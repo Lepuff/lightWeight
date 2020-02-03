@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">LightWeight</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="sign_up_here">Sign up here</string>
+    <string name="register">Register</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="create_new_account">Create new account</string>
+    <string name="email">Email</string>
+    <string name="facebook_app_id">188201648926828</string>
+    <string name="fb_login_protocol_scheme">fb188201648926828</string>
+
 </resources>

@@ -11,11 +11,20 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import com.facebook.AccessToken
 import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
+import com.facebook.login.widget.LoginButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -26,6 +35,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var textInputLastName: TextInputEditText
     private lateinit var progressBar: ProgressBar
 
+    private var callbackManager: CallbackManager? = null
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,16 +43,62 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
 
         val signUpButton = findViewById<Button>(R.id.registerButton_button)
-        progressBar = findViewById(R.id.progressBarRegister)
+        val loginButton: LoginButton = findViewById(R.id.login_button)
 
-        auth = FirebaseAuth.getInstance()
+        progressBar = findViewById(R.id.progressBarRegister)
+        callbackManager = CallbackManager.Factory.create()
+
+        loginButton.setPermissions(listOf("email", "public_profile", "user_friends"))
+
         signUpButton.setOnClickListener {
+            auth = FirebaseAuth.getInstance()
             signUpUser()
         }
 
-        val callbackManager = CallbackManager.Factory.create()
+
+        loginButton.setOnClickListener {
+            auth = FirebaseAuth.getInstance()
+            fbSignIn()
+        }
 
 
+    }
+
+    private fun fbSignIn() {
+        login_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+            override fun onSuccess(result: LoginResult?) {
+                handleFacebookAccessToken(result!!.accessToken)
+            }
+
+            override fun onCancel() {
+
+            }
+
+            override fun onError(error: FacebookException?) {
+
+            }
+
+        })
+    }
+
+    private fun handleFacebookAccessToken(accessToken: AccessToken?) {
+        //get credential
+        val credential = FacebookAuthProvider.getCredential(accessToken!!.token)
+        auth.signInWithCredential(credential)
+            .addOnSuccessListener { result ->
+                Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, GarbageActivity::class.java))
+            }
+
+            .addOnFailureListener { e ->
+                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+            }
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        callbackManager!!.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun signUpUser() {
@@ -85,8 +141,7 @@ class RegisterActivity : AppCompatActivity() {
                 textInputPassword.error = getString(R.string.field_cant_be_empty)
                 textInputPassword.requestFocus()
                 return
-            }
-            else {
+            } else {
                 textInputPassword.error = getString(R.string.password_too_short)
                 textInputPassword.requestFocus()
                 return
@@ -129,6 +184,8 @@ class RegisterActivity : AppCompatActivity() {
     private fun isValidPassword(target: CharSequence?): Boolean {
         return target!!.length > 5
     }
+
+
 }
 
 

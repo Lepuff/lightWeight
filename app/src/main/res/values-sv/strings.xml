@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LightWeight</string>
+    <string name="authentication_failed">Autentisering misslyckades.</string>
+    <string name="create_new_account">Skapa nytt konto</string>
+    <string name="email">Email</string>
+    <string name="enter_valid_email">Ange en giltig email</string>
+    <string name="field_cant_be_empty">Fältet kan ej vara tomt</string>
+    <string name="first_name">Förnamn</string>
+    <string name="last_name">Efternamn</string>
+    <string name="log_in">Logga in</string>
+    <string name="password">Lösenord</string>
+    <string name="password_too_short">Lösenordet måste vara minst 6 tecken</string>
+    <string name="register">Registrera</string>
+    <string name="sign_up_failed">Registrering misslyckades</string>
+    <string name="sign_up_here">Registrera dig här</string>
+    <string name="sign_up_successful">Registrering lyckades</string>
+    <string name="facebook_app_id">188201648926828</string>
+    <string name="fb_login_protocol_scheme">fb188201648926828</string>
+</resources>

@@ -9,7 +9,9 @@ import android.widget.EditText
 import android.widget.Toast
 import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import com.facebook.CallbackManager
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
@@ -22,6 +24,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var textInputPassword: TextInputEditText
     private lateinit var textInputFirstName: TextInputEditText
     private lateinit var textInputLastName: TextInputEditText
+    private lateinit var progressBar: ProgressBar
 
     private lateinit var auth: FirebaseAuth
 
@@ -30,12 +33,14 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
 
         val signUpButton = findViewById<Button>(R.id.registerButton_button)
-
+        progressBar = findViewById(R.id.progressBarRegister)
 
         auth = FirebaseAuth.getInstance()
         signUpButton.setOnClickListener {
             signUpUser()
         }
+
+        val callbackManager = CallbackManager.Factory.create()
 
 
     }
@@ -46,51 +51,84 @@ class RegisterActivity : AppCompatActivity() {
         textInputFirstName = findViewById(R.id.firstNameRegister_editText)
         textInputLastName = findViewById(R.id.lastNameRegister_editText)
 
-        var email = textInputEmail.text.toString().trim()
-        var password = textInputPassword.text.toString().trim()
-        var firstName = textInputFirstName.text.toString().trim()
-        var lastName = textInputLastName.text.toString().trim()
+        val email = textInputEmail.text.toString().trim()
+        val password = textInputPassword.text.toString().trim()
+        val firstName = textInputFirstName.text.toString().trim()
+        val lastName = textInputLastName.text.toString().trim()
+
+        if (isFieldEmpty(firstName)) {
+            textInputFirstName.error = getString(R.string.field_cant_be_empty)
+            textInputFirstName.requestFocus()
+            return
+        }
+
+        if (isFieldEmpty(lastName)) {
+            textInputLastName.error = getString(R.string.field_cant_be_empty)
+            textInputLastName.requestFocus()
+            return
+        }
 
         if (!isValidEmail(email)) {
-            textInputEmail.error = "Enter a valid email"
-            textInputEmail.requestFocus()
-            return
-
+            if (isFieldEmpty(email)) {
+                textInputEmail.error = getString(R.string.field_cant_be_empty)
+                textInputEmail.requestFocus()
+                return
+            } else {
+                textInputEmail.error = getString(R.string.enter_valid_email)
+                textInputEmail.requestFocus()
+                return
+            }
         }
+
         if (!isValidPassword(password)) {
-            textInputPassword.error = "Enter a password"
-            textInputPassword.requestFocus()
-            return
-
+            if (isFieldEmpty(password)) {
+                textInputPassword.error = getString(R.string.field_cant_be_empty)
+                textInputPassword.requestFocus()
+                return
+            }
+            else {
+                textInputPassword.error = getString(R.string.password_too_short)
+                textInputPassword.requestFocus()
+                return
+            }
         }
-        progressBarRegister.isShown
+
+        progressBar.visibility = View.VISIBLE
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "Sign up Successful", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.sign_up_successful), Toast.LENGTH_SHORT)
+                        .show()
                     startActivity(Intent(this, LoginActivity::class.java))
-                    progressBarRegister.isShown.not()
+                    progressBar.visibility = View.INVISIBLE
                     finish()
-                }
-                else {
+                } else {
                     Toast.makeText(
-                        baseContext, "Sign up failed",
+                        baseContext, getString(R.string.sign_up_failed),
                         Toast.LENGTH_SHORT
                     ).show()
                     Log.d("TAG", "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        baseContext, getString(R.string.authentication_failed),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    progressBar.visibility = View.INVISIBLE
                 }
 
             }
     }
 
+    private fun isFieldEmpty(target: CharSequence): Boolean {
+        return TextUtils.isEmpty(target)
+    }
 
     private fun isValidEmail(target: CharSequence): Boolean {
-        return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches()
+        return Patterns.EMAIL_ADDRESS.matcher(target).matches()
     }
 
     private fun isValidPassword(target: CharSequence?): Boolean {
-        return !TextUtils.isEmpty(target) && target!!.length > 5
+        return target!!.length > 5
     }
 }
+
+

@@ -11,5 +11,11 @@
     <string name="email">Email</string>
     <string name="facebook_app_id">188201648926828</string>
     <string name="fb_login_protocol_scheme">fb188201648926828</string>
+    <string name="enter_valid_email">Enter a valid email</string>
+    <string name="password_too_short">Password needs to be atleast 6 characters</string>
+    <string name="sign_up_successful">Sign up Successful</string>
+    <string name="sign_up_failed">Sign up failed</string>
+    <string name="authentication_failed">Authentication failed.</string>
+    <string name="field_cant_be_empty">Field can\'t be empty</string>
 
 </resources>

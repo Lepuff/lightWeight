@@ -18,7 +18,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/firstNameRegister_editText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:background="@color/background_button"
             android:hint="@string/first_name"
             android:textColor="@color/text_item"
@@ -35,7 +35,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/lastNameRegister_editText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:background="@color/background_button"
             android:hint="@string/last_name"
             android:textColor="@color/text_item"
@@ -51,7 +51,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailRegister_editText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:background="@color/background_button"
             android:hint="@string/email"
             android:textColor="@color/text_item"
@@ -69,7 +69,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordRegister_editText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:background="@color/background_button"
             android:hint="@string/password"
             android:textColor="@color/text_item"
@@ -77,23 +77,31 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <Button
         android:id="@+id/registerButton_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="48dp"
         android:background="@color/background_button"
         android:text="@string/register"
         android:textColor="@color/text_button"
-        android:textSize="14sp"/>
+        android:textSize="14sp" />
+
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp" />
 
     <ProgressBar
         android:id="@+id/progressBarRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:background="@color/background_button"
+        android:layout_gravity="center_horizontal"
         android:visibility="invisible" />
 
 </LinearLayout>

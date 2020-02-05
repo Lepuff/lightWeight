@@ -16,5 +16,6 @@
     <string name="sign_up_failed">Sign up failed</string>
     <string name="authentication_failed">Authentication failed.</string>
     <string name="field_cant_be_empty">Field can\'t be empty</string>
+    <string name="log_in_using_email">Log in using Email</string>
 
 </resources>

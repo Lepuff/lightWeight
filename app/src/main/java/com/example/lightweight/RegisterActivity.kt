@@ -35,7 +35,6 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var textInputLastName: TextInputEditText
     private lateinit var progressBar: ProgressBar
 
-    private var callbackManager: CallbackManager? = null
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +45,6 @@ class RegisterActivity : AppCompatActivity() {
         val loginButton: LoginButton = findViewById(R.id.login_button)
 
         progressBar = findViewById(R.id.progressBarRegister)
-        callbackManager = CallbackManager.Factory.create()
 
         loginButton.setPermissions(listOf("email", "public_profile", "user_friends"))
 
@@ -55,51 +53,8 @@ class RegisterActivity : AppCompatActivity() {
             signUpUser()
         }
 
-
-        loginButton.setOnClickListener {
-            auth = FirebaseAuth.getInstance()
-            fbSignIn()
-        }
-
-
     }
 
-    private fun fbSignIn() {
-        login_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
-            override fun onSuccess(result: LoginResult?) {
-                handleFacebookAccessToken(result!!.accessToken)
-            }
-
-            override fun onCancel() {
-
-            }
-
-            override fun onError(error: FacebookException?) {
-
-            }
-
-        })
-    }
-
-    private fun handleFacebookAccessToken(accessToken: AccessToken?) {
-        //get credential
-        val credential = FacebookAuthProvider.getCredential(accessToken!!.token)
-        auth.signInWithCredential(credential)
-            .addOnSuccessListener { result ->
-                Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, GarbageActivity::class.java))
-            }
-
-            .addOnFailureListener { e ->
-                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
-            }
-
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        callbackManager!!.onActivityResult(requestCode, resultCode, data)
-    }
 
     private fun signUpUser() {
         textInputEmail = findViewById(R.id.emailRegister_editText)

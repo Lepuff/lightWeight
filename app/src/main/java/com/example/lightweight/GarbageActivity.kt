@@ -35,8 +35,7 @@ class GarbageActivity : AppCompatActivity() {
 
     fun logout(view: View) {
         FirebaseAuth.getInstance().signOut() //sign out user
-        val intent = Intent(applicationContext, LoginActivity::class.java)
-        startActivity(intent)
+        startActivity(Intent(applicationContext, LoginActivity::class.java))
         finish()
     }
 }

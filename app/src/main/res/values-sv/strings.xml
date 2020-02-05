@@ -17,4 +17,5 @@
     <string name="sign_up_successful">Registrering lyckades</string>
     <string name="facebook_app_id">188201648926828</string>
     <string name="fb_login_protocol_scheme">fb188201648926828</string>
+    <string name="log_in_using_email">Logga in med Email</string>
 </resources>

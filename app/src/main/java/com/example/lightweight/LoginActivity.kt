@@ -8,24 +8,37 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.*
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_register.*
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private var callbackManager: CallbackManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Initialize Firebase Auth
-        auth = FirebaseAuth.getInstance()
+        callbackManager = CallbackManager.Factory.create()
 
         userSignUp.setOnClickListener {
+            auth = FirebaseAuth.getInstance()
             startActivity(Intent(this, RegisterActivity::class.java))
             finish()
+        }
+
+        loginButton.setOnClickListener {
+            auth = FirebaseAuth.getInstance()
+            fbSignIn()
         }
 
 
@@ -40,5 +53,42 @@ class LoginActivity : AppCompatActivity() {
 
     fun updateUI(currentUser: FirebaseUser?){
 
+    }
+
+    private fun fbSignIn() {
+        login_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+            override fun onSuccess(result: LoginResult?) {
+                handleFacebookAccessToken(result!!.accessToken)
+            }
+
+            override fun onCancel() {
+
+            }
+
+            override fun onError(error: FacebookException?) {
+
+            }
+
+        })
+    }
+
+    private fun handleFacebookAccessToken(accessToken: AccessToken?) {
+        //get credential
+        val credential = FacebookAuthProvider.getCredential(accessToken!!.token)
+        auth.signInWithCredential(credential)
+            .addOnSuccessListener { result ->
+                Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, GarbageActivity::class.java))
+            }
+
+            .addOnFailureListener { e ->
+                Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+            }
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        callbackManager!!.onActivityResult(requestCode, resultCode, data)
     }
 }

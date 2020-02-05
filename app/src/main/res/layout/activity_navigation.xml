@@ -7,26 +7,9 @@
     android:layout_height="match_parent"
     tools:context=".NavigationActivity">
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:openDrawer="start">
 
 
 
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:fitsSystemWindows="true"
-            app:headerLayout="@layout/nav_header_drawer"
-            app:menu="@menu/activity_drawer_drawer" />
-
-    </androidx.drawerlayout.widget.DrawerLayout>
 
     <!-- Bottom navigation -->
     <FrameLayout

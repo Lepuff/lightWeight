@@ -42,11 +42,9 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
 
         val signUpButton = findViewById<Button>(R.id.registerButton_button)
-        val loginButton: LoginButton = findViewById(R.id.login_button)
+
 
         progressBar = findViewById(R.id.progressBarRegister)
-
-        loginButton.setPermissions(listOf("email", "public_profile", "user_friends"))
 
         signUpButton.setOnClickListener {
             auth = FirebaseAuth.getInstance()

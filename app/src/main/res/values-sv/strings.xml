@@ -15,7 +15,7 @@
     <string name="sign_up_failed">Registrering misslyckades</string>
     <string name="sign_up_here">Registrera dig här</string>
     <string name="sign_up_successful">Registrering lyckades</string>
-    <string name="facebook_app_id">188201648926828</string>
-    <string name="fb_login_protocol_scheme">fb188201648926828</string>
     <string name="log_in_using_email">Logga in med Email</string>
+    <string name="or">Eller</string>
+    <string name="don_t_have_an_account">Har du inget konto?</string>
 </resources>

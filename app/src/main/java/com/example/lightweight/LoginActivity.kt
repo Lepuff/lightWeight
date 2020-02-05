@@ -13,6 +13,7 @@ import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
+import com.facebook.login.widget.LoginButton
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -29,15 +30,19 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         callbackManager = CallbackManager.Factory.create()
+        val fb_loginButton: LoginButton = findViewById(R.id.login_button)
+        val userSignUp = findViewById<Button>(R.id.signUp_button)
+
+        fb_loginButton.setPermissions(listOf("email", "public_profile", "user_friends"))
+
+        auth = FirebaseAuth.getInstance()
 
         userSignUp.setOnClickListener {
-            auth = FirebaseAuth.getInstance()
             startActivity(Intent(this, RegisterActivity::class.java))
             finish()
         }
 
-        loginButton.setOnClickListener {
-            auth = FirebaseAuth.getInstance()
+        fb_loginButton.setOnClickListener {
             fbSignIn()
         }
 

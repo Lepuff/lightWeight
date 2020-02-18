@@ -21,6 +21,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.*
@@ -36,6 +37,8 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
 
     private lateinit var auth: FirebaseAuth
+    // Access a Cloud Firestore instance from your Activity
+    //private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,12 +49,15 @@ class RegisterActivity : AppCompatActivity() {
 
         progressBar = findViewById(R.id.progressBarRegister)
 
+        auth = FirebaseAuth.getInstance()
+
         signUpButton.setOnClickListener {
             auth = FirebaseAuth.getInstance()
             signUpUser()
         }
 
     }
+
 
 
     private fun signUpUser() {
@@ -65,20 +71,23 @@ class RegisterActivity : AppCompatActivity() {
         val firstName = textInputFirstName.text.toString().trim()
         val lastName = textInputLastName.text.toString().trim()
 
-        if (isFieldEmpty(firstName)) {
+        // Access a Cloud Firestore instance from your Activity
+        val db = FirebaseFirestore.getInstance()
+
+        if (Validation.isFieldEmpty(firstName)) {
             textInputFirstName.error = getString(R.string.field_cant_be_empty)
             textInputFirstName.requestFocus()
             return
         }
 
-        if (isFieldEmpty(lastName)) {
+        if (Validation.isFieldEmpty(lastName)) {
             textInputLastName.error = getString(R.string.field_cant_be_empty)
             textInputLastName.requestFocus()
             return
         }
 
-        if (!isValidEmail(email)) {
-            if (isFieldEmpty(email)) {
+        if (!Validation.isValidEmail(email)) {
+            if (Validation.isFieldEmpty(email)) {
                 textInputEmail.error = getString(R.string.field_cant_be_empty)
                 textInputEmail.requestFocus()
                 return
@@ -89,8 +98,8 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        if (!isValidPassword(password)) {
-            if (isFieldEmpty(password)) {
+        if (!Validation.isValidPassword(password)) {
+            if (Validation.isFieldEmpty(password)) {
                 textInputPassword.error = getString(R.string.field_cant_be_empty)
                 textInputPassword.requestFocus()
                 return
@@ -107,6 +116,23 @@ class RegisterActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Toast.makeText(this, getString(R.string.sign_up_successful), Toast.LENGTH_SHORT)
                         .show()
+                    //create user
+                    val user = hashMapOf(
+                        "firstName" to firstName,
+                        "lastName" to lastName,
+                        "email" to email,
+                        "password" to password
+                    )
+
+                    // Add a new document with a generated ID
+                    db.collection("users")
+                        .add(user)
+                        .addOnSuccessListener { documentReference ->
+                            Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.id}")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w("TAG", "Error adding document", e)
+                        }
                     startActivity(Intent(this, LoginActivity::class.java))
                     progressBar.visibility = View.INVISIBLE
                     finish()
@@ -126,7 +152,7 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
-    private fun isFieldEmpty(target: CharSequence): Boolean {
+    /*private fun isFieldEmpty(target: CharSequence): Boolean {
         return TextUtils.isEmpty(target)
     }
 
@@ -137,6 +163,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun isValidPassword(target: CharSequence?): Boolean {
         return target!!.length > 5
     }
+    */
 
 
 }

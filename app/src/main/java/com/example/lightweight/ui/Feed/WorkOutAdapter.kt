@@ -17,45 +17,52 @@ class WorkOutAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return items.size
     }
 
+    fun submitList(workOutList: List<WorkOut>) {
+        items = workOutList
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return WorkOutViewHolder(
-            LayoutInflater.from(parent.context ).inflate(R.layout.layout_workout_list_item,parent,false)
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.layout_workout_list_item,
+                parent,
+                false
+            )
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(holder){
+        when (holder) {
             is WorkOutViewHolder -> {
                 holder.bind(items.get(position))
             }
 
         }
     }
+
     class WorkOutViewHolder constructor(
         itemView: View
-    ): RecyclerView.ViewHolder(itemView){
+    ) : RecyclerView.ViewHolder(itemView) {
         val workOut_image = itemView.blog_image
         val workOut_title = itemView.blog_title
         val workOut_userName = itemView.blog_author
 
-        fun bind(workOut: WorkOut){
+        fun bind(workOut: WorkOut) {
 
 
             val requestOption = RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_error_layer)
                 .fallback(R.drawable.ic_fallback_foreground)
+
             Glide.with(itemView.context)
                 .applyDefaultRequestOptions(requestOption)
                 .load("https://picsum.photos/200/300")
                 .into(workOut_image)
-            workOut_title.setText(workOut.title)
-            workOut_userName.setText(workOut.userName)
-        }
-    }
 
-    fun submitList(workOutList: List<WorkOut>){
-        items = workOutList
+            workOut_title.text = workOut.title
+            workOut_userName.text = workOut.userName
+        }
     }
 
 

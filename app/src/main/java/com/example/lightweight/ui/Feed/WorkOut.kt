@@ -6,7 +6,4 @@ data class WorkOut(
     var image: String,
     var userName: String
 
-) {
-
-
-}
+)

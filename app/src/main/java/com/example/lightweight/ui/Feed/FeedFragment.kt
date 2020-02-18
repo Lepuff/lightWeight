@@ -39,8 +39,10 @@ class FeedFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        feed_recycler_view.apply() {
+        feed_recycler_view.apply {
             layoutManager = LinearLayoutManager(this.context)
+            val topSpacingItemDecoration = TopSpacingItemDecoration(30)
+            addItemDecoration(topSpacingItemDecoration)
             workOutAdapter = WorkOutAdapter()
             adapter = workOutAdapter
         }
@@ -53,7 +55,4 @@ class FeedFragment : Fragment() {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 }

@@ -29,15 +29,18 @@ class FeedFragment : Fragment() {
         feedViewModel.text.observe(this, Observer {
 
         })
+
         return root
     }
-    private fun addDataSet(){
+
+    private fun addDataSet() {
         val data = DataSource.createDataSet()
         workOutAdapter.submitList(data)
     }
+
     private fun initRecyclerView() {
         feed_recycler_view.apply() {
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = LinearLayoutManager(this.context)
             workOutAdapter = WorkOutAdapter()
             adapter = workOutAdapter
         }
@@ -45,5 +48,12 @@ class FeedFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        initRecyclerView()
+        addDataSet()
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 }

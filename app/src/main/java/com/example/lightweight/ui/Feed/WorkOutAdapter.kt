@@ -39,15 +39,18 @@ class WorkOutAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val workOut_userName = itemView.blog_author
 
         fun bind(workOut: WorkOut){
-            workOut_title.setText(workOut.title)
-            workOut_userName.setText(workOut.userName)
+
+
             val requestOption = RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_error_layer)
+                .fallback(R.drawable.ic_fallback_foreground)
             Glide.with(itemView.context)
                 .applyDefaultRequestOptions(requestOption)
-                .load(workOut.image)
+                .load("https://picsum.photos/200/300")
                 .into(workOut_image)
+            workOut_title.setText(workOut.title)
+            workOut_userName.setText(workOut.userName)
         }
     }
 

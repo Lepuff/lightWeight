@@ -37,8 +37,6 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
 
     private lateinit var auth: FirebaseAuth
-    // Access a Cloud Firestore instance from your Activity
-    //private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -7,6 +7,7 @@ import android.os.PersistableBundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
+import com.facebook.login.LoginManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -27,6 +28,7 @@ class GarbageActivity : AppCompatActivity() {
 
     fun logout(view: View) {
         FirebaseAuth.getInstance().signOut() //sign out user
+        LoginManager.getInstance().logOut()
         startActivity(Intent(applicationContext, LoginActivity::class.java))
         finish()
     }

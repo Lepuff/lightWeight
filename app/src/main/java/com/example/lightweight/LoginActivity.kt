@@ -3,7 +3,6 @@ package com.example.lightweight
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.*
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
@@ -29,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         callbackManager = CallbackManager.Factory.create()
-        val fbLoginButton: LoginButton = findViewById(R.id.login_button)
+        val fbLoginButton: LoginButton = findViewById(R.id.fbLogin_button)
         val userSignUp = findViewById<Button>(R.id.signUp_button)
         val userLogin = findViewById<Button>(R.id.loginButton_button)
 
@@ -44,12 +43,12 @@ class LoginActivity : AppCompatActivity() {
 
         userLogin.setOnClickListener {
             passwordSignIn()
-            finish()
+
         }
 
         fbLoginButton.setOnClickListener {
             fbSignIn()
-            finish()
+
         }
 
 
@@ -114,7 +113,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun fbSignIn() {
-        login_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+        fbLogin_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult?) {
                 handleFacebookAccessToken(result!!.accessToken)
             }

@@ -21,13 +21,7 @@ class GarbageActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         // Check if user is signed in (non-null), else send to LoginActivity
-        val currentUser = auth.currentUser
-
-
-        /*if (currentUser == null) {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }*/
+        //val currentUser = auth.currentUser
     }
 
 

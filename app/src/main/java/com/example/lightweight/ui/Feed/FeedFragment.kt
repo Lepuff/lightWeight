@@ -1,9 +1,7 @@
 package com.example.lightweight.ui.Feed
 
 import android.app.Dialog
-import android.content.Context
 import android.content.DialogInterface
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,24 +13,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
 import com.example.lightweight.DataSource
 import com.example.lightweight.R
-import com.example.lightweight.WorkOutTypeSource
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_feed.*
 import kotlinx.android.synthetic.main.fragment_feed.view.*
-import kotlinx.android.synthetic.main.layout_dialog_new_workout_list_item.*
-import kotlinx.android.synthetic.main.layout_new_workout_dialog.*
 
 class FeedFragment : Fragment() {
 
     private lateinit var feedViewModel: FeedViewModel
     private lateinit var workOutAdapter: WorkOutAdapter
-    private lateinit var workoutTypeAdapter: WorkOutTypeAdapter
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,12 +34,17 @@ class FeedFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_feed, container, false)
         val floatingActionBar =
             root.findViewById<FloatingActionButton>(R.id.feed_floating_action_button)
+
+
+
+
         feedViewModel.text.observe(this, Observer {
 
         })
         floatingActionBar.setOnClickListener {
-            showNewWorkoutDialog(root.context)
+            chooseWorkoutDialog(root)
         }
+
         return root
     }
 
@@ -67,40 +63,42 @@ class FeedFragment : Fragment() {
         }
     }
 
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+
+
         initRecyclerView()
         addDataSet()
+
+
     }
 
-    private fun showNewWorkoutDialog(context: Context) {
+    private fun chooseWorkoutDialog(view: View) {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(view.context)
+        val workOutType = arrayOf("Gym", "Cycling", "Running")
+        builder
+            .setTitle("test")
+            .setItems(workOutType) { dialog, which ->
+                when (which) {
+                    
+                    0 -> {
+
+                    }
+                    1 -> {
+
+                    }
+                    2 -> {
+
+                    }
 
 
-        val dialog = MaterialDialog(context)
-            .title(R.string.app_name)
-            .customView(R.layout.layout_new_workout_dialog)
+                }
+
+            }
 
 
+            .show()
 
-        //initNewWorkoutRecycleView()
-        //addWorkoutTypeDataset()
-        dialog.show()
     }
-
-    /*private fun initNewWorkoutRecycleView() {
-        dialog_recycle_view.apply {
-            layoutManager = LinearLayoutManager(this.context)
-            val topSpacingItemDecoration = TopSpacingItemDecoration(15)
-            addItemDecoration(topSpacingItemDecoration)
-            workoutTypeAdapter = WorkOutTypeAdapter()
-            adapter = workoutTypeAdapter
-        }
-    }*/
-
-    /*private fun addWorkoutTypeDataset() {
-        val data = WorkOutTypeSource.createNWDataSet()
-        workoutTypeAdapter.submitList(data)
-    }*/
 }

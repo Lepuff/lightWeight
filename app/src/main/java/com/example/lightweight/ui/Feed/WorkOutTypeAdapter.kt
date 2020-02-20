@@ -7,24 +7,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.lightweight.R
+import kotlinx.android.synthetic.main.layout_dialog_new_workout_list_item.view.*
 import kotlinx.android.synthetic.main.layout_workout_list_item.view.*
 
-class WorkOutAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class WorkOutTypeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var items: List<WorkOut> = ArrayList()
+    private var items: List<WorkOutType> = ArrayList()
 
     override fun getItemCount(): Int {
         return items.size
     }
 
-    fun submitList(workOutList: List<WorkOut>) {
-        items = workOutList
+    fun submitList(workOutTypeList: List<WorkOutType>) {
+        items = workOutTypeList
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return WorkOutViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.layout_workout_list_item,
+                R.layout.layout_dialog_new_workout_list_item,
                 parent,
                 false
             )
@@ -43,25 +44,15 @@ class WorkOutAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class WorkOutViewHolder constructor(
         itemView: View
     ) : RecyclerView.ViewHolder(itemView) {
-        val workOut_image = itemView.blog_image
-        val workOut_title = itemView.blog_title
-        val workOut_userName = itemView.blog_author
+        val icon = itemView.new_workout_icon
+        val title = itemView.new_workout_textView
 
-        fun bind(workOut: WorkOut) {
+        fun bind(workOutType: WorkOutType) {
+
+            icon.setImageResource(workOutType.icon)
+            title.text = workOutType.name
 
 
-            val requestOption = RequestOptions()
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_error_layer)
-                .fallback(R.drawable.ic_fallback_foreground)
-
-            Glide.with(itemView.context)
-                .applyDefaultRequestOptions(requestOption)
-                .load(workOut.image)
-                .into(workOut_image)
-
-            workOut_title.text = workOut.title
-            workOut_userName.text = workOut.userName
         }
     }
 

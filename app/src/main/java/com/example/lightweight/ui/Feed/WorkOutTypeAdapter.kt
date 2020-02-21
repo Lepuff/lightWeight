@@ -23,7 +23,7 @@ class WorkOutTypeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return WorkOutViewHolder(
+        return WorkOutTypeViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.layout_dialog_new_workout_list_item,
                 parent,
@@ -34,14 +34,14 @@ class WorkOutTypeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is WorkOutViewHolder -> {
+            is WorkOutTypeViewHolder -> {
                 holder.bind(items.get(position))
             }
 
         }
     }
 
-    class WorkOutViewHolder constructor(
+    class WorkOutTypeViewHolder constructor(
         itemView: View
     ) : RecyclerView.ViewHolder(itemView) {
         val icon = itemView.new_workout_icon

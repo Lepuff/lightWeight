@@ -40,18 +40,47 @@ class WorkOutTypeSource {
             )
             list.add(
                 WorkOutType(
-                    "gym",
+                    "hehehe",
                     icon = R.drawable.ic_fitness_center_yellow_24dp
 
                 )
             )
             list.add(
                 WorkOutType(
-                    "gym",
+                    "hehehe",
                     icon = R.drawable.ic_fitness_center_yellow_24dp
 
                 )
             )
+            list.add(
+                WorkOutType(
+                    "hehehe",
+                    icon = R.drawable.ic_fitness_center_yellow_24dp
+
+                )
+            )
+            list.add(
+                WorkOutType(
+                    "hehehe",
+                    icon = R.drawable.ic_fitness_center_yellow_24dp
+
+                )
+            )
+            list.add(
+                WorkOutType(
+                    "hehehe",
+                    icon = R.drawable.ic_fitness_center_yellow_24dp
+
+                )
+            )
+            list.add(
+                WorkOutType(
+                    "hehehe",
+                    icon = R.drawable.ic_fitness_center_yellow_24dp
+
+                )
+            )
+
 
 
 

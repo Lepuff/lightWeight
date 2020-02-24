@@ -47,9 +47,6 @@ class NewWorkoutFragment : DialogFragment() {
             .setView(dialogView)
             .create()
 
-
-
-
         dialog.setCanceledOnTouchOutside(true)
 
         val recyclerView = dialogView.findViewById<RecyclerView>(R.id.dialog_recycle_view)

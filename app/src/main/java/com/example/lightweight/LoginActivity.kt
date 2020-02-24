@@ -166,8 +166,10 @@ class LoginActivity : AppCompatActivity() {
             firstName = `object`.getString("first_name")
             lastName = `object`.getString("last_name")
 
+            Database.updateUserData(accessToken, firstName, lastName, email)
 
-            val db = FirebaseFirestore.getInstance()
+
+            /*val db = FirebaseFirestore.getInstance()
             //create user
 
             val user = hashMapOf(
@@ -178,7 +180,7 @@ class LoginActivity : AppCompatActivity() {
 
             // Add a new document with a email-adress as ID
             db.collection("users").document(email)
-                .set(user)
+                .set(user)*/
         }
         //Here we put the requested fields to be returned from the JSONObject
         val parameters = Bundle()

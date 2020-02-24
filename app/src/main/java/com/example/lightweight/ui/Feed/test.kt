@@ -4,15 +4,12 @@ import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lightweight.R
 import com.example.lightweight.WorkOutTypeSource
-import kotlinx.android.synthetic.main.layout_new_workout_dialog.*
 
 
 class Test : DialogFragment() {
@@ -68,6 +65,7 @@ class Test : DialogFragment() {
         val dialog = AlertDialog.Builder(context!!)
             .setView(dialogView)
             .create()
+
 
 
 

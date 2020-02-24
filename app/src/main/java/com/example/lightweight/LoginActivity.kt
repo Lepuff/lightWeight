@@ -2,12 +2,13 @@ package com.example.lightweight
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
-import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
 import com.google.android.material.textfield.TextInputEditText
@@ -16,14 +17,23 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_login.*
+import org.json.JSONException
+import org.json.JSONObject
+import java.net.MalformedURLException
+import java.net.URL
 
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    private var callbackManager: CallbackManager? = null
+    var callbackManager: CallbackManager? = null
     private lateinit var textInputEmail: TextInputEditText
     private lateinit var textInputPassword: TextInputEditText
+    private lateinit var firstName: String
+    private lateinit var lastName: String
+    private lateinit var email: String
+    private lateinit var profilePicture: URL
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,10 +45,6 @@ class LoginActivity : AppCompatActivity() {
         val fbLoginButton: LoginButton = findViewById(R.id.fbLogin_button)
         val userSignUp = findViewById<Button>(R.id.signUp_button)
         val userLogin = findViewById<Button>(R.id.loginButton_button)
-
-
-
-        fbLoginButton.setPermissions(listOf("email", "public_profile", "user_friends"))
 
         auth = FirebaseAuth.getInstance()
 
@@ -53,6 +59,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         fbLoginButton.setOnClickListener {
+            //fbLoginButton.setPermissions(listOf("email", "public_profile", "user_friends"))
             fbSignIn()
 
         }
@@ -65,28 +72,28 @@ class LoginActivity : AppCompatActivity() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         val accessToken = AccessToken.getCurrentAccessToken()
-        var isLoggedIn: Boolean = accessToken != null && !accessToken.isExpired()
+        val isLoggedIn: Boolean = accessToken != null && !accessToken.isExpired
         updateUI(currentUser)
         updateUI(isLoggedIn)
 
 
     }
 
-    private fun updateUI(currentUser: FirebaseUser?){
-        if (currentUser != null){
+    private fun updateUI(currentUser: FirebaseUser?) {
+        if (currentUser != null) {
             startActivity(Intent(this, GarbageActivity::class.java))
             finish()
         }
     }
 
-    private fun updateUI(isLoggedIn: Boolean){
-        if (isLoggedIn){
+    private fun updateUI(isLoggedIn: Boolean) {
+        if (isLoggedIn) {
             startActivity(Intent(this, GarbageActivity::class.java))
             finish()
         }
     }
 
-    private fun passwordSignIn(){
+    private fun passwordSignIn() {
         textInputEmail = findViewById(R.id.emailLogin_editText)
         textInputPassword = findViewById(R.id.passwordLogin_editText)
 
@@ -121,8 +128,10 @@ class LoginActivity : AppCompatActivity() {
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
-                    Toast.makeText(baseContext, "Login failed.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        baseContext, "Login failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     updateUI(null)
                 }
 
@@ -130,22 +139,52 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun fbSignIn() {
+        fbLogin_button.setPermissions(listOf("email", "public_profile", "user_friends"))
         fbLogin_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
-            override fun onSuccess(result: LoginResult?) {
+            override fun onSuccess(result: LoginResult) {
                 handleFacebookAccessToken(result!!.accessToken)
-
-
             }
 
-            override fun onCancel() {
 
+
+            override fun onCancel() {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
             override fun onError(error: FacebookException?) {
-
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
-
         })
+    }
+
+    private fun getUserDetailsFromFb(accessToken: AccessToken) {
+        val request = GraphRequest.newMeRequest(
+            accessToken
+        ) { `object`, response ->
+
+            email = `object`.getString("email")
+            firstName = `object`.getString("first_name")
+            lastName = `object`.getString("last_name")
+
+
+            val db = FirebaseFirestore.getInstance()
+            //create user
+
+            val user = hashMapOf(
+                "firstName" to firstName,
+                "lastName" to lastName,
+                "email" to email
+            )
+
+            // Add a new document with a email-adress as ID
+            db.collection("users").document(email)
+                .set(user)
+        }
+        //Here we put the requested fields to be returned from the JSONObject
+        val parameters = Bundle()
+        parameters.putString("fields", "id, first_name, last_name, email")
+        request.parameters = parameters
+        request.executeAsync()
     }
 
     private fun handleFacebookAccessToken(accessToken: AccessToken?) {
@@ -154,17 +193,9 @@ class LoginActivity : AppCompatActivity() {
 
         auth.signInWithCredential(credential)
             .addOnSuccessListener { result ->
+                getUserDetailsFromFb(accessToken)
                 Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
-                // Access a Cloud Firestore instance from your Activity
-                val db = FirebaseFirestore.getInstance()
 
-                val userProfile: Profile = Profile.getCurrentProfile()
-                val user = hashMapOf(
-                    "firstName" to userProfile.firstName,
-                    "lastName" to userProfile.lastName
-                )
-                db.collection("users")
-                    .add(user)
                 startActivity(Intent(this, GarbageActivity::class.java))
             }
 

@@ -122,15 +122,16 @@ class RegisterActivity : AppCompatActivity() {
                         "password" to password
                     )
 
-                    // Add a new document with a generated ID
-                    db.collection("users")
-                        .add(user)
+                    // Add a new document with a email-adress as ID
+                    db.collection("users").document(email)
+                        .set(user)
                         .addOnSuccessListener { documentReference ->
-                            Log.d("TAG", "DocumentSnapshot added with ID: ${documentReference.id}")
+                            Log.d("TAG", "DocumentSnapshot added with ID: $documentReference")
                         }
                         .addOnFailureListener { e ->
                             Log.w("TAG", "Error adding document", e)
                         }
+
                     startActivity(Intent(this, LoginActivity::class.java))
                     progressBar.visibility = View.INVISIBLE
                     finish()
@@ -149,21 +150,6 @@ class RegisterActivity : AppCompatActivity() {
 
             }
     }
-
-    /*private fun isFieldEmpty(target: CharSequence): Boolean {
-        return TextUtils.isEmpty(target)
-    }
-
-    private fun isValidEmail(target: CharSequence): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(target).matches()
-    }
-
-    private fun isValidPassword(target: CharSequence?): Boolean {
-        return target!!.length > 5
-    }
-    */
-
-
 }
 
 

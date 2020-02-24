@@ -12,27 +12,8 @@ import com.example.lightweight.R
 import com.example.lightweight.WorkOutTypeSource
 
 
-class Test : DialogFragment() {
+class NewWorkoutFragment : DialogFragment() {
     private lateinit var workoutTypeAdapter: WorkOutTypeAdapter
-
-/*
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-*/
-    /*
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.layout_new_workout_dialog, container, false)
-
-
-    }
-*/
-
     private fun initNewWorkoutRecycleView(recyclerView: RecyclerView) {
         Log.d("funkar", "haha")
         recyclerView.apply {

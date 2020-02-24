@@ -57,7 +57,7 @@ class WorkOutAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             Glide.with(itemView.context)
                 .applyDefaultRequestOptions(requestOption)
-                .load("https://picsum.photos/200/300")
+                .load(workOut.image)
                 .into(workOut_image)
 
             workOut_title.text = workOut.title

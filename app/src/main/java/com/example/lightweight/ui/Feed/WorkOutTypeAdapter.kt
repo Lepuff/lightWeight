@@ -4,11 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.lightweight.R
 import kotlinx.android.synthetic.main.layout_dialog_new_workout_list_item.view.*
-import kotlinx.android.synthetic.main.layout_workout_list_item.view.*
+
 
 class WorkOutTypeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

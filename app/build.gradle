@@ -62,4 +62,7 @@ dependencies {
 
     def material_dialogs_version = "3.1.0"
     implementation "com.afollestad.material-dialogs:core:$material_dialogs_version"
+
+    //CircleImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

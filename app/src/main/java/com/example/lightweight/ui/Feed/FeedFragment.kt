@@ -1,6 +1,7 @@
 package com.example.lightweight.ui.Feed
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,10 +34,8 @@ class FeedFragment : Fragment() {
 
         })
         floatingActionButton.setOnClickListener {
-
+            Log.d("Fab", "fab clicked") //ToDO remove
             NewWorkoutFragment().show(childFragmentManager,"test")
-
-
         }
         return root
     }
@@ -63,7 +62,4 @@ class FeedFragment : Fragment() {
         addDataSet()
 
     }
-
-
-
 }

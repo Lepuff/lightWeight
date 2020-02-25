@@ -15,18 +15,13 @@ import com.example.lightweight.WorkOutTypeSource
 class NewWorkoutFragment : DialogFragment() {
     private lateinit var workoutTypeAdapter: WorkOutTypeAdapter
     private fun initNewWorkoutRecycleView(recyclerView: RecyclerView) {
-        Log.d("funkar", "haha")
+
         recyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
             val topSpacingItemDecoration = TopSpacingItemDecoration(15)
             addItemDecoration(topSpacingItemDecoration)
             workoutTypeAdapter = WorkOutTypeAdapter()
             adapter = workoutTypeAdapter
-
-            Log.d("funkar igen", "haha")
-
-            //ToDo remove log.d
-
         }
     }
 

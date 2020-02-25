@@ -2,9 +2,10 @@ package com.example.lightweight
 
 import java.util.*
 
-class GymWorkout(override val id: Int,
+class GymWorkout(
                  override var title: String,
-                 override var date: Date)
+                 override var date: Date,
+                 override var image: String)
     : AbstractWorkout(R.drawable.ic_fitness_center_yellow_24dp){
 
 

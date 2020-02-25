@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/background_item"
-    android:padding="10dp"
+    app:cardBackgroundColor="@color/background_item"
     app:cardCornerRadius="2dp"
     app:cardElevation="10dp"
     app:cardPreventCornerOverlap="false">
@@ -13,37 +12,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/blog_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/workout_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:padding="10dp"
             android:src="@mipmap/ic_launcher_round"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <LinearLayout
-            android:id="@+id/container1"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
             android:paddingHorizontal="10dp"
-
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/wo_list_item_icon"
-            app:layout_constraintStart_toEndOf="@id/blog_image"
+            app:layout_constraintEnd_toStartOf="@id/workout_icon"
+            app:layout_constraintStart_toEndOf="@id/workout_image"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/blog_title"
+                android:id="@+id/workout_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Title of the workout"
                 android:textSize="19sp" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/blog_author"
+                android:id="@+id/workout_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Date"
@@ -55,12 +53,12 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/workout_icon"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:id="@+id/wo_list_item_icon"
             android:src="@drawable/ic_directions_bike_black_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>

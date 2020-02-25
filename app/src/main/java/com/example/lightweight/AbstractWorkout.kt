@@ -6,9 +6,9 @@ import java.util.*
 abstract class AbstractWorkout(
     val icon: Int
 ) {
-    abstract val id: Int
     abstract var title: String
     abstract var date: Date
+    abstract var image: String //ToDo remove!!!: it is for test
 
     fun getWorkoutByID(id: Int) : Int{
         return id

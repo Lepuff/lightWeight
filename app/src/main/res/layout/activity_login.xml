@@ -81,12 +81,12 @@
             android:id="@+id/noAccount_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_item"
             android:text="@string/don_t_have_an_account"
-            app:layout_constraintTop_toBottomOf="@+id/loginButton_button"
+            android:textColor="@color/text_item"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginButton_button"
             app:layout_constraintVertical_bias="0.3">
 
         </TextView>
@@ -96,9 +96,9 @@
             android:layout_width="111dp"
             android:layout_height="33dp"
             android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@color/background_button"
             android:text="@string/sign_up_here"
             android:textSize="12sp"
-            android:background="@color/background_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/noAccount_textView"
@@ -112,10 +112,10 @@
             android:layout_height="wrap_content"
             android:text="@string/or"
             android:textColor="@color/text_item"
-            app:layout_constraintTop_toBottomOf="@id/signUp_button"
             app:layout_constraintBottom_toTopOf="@id/fbLogin_button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signUp_button">
 
         </TextView>
 
@@ -125,13 +125,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/signUp_button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0"
             android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"/>
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signUp_button"
+            app:layout_constraintVertical_bias="0" />
 
         <ProgressBar
             android:id="@+id/progressBarLogin"

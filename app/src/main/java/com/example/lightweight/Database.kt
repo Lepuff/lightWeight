@@ -10,6 +10,7 @@ import java.time.LocalDateTime
 import java.util.*
 
 object Database{
+    //Todo remove?
     /*fun getUserDetailsFromFb(accessToken: AccessToken, _firstName: String, _lastName: String, _email: String) {
         var firstName = _firstName
         var lastName = _lastName

@@ -1,10 +1,14 @@
 package com.example.lightweight.ui.Feed
 
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lightweight.AbstractWorkout
 import com.example.lightweight.R
+import com.example.lightweight.ui.NewGymWorkoutActivity
 import kotlinx.android.synthetic.main.layout_dialog_new_workout_list_item.view.*
 
 
@@ -39,9 +43,24 @@ class WorkOutTypeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    class WorkOutTypeViewHolder constructor(
-        itemView: View
-    ) : RecyclerView.ViewHolder(itemView) {
+    class WorkOutTypeViewHolder constructor(itemView: View,var workOutType: WorkOutType?=null) : RecyclerView.ViewHolder(itemView) {
+
+        companion object{
+            val WORKOUT_TITLE = "workout title"
+        }
+
+
+        init {
+            itemView.setOnClickListener {
+                Log.d("new workout","clicked") //ToDo remove after testing
+
+                val selectedItem   = adapterPosition
+                Log.d("selected item","$selectedItem")
+                val intent =  Intent(itemView.context,NewGymWorkoutActivity::class.java)
+                intent.putExtra("WORKOUT_TITLE","test")
+                itemView.context.startActivity(intent)
+            }
+        }
         val icon = itemView.new_workout_icon
         val title = itemView.new_workout_textView
 
@@ -49,8 +68,6 @@ class WorkOutTypeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             icon.setImageResource(workOutType.icon)
             title.text = workOutType.name
-
-
         }
     }
 

@@ -11,7 +11,7 @@ class GymWorkoutDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_gym_workout_details)
 
 
-        val navBarTitle = intent.getStringExtra("workoutName")
+        val navBarTitle = intent.getStringExtra("workoutTitle")
         supportActionBar?.title = navBarTitle
     }
 }

@@ -82,14 +82,14 @@ class LoginActivity : AppCompatActivity() {
 
     private fun updateUI(currentUser: FirebaseUser?) {
         if (currentUser != null) {
-            startActivity(Intent(this, GarbageActivity::class.java))
+            startActivity(Intent(this, NavigationActivity::class.java))
             finish()
         }
     }
 
     private fun updateUI(isLoggedIn: Boolean) {
         if (isLoggedIn) {
-            startActivity(Intent(this, GarbageActivity::class.java))
+            startActivity(Intent(this, NavigationActivity::class.java))
             finish()
         }
     }
@@ -185,7 +185,7 @@ class LoginActivity : AppCompatActivity() {
                 Database.updateUserData(firstName, lastName, email)
                 Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
 
-                startActivity(Intent(this, GarbageActivity::class.java))
+                startActivity(Intent(this, NavigationActivity::class.java))
             }
 
             .addOnFailureListener { e ->

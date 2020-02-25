@@ -14,13 +14,13 @@ import com.google.firebase.auth.FirebaseUser
 
 class GarbageActivity : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_garbage)
 
-        auth = FirebaseAuth.getInstance()
+
 
         // Check if user is signed in (non-null), else send to LoginActivity
         //val currentUser = auth.currentUser

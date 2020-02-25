@@ -1,12 +1,32 @@
 <resources>
     <string name="app_name">LightWeight</string>
 
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="sign_up_here">Sign up here</string>
+    <string name="register">Register</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="create_new_account">Create new account</string>
+    <string name="email">Email</string>
+    <string name="facebook_app_id" translatable="false">188201648926828</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb188201648926828</string>
+    <string name="enter_valid_email">Enter a valid email</string>
+    <string name="password_too_short">Password needs to be atleast 6 characters</string>
+    <string name="sign_up_successful">Sign up successful</string>
+    <string name="sign_up_failed">Sign up failed</string>
+    <string name="authentication_failed">Authentication failed.</string>
+    <string name="field_cant_be_empty">Field can\'t be empty</string>
+    <string name="log_in_using_email">Log in using Email</string>
+    <string name="or">Or</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+
     <string name="title_activity_bottom_navigation">Bottom_navigation</string>
     <string name="title_analytics">Analytics</string>
     <string name="title_feed">Feed</string>
     <string name="title_social">Social</string>
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

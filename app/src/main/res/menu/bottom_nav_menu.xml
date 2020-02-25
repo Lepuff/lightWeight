@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_analytics"
+        android:icon="@drawable/ic_timeline_yellow_24dp"
+        android:title="@string/title_analytics" />
+
+    <item
+        android:id="@+id/navigation_feed"
+        android:icon="@drawable/ic_fitness_center_yellow_24dp"
+        android:title="@string/title_feed" />
+
+    <item
+        android:id="@+id/navigation_social"
+        android:icon="@drawable/ic_group_yellow_24dp"
+        android:title="@string/title_social" />
+
+</menu>

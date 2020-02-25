@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
 
@@ -37,17 +38,23 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+        <activity/>
+        <activity
+            android:name=".ui.Feed.GymWorkoutDetailsActivity"
+            android:label="Details"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".NavigationActivity" />
         </activity>
-
-
-
+        <activity
+            android:name=".NavigationActivity"
+            android:label="LightWeight"
+            android:launchMode="singleTop">
+        </activity>
     </application>
-
 </manifest>

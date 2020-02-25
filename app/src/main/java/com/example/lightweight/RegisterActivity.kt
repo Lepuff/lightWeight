@@ -70,7 +70,7 @@ class RegisterActivity : AppCompatActivity() {
         val lastName = textInputLastName.text.toString().trim()
 
         // Access a Cloud Firestore instance from your Activity
-        val db = FirebaseFirestore.getInstance()
+        //val db = FirebaseFirestore.getInstance()
 
         if (Validation.isFieldEmpty(firstName)) {
             textInputFirstName.error = getString(R.string.field_cant_be_empty)
@@ -114,23 +114,9 @@ class RegisterActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Toast.makeText(this, getString(R.string.sign_up_successful), Toast.LENGTH_SHORT)
                         .show()
-                    //create user
-                    val user = hashMapOf(
-                        "firstName" to firstName,
-                        "lastName" to lastName,
-                        "email" to email,
-                        "password" to password
-                    )
 
-                    // Add a new document with a email-adress as ID
-                    db.collection("users").document(email)
-                        .set(user)
-                        .addOnSuccessListener { documentReference ->
-                            Log.d("TAG", "DocumentSnapshot added with ID: $documentReference")
-                        }
-                        .addOnFailureListener { e ->
-                            Log.w("TAG", "Error adding document", e)
-                        }
+                    //update database with user data
+                    Database.updateUserData(firstName, lastName, email)
 
                     startActivity(Intent(this, LoginActivity::class.java))
                     progressBar.visibility = View.INVISIBLE

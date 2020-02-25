@@ -32,6 +32,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var firstName: String
     private lateinit var lastName: String
     private lateinit var email: String
+    private lateinit var password: String
     private lateinit var profilePicture: URL
 
 
@@ -97,8 +98,8 @@ class LoginActivity : AppCompatActivity() {
         textInputEmail = findViewById(R.id.emailLogin_editText)
         textInputPassword = findViewById(R.id.passwordLogin_editText)
 
-        val email = textInputEmail.text.toString().trim()
-        val password = textInputPassword.text.toString().trim()
+        email = textInputEmail.text.toString().trim()
+        password = textInputPassword.text.toString().trim()
 
         if (!Validation.isValidEmail(email)) {
             if (Validation.isFieldEmpty(email)) {
@@ -145,8 +146,6 @@ class LoginActivity : AppCompatActivity() {
                 handleFacebookAccessToken(result!!.accessToken)
             }
 
-
-
             override fun onCancel() {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
@@ -166,21 +165,8 @@ class LoginActivity : AppCompatActivity() {
             firstName = `object`.getString("first_name")
             lastName = `object`.getString("last_name")
 
-            Database.updateUserData(accessToken, firstName, lastName, email)
 
-
-            /*val db = FirebaseFirestore.getInstance()
-            //create user
-
-            val user = hashMapOf(
-                "firstName" to firstName,
-                "lastName" to lastName,
-                "email" to email
-            )
-
-            // Add a new document with a email-adress as ID
-            db.collection("users").document(email)
-                .set(user)*/
+            //Database.updateUserData(accessToken, firstName, lastName, email)
         }
         //Here we put the requested fields to be returned from the JSONObject
         val parameters = Bundle()
@@ -196,6 +182,7 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnSuccessListener { result ->
                 getUserDetailsFromFb(accessToken)
+                Database.updateUserData(firstName, lastName, email)
                 Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
 
                 startActivity(Intent(this, GarbageActivity::class.java))

@@ -15,4 +15,8 @@ object Validation {
     fun isValidPassword(target: CharSequence?): Boolean {
         return target!!.length > 5
     }
+
+    fun isValid(){
+
+    }
 }

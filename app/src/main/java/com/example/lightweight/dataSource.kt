@@ -1,6 +1,5 @@
 package com.example.lightweight
 
-import com.example.lightweight.ui.Feed.WorkOut
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -14,7 +13,7 @@ class DataSource {
             list.add(
                 GymWorkout(
 
-                    "test",
+                    "test1",
                     Date(1, 1, 1),
                     "https://i.pravatar.cc/300"
                 )
@@ -22,7 +21,7 @@ class DataSource {
             list.add(
                 GymWorkout(
 
-                    "test",
+                    "test2",
                     Date(1, 1, 1),
                     "https://i.pravatar.cc/300"
                 )
@@ -30,7 +29,7 @@ class DataSource {
             list.add(
                 GymWorkout(
 
-                    "test",
+                    "test3",
                     Date(1, 1, 1),
                     "https://i.pravatar.cc/300"
                 )
@@ -38,7 +37,7 @@ class DataSource {
             list.add(
                 GymWorkout(
 
-                    "test",
+                    "test4",
                     Date(1, 1, 1),
                     "https://i.pravatar.cc/300"
                 )
@@ -46,7 +45,7 @@ class DataSource {
             list.add(
                 GymWorkout(
 
-                    "test",
+                    "test5",
                     Date(1, 1, 1),
                     "https://i.pravatar.cc/300"
                 )
@@ -54,7 +53,7 @@ class DataSource {
             list.add(
                 GymWorkout(
 
-                    "test",
+                    "test6",
                     Date(1, 1, 1),
                     "https://i.pravatar.cc/300"
                 )
@@ -62,7 +61,7 @@ class DataSource {
             list.add(
                 GymWorkout(
 
-                    "test",
+                    "test7",
                     Date(1, 1, 1),
                     "https://i.pravatar.cc/300"
                 )
@@ -70,7 +69,7 @@ class DataSource {
             list.add(
                 GymWorkout(
 
-                    "test",
+                    "test8",
                     Date(1, 1, 1),
                     "https://i.pravatar.cc/300"
                 )
@@ -78,7 +77,7 @@ class DataSource {
             list.add(
                 GymWorkout(
 
-                    "test",
+                    "test9",
                     Date(1, 1, 1),
                     "https://i.pravatar.cc/300"
                 )

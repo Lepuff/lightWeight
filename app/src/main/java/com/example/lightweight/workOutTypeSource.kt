@@ -12,79 +12,25 @@ class WorkOutTypeSource {
             val list = ArrayList<WorkOutType>()
             list.add(
                 WorkOutType(
-                    "gym",
+                    "Gym Workout",
                     icon = R.drawable.ic_fitness_center_yellow_24dp
 
                 )
             )
             list.add(
                 WorkOutType(
-                    "stuff",
+                    "Running",
                     icon = R.drawable.ic_fitness_center_yellow_24dp
 
                 )
             )
             list.add(
                 WorkOutType(
-                    "hey",
+                    "Cycling",
                     icon = R.drawable.ic_fitness_center_yellow_24dp
 
                 )
             )
-            list.add(
-                WorkOutType(
-                    "hehehe",
-                    icon = R.drawable.ic_fitness_center_yellow_24dp
-
-                )
-            )
-            list.add(
-                WorkOutType(
-                    "hehehe",
-                    icon = R.drawable.ic_fitness_center_yellow_24dp
-
-                )
-            )
-            list.add(
-                WorkOutType(
-                    "hehehe",
-                    icon = R.drawable.ic_fitness_center_yellow_24dp
-
-                )
-            )
-            list.add(
-                WorkOutType(
-                    "hehehe",
-                    icon = R.drawable.ic_fitness_center_yellow_24dp
-
-                )
-            )
-            list.add(
-                WorkOutType(
-                    "hehehe",
-                    icon = R.drawable.ic_fitness_center_yellow_24dp
-
-                )
-            )
-            list.add(
-                WorkOutType(
-                    "hehehe",
-                    icon = R.drawable.ic_fitness_center_yellow_24dp
-
-                )
-            )
-            list.add(
-                WorkOutType(
-                    "hehehe",
-                    icon = R.drawable.ic_fitness_center_yellow_24dp
-
-                )
-            )
-
-
-
-
-
             return list
         }
     }

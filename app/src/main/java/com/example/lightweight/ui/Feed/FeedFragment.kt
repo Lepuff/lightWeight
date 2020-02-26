@@ -18,7 +18,6 @@ class FeedFragment : Fragment() {
 
     private lateinit var feedViewModel: FeedViewModel
     private lateinit var workOutAdapter: WorkOutAdapter
-    private lateinit var workoutTypeAdapter: WorkOutTypeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -33,10 +33,10 @@
         <activity android:name=".GarbageActivity"
             android:exported="true"/>
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ui.Register.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

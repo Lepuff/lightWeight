@@ -9,7 +9,7 @@ import com.google.firebase.firestore.SetOptions
 import java.time.LocalDateTime
 import java.util.*
 
-object Database{
+object Database {
     /*fun getUserDetailsFromFb(accessToken: AccessToken, _firstName: String, _lastName: String, _email: String) {
         var firstName = _firstName
         var lastName = _lastName
@@ -31,7 +31,8 @@ object Database{
         request.executeAsync()
     }*/
 
-    fun updateUserData(firstName: String, lastName: String, email: String){
+    var numberOfSets: Int? = null
+    fun updateUserData(firstName: String, lastName: String, email: String) {
         val db = FirebaseFirestore.getInstance()
 
         val user = hashMapOf(
@@ -50,23 +51,18 @@ object Database{
             }
     }
 
-    fun addExercise(email: String){
+    fun addExercise(email: String, exerciseID: Exercise) {
         val db = FirebaseFirestore.getInstance()
 
-        val weight: Int? = null
-        val reps: Int? = null
-        val sets: Int? = null
-        val date: LocalDateTime = LocalDateTime.now()
-        val typeOfExercise: String? = null
-
         val gymExercise = hashMapOf(
-            "reps" to reps,
-            "sets" to sets,
-            "weight" to weight
+            "weight" to exerciseID.sets.weight,
+            "reps" to exerciseID.sets.reps
         )
 
         db.collection("users").document(email)
-            .collection("workouts").document(date.toString() + typeOfExercise)
+            .collection("workouts").document("workoutID").collection(exerciseID)
+            .document(exerciseID.sets.number)
             .set(gymExercise)
+
     }
 }

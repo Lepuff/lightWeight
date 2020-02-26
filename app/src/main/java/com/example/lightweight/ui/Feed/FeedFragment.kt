@@ -30,7 +30,7 @@ class FeedFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_feed, container, false)
         val floatingActionButton =
             root.findViewById<FloatingActionButton>(R.id.feed_floating_action_button)
-        feedViewModel.text.observe(this, Observer {
+        feedViewModel.text.observe(viewLifecycleOwner, Observer {
 
         })
         floatingActionButton.setOnClickListener {

@@ -1,31 +1,20 @@
-package com.example.lightweight
+package com.example.lightweight.ui.Register
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
-import android.util.Patterns
-import android.widget.EditText
 import android.widget.Toast
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
-import com.facebook.AccessToken
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.login.LoginResult
-import com.facebook.login.widget.LoginButton
+import com.example.lightweight.Database
+import com.example.lightweight.R
+import com.example.lightweight.Validation
+import com.example.lightweight.ui.login.LoginActivity
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -69,8 +58,7 @@ class RegisterActivity : AppCompatActivity() {
         val firstName = textInputFirstName.text.toString().trim()
         val lastName = textInputLastName.text.toString().trim()
 
-        // Access a Cloud Firestore instance from your Activity
-        //val db = FirebaseFirestore.getInstance()
+
 
         if (Validation.isFieldEmpty(firstName)) {
             textInputFirstName.error = getString(R.string.field_cant_be_empty)
@@ -116,7 +104,11 @@ class RegisterActivity : AppCompatActivity() {
                         .show()
 
                     //update database with user data
-                    Database.updateUserData(firstName, lastName, email)
+                    Database.updateUserData(
+                        firstName,
+                        lastName,
+                        email
+                    )
 
                     startActivity(Intent(this, LoginActivity::class.java))
                     progressBar.visibility = View.INVISIBLE

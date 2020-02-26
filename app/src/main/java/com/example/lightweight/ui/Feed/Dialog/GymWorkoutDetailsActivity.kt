@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.Feed
+package com.example.lightweight.ui.Feed.Dialog
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

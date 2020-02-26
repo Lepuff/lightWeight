@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.Feed
+package com.example.lightweight.ui.Feed.Dialog
 
 import android.content.Intent
 import android.util.Log
@@ -6,9 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lightweight.AbstractWorkout
 import com.example.lightweight.R
-import com.example.lightweight.ui.NewGymWorkoutActivity
+import com.example.lightweight.ui.NewWorkout.NewGymWorkoutActivity
 import kotlinx.android.synthetic.main.layout_dialog_new_workout_list_item.view.*
 
 
@@ -56,7 +55,8 @@ class WorkOutTypeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
                 val selectedItem   = adapterPosition
                 Log.d("selected item","$selectedItem")
-                val intent =  Intent(itemView.context,NewGymWorkoutActivity::class.java)
+                val intent =  Intent(itemView.context,
+                    NewGymWorkoutActivity::class.java)
                 intent.putExtra("WORKOUT_TITLE","test")
                 itemView.context.startActivity(intent)
             }

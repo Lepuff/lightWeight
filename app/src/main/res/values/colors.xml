@@ -5,9 +5,9 @@
     <color name="colorAccent">#D81B60</color>
     <color name="background">#1e1d1b</color>
     <color name="background_item">#9b9b96</color>
-    <color name="background_button">#9bdcd6</color>
+    <color name="background_button">#CC1E1D1B</color>
     <color name="text_content">#ffffff</color>
-    <color name="text_button">#ffffff</color>
+    <color name="text_button">#ffc107</color>
     <color name="text_item">#ffffff</color>
     <color name="text_header">#ffffff</color>
     <color name="navbar_background">#1e1d1b</color>

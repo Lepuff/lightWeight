@@ -1,7 +1,7 @@
 package com.example.lightweight
 
 
-import com.example.lightweight.ui.Feed.WorkOutType
+import com.example.lightweight.ui.Feed.Dialog.WorkOutType
 
 
 class WorkOutTypeSource {

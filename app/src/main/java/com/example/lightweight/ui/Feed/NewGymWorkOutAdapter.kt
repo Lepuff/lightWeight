@@ -1,7 +1,5 @@
 package com.example.lightweight.ui.Feed
 
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,12 +11,12 @@ import com.example.lightweight.R
 import kotlinx.android.synthetic.main.layout_wo_list_item.view.*
 
 
-class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() {
+class NewGymWorkOutAdapter : RecyclerView.Adapter<NewGymWorkOutAdapter.WorkOutViewHolder>() {
 
     private var items: List<AbstractWorkout> = ArrayList()
     override fun getItemCount(): Int {
-        return items.size
-    }
+            return items.size
+        }
 
     fun submitList(workOutList: List<AbstractWorkout>) {
         items = workOutList

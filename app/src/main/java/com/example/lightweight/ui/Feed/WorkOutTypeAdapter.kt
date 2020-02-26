@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lightweight.R
-import com.example.lightweight.ui.NewGymWorkoutActivity
+import com.example.lightweight.ui.NewWorkout.NewGymWorkoutActivity
 import kotlinx.android.synthetic.main.layout_dialog_new_workout_list_item.view.*
 
 

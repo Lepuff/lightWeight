@@ -5,18 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lightweight.Exercise
 import com.example.lightweight.R
 
 
 class ExerciseAdapter : RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>() {
 
-    private var exercises: List<Exercise> = ArrayList()
+    private var exercises: ArrayList<Exercise> = ArrayList()
     override fun getItemCount(): Int {
         return exercises.size
     }
 
-    fun submitList(workOutList: List<Exercise>) {
+    fun submitList(workOutList: ArrayList<Exercise>) {
         exercises = workOutList
     }
 
@@ -33,11 +32,11 @@ class ExerciseAdapter : RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>
 
 
     class ExerciseViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
-        private var selectedworkout: Exercise? = null
+        private var selectedExercise: Exercise? = null
 
 
-        fun bind(workOut: Exercise) {
-            this.selectedworkout = workOut
+        fun bind(exercise : Exercise) {
+            this.selectedExercise = exercise
         }
 
         override fun onClick(v: View?) {
@@ -46,7 +45,8 @@ class ExerciseAdapter : RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>
     }
 
     override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val exercise = exercises[position]
+        holder.bind(exercise)
     }
 
 }

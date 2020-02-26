@@ -9,12 +9,11 @@ class GymWorkout(
                  override var title: String,
                  override var date: Date,
                  override var image: String)
-    : Exercise(R.drawable.ic_fitness_center_yellow_24dp){
+    : AbstractWorkout(R.drawable.ic_fitness_center_yellow_24dp){
 
 
     override fun showWorkout(context: Context) {
         val intent = Intent(context,GymWorkoutDetailsActivity::class.java)
-
         intent.putExtra("workoutTitle",title)
 
 
@@ -25,4 +24,5 @@ class GymWorkout(
     override fun editWorkout() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
 }

@@ -1,26 +1,24 @@
 package com.example.lightweight.ui.Feed
 
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.lightweight.AbstractWorkout
+import com.example.lightweight.Exercise
 import com.example.lightweight.R
 import kotlinx.android.synthetic.main.layout_wo_list_item.view.*
 
 
 class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() {
 
-    private var items: List<AbstractWorkout> = ArrayList()
+    private var items: List<Exercise> = ArrayList()
     override fun getItemCount(): Int {
         return items.size
     }
 
-    fun submitList(workOutList: List<AbstractWorkout>) {
+    fun submitList(workOutList: List<Exercise>) {
         items = workOutList
     }
 
@@ -37,7 +35,7 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
 
 
     class WorkOutViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
-        private var selectedworkout : AbstractWorkout? = null
+        private var selectedworkout : Exercise? = null
 
         init {
             itemView.setOnClickListener(this)
@@ -50,7 +48,7 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
         val workoutTitle = itemView.workout_title
         val workoutDate = itemView.workout_date
 
-        fun bind(workOut: AbstractWorkout) {
+        fun bind(workOut: Exercise) {
             this.selectedworkout = workOut
             workoutTitle.text = workOut.title
             workoutDate.text = workOut.date.toString()

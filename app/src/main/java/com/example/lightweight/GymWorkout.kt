@@ -2,7 +2,6 @@ package com.example.lightweight
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import com.example.lightweight.ui.Feed.GymWorkoutDetailsActivity
 import java.util.*
 
@@ -10,7 +9,7 @@ class GymWorkout(
                  override var title: String,
                  override var date: Date,
                  override var image: String)
-    : AbstractWorkout(R.drawable.ic_fitness_center_yellow_24dp){
+    : Exercise(R.drawable.ic_fitness_center_yellow_24dp){
 
 
     override fun showWorkout(context: Context) {

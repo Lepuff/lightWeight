@@ -4,7 +4,7 @@ package com.example.lightweight
 import android.content.Context
 import java.util.*
 
-abstract class AbstractWorkout(
+abstract class Exercise(
     val icon: Int
 ) {
     //ToDo add id?

@@ -1,12 +1,17 @@
-package com.example.lightweight
+package com.example.lightweight.ui.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
+import com.example.lightweight.*
+import com.example.lightweight.R
+import com.example.lightweight.ui.Register.RegisterActivity
 import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginResult
@@ -15,12 +20,9 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_login.*
-import org.json.JSONException
-import org.json.JSONObject
-import java.net.MalformedURLException
 import java.net.URL
+import java.util.logging.Logger
 
 
 class LoginActivity : AppCompatActivity() {
@@ -34,6 +36,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var password: String
     private lateinit var profilePicture: URL
+    private lateinit var progressBar: ProgressBar
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +49,7 @@ class LoginActivity : AppCompatActivity() {
         val fbLoginButton: LoginButton = findViewById(R.id.fbLogin_button)
         val userSignUp = findViewById<Button>(R.id.signUp_button)
         val userLogin = findViewById<Button>(R.id.loginButton_button)
+        //progressBar = findViewById(R.id.progressBarLogin)
 
         auth = FirebaseAuth.getInstance()
 
@@ -85,13 +89,15 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, NavigationActivity::class.java))
             finish()
         }
+        return
     }
 
     private fun updateUI(isLoggedIn: Boolean) {
         if (isLoggedIn) {
-            startActivity(Intent(this, NavigationActivity::class.java))
+            startActivity(Intent(applicationContext, NavigationActivity::class.java))
             finish()
         }
+        return
     }
 
     private fun passwordSignIn() {
@@ -120,13 +126,14 @@ class LoginActivity : AppCompatActivity() {
                 return
             }
         }
-
+        //progressBar.visibility = View.VISIBLE
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
                     updateUI(user)
+                    progressBar.visibility = View.INVISIBLE
                 } else {
                     // If sign in fails, display a message to the user.
                     Toast.makeText(
@@ -134,6 +141,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                     updateUI(null)
+                    //progressBar.visibility = View.INVISIBLE
                 }
 
             }
@@ -165,8 +173,7 @@ class LoginActivity : AppCompatActivity() {
             firstName = `object`.getString("first_name")
             lastName = `object`.getString("last_name")
 
-
-            //Database.updateUserData(accessToken, firstName, lastName, email)
+            Database.updateUserData(firstName, lastName, email)
         }
         //Here we put the requested fields to be returned from the JSONObject
         val parameters = Bundle()
@@ -179,17 +186,19 @@ class LoginActivity : AppCompatActivity() {
         //get credential
         val credential = FacebookAuthProvider.getCredential(accessToken!!.token)
 
+        //progressBar.visibility = View.VISIBLE
         auth.signInWithCredential(credential)
             .addOnSuccessListener { result ->
                 getUserDetailsFromFb(accessToken)
-                Database.updateUserData(firstName, lastName, email)
-                Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
 
+                Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, NavigationActivity::class.java))
+                //progressBar.visibility = View.INVISIBLE
             }
 
             .addOnFailureListener { e ->
                 Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+                //progressBar.visibility = View.INVISIBLE
             }
 
     }

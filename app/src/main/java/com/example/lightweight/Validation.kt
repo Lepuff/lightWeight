@@ -1,7 +1,9 @@
 package com.example.lightweight
 
+import android.provider.Settings.Global.getString
 import android.text.TextUtils
 import android.util.Patterns
+import com.google.android.material.textfield.TextInputEditText
 
 object Validation {
     fun isFieldEmpty(target: CharSequence): Boolean {
@@ -14,9 +16,5 @@ object Validation {
 
     fun isValidPassword(target: CharSequence?): Boolean {
         return target!!.length > 5
-    }
-
-    fun isValid(){
-
     }
 }

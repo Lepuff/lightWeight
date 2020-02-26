@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.Feed.Dialog
+package com.example.lightweight.ui.Feed
 
 import android.graphics.drawable.Drawable
 

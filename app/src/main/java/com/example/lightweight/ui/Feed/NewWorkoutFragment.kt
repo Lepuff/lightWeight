@@ -1,7 +1,8 @@
-package com.example.lightweight.ui.Feed.Dialog
+package com.example.lightweight.ui.Feed
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
@@ -9,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lightweight.R
 import com.example.lightweight.WorkOutTypeSource
-import com.example.lightweight.ui.TopSpacingItemDecoration
 
 
 class NewWorkoutFragment : DialogFragment() {
@@ -18,11 +18,9 @@ class NewWorkoutFragment : DialogFragment() {
 
         recyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
-            val topSpacingItemDecoration =
-                TopSpacingItemDecoration(15)
+            val topSpacingItemDecoration = TopSpacingItemDecoration(15)
             addItemDecoration(topSpacingItemDecoration)
-            workoutTypeAdapter =
-                WorkOutTypeAdapter()
+            workoutTypeAdapter = WorkOutTypeAdapter()
             adapter = workoutTypeAdapter
         }
     }

@@ -1,4 +1,4 @@
-package com.example.lightweight.ui
+package com.example.lightweight.ui.Feed
 
 import android.graphics.Rect
 import android.view.View

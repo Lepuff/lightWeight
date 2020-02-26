@@ -2,7 +2,8 @@ package com.example.lightweight
 
 import android.content.Context
 import android.content.Intent
-import com.example.lightweight.ui.Feed.Dialog.GymWorkoutDetailsActivity
+import android.util.Log
+import com.example.lightweight.ui.Feed.GymWorkoutDetailsActivity
 import java.util.*
 
 class GymWorkout(
@@ -13,11 +14,9 @@ class GymWorkout(
 
 
     override fun showWorkout(context: Context) {
+        val intent = Intent(context,GymWorkoutDetailsActivity::class.java)
 
-        val intent = Intent(context,
-            GymWorkoutDetailsActivity::class.java)
-
-
+        intent.putExtra("workoutTitle",title)
 
 
         context.startActivity(intent)

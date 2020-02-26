@@ -11,14 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.NewWorkout.NewGymWorkoutActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
+        <activity android:name=".ui.NewGymWorkoutActivity"></activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -49,10 +42,14 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
-            android:name=".ui.Feed.Dialog.GymWorkoutDetailsActivity"
+            android:name=".ui.Feed.GymWorkoutDetailsActivity"
             android:label="Details"
             android:launchMode="singleTop">
             <meta-data

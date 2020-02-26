@@ -9,7 +9,10 @@ import com.google.firebase.firestore.SetOptions
 import java.time.LocalDateTime
 import java.util.*
 
-object Database {
+
+
+object Database{
+
 
     var numberOfSets: Int? = null
     fun updateUserData(firstName: String, lastName: String, email: String) {

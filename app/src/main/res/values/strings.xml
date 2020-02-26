@@ -20,7 +20,7 @@
     <string name="log_in_using_email">Log in using Email</string>
     <string name="or">Or</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
-
+    <string name="add_exercise">Exercise</string>
     <string name="title_activity_bottom_navigation">Bottom_navigation</string>
     <string name="title_analytics">Analytics</string>
     <string name="title_feed">Feed</string>

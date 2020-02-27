@@ -33,7 +33,7 @@ object Database{
                 Log.w("TAG", "Error adding document", e)
             }
     }
-
+/*
     fun addExercise(email: String, exerciseID: AbstractWorkout) {
         val db = FirebaseFirestore.getInstance()
 
@@ -51,5 +51,5 @@ object Database{
             .document(exerciseID.sets.number)
             .set(gymExercise)
 
-    }
+    }*/
 }

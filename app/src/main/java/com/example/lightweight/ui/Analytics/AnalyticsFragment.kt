@@ -23,7 +23,7 @@ class AnalyticsFragment : Fragment() {
             ViewModelProviders.of(this).get(AnalyticsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_analytics, container, false)
         val textView: TextView = root.findViewById(R.id.text_notifications)
-        analyticsViewModel.text.observe(this, Observer {
+        analyticsViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

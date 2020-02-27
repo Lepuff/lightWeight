@@ -13,6 +13,7 @@ import com.example.lightweight.R
 class SocialFragment : Fragment() {
 
     private lateinit var socialViewModel: SocialViewModel
+    private lateinit var socialAdapter: SocialAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,6 +27,7 @@ class SocialFragment : Fragment() {
         socialViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
         return root
     }
 }

@@ -11,7 +11,7 @@ import com.example.lightweight.R
 import kotlinx.android.synthetic.main.layout_wo_list_item.view.*
 
 class SocialAdapter : RecyclerView.Adapter<SocialAdapter.SocialViewHolder>() {
-    private var items: List<AbstractWorkout> = ArrayList()
+    private var items: List<AbstractWorkout> = mutableListOf()
 
     override fun getItemCount(): Int {
         return items.size

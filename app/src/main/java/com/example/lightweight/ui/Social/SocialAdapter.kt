@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.Feed
+package com.example.lightweight.ui.Social
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,22 +10,19 @@ import com.example.lightweight.AbstractWorkout
 import com.example.lightweight.R
 import kotlinx.android.synthetic.main.layout_wo_list_item.view.*
 
-
-class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() {
-
+class SocialAdapter : RecyclerView.Adapter<SocialAdapter.SocialViewHolder>() {
     private var items: List<AbstractWorkout> = ArrayList()
 
     override fun getItemCount(): Int {
         return items.size
     }
 
-    fun submitList(workOutList: List<AbstractWorkout>) {
-        items = workOutList
+    fun submitList(socialList: List<AbstractWorkout>){
+        items = socialList
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkOutViewHolder {
-
-        return WorkOutViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SocialViewHolder {
+        return SocialViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.layout_wo_list_item,
                 parent,
@@ -35,25 +32,24 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
     }
 
 
-    class WorkOutViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
-        private var selectedworkout : AbstractWorkout? = null
+    class SocialViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
+        private var selectedworkout : AbstractWorkout? = null
         init {
             itemView.setOnClickListener(this)
         }
 
+        val socialImage = itemView.workout_image
+        val socialIcon = itemView.workout_icon
+        val socialTitle = itemView.workout_title
+        val socialDate = itemView.workout_date
 
 
-        val workoutImage = itemView.workout_image
-        val workoutIcon = itemView.workout_icon
-        val workoutTitle = itemView.workout_title
-        val workoutDate = itemView.workout_date
-
-        fun bind(workOut: AbstractWorkout) {
-            this.selectedworkout = workOut
-            workoutTitle.text = workOut.title
-            workoutDate.text = workOut.date.toString()
-            workoutIcon.setImageResource(workOut.icon)
+        fun bind(socialWorkOut: AbstractWorkout){
+            this.selectedworkout = socialWorkOut
+            socialTitle.text = socialWorkOut.title
+            socialDate.text = socialWorkOut.date.toString()
+            socialIcon.setImageResource(socialWorkOut.icon)
 
             val requestOption = RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background)
@@ -61,9 +57,11 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
                 .fallback(R.drawable.ic_fallback_foreground)
 
             Glide.with(itemView.context)
+
                 .applyDefaultRequestOptions(requestOption)
-                .load(workOut.image)
-                .into(workoutImage)
+                .load(socialWorkOut.image)
+                .into(socialImage)
+
         }
 
         override fun onClick(v: View?) {
@@ -72,9 +70,8 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
     }
 
 
-    override fun onBindViewHolder(holder: WorkOutViewHolder, position: Int) {
-
-        val workout = items[position]
-        holder.bind(workout)
+    override fun onBindViewHolder(holder: SocialViewHolder, position: Int) {
+        val socialWorkout = items[position]
+        holder.bind(socialWorkout)
     }
 }

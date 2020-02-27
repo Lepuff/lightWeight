@@ -23,7 +23,7 @@ class SocialFragment : Fragment() {
             ViewModelProviders.of(this).get(SocialViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_social, container, false)
         val textView: TextView = root.findViewById(R.id.text_home)
-        socialViewModel.text.observe(this, Observer {
+        socialViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

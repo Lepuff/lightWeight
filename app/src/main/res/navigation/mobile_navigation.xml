@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_analytics"
-        android:name="com.example.lightweight.ui.Social.SocialFragment"
+        android:name="com.example.lightweight.ui.Analytics.AnalyticsFragment"
         android:label="@string/title_analytics"
-        tools:layout="@layout/fragment_social" />
+        tools:layout="@layout/fragment_analytics"  />
 
     <fragment
         android:id="@+id/navigation_feed"
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_social"
-        android:name="com.example.lightweight.ui.Analytics.AnalyticsFragment"
+        android:name="com.example.lightweight.ui.Social.SocialFragment"
         android:label="@string/title_social"
-        tools:layout="@layout/fragment_analytics" />
+        tools:layout="@layout/fragment_social" />
 </navigation>

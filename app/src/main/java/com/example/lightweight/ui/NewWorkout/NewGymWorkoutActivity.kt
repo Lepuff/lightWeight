@@ -5,11 +5,9 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lightweight.R
-import com.example.lightweight.ui.Feed.TopSpacingItemDecoration
-import com.example.lightweight.ui.Feed.WorkOutAdapter
+import com.example.lightweight.TopSpacingItemDecoration
 import com.facebook.internal.Utility.arrayList
 import kotlinx.android.synthetic.main.activity_new_gym_workout.*
-import kotlinx.android.synthetic.main.fragment_feed.*
 
 class NewGymWorkoutActivity : AppCompatActivity() {
 
@@ -46,7 +44,8 @@ private lateinit var exerciseAdapter: ExerciseAdapter
     private fun initRecyclerView() {
         new_gym_recycle_view.apply {
             layoutManager = LinearLayoutManager(this.context)
-            val topSpacingItemDecoration = TopSpacingItemDecoration(30)
+            val topSpacingItemDecoration =
+                TopSpacingItemDecoration(30)
             addItemDecoration(topSpacingItemDecoration)
             exerciseAdapter = ExerciseAdapter()
             adapter = exerciseAdapter

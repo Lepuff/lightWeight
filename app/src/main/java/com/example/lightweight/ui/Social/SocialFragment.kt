@@ -11,14 +11,15 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lightweight.DataSource
 import com.example.lightweight.R
-import com.example.lightweight.ui.Feed.TopSpacingItemDecoration
-import com.example.lightweight.ui.Feed.WorkOutAdapter
+import com.example.lightweight.TopSpacingItemDecoration
+import com.example.lightweight.WorkOutAdapter
 import kotlinx.android.synthetic.main.fragment_feed.*
+import kotlinx.android.synthetic.main.fragment_social.*
 
 class SocialFragment : Fragment() {
 
     private lateinit var socialViewModel: SocialViewModel
-    private lateinit var socialAdapter: SocialAdapter
+    private lateinit var socialAdapter: WorkOutAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,23 +37,26 @@ class SocialFragment : Fragment() {
         return root
     }
 
-    private fun addDataSet(){
+    private fun addDataSet() {
         val data = DataSource.createDataSet()
         socialAdapter.submitList(data)
     }
 
 
     private fun initRecyclerView() {
-        feed_recycler_view.apply {
+        social_recycler_view.apply {
             layoutManager = LinearLayoutManager(this.context)
-            val topSpacingItemDecoration = TopSpacingItemDecoration(30)
+            val topSpacingItemDecoration =
+                TopSpacingItemDecoration(30)
             addItemDecoration(topSpacingItemDecoration)
-            socialAdapter = SocialAdapter()
+            socialAdapter = WorkOutAdapter()
             adapter = socialAdapter
         }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        initRecyclerView()
+        addDataSet()
     }
 }

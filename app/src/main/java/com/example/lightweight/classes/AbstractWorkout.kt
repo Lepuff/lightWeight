@@ -1,4 +1,4 @@
-package com.example.lightweight
+package com.example.lightweight.classes
 
 
 import android.content.Context

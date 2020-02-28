@@ -1,7 +1,8 @@
-package com.example.lightweight
+package com.example.lightweight.classes
 
 import android.content.Context
 import android.content.Intent
+import com.example.lightweight.R
 import com.example.lightweight.ui.Feed.GymWorkoutDetailsActivity
 import java.util.*
 

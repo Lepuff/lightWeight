@@ -1,9 +1,7 @@
 package com.example.lightweight.ui.login
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
@@ -11,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lightweight.*
 import com.example.lightweight.R
+import com.example.lightweight.ui.NavigationActivity
 import com.example.lightweight.ui.Register.RegisterActivity
 import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
@@ -22,7 +21,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
 import java.net.URL
-import java.util.logging.Logger
 
 
 class LoginActivity : AppCompatActivity() {

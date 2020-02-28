@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lightweight.R
-import com.example.lightweight.ui.Feed.TopSpacingItemDecoration
+import com.example.lightweight.TopSpacingItemDecoration
 import kotlinx.android.synthetic.main.layout_exercises_list_item.view.*
 
 
@@ -20,16 +20,9 @@ class ExerciseAdapter(private val parentRecyclerView: RecyclerView) :
 
     private var exercises: MutableList<Exercise> = ArrayList()
 
-
-    fun getExercises(): MutableList<Exercise> {
-
-        for (i in 0 until exercises.size) {
-
-        }
-
-        return exercises
+    fun submitList(workOutList: MutableList<Exercise>) {
+        exercises = workOutList
     }
-
 
     fun addExercise(name: String) {
         exercises.add(Exercise(name))
@@ -49,11 +42,7 @@ class ExerciseAdapter(private val parentRecyclerView: RecyclerView) :
     override fun getItemCount(): Int {
         return exercises.size
     }
-
-    fun submitList(workOutList: ArrayList<Exercise>) {
-        exercises = workOutList
-    }
-
+    
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
         return ExerciseViewHolder(
             LayoutInflater.from(parent.context).inflate(
@@ -111,7 +100,9 @@ class ExerciseAdapter(private val parentRecyclerView: RecyclerView) :
             setsAdapter = SetsAdapter(this)
             adapter = setsAdapter
         }
+
         val exercise = exercises[position]
+        setsAdapter.submitList(exercise.sets)
         holder.bind(exercise)
     }
 }

@@ -55,10 +55,10 @@
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NavigationActivity" />
+                android:value=".ui.NavigationActivity" />
         </activity>
         <activity
-            android:name=".NavigationActivity"
+            android:name=".ui.NavigationActivity"
             android:label="LightWeight"
             android:launchMode="singleTop" />
     </application>

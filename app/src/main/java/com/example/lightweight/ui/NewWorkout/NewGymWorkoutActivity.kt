@@ -13,8 +13,8 @@ import kotlinx.android.synthetic.main.activity_new_gym_workout.*
 
 class NewGymWorkoutActivity : AppCompatActivity() {
 
-private lateinit var exerciseAdapter: ExerciseAdapter
-
+    private lateinit var exerciseAdapter: ExerciseAdapter
+    private  var exerciseList: MutableList<Exercise> = arrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,13 +23,7 @@ private lateinit var exerciseAdapter: ExerciseAdapter
 
 
         initRecyclerView()
-
-
-
-
-
-
-
+        exerciseAdapter.submitList(exerciseList)
 
         val addExerciseButton = findViewById<Button>(R.id.new_gym_add_exercise_button)
         addExerciseButton.setOnClickListener {
@@ -42,18 +36,12 @@ private lateinit var exerciseAdapter: ExerciseAdapter
     private fun initRecyclerView() {
         exercise_recycle_view.apply {
             layoutManager = LinearLayoutManager(this.context)
-            val topSpacingItemDecoration =
-                TopSpacingItemDecoration(30)
+            val topSpacingItemDecoration = TopSpacingItemDecoration(30)
             addItemDecoration(topSpacingItemDecoration)
             exerciseAdapter = ExerciseAdapter(this)
             adapter = exerciseAdapter
         }
     }
-
-
-
-
-
 
 
 }

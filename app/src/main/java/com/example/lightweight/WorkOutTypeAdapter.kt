@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.Feed
+package com.example.lightweight
 
 import android.content.Intent
 import android.util.Log
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lightweight.R
+import com.example.lightweight.classes.WorkOutType
 import com.example.lightweight.ui.NewWorkout.NewGymWorkoutActivity
 import kotlinx.android.synthetic.main.layout_dialog_new_workout_list_item.view.*
 

@@ -1,6 +1,7 @@
-package com.example.lightweight
+package com.example.lightweight.classes
 
 import android.content.Context
+import com.example.lightweight.R
 import java.util.*
 
 class RunningWorkout(

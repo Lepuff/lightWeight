@@ -34,7 +34,7 @@ object Database{
             }
     }
 
-
+/*
     fun addExercise(email: String, exerciseID: AbstractWorkout) {
         val db = FirebaseFirestore.getInstance()
 
@@ -53,5 +53,5 @@ object Database{
             .set(gymExercise)
 
     }
-
+*/
 }

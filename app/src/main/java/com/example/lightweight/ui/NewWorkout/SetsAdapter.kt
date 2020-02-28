@@ -17,17 +17,17 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
 
     private var sets: MutableList<Sets> = ArrayList()
 
-    fun getSets() = sets
-
-    override fun getItemCount(): Int {
-        return sets.size
+    fun submitList(sets: MutableList<Sets>) {
+        this.sets = sets
     }
+
 
 
     fun deleteSet(position: Int) {
         sets.removeAt(position)
         this.notifyDataSetChanged() // need to reload full list because of the set numbers
     }
+
 
     fun addSet() {
         var weight = 0
@@ -41,10 +41,10 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
         sets.add(Sets(weight, rep))
         this.notifyItemInserted(sets.size - 1)
     }
-
-    fun submitList(sets: MutableList<Sets>) {
-        this.sets = sets
+    override fun getItemCount(): Int {
+        return sets.size
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SetsViewHolder {
         return SetsViewHolder(
@@ -55,7 +55,6 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
             ), childRecyclerView
         )
     }
-
 
     class SetsViewHolder constructor(itemView: View, private val recyclerView: RecyclerView) :
         RecyclerView.ViewHolder(itemView) {

@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.Feed
+package com.example.lightweight.classes
 
 import android.graphics.drawable.Drawable
 

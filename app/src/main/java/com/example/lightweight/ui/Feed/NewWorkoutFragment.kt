@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lightweight.R
 import com.example.lightweight.TopSpacingItemDecoration
+import com.example.lightweight.WorkOutTypeAdapter
 import com.example.lightweight.WorkOutTypeSource
 
 

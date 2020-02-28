@@ -1,5 +1,6 @@
 package com.example.lightweight
 
+import com.example.lightweight.classes.GymWorkout
 import java.util.*
 import kotlin.collections.ArrayList
 

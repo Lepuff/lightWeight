@@ -1,7 +1,8 @@
 package com.example.lightweight.ui.NewWorkout
 
 data class Exercise(
-    val name: String,
-    val sets: List<Sets>
+    var name: String
+
 ) {
+    var sets: MutableList<Sets> = arrayListOf()
 }

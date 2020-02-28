@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">LightWeight</string>
-
     <string name="password">Password</string>
     <string name="log_in">Log In</string>
     <string name="sign_up_here">Sign up here</string>
@@ -25,8 +24,9 @@
     <string name="title_analytics">Analytics</string>
     <string name="title_feed">Feed</string>
     <string name="title_social">Social</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-
+    <string name="add_set">Set</string>
+    <string name="set">Set</string>
+    <string name="weight">Weight</string>
+    <string name="reps">Reps</string>
+    <string name="delete_exercise_button">delete_exercise_button</string>
 </resources>

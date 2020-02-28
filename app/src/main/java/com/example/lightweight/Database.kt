@@ -34,4 +34,24 @@ object Database{
             }
     }
 
+
+    fun addExercise(email: String, exerciseID: AbstractWorkout) {
+        val db = FirebaseFirestore.getInstance()
+
+        when(exerciseID){
+            is GymWorkout ->{
+                val gymExercise = hashMapOf(
+                    "weight" to exerciseID.sets.weight,
+                    "reps" to exerciseID.sets.reps
+            }
+
+        }
+
+        db.collection("users").document(email)
+            .collection("workouts").document("workoutID").collection(exerciseID)
+            .document(exerciseID.sets.number)
+            .set(gymExercise)
+
+    }
+
 }

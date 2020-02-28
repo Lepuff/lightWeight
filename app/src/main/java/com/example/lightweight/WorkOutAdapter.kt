@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.Feed
+package com.example.lightweight
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,14 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.lightweight.AbstractWorkout
-import com.example.lightweight.R
 import kotlinx.android.synthetic.main.layout_wo_list_item.view.*
 
 
 class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() {
 
     private var items: List<AbstractWorkout> = ArrayList()
+
     override fun getItemCount(): Int {
         return items.size
     }

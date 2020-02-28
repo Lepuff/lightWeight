@@ -34,15 +34,11 @@ class ExerciseAdapter(private val parentRecyclerView: RecyclerView) :
         notifyItemRemoved(position)
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return super.getItemViewType(position)
-    }
-
 
     override fun getItemCount(): Int {
         return exercises.size
     }
-    
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
         return ExerciseViewHolder(
             LayoutInflater.from(parent.context).inflate(

@@ -23,7 +23,14 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
 
         initRecyclerView()
+
+
+        //ToDo samuel!! så här binder du en mutablelist av exercises till recycleviews,
+        //ToDo de är gjorda med referens så du kan spara denna lista till db.
         exerciseAdapter.submitList(exerciseList)
+
+
+
 
         val addExerciseButton = findViewById<Button>(R.id.new_gym_add_exercise_button)
         addExerciseButton.setOnClickListener {

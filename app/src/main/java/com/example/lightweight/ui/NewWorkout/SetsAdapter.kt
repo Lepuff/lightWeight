@@ -1,12 +1,14 @@
 package com.example.lightweight.ui.NewWorkout
 
 
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lightweight.R
 import kotlinx.android.synthetic.main.layout_sets_item.view.*
@@ -61,14 +63,20 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
         private var selectedSet: Sets? = null
 
         private val setNumber: TextView = itemView.sets_number_textView
-        private val setWeight: EditText = itemView.sets_weight_editText
-        private val setsReps: EditText = itemView.sets_reps_editText
+        private val setWeight: EditText = itemView.sets_weight_editText.apply {
+
+        }
+        private val setsReps: EditText = itemView.sets_reps_editText.apply {
+
+        }
         val button: Button = itemView.findViewById<Button>(R.id.delete_set_button).apply {
             setOnClickListener {
                 val adapter = recyclerView.adapter as SetsAdapter
                 adapter.deleteSet(recyclerView.getChildLayoutPosition(itemView))
             }
         }
+
+
 
 
         fun bind(set: Sets,position: Int) {

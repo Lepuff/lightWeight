@@ -30,6 +30,7 @@ abstract class AbstractWorkout(
 
     abstract fun showWorkout(context: Context)
     abstract fun editWorkout()
+    abstract fun addWorkoutToDb(email: String)
 
 
 

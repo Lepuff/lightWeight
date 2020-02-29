@@ -2,6 +2,7 @@ package com.example.lightweight.classes
 
 import android.content.Context
 import com.example.lightweight.R
+import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
 
 class RunningWorkout(
@@ -35,6 +36,23 @@ class RunningWorkout(
 
     override fun editWorkout() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun addWorkoutToDb(email: String) {
+        val db = FirebaseFirestore.getInstance()
+
+        time = 10  //TODO remove after testing
+        distance = 20  //TODO remove after testing
+
+        val exercise = hashMapOf(
+            "distance" to distance,
+            "time" to time
+        )
+
+        //TODO fix ID. Currently "unoDosTres"
+        db.collection("users").document(email)
+            .collection("workouts").document("unoDosTres")
+            .set(exercise)
     }
 
 }

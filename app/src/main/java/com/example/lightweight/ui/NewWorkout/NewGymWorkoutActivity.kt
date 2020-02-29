@@ -8,6 +8,7 @@ import com.example.lightweight.R
 
 import com.example.lightweight.TopSpacingItemDecoration
 import com.facebook.internal.Utility.arrayList
+import com.google.firebase.firestore.FirebaseFirestore
 
 import kotlinx.android.synthetic.main.activity_new_gym_workout.*
 
@@ -19,6 +20,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_gym_workout)
+        val db = FirebaseFirestore.getInstance() //gets access to db
 
 
 
@@ -29,6 +31,10 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         //ToDo de är gjorda med referens så du kan spara denna lista till db.
         exerciseAdapter.submitList(exerciseList)
 
+        //TODO Oskar, vet ej ännu om man kan ladda upp en hel lista till db
+
+
+
 
 
 
@@ -36,6 +42,8 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         addExerciseButton.setOnClickListener {
 
             exerciseAdapter.addExercise("tests")
+
+
         }
 
     }

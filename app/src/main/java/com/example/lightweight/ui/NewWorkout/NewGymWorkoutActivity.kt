@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lightweight.R
 
 import com.example.lightweight.TopSpacingItemDecoration
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
 
 import kotlinx.android.synthetic.main.activity_new_gym_workout.*
@@ -23,7 +24,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_gym_workout)
         val db = FirebaseFirestore.getInstance() //gets access to db
-         newGymWorkoutViewModel = ViewModelProviders.of(this).get(
+        newGymWorkoutViewModel = ViewModelProviders.of(this).get(
             NewGymWorkoutViewModel::class.java
         )
         newGymWorkoutViewModel.init()
@@ -34,8 +35,6 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
         initRecyclerView()
         exerciseAdapter.submitList(newGymWorkoutViewModel.getExerciseList().value!!)
-
-
 
 
         val addExerciseButton = findViewById<Button>(R.id.new_gym_add_exercise_button)
@@ -49,13 +48,24 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         val saveWorkoutButton = findViewById<Button>(R.id.new_gym_save_workout_button)
         saveWorkoutButton.setOnClickListener {
 
-            AlertDialog.Builder(this)
-                .setTitle("save Workout")
-                .setView(R.layout.activity_save_gym_workout)
+            val dialog = AlertDialog.Builder(this)
+                .setView(R.layout.dialog_save_gym_workout)
+                .create()
 
-                .show()
+
+
+
+            val saveButton =  findViewById<Button>(R.id.save_workout_save_button)
+            saveButton.setOnClickListener {
+
+            }
+
+            val cancelButton: Button = findViewById(R.id.save_workout_cancel_button)
+            saveButton.setOnClickListener {dialog.context
+                dialog.cancel()
+            }
+            dialog.show()
         }
-
     }
 
     private fun initRecyclerView() {

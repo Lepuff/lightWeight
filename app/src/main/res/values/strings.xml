@@ -30,4 +30,7 @@
     <string name="reps">Reps</string>
     <string name="delete_exercise_button">delete_exercise_button</string>
     <string name="save_workout">Save workout</string>
+    <string name="new_workout_name">Workout name</string>
+    <string name="how_did_it_go">How did it go?</string>
+    <string name="date">Date</string>
 </resources>

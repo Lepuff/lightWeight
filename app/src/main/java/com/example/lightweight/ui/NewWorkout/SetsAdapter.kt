@@ -1,6 +1,7 @@
 package com.example.lightweight.ui.NewWorkout
 
 
+import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
@@ -24,9 +25,8 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
     }
 
 
-
     fun deleteSet(position: Int) {
-        sets.removeAt(position)
+        sets.removeAt(position - 1)
         this.notifyDataSetChanged() // need to reload full list because of the set numbers
     }
 
@@ -43,6 +43,7 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
         sets.add(Sets(weight, rep))
         this.notifyItemInserted(sets.size - 1)
     }
+
     override fun getItemCount(): Int {
         return sets.size
     }
@@ -61,28 +62,66 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
     class SetsViewHolder constructor(itemView: View, private val recyclerView: RecyclerView) :
         RecyclerView.ViewHolder(itemView) {
         private var selectedSet: Sets? = null
+        private val adapter = recyclerView.adapter as SetsAdapter
 
         private val setNumber: TextView = itemView.sets_number_textView
         private val setWeight: EditText = itemView.sets_weight_editText.apply {
+            addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    val position = adapterPosition
+                    adapter.sets[position].weight = s.toString().toIntOrNull()!!
+                }
+
+
+            })
 
         }
         private val setsReps: EditText = itemView.sets_reps_editText.apply {
+            addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
 
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+
+                }
+
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    val position = adapterPosition
+                    adapter.sets[position].reps = s.toString().toIntOrNull()!!
+
+                }
+            }
+            )
         }
         val button: Button = itemView.findViewById<Button>(R.id.delete_set_button).apply {
             setOnClickListener {
-                val adapter = recyclerView.adapter as SetsAdapter
-                adapter.deleteSet(recyclerView.getChildLayoutPosition(itemView))
+                adapter.deleteSet(recyclerView.getChildLayoutPosition(itemView) + 1)
             }
         }
 
 
-
-
-        fun bind(set: Sets,position: Int) {
+        fun bind(set: Sets, position: Int) {
             this.selectedSet = set
-
-            setNumber.text = (position+1).toString()
+            setNumber.text = (position + 1).toString()
             setWeight.setText(set.weight.toString())
             setsReps.setText(set.reps.toString())
 
@@ -92,6 +131,6 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
     override fun onBindViewHolder(holder: SetsViewHolder, position: Int) {
 
         val set = sets[position]
-        holder.bind(set,position)
+        holder.bind(set, position)
     }
 }

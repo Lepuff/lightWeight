@@ -19,6 +19,7 @@ class NavigationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_navigation)
         auth = FirebaseAuth.getInstance()
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        var email = intent.getStringExtra("email")
 
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each

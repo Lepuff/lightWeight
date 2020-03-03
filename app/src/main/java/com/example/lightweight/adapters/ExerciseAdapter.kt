@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lightweight.R
-import com.example.lightweight.TopSpacingItemDecoration
+import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.classes.Exercise
 import kotlinx.android.synthetic.main.layout_exercises_list_item.view.*
 
@@ -96,7 +96,8 @@ class ExerciseAdapter(private val parentRecyclerView: RecyclerView) :
         lateinit var setsAdapter: SetsAdapter
         holder.childRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
-            val topSpacingItemDecoration = TopSpacingItemDecoration(10)
+            val topSpacingItemDecoration =
+                TopSpacingItemDecoration(10)
             addItemDecoration(topSpacingItemDecoration)
             setsAdapter = SetsAdapter(this)
             adapter = setsAdapter

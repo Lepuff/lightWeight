@@ -20,6 +20,7 @@ class GymWorkout(
 
     private var exerciseList :MutableList<Exercise> = ArrayList()
 
+
     fun setExerciseList(exerciseList : MutableList<Exercise>){
         this.exerciseList = exerciseList
     }

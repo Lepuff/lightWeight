@@ -1,6 +1,7 @@
 package com.example.lightweight
 
 import com.example.lightweight.classes.AbstractWorkout
+import com.example.lightweight.classes.CyclingWorkout
 import com.example.lightweight.classes.GymWorkout
 import com.example.lightweight.classes.RunningWorkout
 import kotlin.collections.ArrayList
@@ -14,12 +15,13 @@ class WorkOutTypeSource {
             val list = ArrayList<AbstractWorkout>()
             list.add(
                 GymWorkout(
-                    "Gym", "test", "test"
-
-                )
+                    "Gym", "test", "test")
             )
             list.add(
-                RunningWorkout("Running", "test", "test")
+                RunningWorkout("Run", "test", "test")
+            )
+            list.add(
+                CyclingWorkout("Cycling","test","test")
             )
             return list
         }

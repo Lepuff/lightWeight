@@ -119,7 +119,7 @@ class RegisterActivity : AppCompatActivity() {
                     ).show()*/
                     Log.d("TAG", "createUserWithEmail:failure", task.exception)
                     Toast.makeText(
-                        baseContext, getString(R.string.authentication_failed),
+                        baseContext, getString(R.string.authentication_failed), //TODO set message to $exception
                         Toast.LENGTH_SHORT
                     ).show()
                     progressBar.visibility = View.INVISIBLE

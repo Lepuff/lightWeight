@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.lightweight.Database
 import com.example.lightweight.R
 
 import com.example.lightweight.TopSpacingItemDecoration
@@ -74,10 +75,14 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                 val workoutTitle =
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_name_editText)
                         .text //todo titel
-                // TODO db.collection("users")
+
                 val workoutDate =
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
                         .text //todo datum
+
+                db.collection("users").document(Database.getUserEmail())
+                    .collection("workouts").document("$workoutTitle")
+                    .set(newGymWorkoutViewModel.getExerciseList())
 
                 dialog.cancel()
                 finish()

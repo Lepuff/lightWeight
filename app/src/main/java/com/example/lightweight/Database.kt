@@ -18,6 +18,12 @@ object Database{
     var facebookUser: User = User(null, null, null)
     var emailUser: User = User(null, null, null)
 
+    fun getUserEmail(): String {
+        return if (facebookUser.email != null)
+            facebookUser.email.toString()
+        else
+            emailUser.email.toString()
+    }
     fun updateUserData(target: User) {
         val db = FirebaseFirestore.getInstance()
 

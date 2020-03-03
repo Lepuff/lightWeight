@@ -106,11 +106,7 @@ class RegisterActivity : AppCompatActivity() {
                         .show()
 
                     //update database with user data
-                    Database.updateUserData(
-                        firstName,
-                        lastName,
-                        email
-                    )
+                    Database.updateUserData(Database.emailUser)
 
                     startActivity(Intent(this, LoginActivity::class.java))
                     progressBar.visibility = View.INVISIBLE

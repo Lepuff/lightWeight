@@ -38,24 +38,21 @@ object Database{
             }
     }
 
-/*
-    fun addExercise(email: String, exerciseID: AbstractWorkout) {
-        val db = FirebaseFirestore.getInstance()
+    fun getUserDetailsFromFb(accessToken: AccessToken) {
+        val request = GraphRequest.newMeRequest(
+            accessToken
+        ) { `object`, response ->
 
-        when(exerciseID){
-            is GymWorkout ->{
-                val gymExercise = hashMapOf(
-                    "weight" to exerciseID.sets.weight,
-                    "reps" to exerciseID.sets.reps
-            }
+            facebookUser.email = `object`.getString("email")
+            facebookUser.firstName = `object`.getString("first_name")
+            facebookUser.lastName = `object`.getString("last_name")
 
+            //Database.updateUserData(firstName, lastName, email)
         }
-
-        db.collection("users").document(email)
-            .collection("workouts").document("workoutID").collection(exerciseID)
-            .document(exerciseID.sets.number)
-            .set(gymExercise)
-
+        //Here we put the requested fields to be returned from the JSONObject
+        val parameters = Bundle()
+        parameters.putString("fields", "id, first_name, last_name, email")
+        request.parameters = parameters
+        request.executeAsync()
     }
-*/
 }

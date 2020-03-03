@@ -150,7 +150,7 @@ class LoginActivity : AppCompatActivity() {
         fbLogin_button.setPermissions(listOf("email", "public_profile", "user_friends"))
         fbLogin_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult) {
-                handleFacebookAccessToken(result!!.accessToken)
+                handleFacebookAccessToken(result.accessToken)
             }
 
             override fun onCancel() {

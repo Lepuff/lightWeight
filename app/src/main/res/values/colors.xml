@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="background">#1e1d1b</color>
-    <color name="background_item">#9b9b96</color>
+    <color name="background_item">#E61C1D1B</color>
     <color name="background_button">#1E1D1B</color>
     <color name="text_content">#ffc107</color>
     <color name="text_button">#ffc107</color>
@@ -17,6 +17,7 @@
     <color name="navbar_text_color_not_clicked">#FFD54F</color>
     <color name="navbar_ripple_color">#ffc107</color>
     <color name="floating_action_button_color">#ffc107</color>
+
 
 
 </resources>

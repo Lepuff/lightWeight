@@ -215,4 +215,42 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textedit_average_force" />
 
+    <TextView
+        android:id="@+id/text_top_cadence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/top_cadence"
+        app:layout_constraintBottom_toBottomOf="@+id/textedit_top_cadence"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textedit_average_cadence" />
+
+    <EditText
+        android:id="@+id/textedit_top_cadence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textedit_average_cadence" />
+
+    <TextView
+        android:id="@+id/text_calories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/calories"
+        app:layout_constraintBottom_toBottomOf="@+id/textedit_calories"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textedit_top_cadence" />
+
+    <EditText
+        android:id="@+id/textedit_calories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textedit_top_cadence" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

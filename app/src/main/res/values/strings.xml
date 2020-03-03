@@ -36,6 +36,8 @@
     <string name="fitness_exercise">Fitness exercise</string>
     <string name="average_force">Average force</string>
     <string name="average_cadence">Average cadence</string>
+    <string name="top_cadence">Top cadence</string>
+    <string name="calories">Calories</string>
 
 
 </resources>

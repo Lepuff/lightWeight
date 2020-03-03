@@ -37,6 +37,7 @@ class FeedFragment : Fragment() {
         floatingActionButton.setOnClickListener {
             Log.d("Fab", "fab clicked") //ToDO remove
             NewWorkoutFragment().show(childFragmentManager,"test")
+
         }
         return root
     }

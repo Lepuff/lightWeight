@@ -6,7 +6,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
 
 class RunningWorkout(
-    override var date: Date,
+    override var date: String,
     override var image: String,
     override var title: String
 ) : AbstractWorkout(R.drawable.ic_directions_run_yellow_24dp) {
@@ -35,6 +35,10 @@ class RunningWorkout(
     }
 
     override fun editWorkout() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun newWorkout(context: Context) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

@@ -2,6 +2,7 @@ package com.example.lightweight.ui.NewWorkout
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
@@ -14,6 +15,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
 
 import kotlinx.android.synthetic.main.activity_new_gym_workout.*
+import java.time.LocalDate
 
 class NewGymWorkoutActivity : AppCompatActivity() {
 
@@ -47,24 +49,39 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
         val saveWorkoutButton = findViewById<Button>(R.id.new_gym_save_workout_button)
         saveWorkoutButton.setOnClickListener {
+            val dialogView =
+                LayoutInflater.from(this).inflate(R.layout.dialog_save_gym_workout, null)
+            val saveButton = dialogView.findViewById<Button>(R.id.save_workout_save_button)
+            val currentDate = LocalDate.now().toString()
+            dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
+                .setText(currentDate)
 
-            val dialog = AlertDialog.Builder(this)
-                .setView(R.layout.dialog_save_gym_workout)
-                .create()
+            val dialogBuilder = AlertDialog.Builder(this)
+                .setView(dialogView)
+
+
+            val dialog = dialogBuilder.show()
 
 
 
 
-            val saveButton =  findViewById<Button>(R.id.save_workout_save_button)
             saveButton.setOnClickListener {
 
+
+                newGymWorkoutViewModel.getExerciseList() //todo detta är sjävla listan.
+                val workoutTitle =
+                    dialogView.findViewById<TextInputEditText>(R.id.new_workout_name_editText)
+                        .text //todo titel
+                val workoutDate =
+                    dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
+                        .text //todo datum
+
+                dialog.cancel()
+                finish()
+
             }
 
-            val cancelButton: Button = findViewById(R.id.save_workout_cancel_button)
-            saveButton.setOnClickListener {dialog.context
-                dialog.cancel()
-            }
-            dialog.show()
+
         }
     }
 

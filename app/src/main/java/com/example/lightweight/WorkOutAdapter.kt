@@ -18,7 +18,7 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
         return items.size
     }
 
-    fun submitList(workOutList: List<AbstractWorkout>) {
+    fun submitList(workOutList: MutableList<AbstractWorkout>) {
         items = workOutList
     }
 
@@ -35,7 +35,7 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
 
 
     class WorkOutViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
-        private var selectedworkout : AbstractWorkout? = null
+        private var selectedWorkout : AbstractWorkout? = null
 
         init {
             itemView.setOnClickListener(this)
@@ -49,9 +49,9 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
         val workoutDate = itemView.workout_date
 
         fun bind(workOut: AbstractWorkout) {
-            this.selectedworkout = workOut
+            this.selectedWorkout = workOut
             workoutTitle.text = workOut.title
-            workoutDate.text = workOut.date.toString()
+            workoutDate.text = workOut.date
             workoutIcon.setImageResource(workOut.icon)
 
             val requestOption = RequestOptions()
@@ -66,7 +66,7 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
         }
 
         override fun onClick(v: View?) {
-            selectedworkout?.showWorkout(itemView.context)
+            selectedWorkout?.showWorkout(itemView.context)
         }
     }
 

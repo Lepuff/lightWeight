@@ -72,6 +72,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                 val workoutTitle =
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_name_editText)
                         .text //todo titel
+                // TODO db.collection("users")
                 val workoutDate =
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
                         .text //todo datum

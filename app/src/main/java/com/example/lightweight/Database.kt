@@ -15,24 +15,20 @@ import java.util.*
 
 object Database{
 
-        /*var facebookUser: User by lazy {
-
-        }*/
-    var emailUser: User by lazy {
-            User(textInputEmail.text.toString().trim())
-        }
+    var facebookUser: User = User("", "", "")
+    var emailUser: User = User("", "", "")
 
 
-    fun updateUserData(firstName: String, lastName: String, email: String) {
+    fun updateUserData(target: User) {
         val db = FirebaseFirestore.getInstance()
 
         val user = hashMapOf(
-            "firstName" to firstName,
-            "lastName" to lastName,
-            "email" to email
+            "firstName" to target.firstName,
+            "lastName" to target.lastName,
+            "email" to target.email
         )
         // Add a new document with a email-address as ID
-        db.collection("users").document(email)
+        db.collection("users").document(target.email!!)
             .set(user)
             .addOnSuccessListener { documentReference ->
                 Log.d("TAG", "DocumentSnapshot added with ID: $documentReference")

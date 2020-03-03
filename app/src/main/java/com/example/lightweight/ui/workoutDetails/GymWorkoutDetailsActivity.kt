@@ -2,6 +2,7 @@ package com.example.lightweight.ui.workoutDetails
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lightweight.R
 import com.example.lightweight.adapters.ExerciseAdapter
@@ -19,7 +20,10 @@ class GymWorkoutDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gym_workout_details)
-        //Todo remove after testing 
+
+        
+
+        //Todo remove after testing
         val exerciseList : MutableList<Exercise> = ArrayList()
         val setTest = Sets("3","3")
         val exerciseTest = Exercise("test")

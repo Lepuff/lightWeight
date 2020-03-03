@@ -9,12 +9,12 @@ abstract class AbstractWorkout(
     val icon: Int
 ) {
     //ToDo add id?
-    abstract var title: String
-    abstract var date: String
-    abstract var image: String //ToDo remove!!!: it is for test
+    abstract var title: String?
+    abstract var date: String?
+    abstract var image: String? //ToDo remove!!!: it is for test
 
 
-    fun getWorkoutTitle() : String{
+    fun getWorkoutTitle() : String? {
         return title
     }
     fun setWorkoutTitle(newTitle: String){

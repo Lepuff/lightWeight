@@ -11,9 +11,9 @@ import com.example.lightweight.ui.newWorkout.gym.NewGymWorkoutActivity
 import kotlin.collections.ArrayList
 
 class GymWorkout(
-    override var title: String,
-    override var date: String,
-    override var image: String
+    override var title: String?,
+    override var date: String?,
+    override var image: String?
 ) : AbstractWorkout(R.drawable.ic_fitness_center_yellow_24dp) {
 
 

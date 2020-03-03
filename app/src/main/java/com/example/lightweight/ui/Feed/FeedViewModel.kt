@@ -10,4 +10,5 @@ class FeedViewModel : ViewModel() {
 
     }
     val text: LiveData<String> = _text
+    //test
 }

@@ -31,4 +31,13 @@
             app:layout_constraintTop_toBottomOf="@id/exercise_recycle_view"
             app:layout_constraintBottom_toBottomOf="parent"
             />
+        <Button
+            android:layout_width="wrap_content"
+            android:id="@+id/new_gym_save_workout_button"
+            android:layout_height="wrap_content"
+            android:background="@color/background"
+            android:textColor="@color/text_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="@string/save_workout"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

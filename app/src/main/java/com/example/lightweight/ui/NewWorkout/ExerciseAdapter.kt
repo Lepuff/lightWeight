@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lightweight.R
@@ -59,6 +60,8 @@ class ExerciseAdapter(private val parentRecyclerView: RecyclerView) :
         private val exerciseName: TextView = itemView.exercise_name_textView
 
 
+
+
         val deleteExerciseButton: ImageButton =
             itemView.findViewById<ImageButton>(R.id.delete_exercise_button).apply {
                 setOnClickListener {
@@ -71,6 +74,8 @@ class ExerciseAdapter(private val parentRecyclerView: RecyclerView) :
 
                 }
             }
+
+
 
 
         val newSetButton: Button = itemView.findViewById<Button>(R.id.new_set_button).apply {

@@ -9,7 +9,7 @@ abstract class AbstractWorkout(
 ) {
     //ToDo add id?
     abstract var title: String
-    abstract var date: Date
+    abstract var date: String
     abstract var image: String //ToDo remove!!!: it is for test
 
 
@@ -20,16 +20,13 @@ abstract class AbstractWorkout(
         title = newTitle
     }
 
-    fun getWorkoutDate (): Date{
-        return date
-    }
-    fun setWorokoutDate(newDate: Date){
-        date = newDate
-    }
+
+
 
 
     abstract fun showWorkout(context: Context)
     abstract fun editWorkout()
+    abstract fun newWorkout(context: Context)
     abstract fun addWorkoutToDb(email: String)
 
 

@@ -1,34 +1,25 @@
 package com.example.lightweight
 
-import com.example.lightweight.classes.WorkOutType
+import com.example.lightweight.classes.AbstractWorkout
+import com.example.lightweight.classes.GymWorkout
+import com.example.lightweight.classes.RunningWorkout
+import kotlin.collections.ArrayList
 
 
 class WorkOutTypeSource {
 
     companion object {
 
-        fun createNWDataSet(): ArrayList<WorkOutType> {
-            val list = ArrayList<WorkOutType>()
+        fun createNWDataSet(): MutableList<AbstractWorkout> {
+            val list = ArrayList<AbstractWorkout>()
             list.add(
-                WorkOutType(
-                    "Gym Workout",
-                    icon = R.drawable.ic_fitness_center_yellow_24dp
+                GymWorkout(
+                    "Gym", "test", "test"
 
                 )
             )
             list.add(
-                WorkOutType(
-                    "Running",
-                    icon = R.drawable.ic_fitness_center_yellow_24dp
-
-                )
-            )
-            list.add(
-                WorkOutType(
-                    "Cycling",
-                    icon = R.drawable.ic_fitness_center_yellow_24dp
-
-                )
+                RunningWorkout("Running", "test", "test")
             )
             return list
         }

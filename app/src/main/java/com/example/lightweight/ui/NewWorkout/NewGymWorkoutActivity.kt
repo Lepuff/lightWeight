@@ -2,40 +2,41 @@ package com.example.lightweight.ui.NewWorkout
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.Button
+import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lightweight.R
 
 import com.example.lightweight.TopSpacingItemDecoration
-import com.facebook.internal.Utility.arrayList
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
 
 import kotlinx.android.synthetic.main.activity_new_gym_workout.*
+import java.time.LocalDate
 
 class NewGymWorkoutActivity : AppCompatActivity() {
 
     private lateinit var exerciseAdapter: ExerciseAdapter
-    private  var exerciseList: MutableList<Exercise> = arrayList()
+    private lateinit var newGymWorkoutViewModel: NewGymWorkoutViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_gym_workout)
         val db = FirebaseFirestore.getInstance() //gets access to db
+        newGymWorkoutViewModel = ViewModelProviders.of(this).get(
+            NewGymWorkoutViewModel::class.java
+        )
+        newGymWorkoutViewModel.init()
+        newGymWorkoutViewModel.getExerciseList().observe(this,
+            Observer<MutableList<Exercise>> { exerciseAdapter.notifyDataSetChanged() })
 
 
 
         initRecyclerView()
-
-
-        //ToDo samuel!! så här binder du en mutablelist av exercises till recycleviews,
-        //ToDo de är gjorda med referens så du kan spara denna lista till db.
-        exerciseAdapter.submitList(exerciseList)
-
-        //TODO Oskar, vet ej ännu om man kan ladda upp en hel lista till db
-
-
-
-
+        exerciseAdapter.submitList(newGymWorkoutViewModel.getExerciseList().value!!)
 
 
         val addExerciseButton = findViewById<Button>(R.id.new_gym_add_exercise_button)
@@ -46,6 +47,42 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
         }
 
+        val saveWorkoutButton = findViewById<Button>(R.id.new_gym_save_workout_button)
+        saveWorkoutButton.setOnClickListener {
+            val dialogView =
+                LayoutInflater.from(this).inflate(R.layout.dialog_save_gym_workout, null)
+            val saveButton = dialogView.findViewById<Button>(R.id.save_workout_save_button)
+            val currentDate = LocalDate.now().toString()
+            dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
+                .setText(currentDate)
+
+            val dialogBuilder = AlertDialog.Builder(this)
+                .setView(dialogView)
+
+
+            val dialog = dialogBuilder.show()
+
+
+
+
+            saveButton.setOnClickListener {
+
+
+                newGymWorkoutViewModel.getExerciseList() //todo detta är sjävla listan.
+                val workoutTitle =
+                    dialogView.findViewById<TextInputEditText>(R.id.new_workout_name_editText)
+                        .text //todo titel
+                val workoutDate =
+                    dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
+                        .text //todo datum
+
+                dialog.cancel()
+                finish()
+
+            }
+
+
+        }
     }
 
     private fun initRecyclerView() {
@@ -57,6 +94,8 @@ class NewGymWorkoutActivity : AppCompatActivity() {
             adapter = exerciseAdapter
         }
     }
-
-
 }
+
+
+
+

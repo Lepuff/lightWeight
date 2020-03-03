@@ -30,6 +30,12 @@
     <string name="timing">Timing</string>
     <string name="total">Total</string>
     <string name="total_time">Total time</string>
+    <string name="average_pulse">Average Pulse</string>
+    <string name="average_speed">Average speed</string>
+    <string name="top_speed">Top speed</string>
+    <string name="fitness_exercise">Fitness exercise</string>
+    <string name="average_force">Average force</string>
+    <string name="average_cadence">Average cadence</string>
 
 
 </resources>

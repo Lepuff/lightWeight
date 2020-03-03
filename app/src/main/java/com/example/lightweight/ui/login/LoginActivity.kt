@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var textInputPassword: TextInputEditText
     private lateinit var firstName: String
     private lateinit var lastName: String
-    private lateinit var email: String
+    //private lateinit var email: String
     private lateinit var password: String
     private lateinit var profilePicture: URL
     private lateinit var progressBar: ProgressBar
@@ -43,11 +43,12 @@ class LoginActivity : AppCompatActivity() {
 
         AppEventsLogger.activateApp(application)
 
+
         callbackManager = CallbackManager.Factory.create()
         val fbLoginButton: LoginButton = findViewById(R.id.fbLogin_button)
         val userSignUp = findViewById<Button>(R.id.signUp_button)
         val userLogin = findViewById<Button>(R.id.loginButton_button)
-        //progressBar = findViewById(R.id.progressBarLogin)
+        progressBar = findViewById(R.id.progressBarLogin)
 
         auth = FirebaseAuth.getInstance()
 
@@ -102,7 +103,7 @@ class LoginActivity : AppCompatActivity() {
         textInputEmail = findViewById(R.id.emailLogin_editText)
         textInputPassword = findViewById(R.id.passwordLogin_editText)
 
-        email = textInputEmail.text.toString().trim()
+        Databaseemail = textInputEmail.text.toString().trim()
         password = textInputPassword.text.toString().trim()
 
         if (!Validation.isValidEmail(email)) {
@@ -124,7 +125,7 @@ class LoginActivity : AppCompatActivity() {
                 return
             }
         }
-        //progressBar.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -139,7 +140,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                     updateUI(null)
-                    //progressBar.visibility = View.INVISIBLE
+                    progressBar.visibility = View.INVISIBLE
                 }
 
             }
@@ -162,7 +163,7 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-    private fun getUserDetailsFromFb(accessToken: AccessToken) {
+    /*private fun getUserDetailsFromFb(accessToken: AccessToken) {
         val request = GraphRequest.newMeRequest(
             accessToken
         ) { `object`, response ->
@@ -171,32 +172,35 @@ class LoginActivity : AppCompatActivity() {
             firstName = `object`.getString("first_name")
             lastName = `object`.getString("last_name")
 
-            Database.updateUserData(firstName, lastName, email)
+            //Database.updateUserData(firstName, lastName, email)
         }
         //Here we put the requested fields to be returned from the JSONObject
         val parameters = Bundle()
         parameters.putString("fields", "id, first_name, last_name, email")
         request.parameters = parameters
         request.executeAsync()
-    }
+    }*/
 
     private fun handleFacebookAccessToken(accessToken: AccessToken?) {
         //get credential
         val credential = FacebookAuthProvider.getCredential(accessToken!!.token)
 
-        //progressBar.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
         auth.signInWithCredential(credential)
             .addOnSuccessListener { result ->
-                getUserDetailsFromFb(accessToken)
+                //getUserDetailsFromFb(accessToken)
+
 
                 Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, NavigationActivity::class.java))
-                //progressBar.visibility = View.INVISIBLE
+                val intent = Intent(this, NavigationActivity::class.java)
+                intent.putExtra("email", email)
+                startActivity(intent)
+                progressBar.visibility = View.INVISIBLE
             }
 
             .addOnFailureListener { e ->
                 Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
-                //progressBar.visibility = View.INVISIBLE
+                progressBar.visibility = View.INVISIBLE
             }
 
     }

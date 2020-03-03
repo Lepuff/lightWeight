@@ -2,6 +2,7 @@ package com.example.lightweight
 
 import android.os.Bundle
 import android.util.Log
+import com.example.lightweight.classes.User
 import com.facebook.AccessToken
 import com.facebook.GraphRequest
 import com.google.firebase.firestore.FirebaseFirestore
@@ -11,10 +12,17 @@ import java.util.*
 
 
 
+
 object Database{
 
+        /*var facebookUser: User by lazy {
 
-    var numberOfSets: Int? = null
+        }*/
+    var emailUser: User by lazy {
+            User(textInputEmail.text.toString().trim())
+        }
+
+
     fun updateUserData(firstName: String, lastName: String, email: String) {
         val db = FirebaseFirestore.getInstance()
 

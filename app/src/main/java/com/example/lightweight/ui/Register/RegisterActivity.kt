@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lightweight.Database
+//import com.example.lightweight.Database.emailUser
 import com.example.lightweight.R
 import com.example.lightweight.Validation
 import com.example.lightweight.ui.login.LoginActivity
@@ -60,7 +61,7 @@ class RegisterActivity : AppCompatActivity() {
 
 
 
-        if (Validation.isFieldEmpty(firstName)) {
+        if (Validation.isFieldEmpty(email) {
             textInputFirstName.error = getString(R.string.field_cant_be_empty)
             textInputFirstName.requestFocus()
             return

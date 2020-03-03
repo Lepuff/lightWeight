@@ -32,8 +32,8 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
 
 
     fun addSet() {
-        var weight = 0
-        var rep = 0
+        var weight = ""
+        var rep = ""
 
         if (sets.isNotEmpty()) {
             rep = sets[sets.size - 1].reps
@@ -81,7 +81,8 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     val position = adapterPosition
-                    adapter.sets[position].weight = s.toString().toIntOrNull()!!
+
+                    adapter.sets[position].weight = s.toString()
                 }
 
 
@@ -106,7 +107,7 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     val position = adapterPosition
-                    adapter.sets[position].reps = s.toString().toIntOrNull()!!
+                    adapter.sets[position].reps = s.toString()
 
                 }
             }

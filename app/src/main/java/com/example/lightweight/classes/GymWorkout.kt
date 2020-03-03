@@ -7,8 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.lightweight.Database
 import com.example.lightweight.R
 import com.example.lightweight.ui.Feed.GymWorkoutDetailsActivity
-import com.example.lightweight.ui.NewWorkout.NewGymWorkoutActivity
-import com.google.firebase.firestore.FirebaseFirestore
+import com.example.lightweight.ui.newWorkout.gym.NewGymWorkoutActivity
 import kotlin.collections.ArrayList
 
 class GymWorkout(
@@ -40,7 +39,8 @@ class GymWorkout(
     }
 
     override fun newWorkout(context: Context) {
-        val intent = Intent(context,NewGymWorkoutActivity::class.java)
+        val intent = Intent(context,
+            NewGymWorkoutActivity::class.java)
         context.startActivity(intent)
     }
 

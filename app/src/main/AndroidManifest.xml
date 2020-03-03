@@ -11,8 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SaveGymWorkoutActivity"></activity>
-        <activity android:name=".ui.NewWorkout.NewGymWorkoutActivity" />
+        <activity android:name=".ui.newWorkout.running.NewRunningWorkoutActivity"></activity>
+        <activity android:name=".ui.newWorkout.cycling.NewCyclingWorkoutActivity" />
+        <activity android:name=".SaveGymWorkoutActivity" />
+        <activity android:name=".ui.newWorkout.gym.NewGymWorkoutActivity" />
         <activity android:name=".ui.NewGymWorkoutActivity" />
 
         <meta-data

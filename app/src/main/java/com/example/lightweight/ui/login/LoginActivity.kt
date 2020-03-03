@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var textInputPassword: TextInputEditText
     private lateinit var firstName: String
     private lateinit var lastName: String
-    //private lateinit var email: String
+    private lateinit var email: String
     private lateinit var password: String
     private lateinit var profilePicture: URL
     private lateinit var progressBar: ProgressBar
@@ -103,7 +103,7 @@ class LoginActivity : AppCompatActivity() {
         textInputEmail = findViewById(R.id.emailLogin_editText)
         textInputPassword = findViewById(R.id.passwordLogin_editText)
 
-        Databaseemail = textInputEmail.text.toString().trim()
+        email = textInputEmail.text.toString().trim()
         password = textInputPassword.text.toString().trim()
 
         if (!Validation.isValidEmail(email)) {

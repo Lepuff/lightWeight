@@ -12,6 +12,7 @@ import com.example.lightweight.Database
 //import com.example.lightweight.Database.emailUser
 import com.example.lightweight.R
 import com.example.lightweight.Validation
+import com.example.lightweight.classes.User
 import com.example.lightweight.ui.login.LoginActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
@@ -60,8 +61,7 @@ class RegisterActivity : AppCompatActivity() {
         val lastName = textInputLastName.text.toString().trim()
 
 
-
-        if (Validation.isFieldEmpty(email) {
+        if (Validation.isFieldEmpty(email)){
             textInputFirstName.error = getString(R.string.field_cant_be_empty)
             textInputFirstName.requestFocus()
             return
@@ -101,6 +101,7 @@ class RegisterActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    Database.emailUser = User(email, firstName, lastName)
                     Toast.makeText(this, getString(R.string.sign_up_successful), Toast.LENGTH_SHORT)
                         .show()
 

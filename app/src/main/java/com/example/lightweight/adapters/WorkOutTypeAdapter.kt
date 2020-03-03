@@ -1,14 +1,16 @@
-package com.example.lightweight
+package com.example.lightweight.adapters
 
+import android.app.Dialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lightweight.R
 import com.example.lightweight.classes.AbstractWorkout
 import kotlinx.android.synthetic.main.layout_dialog_new_workout_list_item.view.*
 
 
-class WorkOutTypeAdapter : RecyclerView.Adapter<WorkOutTypeAdapter.WorkOutTypeViewHolder>() {
+class WorkOutTypeAdapter(private val dialog: Dialog) : RecyclerView.Adapter<WorkOutTypeAdapter.WorkOutTypeViewHolder>() {
 
     private var items: MutableList<AbstractWorkout> = ArrayList()
 
@@ -28,13 +30,13 @@ class WorkOutTypeAdapter : RecyclerView.Adapter<WorkOutTypeAdapter.WorkOutTypeVi
                 R.layout.layout_dialog_new_workout_list_item,
                 parent,
                 false
-            )
+            ), dialog
         )
     }
 
 
 
-    class WorkOutTypeViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
+    class WorkOutTypeViewHolder constructor(itemView: View,val dialog: Dialog) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
         private var  selectedWorkoutType : AbstractWorkout? = null
         init {
            itemView.setOnClickListener(this)
@@ -50,6 +52,7 @@ class WorkOutTypeAdapter : RecyclerView.Adapter<WorkOutTypeAdapter.WorkOutTypeVi
         }
 
         override fun onClick(v: View?) {
+            dialog.dismiss()
             selectedWorkoutType?.newWorkout(itemView.context)
         }
     }

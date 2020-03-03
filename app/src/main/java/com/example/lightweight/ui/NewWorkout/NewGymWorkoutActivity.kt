@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lightweight.R
 
 import com.example.lightweight.TopSpacingItemDecoration
+import com.example.lightweight.adapters.ExerciseAdapter
+import com.example.lightweight.classes.Exercise
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -91,7 +93,8 @@ class NewGymWorkoutActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this.context)
             val topSpacingItemDecoration = TopSpacingItemDecoration(30)
             addItemDecoration(topSpacingItemDecoration)
-            exerciseAdapter = ExerciseAdapter(this)
+            exerciseAdapter =
+                ExerciseAdapter(this)
             adapter = exerciseAdapter
         }
     }

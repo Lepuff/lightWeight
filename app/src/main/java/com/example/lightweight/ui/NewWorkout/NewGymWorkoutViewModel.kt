@@ -2,6 +2,7 @@ package com.example.lightweight.ui.NewWorkout
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.lightweight.classes.Exercise
 
 
 class NewGymWorkoutViewModel : ViewModel() {

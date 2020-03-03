@@ -4,10 +4,8 @@ import android.content.Context
 import android.content.Intent
 import com.example.lightweight.R
 import com.example.lightweight.ui.Feed.GymWorkoutDetailsActivity
-import com.example.lightweight.ui.NewWorkout.Exercise
 import com.example.lightweight.ui.NewWorkout.NewGymWorkoutActivity
 import com.google.firebase.firestore.FirebaseFirestore
-import java.util.*
 import kotlin.collections.ArrayList
 
 class GymWorkout(

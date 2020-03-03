@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.NewWorkout
+package com.example.lightweight.adapters
 
 
 import android.text.Editable
@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lightweight.R
+import com.example.lightweight.classes.Sets
 import kotlinx.android.synthetic.main.layout_sets_item.view.*
 
 

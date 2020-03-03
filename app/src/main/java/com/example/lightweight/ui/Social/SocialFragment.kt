@@ -9,11 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.lightweight.DataSource
 import com.example.lightweight.R
 import com.example.lightweight.TopSpacingItemDecoration
-import com.example.lightweight.WorkOutAdapter
-import kotlinx.android.synthetic.main.fragment_feed.*
+import com.example.lightweight.adapters.WorkOutAdapter
 import kotlinx.android.synthetic.main.fragment_social.*
 
 class SocialFragment : Fragment() {
@@ -38,8 +36,7 @@ class SocialFragment : Fragment() {
     }
 
     private fun addDataSet() {
-        val data = DataSource.createDataSet()
-        socialAdapter.submitList(data)
+
     }
 
 

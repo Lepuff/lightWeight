@@ -1,7 +1,6 @@
 package com.example.lightweight.ui.Feed
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.lightweight.DataSource
 import com.example.lightweight.R
 import com.example.lightweight.TopSpacingItemDecoration
-import com.example.lightweight.WorkOutAdapter
+import com.example.lightweight.adapters.WorkOutAdapter
 import com.example.lightweight.classes.AbstractWorkout
 import com.example.lightweight.classes.GymWorkout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -38,7 +36,7 @@ class FeedFragment : Fragment() {
             workOutAdapter.notifyDataSetChanged()
         } )
         floatingActionButton.setOnClickListener {
-            NewWorkoutFragment().show(childFragmentManager,"test")
+            NewWorkoutDialog().show(childFragmentManager,"test")
 
         }
         return root

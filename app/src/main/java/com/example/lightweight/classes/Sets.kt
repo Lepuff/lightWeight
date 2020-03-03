@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.NewWorkout
+package com.example.lightweight.classes
 
 data class Sets(
     var weight: Int = 0,

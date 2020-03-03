@@ -8,6 +8,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lightweight.*
+//import com.example.lightweight.Database.getUserDetailsFromFb
 import com.example.lightweight.R
 import com.example.lightweight.ui.NavigationActivity
 import com.example.lightweight.ui.Register.RegisterActivity
@@ -163,23 +164,6 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-    /*private fun getUserDetailsFromFb(accessToken: AccessToken) {
-        val request = GraphRequest.newMeRequest(
-            accessToken
-        ) { `object`, response ->
-
-            email = `object`.getString("email")
-            firstName = `object`.getString("first_name")
-            lastName = `object`.getString("last_name")
-
-            //Database.updateUserData(firstName, lastName, email)
-        }
-        //Here we put the requested fields to be returned from the JSONObject
-        val parameters = Bundle()
-        parameters.putString("fields", "id, first_name, last_name, email")
-        request.parameters = parameters
-        request.executeAsync()
-    }*/
 
     private fun handleFacebookAccessToken(accessToken: AccessToken?) {
         //get credential
@@ -188,13 +172,11 @@ class LoginActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
         auth.signInWithCredential(credential)
             .addOnSuccessListener { result ->
-                //getUserDetailsFromFb(accessToken)
-
+                Database.addFacebookUserToDb(accessToken)
 
                 Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, NavigationActivity::class.java)
-                intent.putExtra("email", email)
-                startActivity(intent)
+
+                startActivity(Intent(this, NavigationActivity::class.java))
                 progressBar.visibility = View.INVISIBLE
             }
 

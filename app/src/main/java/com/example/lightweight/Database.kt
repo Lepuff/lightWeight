@@ -15,9 +15,8 @@ import java.util.*
 
 object Database{
 
-    var facebookUser: User = User("", "", "")
-    var emailUser: User = User("", "", "")
-
+    var facebookUser: User = User(null, null, null)
+    var emailUser: User = User(null, null, null)
 
     fun updateUserData(target: User) {
         val db = FirebaseFirestore.getInstance()
@@ -38,7 +37,7 @@ object Database{
             }
     }
 
-    fun getUserDetailsFromFb(accessToken: AccessToken) {
+    fun addFacebookUserToDb(accessToken: AccessToken) {
         val request = GraphRequest.newMeRequest(
             accessToken
         ) { `object`, response ->
@@ -47,7 +46,7 @@ object Database{
             facebookUser.firstName = `object`.getString("first_name")
             facebookUser.lastName = `object`.getString("last_name")
 
-            //Database.updateUserData(firstName, lastName, email)
+            updateUserData(facebookUser)
         }
         //Here we put the requested fields to be returned from the JSONObject
         val parameters = Bundle()

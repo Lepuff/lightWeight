@@ -13,6 +13,7 @@ import com.example.lightweight.Database
 import com.example.lightweight.R
 import com.example.lightweight.Validation
 import com.example.lightweight.classes.User
+import com.example.lightweight.ui.NavigationActivity
 import com.example.lightweight.ui.login.LoginActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
@@ -38,7 +39,7 @@ class RegisterActivity : AppCompatActivity() {
 
         progressBar = findViewById(R.id.progressBarRegister)
 
-        auth = FirebaseAuth.getInstance()
+        //auth = FirebaseAuth.getInstance()
 
         signUpButton.setOnClickListener {
             auth = FirebaseAuth.getInstance()
@@ -61,7 +62,7 @@ class RegisterActivity : AppCompatActivity() {
         val lastName = textInputLastName.text.toString().trim()
 
 
-        if (Validation.isFieldEmpty(email)){
+        if (Validation.isFieldEmpty(firstName)){
             textInputFirstName.error = getString(R.string.field_cant_be_empty)
             textInputFirstName.requestFocus()
             return
@@ -108,14 +109,14 @@ class RegisterActivity : AppCompatActivity() {
                     //update database with user data
                     Database.updateUserData(Database.emailUser)
 
-                    startActivity(Intent(this, LoginActivity::class.java))
+                    startActivity(Intent(this, NavigationActivity::class.java))
                     progressBar.visibility = View.INVISIBLE
                     finish()
                 } else {
-                    Toast.makeText(
+                    /*Toast.makeText(
                         baseContext, getString(R.string.sign_up_failed),
                         Toast.LENGTH_SHORT
-                    ).show()
+                    ).show()*/
                     Log.d("TAG", "createUserWithEmail:failure", task.exception)
                     Toast.makeText(
                         baseContext, getString(R.string.authentication_failed),

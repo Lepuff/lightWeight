@@ -12,15 +12,24 @@ import kotlinx.android.synthetic.main.layout_wo_list_item.view.*
 
 class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() {
 
-    private var items: List<AbstractWorkout> = ArrayList()
-
+    private var workouts: MutableList<AbstractWorkout> = ArrayList()
     override fun getItemCount(): Int {
-        return items.size
+        return workouts.size
     }
 
     fun submitList(workOutList: MutableList<AbstractWorkout>) {
-        items = workOutList
+        workouts = workOutList
     }
+
+    fun addWorkout(workOut: AbstractWorkout){
+        workouts.add(workOut)
+        this.notifyItemInserted(workouts.size-1)
+    }
+    fun removeWorkout(position: Int){
+        workouts.removeAt(position)
+        this.notifyDataSetChanged()
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkOutViewHolder {
 
@@ -73,7 +82,7 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
 
     override fun onBindViewHolder(holder: WorkOutViewHolder, position: Int) {
 
-        val workout = items[position]
+        val workout = workouts[position]
         holder.bind(workout)
     }
 }

@@ -6,7 +6,7 @@ import android.text.Editable
 import androidx.lifecycle.MutableLiveData
 import com.example.lightweight.Database
 import com.example.lightweight.R
-import com.example.lightweight.ui.Feed.GymWorkoutDetailsActivity
+import com.example.lightweight.ui.workoutDetails.GymWorkoutDetailsActivity
 import com.example.lightweight.ui.newWorkout.gym.NewGymWorkoutActivity
 import kotlin.collections.ArrayList
 

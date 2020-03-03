@@ -53,7 +53,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.Feed.GymWorkoutDetailsActivity"
+            android:name=".ui.workoutDetails.GymWorkoutDetailsActivity"
             android:label="Details"
             android:launchMode="singleTop">
             <meta-data

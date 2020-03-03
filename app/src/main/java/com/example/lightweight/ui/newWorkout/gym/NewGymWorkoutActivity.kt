@@ -63,20 +63,17 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
             val dialog = dialogBuilder.show()
 
-
-
-
             saveButton.setOnClickListener {
 
 
-                newGymWorkoutViewModel.getExerciseList() //todo detta är sjävla listan.
+                newGymWorkoutViewModel.getExerciseList()
                 val workoutTitle =
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_name_editText)
-                        .text //todo titel
+                        .text
 
                 val workoutDate =
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
-                        .text //todo datum
+                        .text
 
                 dialog.cancel()
                 finish()

@@ -17,6 +17,7 @@ object Database{
 
     var facebookUser: User = User(null, null, null)
     var emailUser: User = User(null, null, null)
+    val db = FirebaseFirestore.getInstance()
 
     fun getUserEmail(): String {
         return if (facebookUser.email != null)

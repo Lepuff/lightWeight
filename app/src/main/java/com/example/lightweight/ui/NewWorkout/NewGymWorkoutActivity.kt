@@ -28,7 +28,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_gym_workout)
-        val db = FirebaseFirestore.getInstance() //gets access to db
+
         newGymWorkoutViewModel = ViewModelProviders.of(this).get(
             NewGymWorkoutViewModel::class.java
         )
@@ -79,10 +79,6 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                 val workoutDate =
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
                         .text //todo datum
-
-                db.collection("users").document(Database.getUserEmail())
-                    .collection("workouts").document("$workoutTitle")
-                    .set(newGymWorkoutViewModel.getExerciseList())
 
                 dialog.cancel()
                 finish()

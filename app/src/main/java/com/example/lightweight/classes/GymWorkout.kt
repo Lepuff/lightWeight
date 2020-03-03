@@ -2,6 +2,9 @@ package com.example.lightweight.classes
 
 import android.content.Context
 import android.content.Intent
+import android.text.Editable
+import androidx.lifecycle.MutableLiveData
+import com.example.lightweight.Database
 import com.example.lightweight.R
 import com.example.lightweight.ui.Feed.GymWorkoutDetailsActivity
 import com.example.lightweight.ui.NewWorkout.NewGymWorkoutActivity
@@ -40,22 +43,16 @@ class GymWorkout(
         context.startActivity(intent)
     }
 
-    override fun addWorkoutToDb(email: String) {
-        val db = FirebaseFirestore.getInstance()
-
-        val set = 1  //TODO remove after testing
-        val weight = 20  //TODO remove after testing
-        val reps = 10 //TODO remove after testing
-
-        val exercise = hashMapOf(
-            "set" to set, //TODO probably needs to be removed
-            "weight" to weight,
-            "reps" to reps
-        )
-
-        //TODO fix ID. Currently "unoDosTres"
-        db.collection("users").document(email)
-            .collection("workouts").document("unoDosTres")
-            .set(exercise)
+    override fun addWorkoutToDb(
+        workoutTitle: Editable,
+        workoutDate: Editable,
+        exerciseList: MutableList<Exercise>,
+        exerciseLiveData: MutableLiveData<MutableList<Exercise>>
+    ) {
+        Database.db.collection("users").document(Database.getUserEmail())
+            .collection("workouts").document("$workoutTitle")
+            .collection(exerciseList.toString()).document(exerciseLiveData.toString())
+        //TODO Oskar, hur kommer man åt: set nummer, reps och vikt?
     }
+
 }

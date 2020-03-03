@@ -2,7 +2,8 @@ package com.example.lightweight.classes
 
 
 import android.content.Context
-import java.util.*
+import android.text.Editable
+import androidx.lifecycle.MutableLiveData
 
 abstract class AbstractWorkout(
     val icon: Int
@@ -27,7 +28,11 @@ abstract class AbstractWorkout(
     abstract fun showWorkout(context: Context)
     abstract fun editWorkout()
     abstract fun newWorkout(context: Context)
-    abstract fun addWorkoutToDb(email: String)
+    abstract fun addWorkoutToDb(
+        workoutTitle: Editable,
+        workoutDate: Editable,
+        exerciseList: MutableList<Exercise>,
+        exerciseLiveData: MutableLiveData<MutableList<Exercise>>)
 
 
 

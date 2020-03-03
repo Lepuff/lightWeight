@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.lightweight.Database
 import com.example.lightweight.R
 
 import com.example.lightweight.TopSpacingItemDecoration
@@ -27,7 +28,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_gym_workout)
-        val db = FirebaseFirestore.getInstance() //gets access to db
+
         newGymWorkoutViewModel = ViewModelProviders.of(this).get(
             NewGymWorkoutViewModel::class.java
         )
@@ -74,7 +75,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                 val workoutTitle =
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_name_editText)
                         .text //todo titel
-                // TODO db.collection("users")
+
                 val workoutDate =
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
                         .text //todo datum

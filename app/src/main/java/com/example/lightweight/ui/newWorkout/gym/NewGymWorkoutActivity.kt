@@ -76,7 +76,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                         .text
 
                 //TODO en yttre for loop som går igenom size (alla exercises)
-                //TODO      en inre for loop som går igenom sets
+                    //TODO en inre for loop som går igenom sets
 
                 dialog.cancel()
                 finish()

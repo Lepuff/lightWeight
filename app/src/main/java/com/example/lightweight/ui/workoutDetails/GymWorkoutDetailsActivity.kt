@@ -21,7 +21,7 @@ class GymWorkoutDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gym_workout_details)
 
-        
+
 
         //Todo remove after testing
         val exerciseList : MutableList<Exercise> = ArrayList()

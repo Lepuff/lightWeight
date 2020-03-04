@@ -75,6 +75,9 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
                         .text
 
+                //TODO en yttre for loop som går igenom size (alla exercises)
+                //TODO      en inre for loop som går igenom sets
+
                 dialog.cancel()
                 finish()
 

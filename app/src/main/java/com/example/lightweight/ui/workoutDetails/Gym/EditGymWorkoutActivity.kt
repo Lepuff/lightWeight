@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.workoutDetails
+package com.example.lightweight.ui.workoutDetails.Gym
 
 import android.os.Bundle
 import android.view.LayoutInflater

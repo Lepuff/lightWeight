@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".ui.newWorkout.running.NewRunningWorkoutActivity">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/distance"
-                android:inputType="numberDecimal"
+                android:inputType="none"
                 android:textColor="@color/text_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -52,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/total_time"
-                android:inputType="time"
+                android:inputType="none"
                 android:textColor="@color/text_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -74,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/average_speed"
-                android:inputType="numberDecimal"
+                android:inputType="none"
                 android:textColor="@color/text_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -89,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/top_speed"
-                android:inputType="numberDecimal"
+                android:inputType="none"
                 android:textColor="@color/text_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -111,7 +110,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/average_pulse_sa"
-                android:inputType="number"
+                android:inputType="none"
                 android:textColor="@color/text_content"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -125,7 +124,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/max_pulse"
-                android:inputType="number"
+                android:inputType="none"
                 android:textColor="@color/text_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -147,7 +146,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/average_force"
-                android:inputType="number"
+                android:inputType="none"
                 android:textColor="@color/text_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -161,7 +160,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/max_force"
-                android:inputType="number"
+                android:inputType="none"
                 android:textColor="@color/text_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -182,16 +181,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/calories"
-                android:inputType="numberDecimal"
+                android:inputType="none"
                 android:textColor="@color/text_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/new_running_save_button"
+            android:id="@+id/view_running_edit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/background_button"
-            android:text="@string/save_workout"
+            android:text="@string/edit_workout"
             android:textColor="@color/text_button" />
+
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

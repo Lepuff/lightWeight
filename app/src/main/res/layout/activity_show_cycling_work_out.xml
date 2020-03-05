@@ -18,12 +18,12 @@
 
 
         <TextView
-            android:id="@+id/text_distance_devider"
+            android:id="@+id/text_distance_divider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/distance"
-            android:background="@color/devider"
-            android:textColor="@color/text_devider"
+            android:background="@color/divider"
+            android:textColor="@color/text_divider"
             />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -40,12 +40,12 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/text_time_devider"
+            android:id="@+id/text_time_divider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/time"
-            android:background="@color/devider"
-            android:textColor="@color/text_devider" />
+            android:background="@color/divider"
+            android:textColor="@color/text_divider" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -64,12 +64,12 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/text_speed_devider"
+            android:id="@+id/text_speed_divider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/speed"
-            android:background="@color/devider"
-            android:textColor="@color/text_devider"
+            android:background="@color/divider"
+            android:textColor="@color/text_divider"
             />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -99,12 +99,12 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/text_pulse_devider"
+            android:id="@+id/text_pulse_divider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/pulse"
-            android:background="@color/devider"
-            android:textColor="@color/text_devider"/>
+            android:background="@color/divider"
+            android:textColor="@color/text_divider"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -133,12 +133,12 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/text_force_devider"
+            android:id="@+id/text_force_divider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/force"
-            android:background="@color/devider"
-            android:textColor="@color/text_devider"/>
+            android:background="@color/divider"
+            android:textColor="@color/text_divider"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -171,8 +171,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/cadence"
-            android:background="@color/devider"
-            android:textColor="@color/text_devider"/>
+            android:background="@color/divider"
+            android:textColor="@color/text_divider"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -201,12 +201,12 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/text_calories_devider"
+            android:id="@+id/text_calories_divider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/calories"
-            android:background="@color/devider"
-            android:textColor="@color/text_devider"/>
+            android:background="@color/divider"
+            android:textColor="@color/text_divider"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"

@@ -42,12 +42,12 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         initRecyclerView()
         exerciseAdapter.submitList(newGymWorkoutViewModel.getExerciseList().value!!)
 
-
+        var i = 1
         val addExerciseButton = findViewById<Button>(R.id.new_gym_add_exercise_button)
         addExerciseButton.setOnClickListener {
-            exerciseName = "Test"
+            exerciseName = "Test $i"
             exerciseAdapter.addExercise(exerciseName)
-
+            i++
 
         }
 
@@ -77,8 +77,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                 val workoutDate =
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
                         .text
-
-                //TODO en yttre for loop som går igenom size (alla exercises)
+                
                 for (exercise in exerciseList){
                     var setNumber: Int = 0
                     var currentExercise = db.collection("users").document(Database.user.email!!).collection("workouts")
@@ -86,10 +85,9 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
                     for (sets in exercise.sets){
                         setNumber++
-                        currentExercise.collection(exerciseName).document("Set $setNumber").set(sets)
+                        currentExercise.collection(exercise.name).document("Set $setNumber").set(sets)
                     }
                 }
-                    //TODO en inre for loop som går igenom sets
 
                 dialog.cancel()
                 finish()

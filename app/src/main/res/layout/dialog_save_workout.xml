@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/background_item"
-    >
+    android:background="@color/background_item">
 
 
     <LinearLayout
@@ -19,16 +18,14 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/TextInputLayoutAppearance"
-            >
+            android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/new_workout_name_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/new_workout_name"
-                android:textColor="@color/text_item"
-                />
+                android:textColor="@color/text_item" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -43,13 +40,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/date"
                 android:inputType="date"
-                android:textColor="@color/text_item"/>
+                android:textColor="@color/text_item" />
         </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-
 
     </LinearLayout>
 
@@ -64,7 +56,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/save_workout_linear_layout" />
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

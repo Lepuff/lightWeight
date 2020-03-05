@@ -65,7 +65,12 @@
     <string name="max_temperature">Max temperature</string>
     <string name="profile">Profile</string>
     <string name="log_out">Log out</string>
+
     <string name="login_failed">Login failed</string>
     <string name="average_force">Average force</string>
+
+    <string name="save">save</string>
+
+
 
 </resources>

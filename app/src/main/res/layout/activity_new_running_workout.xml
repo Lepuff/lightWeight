@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@color/background_item"
     tools:context=".ui.newWorkout.running.NewRunningWorkoutActivity">
 
     <LinearLayout
@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/distance"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:textColor="@color/text_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -74,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/average_speed"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:textColor="@color/text_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -89,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/top_speed"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:textColor="@color/text_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -182,7 +182,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/calories"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:textColor="@color/text_content" />
         </com.google.android.material.textfield.TextInputLayout>
 

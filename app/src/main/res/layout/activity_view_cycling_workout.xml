@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_item"
-    tools:context=".ui.newWorkout.cycling.NewCyclingWorkoutActivity">
+    android:background="@color/background"
+    >
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
@@ -20,7 +21,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -29,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/total_time"
                 android:textColor="@color/text_content"
-                android:inputType="time"/>
+                android:inputType="none"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -41,7 +42,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -50,12 +51,12 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/average_speed"
                 android:textColor="@color/text_content"
-                android:inputType="numberDecimal"/>
+                android:inputType="none"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -64,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/top_speed"
                 android:textColor="@color/text_content"
-                android:inputType="numberDecimal"/>
+                android:inputType="none"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,7 +79,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:theme="@style/TextInputLayoutAppearance">
 
 
@@ -88,13 +89,13 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/average_pulse_sa"
                 android:textColor="@color/text_content"
-                android:inputType="number"/>
+                android:inputType="none"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -103,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/max_pulse"
                 android:textColor="@color/text_content"
-                android:inputType="number"/>
+                android:inputType="none"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -115,7 +116,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -124,12 +125,12 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/average_force"
                 android:textColor="@color/text_content"
-                android:inputType="number"/>
+                android:inputType="none"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -138,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/max_force"
                 android:textColor="@color/text_content"
-                android:inputType="number"/>
+                android:inputType="none"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -150,7 +151,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:theme="@style/TextInputLayoutAppearance">
 
 
@@ -160,12 +161,12 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/average_cadence"
                 android:textColor="@color/text_content"
-                android:inputType="number"/>
+                android:inputType="none"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:theme="@style/TextInputLayoutAppearance">
 
 
@@ -175,7 +176,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/max_cadence"
                 android:textColor="@color/text_content"
-                android:inputType="number"/>
+                android:inputType="none"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -187,7 +188,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -196,16 +197,17 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/calories"
                 android:textColor="@color/text_content"
-                android:inputType="number"/>
+                android:inputType="none"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/new_cycling_save_button"
+            android:id="@+id/view_cycling_edit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/background_button"
-            android:text="@string/save_workout"
+            android:text="@string/edit"
             android:textColor="@color/text_button" />
+
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

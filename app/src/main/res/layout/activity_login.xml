@@ -53,6 +53,7 @@
             app:errorEnabled="true"
             app:layout_constraintTop_toBottomOf="@+id/emailLayout"
             app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/text_item"
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -62,7 +63,8 @@
                 android:background="@color/background_button"
                 android:hint="@string/password"
                 android:inputType="textPassword"
-                android:textColor="@color/text_item" />
+                android:textColor="@color/text_item"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,6 +101,7 @@
             android:layout_height="33dp"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:background="@color/background_button"
+            android:textColor="@color/text_button"
             android:text="@string/sign_up_here"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"

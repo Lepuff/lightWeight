@@ -46,7 +46,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         var i = 1
         val addExerciseButton = findViewById<Button>(R.id.new_gym_add_exercise_button)
         addExerciseButton.setOnClickListener {
-            exerciseName = "Test $i"
+            exerciseName = "Test $i" //todo remove
             exerciseAdapter.addExercise(exerciseName)
             i++
 
@@ -71,6 +71,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
 
                 val db = FirebaseFirestore.getInstance()
+
                 val exerciseList = newGymWorkoutViewModel.getExerciseList().value!!
                 val workoutTitle =
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_name_editText)
@@ -79,6 +80,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                 val workoutDate =
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
                         .text
+
 
                 val workoutInfo = hashMapOf(
                     "Title of workout" to workoutTitle,
@@ -108,21 +110,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
 
                 for (exercise in exerciseList) {
-                    var setNumber: Int = 0
-                    //currentGymWorkoutRef.collection(exercise.toString())
 
-                    for (sets in exercise.sets) {
-                        setNumber++
-                        currentGymWorkoutRef.collection(exercise.name).document("Set $setNumber")
-                            .set(sets)
-                            .addOnSuccessListener { documentReference ->
-                                Log.d("TAG", "DocumentSnapshot added with ID: $documentReference")
-                            }
-                            .addOnFailureListener { e ->
-                                Log.d("TAG", "Error adding Set", e)
-                            }
-                    }
-                }
 
                 dialog.cancel()
                 finish()
@@ -137,7 +125,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         exercise_recycle_view.apply {
             layoutManager = LinearLayoutManager(this.context)
             val topSpacingItemDecoration =
-                TopSpacingItemDecoration(30)
+                TopSpacingItemDecoration(20)
             addItemDecoration(topSpacingItemDecoration)
             exerciseAdapter =
                 ExerciseAdapter(this)

@@ -12,9 +12,11 @@ import com.example.lightweight.R
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.adapters.WorkOutAdapter
 import com.example.lightweight.classes.AbstractWorkout
+import com.example.lightweight.classes.CyclingWorkout
 import com.example.lightweight.classes.GymWorkout
 import com.example.lightweight.classes.RunningWorkout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.activity_show_cycling_activity.*
 import kotlinx.android.synthetic.main.fragment_feed.*
 
 class FeedFragment : Fragment() {
@@ -59,11 +61,34 @@ class FeedFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initRecyclerView()
+        val id : String = ""
+        val title : String = ""
+        val date : String = ""
+
         workOutAdapter.submitList(feedViewModel.workoutList.value!!)
+        workOutAdapter.addWorkout(GymWorkout(id,title,date))
+        workOutAdapter.addWorkout(CyclingWorkout(id,title,date))
+        workOutAdapter.addWorkout(RunningWorkout(id,title,date))
 
+    }
 
+    private enum class WorkoutType{
+        GYM,
+        RUNNING,
+        CYCLING
+    }
 
+    fun addWorkoutToFeed(){
 
+        var workoutType : WorkoutType = WorkoutType.CYCLING
+        val id : String = ""
+        val title : String = ""
+        val date : String = ""
 
+        when(workoutType){
+            WorkoutType.GYM -> workOutAdapter.addWorkout(GymWorkout(id,title,date))
+            WorkoutType.CYCLING -> workOutAdapter.addWorkout(GymWorkout(id,title,date))
+            WorkoutType.RUNNING -> workOutAdapter.addWorkout(GymWorkout(id,title,date))
+        }
     }
 }

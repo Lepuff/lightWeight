@@ -9,7 +9,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
 
 class RunningWorkout(
-    override var title: String?, override var date: String?, override var image: String?
+    override var title: String?,
+    override var date: String?,
+    override var image: String?
 
 ) : AbstractWorkout(R.drawable.ic_directions_run_yellow_24dp) {
 
@@ -56,8 +58,6 @@ class RunningWorkout(
             .collection("workouts").document("$workoutTitle")
             .collection(exerciseList.toString())
             .document("setNumber")
-        //TODO Oskar, hur kommer man åt: duration, distance?
+
     }
-
-
 }

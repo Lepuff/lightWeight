@@ -66,6 +66,7 @@
     <string name="max_temperature">Max temperature</string>
     <string name="profile">Profile</string>
     <string name="log_out">Log out</string>
+    <string name="save">save</string>
 
 
 </resources>

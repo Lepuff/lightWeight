@@ -29,8 +29,6 @@ class LoginActivity : AppCompatActivity() {
     var callbackManager: CallbackManager? = null
     private lateinit var textInputEmail: TextInputEditText
     private lateinit var textInputPassword: TextInputEditText
-    private lateinit var firstName: String
-    private lateinit var lastName: String
     private lateinit var email: String
     private lateinit var password: String
     private lateinit var profilePicture: URL

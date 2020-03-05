@@ -2,6 +2,7 @@ package com.example.lightweight.ui.newWorkout.gym
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
@@ -24,7 +25,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
     private lateinit var exerciseAdapter: ExerciseAdapter
     private lateinit var newGymWorkoutViewModel: NewGymWorkoutViewModel
-    private lateinit var exerciseName : String
+    private lateinit var exerciseName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,19 +85,44 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                     "Date of workout" to workoutDate
                 )
 
-                var currentGymWorkoutRef = db.collection("users").document(Database.user.email!!).collection("workouts")
-                    .document("Gym").collection("Gym Workouts").document()
+                var currentGymWorkoutRef =
+                    db.collection("users").document(Database.user.email!!).collection("workouts")
+                        .document("Gym")//.collection("Gym Workouts").document()
 
-                for (exercise in exerciseList){
-                    var setNumber: Int = 0
-                    for (sets in exercise.sets){
-                        setNumber++
-                        currentGymWorkoutRef.collection(exercise.name).document("Set $setNumber").set(sets)
-                    }
-                }
                 currentGymWorkoutRef.set(workoutInfo)
 
+                exerciseList.forEach {
+                    var setNumber = 0
+                    for (sets in it.sets) {
+                        setNumber++
+                        currentGymWorkoutRef.collection(it.name).document("Set $setNumber")
+                            .set(sets)
+                            .addOnSuccessListener { documentReference ->
+                                Log.d("TAG", "DocumentSnapshot added with ID: $documentReference")
+                            }
+                            .addOnFailureListener { e ->
+                                Log.d("TAG", "Error adding Set", e)
+                            }
+                    }
+                }
 
+
+                for (exercise in exerciseList) {
+                    var setNumber: Int = 0
+                    //currentGymWorkoutRef.collection(exercise.toString())
+
+                    for (sets in exercise.sets) {
+                        setNumber++
+                        currentGymWorkoutRef.collection(exercise.name).document("Set $setNumber")
+                            .set(sets)
+                            .addOnSuccessListener { documentReference ->
+                                Log.d("TAG", "DocumentSnapshot added with ID: $documentReference")
+                            }
+                            .addOnFailureListener { e ->
+                                Log.d("TAG", "Error adding Set", e)
+                            }
+                    }
+                }
 
                 dialog.cancel()
                 finish()

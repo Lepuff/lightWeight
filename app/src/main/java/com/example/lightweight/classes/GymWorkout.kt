@@ -10,9 +10,9 @@ import com.example.lightweight.ui.workoutDetails.Gym.ViewGymWorkoutActivity
 import com.example.lightweight.ui.newWorkout.gym.NewGymWorkoutActivity
 
 class GymWorkout(
-    override var title: String?,
-    override var date: String?,
-    override var image: String?
+    override var id: String?, override var title: String?, override var date: String?
+
+
 ) : AbstractWorkout(R.drawable.ic_fitness_center_yellow_24dp) {
 
     override fun showWorkout(context: Context) {
@@ -29,18 +29,6 @@ class GymWorkout(
         val intent = Intent(context,
             NewGymWorkoutActivity::class.java)
         context.startActivity(intent)
-    }
-
-    override fun addWorkoutToDb(
-        workoutTitle: Editable,
-        workoutDate: Editable,
-        exerciseList: MutableList<Exercise>,
-        exerciseLiveData: MutableLiveData<MutableList<Exercise>>
-    ) {
-        Database.db.collection("users").document(Database.getUserEmail())
-            .collection("workouts").document("$workoutTitle")
-            .collection(exerciseList.toString()).document(exerciseLiveData.toString())
-        //TODO Oskar, hur kommer man åt: set nummer, reps och vikt?
     }
 
 }

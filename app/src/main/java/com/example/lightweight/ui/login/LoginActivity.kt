@@ -8,7 +8,6 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lightweight.*
-//import com.example.lightweight.Database.getUserDetailsFromFb
 import com.example.lightweight.R
 import com.example.lightweight.ui.NavigationActivity
 import com.example.lightweight.ui.Register.RegisterActivity
@@ -64,9 +63,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         fbLoginButton.setOnClickListener {
-            //fbLoginButton.setPermissions(listOf("email", "public_profile", "user_friends"))
             fbSignIn()
-
         }
 
 
@@ -172,7 +169,7 @@ class LoginActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
         auth.signInWithCredential(credential)
             .addOnSuccessListener { result ->
-                Database.addFacebookUserToDb(accessToken)
+                Database.updateUserData(accessToken)
 
                 Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
 

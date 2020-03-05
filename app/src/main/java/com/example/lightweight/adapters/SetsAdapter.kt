@@ -123,6 +123,7 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
         fun bind(set: Sets, position: Int) {
             this.selectedSet = set
             setNumber.text = (position + 1).toString()
+
             setWeight.setText(set.weight.toString())
             setsReps.setText(set.reps.toString())
 

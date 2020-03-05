@@ -102,12 +102,12 @@ class RegisterActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Database.emailUser = User(email, firstName, lastName)
+                    Database.user = User(false, email, firstName, lastName)
                     Toast.makeText(this, getString(R.string.sign_up_successful), Toast.LENGTH_SHORT)
                         .show()
 
                     //update database with user data
-                    Database.updateUserData(Database.emailUser)
+                    Database.updateUserData(null)
 
                     startActivity(Intent(this, NavigationActivity::class.java))
                     progressBar.visibility = View.INVISIBLE

@@ -28,12 +28,4 @@ class CyclingWorkout(
 
     }
 
-    override fun addWorkoutToDb(
-        workoutTitle: Editable,
-        workoutDate: Editable,
-        exerciseList: MutableList<Exercise>,
-        exerciseLiveData: MutableLiveData<MutableList<Exercise>>
-    ) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 }

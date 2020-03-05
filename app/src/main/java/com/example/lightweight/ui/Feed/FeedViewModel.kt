@@ -6,13 +6,9 @@ import com.example.lightweight.classes.AbstractWorkout
 
 class FeedViewModel : ViewModel() {
 
-    private val workoutLiveData = MutableLiveData<MutableList<AbstractWorkout>>()
-    private var workoutList : MutableList<AbstractWorkout> = ArrayList()
 
-
-    fun init(){
-        workoutLiveData.value = workoutList
+    val workoutList = MutableLiveData<MutableList<AbstractWorkout>>().apply {
+        value = ArrayList()
     }
-    fun getExerciseList() = workoutLiveData
 
 }

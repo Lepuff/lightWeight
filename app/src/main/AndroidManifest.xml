@@ -16,6 +16,7 @@
         <activity android:name=".SaveGymWorkoutActivity" />
         <activity android:name=".ui.newWorkout.gym.NewGymWorkoutActivity" />
         <activity android:name=".ui.NewGymWorkoutActivity" />
+        <activity android:name=".ui.workoutDetails.EditGymWorkoutActivity"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -53,7 +54,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.workoutDetails.GymWorkoutDetailsActivity"
+            android:name=".ui.workoutDetails.ViewGymWorkoutActivity"
             android:label="Details"
             android:launchMode="singleTop">
             <meta-data

@@ -7,6 +7,10 @@ import com.google.gson.annotations.SerializedName
 data class User(
 
     @Expose
+    @SerializedName("isFacebookUser")
+    var isFacebookUser: Boolean = false,
+
+    @Expose
     @SerializedName("email")
     var email: String? = null,
 

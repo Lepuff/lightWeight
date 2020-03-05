@@ -44,16 +44,4 @@ class GymWorkout(
         context.startActivity(intent)
     }
 
-    override fun addWorkoutToDb(
-        workoutTitle: Editable,
-        workoutDate: Editable,
-        exerciseList: MutableList<Exercise>,
-        exerciseLiveData: MutableLiveData<MutableList<Exercise>>
-    ) {
-        Database.db.collection("users").document(Database.getUserEmail())
-            .collection("workouts").document("$workoutTitle")
-            .collection(exerciseList.toString()).document(exerciseLiveData.toString())
-        //TODO Oskar, hur kommer man åt: set nummer, reps och vikt?
-    }
-
 }

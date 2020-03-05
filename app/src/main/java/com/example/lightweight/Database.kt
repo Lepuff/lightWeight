@@ -9,33 +9,28 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import java.time.LocalDateTime
 import java.util.*
+import kotlin.collections.HashMap
+
+
+object Database {
+
+    var user: User = User(true, null, null, null)
 
 
 
-
-object Database{
-
-    var facebookUser: User = User(null, null, null)
-    var emailUser: User = User(null, null, null)
-    val db = FirebaseFirestore.getInstance()
-
-    fun getUserEmail(): String {
-        return if (facebookUser.email != null)
-            facebookUser.email.toString()
-        else
-            emailUser.email.toString()
+    fun getUserEmail(): String? {
+        return user.email
     }
-    fun updateUserData(target: User) {
-        val db = FirebaseFirestore.getInstance()
 
-        val user = hashMapOf(
-            "firstName" to target.firstName,
-            "lastName" to target.lastName,
-            "email" to target.email
+    private fun userInfoToDb() {
+        val userInfo = hashMapOf(
+            "firstName" to user.firstName,
+            "lastName" to user.lastName,
+            "email" to user.email
         )
-        // Add a new document with a email-address as ID
-        db.collection("users").document(target.email!!)
-            .set(user)
+        val db = FirebaseFirestore.getInstance()
+        db.collection("users").document(getUserEmail()!!)
+            .set(userInfo)
             .addOnSuccessListener { documentReference ->
                 Log.d("TAG", "DocumentSnapshot added with ID: $documentReference")
             }
@@ -44,21 +39,24 @@ object Database{
             }
     }
 
-    fun addFacebookUserToDb(accessToken: AccessToken) {
-        val request = GraphRequest.newMeRequest(
-            accessToken
-        ) { `object`, response ->
+    fun updateUserData(accessToken: AccessToken?) {
+        if (user.isFacebookUser) {
+            val request = GraphRequest.newMeRequest(
+                accessToken
+            ) { `object`, response ->
 
-            facebookUser.email = `object`.getString("email")
-            facebookUser.firstName = `object`.getString("first_name")
-            facebookUser.lastName = `object`.getString("last_name")
+                user.email = `object`.getString("email")
+                user.firstName = `object`.getString("first_name")
+                user.lastName = `object`.getString("last_name")
 
-            updateUserData(facebookUser)
-        }
-        //Here we put the requested fields to be returned from the JSONObject
-        val parameters = Bundle()
-        parameters.putString("fields", "id, first_name, last_name, email")
-        request.parameters = parameters
-        request.executeAsync()
+                userInfoToDb()
+            }
+            //Here we put the requested fields to be returned from the JSONObject
+            val parameters = Bundle()
+            parameters.putString("fields", "id, first_name, last_name, email")
+            request.parameters = parameters
+            request.executeAsync()
+        } else
+            userInfoToDb()
     }
 }

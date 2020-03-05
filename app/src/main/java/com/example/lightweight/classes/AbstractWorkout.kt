@@ -28,11 +28,6 @@ abstract class AbstractWorkout(
     abstract fun showWorkout(context: Context)
     abstract fun editWorkout()
     abstract fun newWorkout(context: Context)
-    abstract fun addWorkoutToDb(
-        workoutTitle: Editable,
-        workoutDate: Editable,
-        exerciseList: MutableList<Exercise>,
-        exerciseLiveData: MutableLiveData<MutableList<Exercise>>)
 
 
 

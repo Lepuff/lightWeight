@@ -8,12 +8,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.lightweight.Database
 import com.example.lightweight.R
 
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.adapters.ExerciseAdapter
 import com.example.lightweight.classes.Exercise
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.firestore.FirebaseFirestore
 
 import kotlinx.android.synthetic.main.activity_new_gym_workout.*
 import java.time.LocalDate
@@ -22,6 +24,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
     private lateinit var exerciseAdapter: ExerciseAdapter
     private lateinit var newGymWorkoutViewModel: NewGymWorkoutViewModel
+    private lateinit var exerciseName : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +45,8 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
         val addExerciseButton = findViewById<Button>(R.id.new_gym_add_exercise_button)
         addExerciseButton.setOnClickListener {
-
-            exerciseAdapter.addExercise("tests")
+            exerciseName = "Test"
+            exerciseAdapter.addExercise(exerciseName)
 
 
         }
@@ -65,8 +68,8 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
             saveButton.setOnClickListener {
 
-
-                newGymWorkoutViewModel.getExerciseList()
+                val db = FirebaseFirestore.getInstance()
+                val exerciseList = newGymWorkoutViewModel.getExerciseList().value!!
                 val workoutTitle =
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_name_editText)
                         .text
@@ -76,6 +79,16 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                         .text
 
                 //TODO en yttre for loop som går igenom size (alla exercises)
+                for (exercise in exerciseList){
+                    var setNumber: Int = 0
+                    var currentExercise = db.collection("users").document(Database.user.email!!).collection("workouts")
+                        .document("$workoutTitle + $workoutDate")
+
+                    for (sets in exercise.sets){
+                        setNumber++
+                        currentExercise.collection(exerciseName).document("Set $setNumber").set(sets)
+                    }
+                }
                     //TODO en inre for loop som går igenom sets
 
                 dialog.cancel()

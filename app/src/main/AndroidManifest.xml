@@ -11,10 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        SocialFragmentv2
+        <activity android:name=".ui.CyclingWorkOut.ShowCyclingWorkOut"></activity>
+        <activity android:name="CyclingWorkOut.ShowCyclingWorkOut" />
+        <activity android:name=".ui.ShowCyclingWorkOut" />
+
         <activity android:name=".ui.newWorkout.running.NewRunningWorkoutActivity"></activity>
-        <activity android:name=".ui.newWorkout.cycling.NewCyclingWorkoutActivity" />
+      
         <activity android:name=".SaveGymWorkoutActivity" />
         <activity android:name=".ui.newWorkout.gym.NewGymWorkoutActivity" />
+
         <activity android:name=".ui.NewGymWorkoutActivity" />
         <activity android:name=".ui.workoutDetails.EditGymWorkoutActivity"/>
 

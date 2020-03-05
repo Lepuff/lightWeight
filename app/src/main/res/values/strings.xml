@@ -24,6 +24,27 @@
     <string name="title_analytics">Analytics</string>
     <string name="title_feed">Feed</string>
     <string name="title_social">Social</string>
+  
+    <!--Todo från arvin, kolla igenom ! -->
+    <string name="timing">Timing</string>
+    <string name="total">Total</string>
+    <string name="total_time">Total time</string>
+    <string name="average_speed">Average speed</string>
+    <string name="top_speed">Top speed</string>
+    <string name="fitness_exercise">Fitness exercise</string>
+    <string name="average_force">Average force</string>
+    <string name="average_cadence">Average cadence</string>
+    <string name="top_cadence">Top cadence</string>
+    <string name="average_pulse_ca">Average_pulse</string>
+    <string name="average_pulse_sa">Average pulse</string>
+    <string name="max_pulse">Max pulse</string>
+    <string name="max_force">Max force</string>
+    <string name="max_cadence">Max cadence</string>
+    <string name="calories">Calories</string>
+    <string name="speed">Speed</string>
+
+
+
     <string name="add_set">Set</string>
     <string name="set">Set</string>
     <string name="weight">Weight</string>
@@ -34,4 +55,5 @@
     <string name="how_did_it_go">How did it go?</string>
     <string name="date">Date</string>
     <string name="edit">edit</string>
+
 </resources>

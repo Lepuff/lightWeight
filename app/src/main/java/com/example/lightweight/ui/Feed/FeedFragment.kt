@@ -13,6 +13,7 @@ import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.adapters.WorkOutAdapter
 import com.example.lightweight.classes.AbstractWorkout
 import com.example.lightweight.classes.GymWorkout
+import com.example.lightweight.classes.RunningWorkout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_feed.*
 
@@ -31,10 +32,26 @@ class FeedFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_feed, container, false)
         val floatingActionButton =
             root.findViewById<FloatingActionButton>(R.id.feed_floating_action_button)
-        feedViewModel.init()
-        feedViewModel.getExerciseList().observe(viewLifecycleOwner, Observer<MutableList<AbstractWorkout>> {
+        feedViewModel.workoutList.observe(viewLifecycleOwner, Observer<MutableList<AbstractWorkout>> {
             workOutAdapter.notifyDataSetChanged()
         } )
+
+
+        /*var workout : AbstractWorkout
+
+        //if sats
+        workout = RunningWorkout()
+
+        // else
+
+
+        workout = GymWorkout()
+
+
+        feedViewModel.workoutList.value?.add(workout)*/ //TODO LÄGGA IN WORKOUTS I FEED
+
+
+
         floatingActionButton.setOnClickListener {
             NewWorkoutDialog().show(childFragmentManager,"test")
 
@@ -57,8 +74,11 @@ class FeedFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initRecyclerView()
-        workOutAdapter.submitList(feedViewModel.getExerciseList().value!!)
-        workOutAdapter.addWorkout(GymWorkout("awesome workout","2020-11-11",""))
+        workOutAdapter.submitList(feedViewModel.workoutList.value!!)
+
+
+
+
 
     }
 }

@@ -8,10 +8,10 @@ import androidx.lifecycle.MutableLiveData
 abstract class AbstractWorkout(
     val icon: Int
 ) {
-    //ToDo add id?
+    abstract var id : String?
     abstract var title: String?
     abstract var date: String?
-    abstract var image: String? //ToDo remove!!!: it is for test
+
 
 
     fun getWorkoutTitle() : String? {
@@ -21,7 +21,8 @@ abstract class AbstractWorkout(
         title = newTitle
     }
 
-
+    fun getWorkoutList(){
+    }
 
 
 

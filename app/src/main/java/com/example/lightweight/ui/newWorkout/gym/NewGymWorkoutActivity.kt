@@ -77,11 +77,11 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                 val workoutDate =
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
                         .text
-                
+
                 for (exercise in exerciseList){
                     var setNumber: Int = 0
                     var currentExercise = db.collection("users").document(Database.user.email!!).collection("workouts")
-                        .document("$workoutTitle + $workoutDate")
+                        .document("Gym")
 
                     for (sets in exercise.sets){
                         setNumber++

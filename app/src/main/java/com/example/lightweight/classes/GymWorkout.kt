@@ -11,22 +11,13 @@ import com.example.lightweight.ui.newWorkout.gym.NewGymWorkoutActivity
 import kotlin.collections.ArrayList
 
 class GymWorkout(
-    override var title: String?,
-    override var date: String?,
-    override var image: String?
+    override var id: String?, override var title: String?, override var date: String?
+
 ) : AbstractWorkout(R.drawable.ic_fitness_center_yellow_24dp) {
 
 
-    private var exerciseList :MutableList<Exercise> = ArrayList()
 
 
-    fun setExerciseList(exerciseList : MutableList<Exercise>){
-        this.exerciseList = exerciseList
-    }
-
-    fun getExerciseList(): MutableList<Exercise>{
-        return this.exerciseList
-    }
 
     override fun showWorkout(context: Context) {
         val intent = Intent(context, GymWorkoutDetailsActivity::class.java)

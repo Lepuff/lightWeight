@@ -5,14 +5,15 @@
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/background_item"
     app:cardCornerRadius="2dp"
-    app:cardElevation="10dp"
+    app:cardElevation="5dp"
+    app:cardUseCompatPadding="true"
 
     app:cardPreventCornerOverlap="false">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background">
+        >
 
         <LinearLayout
             android:id="@+id/sets_linear_layout"
@@ -26,6 +27,7 @@
 
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:textColor="@color/text_content"
                 android:id="@+id/sets_number_textView"/>
 
@@ -35,6 +37,7 @@
                 android:textColor="@color/text_content"
                 android:autofillHints="@string/weight"
                 android:inputType="number"
+                android:gravity="center"
                 android:id="@+id/sets_weight_editText"/>
 
             <EditText
@@ -43,18 +46,16 @@
                 android:textColor="@color/text_content"
                 android:autofillHints="@string/reps"
                 android:inputType="number"
+                android:gravity="center"
                 android:id="@+id/sets_reps_editText"
                 />
-
 
             <Button
                 android:layout_width="50dp"
                 android:id="@+id/delete_set_button"
                 android:layout_height="wrap_content"
-                android:background="@color/background"
+                android:background="@drawable/md_transparent"
                 android:drawableStart="@drawable/ic_delete_forever_yellow_24dp" />
-
-
         </LinearLayout>
 
 

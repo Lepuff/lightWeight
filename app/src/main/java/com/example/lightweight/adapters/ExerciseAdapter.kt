@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lightweight.R
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.classes.Exercise
+import com.example.lightweight.classes.Sets
 import kotlinx.android.synthetic.main.layout_exercises_list_item.view.*
 
 
@@ -26,7 +27,9 @@ class ExerciseAdapter(private val parentRecyclerView: RecyclerView) :
     }
 
     fun addExercise(name: String) {
-        exercises.add(Exercise(name))
+        val newExercise = Exercise(name)
+        newExercise.sets.add(Sets("", ""))
+        exercises.add(newExercise)
         notifyItemInserted(exercises.size)
     }
 
@@ -60,8 +63,6 @@ class ExerciseAdapter(private val parentRecyclerView: RecyclerView) :
         private val exerciseName: TextView = itemView.exercise_name_textView
 
 
-
-
         val deleteExerciseButton: ImageButton =
             itemView.findViewById<ImageButton>(R.id.delete_exercise_button).apply {
                 setOnClickListener {
@@ -74,8 +75,6 @@ class ExerciseAdapter(private val parentRecyclerView: RecyclerView) :
 
                 }
             }
-
-
 
 
         val newSetButton: Button = itemView.findViewById<Button>(R.id.new_set_button).apply {

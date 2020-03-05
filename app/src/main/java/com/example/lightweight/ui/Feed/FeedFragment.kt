@@ -29,12 +29,13 @@ class FeedFragment : Fragment() {
         feedViewModel =
             ViewModelProviders.of(this).get(FeedViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_feed, container, false)
-        val floatingActionButton =
-            root.findViewById<FloatingActionButton>(R.id.feed_floating_action_button)
+
         feedViewModel.init()
         feedViewModel.getExerciseList().observe(viewLifecycleOwner, Observer<MutableList<AbstractWorkout>> {
             workOutAdapter.notifyDataSetChanged()
         } )
+        val floatingActionButton =
+            root.findViewById<FloatingActionButton>(R.id.feed_floating_action_button)
         floatingActionButton.setOnClickListener {
             NewWorkoutDialog().show(childFragmentManager,"test")
 
@@ -52,7 +53,6 @@ class FeedFragment : Fragment() {
             adapter = workOutAdapter
         }
     }
-
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

@@ -13,11 +13,6 @@ class FeedViewModel : ViewModel() {
     fun init(){
         workoutLiveData.value = workoutList
     }
-
     fun getExerciseList() = workoutLiveData
 
-    fun setExerciseList(newWorkoutList: MutableList<AbstractWorkout>){
-        workoutList = newWorkoutList
-        init()
-    }
 }

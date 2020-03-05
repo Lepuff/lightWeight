@@ -45,9 +45,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GarbageActivity"
-            android:exported="true" />
-        <activity
             android:name=".ui.Register.RegisterActivity"
             android:exported="true" /><!--todo Check this erroro?-->
         <activity

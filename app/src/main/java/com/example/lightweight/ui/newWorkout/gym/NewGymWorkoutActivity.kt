@@ -25,7 +25,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
     private lateinit var exerciseAdapter: ExerciseAdapter
     private lateinit var newGymWorkoutViewModel: NewGymWorkoutViewModel
-    private lateinit var exerciseName : String
+    private lateinit var exerciseName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +69,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
             saveButton.setOnClickListener {
 
+
                 val db = FirebaseFirestore.getInstance()
 
                 val exerciseList = newGymWorkoutViewModel.getExerciseList().value!!
@@ -79,18 +80,38 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                 val workoutDate =
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
                         .text
-/*
-                for (exercise in exerciseList){
-                    var setNumber: Int = 0
-                    var currentExercise = db.collection("users").document(Database.user.email!!).collection("workouts")
-                        .document("Gym")
 
-                    for (sets in exercise.sets){
+
+                val workoutInfo = hashMapOf(
+                    "Title of workout" to workoutTitle,
+                    "Date of workout" to workoutDate
+                )
+
+                var currentGymWorkoutRef =
+                    db.collection("users").document(Database.user.email!!).collection("workouts")
+                        .document("Gym")//.collection("Gym Workouts").document()
+
+                currentGymWorkoutRef.set(workoutInfo)
+
+                exerciseList.forEach {
+                    var setNumber = 0
+                    for (sets in it.sets) {
                         setNumber++
-                        currentExercise.collection(exercise.name).document("Set $setNumber").set(sets)
+                        currentGymWorkoutRef.collection(it.name).document("Set $setNumber")
+                            .set(sets)
+                            .addOnSuccessListener { documentReference ->
+                                Log.d("TAG", "DocumentSnapshot added with ID: $documentReference")
+                            }
+                            .addOnFailureListener { e ->
+                                Log.d("TAG", "Error adding Set", e)
+                            }
                     }
                 }
-*/
+
+
+                for (exercise in exerciseList) {
+
+
                 dialog.cancel()
                 finish()
 

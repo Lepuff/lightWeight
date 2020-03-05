@@ -29,8 +29,6 @@ class LoginActivity : AppCompatActivity() {
     var callbackManager: CallbackManager? = null
     private lateinit var textInputEmail: TextInputEditText
     private lateinit var textInputPassword: TextInputEditText
-    private lateinit var firstName: String
-    private lateinit var lastName: String
     private lateinit var email: String
     private lateinit var password: String
     private lateinit var profilePicture: URL
@@ -134,7 +132,7 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     // If sign in fails, display a message to the user.
                     Toast.makeText(
-                        baseContext, "Login failed.",
+                        baseContext, getString(R.string.login_failed),
                         Toast.LENGTH_SHORT
                     ).show()
                     updateUI(null)

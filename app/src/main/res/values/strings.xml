@@ -32,7 +32,6 @@
     <string name="average_speed">Average speed</string>
     <string name="top_speed">Top speed</string>
     <string name="fitness_exercise">Fitness exercise</string>
-    <string name="average_force">Average force</string>
     <string name="average_cadence">Average cadence</string>
     <string name="top_cadence">Top cadence</string>
     <string name="average_pulse_ca">Average_pulse</string>
@@ -45,7 +44,7 @@
 
 
 
-    <string name="add_set">Set</string>
+    <string name="add_set">Add set</string>
     <string name="set">Set</string>
     <string name="weight">Weight</string>
     <string name="reps">Reps</string>
@@ -54,7 +53,7 @@
     <string name="new_workout_name">Workout name</string>
     <string name="how_did_it_go">How did it go?</string>
     <string name="date">Date</string>
-    <string name="edit">edit</string>
+    <string name="edit">Edit</string>
     <string name="time">Time</string>
     <string name="pulse">Pulse</string>
     <string name="force">Force</string>
@@ -66,7 +65,12 @@
     <string name="max_temperature">Max temperature</string>
     <string name="profile">Profile</string>
     <string name="log_out">Log out</string>
+
+    <string name="login_failed">Login failed</string>
+    <string name="average_force">Average force</string>
+
     <string name="save">save</string>
+
 
 
 </resources>

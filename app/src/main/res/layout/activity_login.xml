@@ -72,7 +72,7 @@
             android:id="@+id/loginButton_button"
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="36dp"
             android:background="@color/background_button"
             android:text="@string/log_in"
             android:textColor="@color/text_button"
@@ -91,7 +91,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/loginButton_button"
-            app:layout_constraintVertical_bias="0.3">
+            app:layout_constraintVertical_bias="0.15">
 
         </TextView>
 

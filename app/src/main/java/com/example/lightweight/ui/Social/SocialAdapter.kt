@@ -59,7 +59,7 @@ class SocialAdapter : RecyclerView.Adapter<SocialAdapter.SocialViewHolder>() {
             Glide.with(itemView.context)
 
                 .applyDefaultRequestOptions(requestOption)
-                .load(socialWorkOut.image)
+                .load("") //todo Load image from fb
                 .into(socialImage)
 
         }

@@ -12,11 +12,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
 
 class RunningWorkout(
+    override var id: String?,
     override var title: String?,
-    override var date: String?,
-    override var image: String?
+    override var date: String?
 
-) : AbstractWorkout(R.drawable.ic_directions_run_yellow_24dp) {
+
+    ) : AbstractWorkout(R.drawable.ic_directions_run_yellow_24dp) {
 
 
     override fun showWorkout(context: Context) {

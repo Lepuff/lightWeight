@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         SocialFragmentv2
-        <activity android:name=".ui.CyclingWorkOut.ShowCyclingWorkOut"></activity>
+        <activity android:name=".ui.newWorkout.cycling.NewCyclingWorkoutActivity"></activity>
         <activity android:name="CyclingWorkOut.ShowCyclingWorkOut" />
         <activity android:name=".ui.ShowCyclingWorkOut" />
 

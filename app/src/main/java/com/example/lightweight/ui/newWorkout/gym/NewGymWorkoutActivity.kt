@@ -112,15 +112,19 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                 for (exercise in exerciseList) {
 
 
-                dialog.cancel()
-                finish()
+                    dialog.cancel()
+                    finish()
+
+                }
+
 
             }
 
 
-        }
-    }
 
+        }
+
+    }
     private fun initRecyclerView() {
         exercise_recycle_view.apply {
             layoutManager = LinearLayoutManager(this.context)
@@ -133,7 +137,3 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         }
     }
 }
-
-
-
-

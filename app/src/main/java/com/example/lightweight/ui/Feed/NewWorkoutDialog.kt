@@ -22,7 +22,7 @@ class NewWorkoutDialog : DialogFragment() {
         recyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
             val topSpacingItemDecoration =
-                TopSpacingItemDecoration(15)
+                TopSpacingItemDecoration(5)
             addItemDecoration(topSpacingItemDecoration)
             workoutTypeAdapter =
                 WorkOutTypeAdapter(dialog)

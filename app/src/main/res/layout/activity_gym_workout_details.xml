@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/edit"
         android:textColor="@color/text_button"
-        android:background="@color/background_button"
+        android:background="@drawable/md_transparent"
         />
 
 

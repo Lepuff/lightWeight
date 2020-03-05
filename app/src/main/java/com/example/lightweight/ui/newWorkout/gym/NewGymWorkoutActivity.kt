@@ -45,7 +45,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         var i = 1
         val addExerciseButton = findViewById<Button>(R.id.new_gym_add_exercise_button)
         addExerciseButton.setOnClickListener {
-            exerciseName = "Test $i"
+            exerciseName = "Test $i" //todo remove
             exerciseAdapter.addExercise(exerciseName)
             i++
 
@@ -102,7 +102,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         exercise_recycle_view.apply {
             layoutManager = LinearLayoutManager(this.context)
             val topSpacingItemDecoration =
-                TopSpacingItemDecoration(30)
+                TopSpacingItemDecoration(20)
             addItemDecoration(topSpacingItemDecoration)
             exerciseAdapter =
                 ExerciseAdapter(this)

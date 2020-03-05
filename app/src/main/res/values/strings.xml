@@ -65,5 +65,8 @@
     <string name="min_temperature">Min temperature</string>
     <string name="max_temperature">Max temperature</string>
     <string name="edit_workout">Edit workout</string>
+    <string name="profile">Profile</string>
+    <string name="log_out">Log out</string>
+
 
 </resources>

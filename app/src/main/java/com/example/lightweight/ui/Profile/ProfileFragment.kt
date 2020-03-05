@@ -10,11 +10,6 @@ import android.view.ViewGroup
 import com.example.lightweight.R
 
 class ProfileFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ProfileFragment()
-    }
-
     private lateinit var viewModel: ProfileViewModel
 
     override fun onCreateView(

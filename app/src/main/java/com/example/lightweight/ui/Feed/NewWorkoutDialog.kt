@@ -8,26 +8,30 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lightweight.R
-import com.example.lightweight.TopSpacingItemDecoration
+import com.example.lightweight.ui.TopSpacingItemDecoration
+import com.example.lightweight.adapters.WorkOutTypeAdapter
 import com.example.lightweight.WorkOutTypeSource
 
 
-class NewWorkoutFragment : DialogFragment() {
-    private lateinit var workoutTypeAdapter: WorkOutTypeAdapter
-    private fun initNewWorkoutRecycleView(recyclerView: RecyclerView) {
+class NewWorkoutDialog : DialogFragment() {
+
+
+    private lateinit var workoutTypeAdapter : WorkOutTypeAdapter
+    private fun initNewWorkoutRecycleView(recyclerView: RecyclerView,dialog: Dialog) {
 
         recyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
             val topSpacingItemDecoration =
                 TopSpacingItemDecoration(15)
             addItemDecoration(topSpacingItemDecoration)
-            workoutTypeAdapter = WorkOutTypeAdapter()
+            workoutTypeAdapter =
+                WorkOutTypeAdapter(dialog)
             adapter = workoutTypeAdapter
         }
     }
 
 
-    private fun addWorkoutTypeDataset() {
+    private fun addWorkoutTypeDataSet() {
         val data =
             WorkOutTypeSource.createNWDataSet()
         workoutTypeAdapter.submitList(data)
@@ -42,14 +46,10 @@ class NewWorkoutFragment : DialogFragment() {
         val dialog = AlertDialog.Builder(context!!)
             .setView(dialogView)
             .create()
-
         dialog.setCanceledOnTouchOutside(true)
-
         val recyclerView = dialogView.findViewById<RecyclerView>(R.id.dialog_recycle_view)
-
-        initNewWorkoutRecycleView(recyclerView!!)
-        addWorkoutTypeDataset()
-
+        initNewWorkoutRecycleView(recyclerView!!,dialog)
+        addWorkoutTypeDataSet()
         return dialog
     }
 }

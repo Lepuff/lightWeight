@@ -6,7 +6,8 @@
     app:cardBackgroundColor="@color/background_item"
     app:cardCornerRadius="10dp"
     app:cardElevation="10dp"
-    app:cardPreventCornerOverlap="false">
+    app:cardPreventCornerOverlap="false"
+    android:background="@color/background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,10 +27,10 @@
             android:id="@+id/new_workout_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:text="workout"
+            android:paddingStart="20dp"
+            android:text=""
             android:textColor="@color/text_item"
-            android:textSize="30dp"
+            android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/new_workout_icon"

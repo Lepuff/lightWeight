@@ -11,11 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        SocialFragmentv2
         <activity android:name=".ui.CyclingWorkOut.ShowCyclingWorkOut"></activity>
         <activity android:name="CyclingWorkOut.ShowCyclingWorkOut" />
         <activity android:name=".ui.ShowCyclingWorkOut" />
-        <activity android:name=".ui.NewWorkout.NewGymWorkoutActivity" />
+
+        <activity android:name=".ui.newWorkout.running.NewRunningWorkoutActivity"></activity>
+      
+        <activity android:name=".SaveGymWorkoutActivity" />
+        <activity android:name=".ui.newWorkout.gym.NewGymWorkoutActivity" />
+
         <activity android:name=".ui.NewGymWorkoutActivity" />
+        <activity android:name=".ui.workoutDetails.EditGymWorkoutActivity"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -53,15 +60,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.Feed.GymWorkoutDetailsActivity"
+            android:name=".ui.workoutDetails.ViewGymWorkoutActivity"
             android:label="Details"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".NavigationActivity" />
+                android:value=".ui.NavigationActivity" />
         </activity>
         <activity
-            android:name=".NavigationActivity"
+            android:name=".ui.NavigationActivity"
             android:label="LightWeight"
             android:launchMode="singleTop" />
     </application>

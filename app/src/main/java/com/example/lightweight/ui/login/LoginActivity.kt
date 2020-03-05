@@ -1,16 +1,16 @@
 package com.example.lightweight.ui.login
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lightweight.*
+//import com.example.lightweight.Database.getUserDetailsFromFb
 import com.example.lightweight.R
+import com.example.lightweight.ui.NavigationActivity
 import com.example.lightweight.ui.Register.RegisterActivity
 import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
@@ -22,7 +22,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
 import java.net.URL
-import java.util.logging.Logger
 
 
 class LoginActivity : AppCompatActivity() {
@@ -45,11 +44,12 @@ class LoginActivity : AppCompatActivity() {
 
         AppEventsLogger.activateApp(application)
 
+
         callbackManager = CallbackManager.Factory.create()
         val fbLoginButton: LoginButton = findViewById(R.id.fbLogin_button)
         val userSignUp = findViewById<Button>(R.id.signUp_button)
         val userLogin = findViewById<Button>(R.id.loginButton_button)
-        //progressBar = findViewById(R.id.progressBarLogin)
+        progressBar = findViewById(R.id.progressBarLogin)
 
         auth = FirebaseAuth.getInstance()
 
@@ -126,7 +126,7 @@ class LoginActivity : AppCompatActivity() {
                 return
             }
         }
-        //progressBar.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -141,7 +141,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                     updateUI(null)
-                    //progressBar.visibility = View.INVISIBLE
+                    progressBar.visibility = View.INVISIBLE
                 }
 
             }
@@ -151,7 +151,7 @@ class LoginActivity : AppCompatActivity() {
         fbLogin_button.setPermissions(listOf("email", "public_profile", "user_friends"))
         fbLogin_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult) {
-                handleFacebookAccessToken(result!!.accessToken)
+                handleFacebookAccessToken(result.accessToken)
             }
 
             override fun onCancel() {
@@ -164,41 +164,25 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-    private fun getUserDetailsFromFb(accessToken: AccessToken) {
-        val request = GraphRequest.newMeRequest(
-            accessToken
-        ) { `object`, response ->
-
-            email = `object`.getString("email")
-            firstName = `object`.getString("first_name")
-            lastName = `object`.getString("last_name")
-
-            Database.updateUserData(firstName, lastName, email)
-        }
-        //Here we put the requested fields to be returned from the JSONObject
-        val parameters = Bundle()
-        parameters.putString("fields", "id, first_name, last_name, email")
-        request.parameters = parameters
-        request.executeAsync()
-    }
 
     private fun handleFacebookAccessToken(accessToken: AccessToken?) {
         //get credential
         val credential = FacebookAuthProvider.getCredential(accessToken!!.token)
 
-        //progressBar.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
         auth.signInWithCredential(credential)
             .addOnSuccessListener { result ->
-                getUserDetailsFromFb(accessToken)
+                Database.addFacebookUserToDb(accessToken)
 
                 Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
+
                 startActivity(Intent(this, NavigationActivity::class.java))
-                //progressBar.visibility = View.INVISIBLE
+                progressBar.visibility = View.INVISIBLE
             }
 
             .addOnFailureListener { e ->
                 Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
-                //progressBar.visibility = View.INVISIBLE
+                progressBar.visibility = View.INVISIBLE
             }
 
     }

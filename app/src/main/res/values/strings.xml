@@ -55,5 +55,14 @@
     <string name="how_did_it_go">How did it go?</string>
     <string name="date">Date</string>
     <string name="edit">edit</string>
+    <string name="time">Time</string>
+    <string name="pulse">Pulse</string>
+    <string name="force">Force</string>
+    <string name="cadence">Cadence</string>
+    <string name="distance">Distance</string>
+    <string name="temperature">Temperature</string>
+    <string name="average_temperature">Average temperature</string>
+    <string name="min_temperature">Min temperature</string>
+    <string name="max_temperature">Max temperature</string>
 
 </resources>

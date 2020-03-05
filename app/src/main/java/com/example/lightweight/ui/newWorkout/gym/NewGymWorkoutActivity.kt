@@ -51,7 +51,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         val saveWorkoutButton = findViewById<Button>(R.id.new_gym_save_workout_button)
         saveWorkoutButton.setOnClickListener {
             val dialogView =
-                LayoutInflater.from(this).inflate(R.layout.dialog_save_gym_workout, null)
+                LayoutInflater.from(this).inflate(R.layout.dialog_save_workout, null)
             val saveButton = dialogView.findViewById<Button>(R.id.save_workout_save_button)
             val currentDate = LocalDate.now().toString()
             dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)

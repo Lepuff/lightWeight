@@ -11,11 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.newWorkout.running.NewRunningWorkoutActivity"></activity>
         <activity android:name=".ui.newWorkout.cycling.NewCyclingWorkoutActivity" />
-        <activity android:name=".SaveGymWorkoutActivity" />
+
+
+
+        <activity android:name=".ui.newWorkout.running.NewRunningWorkoutActivity" />
+      
+
         <activity android:name=".ui.newWorkout.gym.NewGymWorkoutActivity" />
-        <activity android:name=".ui.NewGymWorkoutActivity" />
+
+
+        <activity android:name=".ui.workoutDetails.Gym.EditGymWorkoutActivity"/> <!--Todo check this error?-->
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -42,7 +48,7 @@
             android:exported="true" />
         <activity
             android:name=".ui.Register.RegisterActivity"
-            android:exported="true" />
+            android:exported="true" /><!--todo Check this erroro?-->
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true">
@@ -53,9 +59,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.workoutDetails.GymWorkoutDetailsActivity"
+            android:name=".ui.workoutDetails.Gym.ViewGymWorkoutActivity"
             android:label="Details"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"><!--todo Check this erroro?-->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.NavigationActivity" />

@@ -6,21 +6,17 @@ import android.text.Editable
 import androidx.lifecycle.MutableLiveData
 import com.example.lightweight.Database
 import com.example.lightweight.R
-import com.example.lightweight.ui.workoutDetails.GymWorkoutDetailsActivity
+import com.example.lightweight.ui.workoutDetails.Gym.ViewGymWorkoutActivity
 import com.example.lightweight.ui.newWorkout.gym.NewGymWorkoutActivity
-import kotlin.collections.ArrayList
 
 class GymWorkout(
     override var id: String?, override var title: String?, override var date: String?
 
+
 ) : AbstractWorkout(R.drawable.ic_fitness_center_yellow_24dp) {
 
-
-
-
-
     override fun showWorkout(context: Context) {
-        val intent = Intent(context, GymWorkoutDetailsActivity::class.java)
+        val intent = Intent(context, ViewGymWorkoutActivity::class.java)
         intent.putExtra("workoutTitle", title)
         context.startActivity(intent)
     }

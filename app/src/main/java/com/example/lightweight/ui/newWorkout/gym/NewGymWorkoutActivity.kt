@@ -68,6 +68,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
             saveButton.setOnClickListener {
 
+
                 val db = FirebaseFirestore.getInstance()
                 val exerciseList = newGymWorkoutViewModel.getExerciseList().value!!
                 val workoutTitle =
@@ -78,16 +79,24 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
                         .text
 
+                val workoutInfo = hashMapOf(
+                    "Title of workout" to workoutTitle,
+                    "Date of workout" to workoutDate
+                )
+
+                var currentGymWorkoutRef = db.collection("users").document(Database.user.email!!).collection("workouts")
+                    .document("Gym").collection("Gym Workouts").document()
+
                 for (exercise in exerciseList){
                     var setNumber: Int = 0
-                    var currentExercise = db.collection("users").document(Database.user.email!!).collection("workouts")
-                        .document("Gym")
-
                     for (sets in exercise.sets){
                         setNumber++
-                        currentExercise.collection(exercise.name).document("Set $setNumber").set(sets)
+                        currentGymWorkoutRef.collection(exercise.name).document("Set $setNumber").set(sets)
                     }
                 }
+                currentGymWorkoutRef.set(workoutInfo)
+
+
 
                 dialog.cancel()
                 finish()

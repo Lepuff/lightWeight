@@ -2,6 +2,7 @@ package com.example.lightweight.ui.newWorkout.gym
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
@@ -69,6 +70,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
             saveButton.setOnClickListener {
 
                 val db = FirebaseFirestore.getInstance()
+
                 val exerciseList = newGymWorkoutViewModel.getExerciseList().value!!
                 val workoutTitle =
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_name_editText)
@@ -77,7 +79,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                 val workoutDate =
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
                         .text
-
+/*
                 for (exercise in exerciseList){
                     var setNumber: Int = 0
                     var currentExercise = db.collection("users").document(Database.user.email!!).collection("workouts")
@@ -88,7 +90,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                         currentExercise.collection(exercise.name).document("Set $setNumber").set(sets)
                     }
                 }
-
+*/
                 dialog.cancel()
                 finish()
 

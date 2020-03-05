@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import com.example.lightweight.R
 
 class CyclingWorkout(
-    override var title: String,
-    override var date: String,
-    override var image: String
+    override var title: String?,
+    override var date: String?,
+    override var image: String?
 ) : AbstractWorkout(R.drawable.ic_directions_bike_yellow_24dp) {
 
 

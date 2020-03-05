@@ -16,18 +16,6 @@ class GymWorkout(
     override var image: String?
 ) : AbstractWorkout(R.drawable.ic_fitness_center_yellow_24dp) {
 
-
-    private var exerciseList :MutableList<Exercise> = ArrayList()
-
-
-    fun setExerciseList(exerciseList : MutableList<Exercise>){
-        this.exerciseList = exerciseList
-    }
-
-    fun getExerciseList(): MutableList<Exercise>{
-        return this.exerciseList
-    }
-
     override fun showWorkout(context: Context) {
         val intent = Intent(context, ViewGymWorkoutActivity::class.java)
         intent.putExtra("workoutTitle", title)

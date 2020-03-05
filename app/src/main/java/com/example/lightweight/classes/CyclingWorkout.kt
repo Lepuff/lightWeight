@@ -13,18 +13,6 @@ class CyclingWorkout(
     override var image: String?
 ) : AbstractWorkout(R.drawable.ic_directions_bike_yellow_24dp) {
 
-    var averageSpeed : String = ""
-    var topSpeed : String = ""
-    var totalTime : String = ""
-    var averagePulse : String = ""
-    var maxPulse : String = ""
-    var averageForce: String = ""
-    var maxForce : String = ""
-    var averageCadence : String = ""
-    var maxCadence : String = ""
-    var calories : String = ""
-
-            // Average speed , top speed , total time , average puls , max puls , average force , max force ,average kadens , max kadens , calories
     override fun showWorkout(context: Context) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -34,7 +22,7 @@ class CyclingWorkout(
     }
 
     override fun newWorkout(context: Context) {
-         var intent = Intent(context,
+         val intent = Intent(context,
              NewCyclingWorkoutActivity::class.java)
         context.startActivity(intent)
 

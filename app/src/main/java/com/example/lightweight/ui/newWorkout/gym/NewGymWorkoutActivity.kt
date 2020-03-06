@@ -17,6 +17,7 @@ import com.example.lightweight.adapters.ExerciseAdapter
 import com.example.lightweight.classes.Exercise
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 
 import kotlinx.android.synthetic.main.activity_new_gym_workout.*
 import java.time.LocalDate
@@ -83,23 +84,26 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
 
                 val workoutInfo = hashMapOf(
-                    "Title of workout" to workoutTitle,
-                    "Date of workout" to workoutDate
+                    "typeOfWorkout" to "gymWorkout",
+                    "workoutTitle" to workoutTitle,
+                    "workoutDate" to workoutDate
                 )
 
-                var currentGymWorkoutRef =
+                /*var currentGymWorkoutRef =
                     db.collection("users").document(Database.user.email!!).collection("workouts")
-                        .document("Gym").collection("Gym Workouts").document()
+                        .document("gym").collection("gymWorkouts").document("123")*/
+                var currentGymWorkoutRef = db.collection("users")
+                    .document(Database.user.email!!).collection("workouts").document()
 
-                for (exercise in exerciseList){
+                 for (exercise in exerciseList){
                     var setNumber = 0
-                    var currentExercise = currentGymWorkoutRef.collection(exercise.name)
+                    val currentExercise = currentGymWorkoutRef.collection(exercise.name)
                     for (sets in exercise.sets){
                         setNumber++
                         currentExercise.document("Set $setNumber").set(sets)
-
                     }
                 }
+
                 //TODO försök lägga till: currentGymWorkoutRef.set(workoutInfo) i DB
 
                 dialog.cancel()

@@ -39,7 +39,6 @@ class RegisterActivity : AppCompatActivity() {
 
         progressBar = findViewById(R.id.progressBarRegister)
 
-        //auth = FirebaseAuth.getInstance()
 
         signUpButton.setOnClickListener {
             auth = FirebaseAuth.getInstance()

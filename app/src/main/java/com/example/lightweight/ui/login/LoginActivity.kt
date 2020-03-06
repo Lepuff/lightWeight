@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lightweight.*
 import com.example.lightweight.R
+import com.example.lightweight.classes.User
 import com.example.lightweight.ui.NavigationActivity
 import com.example.lightweight.ui.Register.RegisterActivity
 import com.facebook.*
@@ -127,6 +128,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
+                    Database.user.email = email
                     updateUI(user)
                     progressBar.visibility = View.INVISIBLE
                 } else {

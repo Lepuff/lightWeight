@@ -89,42 +89,30 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
                 var currentGymWorkoutRef =
                     db.collection("users").document(Database.user.email!!).collection("workouts")
-                        .document("Gym")//.collection("Gym Workouts").document()
+                        .document("Gym").collection("Gym Workouts").document()
 
-                currentGymWorkoutRef.set(workoutInfo)
-
-                exerciseList.forEach {
+                for (exercise in exerciseList){
                     var setNumber = 0
-                    for (sets in it.sets) {
+                    var currentExercise = currentGymWorkoutRef.collection(exercise.name)
+                    for (sets in exercise.sets){
                         setNumber++
-                        currentGymWorkoutRef.collection(it.name).document("Set $setNumber")
-                            .set(sets)
-                            .addOnSuccessListener { documentReference ->
-                                Log.d("TAG", "DocumentSnapshot added with ID: $documentReference")
-                            }
-                            .addOnFailureListener { e ->
-                                Log.d("TAG", "Error adding Set", e)
-                            }
+                        currentExercise.document("Set $setNumber").set(sets)
+
                     }
                 }
+                //TODO försök lägga till: currentGymWorkoutRef.set(workoutInfo) i DB
 
-
-                for (exercise in exerciseList) {
-
-
-                    dialog.cancel()
-                    finish()
-
-                }
-
+                dialog.cancel()
+                finish()
 
             }
 
 
-
         }
 
+
     }
+
     private fun initRecyclerView() {
         exercise_recycle_view.apply {
             layoutManager = LinearLayoutManager(this.context)

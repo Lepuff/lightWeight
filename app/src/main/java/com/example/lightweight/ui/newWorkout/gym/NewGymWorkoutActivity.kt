@@ -29,8 +29,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
     private lateinit var newGymWorkoutViewModel: NewGymWorkoutViewModel
     private lateinit var exerciseName: String
     private val db = FirebaseFirestore.getInstance()
-    private var workoutsRef = db.collection("users").document(Database.user.email!!)
-        .collection("workouts")
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,35 +84,20 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                         .text
 
 
+                var currentGymWorkoutRef = db.collection("users")
+                    .document(Database.user.email!!).collection("workouts").document()
+
+
                 val workoutInfo = hashMapOf(
+                    "exercises" to exerciseList,
                     "timestamp" to FieldValue.serverTimestamp(),
                     "typeOfWorkout" to "gymWorkout",
                     "workoutTitle" to workoutTitle.toString(),
                     "workoutDate" to workoutDate.toString()
                 )
 
-                var currentGymWorkoutRef = db.collection("users")
-                    .document(Database.user.email!!).collection("workouts").document()
-
-                /*db.collection("users")
-                    .document(Database.user.email!!).collection("workouts").document("test123").set(workoutInfo)
-                    .addOnFailureListener { e ->
-                        Log.w("TAG", "Error adding document", e)
-                    }*/
-
-
-                for (exercise in exerciseList) {
-                    var setNumber = 0
-                    val currentExercise = currentGymWorkoutRef.collection(exercise.name)
-                    for (sets in exercise.sets) {
-                        setNumber++
-                        currentExercise.document("Set $setNumber").set(sets)
-                    }
-                }
+                //adds current workout to database
                 currentGymWorkoutRef.set(workoutInfo)
-                    .addOnFailureListener { e ->
-                        Log.w("TAG", "Error adding document", e)
-                    }
 
                 dialog.cancel()
                 finish()

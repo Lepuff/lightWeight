@@ -59,10 +59,6 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
         val averageForce = findViewById<TextInputEditText>(R.id.new_running_average_force_editText).text
         val maxForce = findViewById<TextInputEditText>(R.id.new_running_max_force_editText).text
         val calories = findViewById<TextInputEditText>(R.id.new_running_calories_editText).text
-
-
-
-
         //todo samuel databas
 
 

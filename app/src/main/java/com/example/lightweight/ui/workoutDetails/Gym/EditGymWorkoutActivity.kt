@@ -25,10 +25,10 @@ class EditGymWorkoutActivity : AppCompatActivity() {
         setContentView(R.layout.activity_new_gym_workout)
         viewModel = ViewModelProviders.of(this).get(ViewEditGymWorkoutViewModel::class.java)
         initRecyclerView()
-        viewModel.init()
-        viewModel.getExerciseList().observe(this,
+
+        viewModel.exerciseList.observe(this,
             Observer<MutableList<Exercise>> { exerciseAdapter.notifyDataSetChanged() })
-        exerciseAdapter.submitList(viewModel.getExerciseList().value!!)
+        exerciseAdapter.submitList(viewModel.exerciseList.value!!)
 
         val addExerciseButton = findViewById<Button>(R.id.new_gym_add_exercise_button)
         addExerciseButton.setOnClickListener {
@@ -51,8 +51,6 @@ class EditGymWorkoutActivity : AppCompatActivity() {
 
             saveButton.setOnClickListener {
 
-
-                viewModel.getExerciseList()
                 val workoutTitle =
                     dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText)
                         .text

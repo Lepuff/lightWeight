@@ -13,20 +13,22 @@ import com.example.lightweight.Database
 import com.example.lightweight.R
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.adapters.WorkOutAdapter
-import com.example.lightweight.classes.AbstractWorkout
-import com.example.lightweight.classes.CyclingWorkout
-import com.example.lightweight.classes.GymWorkout
-import com.example.lightweight.classes.RunningWorkout
+import com.example.lightweight.classes.*
+import com.facebook.internal.Mutable
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_show_cycling_activity.*
 import kotlinx.android.synthetic.main.fragment_feed.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FeedFragment : Fragment() {
 
+    private lateinit var workoutList : MutableList<AbstractWorkout>
     private lateinit var feedViewModel: FeedViewModel
     private lateinit var workOutAdapter: WorkOutAdapter
+    private var db = FirebaseFirestore.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,17 +39,20 @@ class FeedFragment : Fragment() {
             ViewModelProviders.of(this).get(FeedViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_feed, container, false)
 
-  
-        feedViewModel.workoutList.observe(viewLifecycleOwner, Observer<MutableList<AbstractWorkout>> {
-            workOutAdapter.notifyDataSetChanged()
-        } )
+
+        feedViewModel.workoutList.observe(
+            viewLifecycleOwner,
+            Observer<MutableList<AbstractWorkout>> {
+                workOutAdapter.notifyDataSetChanged()
+            })
         val floatingActionButton =
             root.findViewById<FloatingActionButton>(R.id.feed_floating_action_button)
 
         floatingActionButton.setOnClickListener {
-            NewWorkoutDialog().show(childFragmentManager,"test")
+            NewWorkoutDialog().show(childFragmentManager, "test")
 
         }
+
         return root
     }
 
@@ -65,64 +70,48 @@ class FeedFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initRecyclerView()
-        val id : String = ""
-        val title : String = ""
-        val date : String = ""
-
-        workOutAdapter.submitList(feedViewModel.workoutList.value!!)
-        workOutAdapter.addWorkout(GymWorkout(id,title,date))
-        workOutAdapter.addWorkout(CyclingWorkout(id,title,date))
-        workOutAdapter.addWorkout(RunningWorkout(id,title,date))
+        workoutList = ArrayList()
 
     }
 
-    private enum class WorkoutType{
-        GYM,
-        RUNNING,
-        CYCLING
+    override fun onStart() {
+        super.onStart()
+        workOutAdapter.submitList(workoutList)
+        workOutAdapter.notifyDataSetChanged()
+        addWorkoutToFeed()
     }
 
-    fun addWorkoutToFeed(){
-        val db = FirebaseFirestore.getInstance()
+    override fun onStop() {
+        super.onStop()
+    }
 
-        //TODO sorterar alla workouts
-        db.collection("users").document(Database.user.email!!).collection("workouts")
-            .orderBy("timestamp", Query.Direction.ASCENDING)
-            .get()
+    private enum class WorkoutType {
+        gymWorkout,
+        runningWorkout,
+        cyclingWorkout
+    }
 
-        //TODO hämtar alla gymWorkouts
-        db.collection("users").document(Database.user.email!!).collection("workouts")
-            .whereEqualTo("typeOfWorkout", "gym")
-            .get()
-            .addOnFailureListener { exception ->
-                Log.d("TAG", "Error getting documents", exception)
+    private fun addWorkoutToFeed() {
+
+
+        val workoutsRef = db.collection("users").document(Database.user.email!!)
+            .collection("workouts")
+
+        workoutsRef.orderBy("workoutDate", Query.Direction.DESCENDING).limit(10).get().addOnSuccessListener { workouts ->
+            if (workouts != null) {
+                for (workout in workouts) {
+                    val id = workoutsRef.id
+                    val type = workout["typeOfWorkout"].toString()
+                    val date = workout["workoutDate"].toString()
+                    val title = workout["workoutTitle"].toString()
+                    when (type) {
+                        "gymWorkout" -> workOutAdapter.addWorkout(GymWorkout(id, title, date))
+                        "runningWorkout" -> workOutAdapter.addWorkout(RunningWorkout(id, title, date))
+                        "cyclingWorkout" -> workOutAdapter.addWorkout(CyclingWorkout(id, title, date))
+                    }
+                }
             }
-
-        //TODO hämtar alla cyclingWorkouts
-        db.collection("users").document(Database.user.email!!).collection("workouts")
-            .whereEqualTo("typeOfWorkout", "cycling")
-            .get()
-            .addOnFailureListener { exception ->
-                Log.d("TAG", "Error getting documents", exception)
-            }
-
-        //TODO hämtar alla runningWorkouts
-        db.collection("users").document(Database.user.email!!).collection("workouts")
-            .whereEqualTo("typeOfWorkout", "running")
-            .get()
-            .addOnFailureListener { exception ->
-                Log.d("TAG", "Error getting documents", exception)
-            }
-
-        var workoutType : WorkoutType = WorkoutType.CYCLING
-        val id : String = ""
-        val title : String = ""
-        val date : String = ""
-
-        when(workoutType){
-            WorkoutType.GYM -> workOutAdapter.addWorkout(GymWorkout(id,title,date))
-            WorkoutType.CYCLING -> workOutAdapter.addWorkout(GymWorkout(id,title,date))
-            WorkoutType.RUNNING -> workOutAdapter.addWorkout(GymWorkout(id,title,date))
         }
+
     }
 }

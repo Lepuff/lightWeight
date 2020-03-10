@@ -14,12 +14,18 @@ import com.example.lightweight.R
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.adapters.ExerciseAdapter
 import com.example.lightweight.classes.Exercise
+import com.google.android.gms.tasks.Task
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.SetOptions
+
+
 import kotlinx.android.synthetic.main.activity_new_gym_workout.*
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 class NewGymWorkoutActivity : AppCompatActivity() {
 
@@ -58,6 +64,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
             val currentDate = LocalDate.now().toString()
             dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
                 .setText(currentDate)
+
 
             val dialogBuilder = AlertDialog.Builder(this)
                 .setView(dialogView)
@@ -128,25 +135,34 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         builder.setTitle("Choose a new Exercise") //todo string res
 
 
-        val exerciseList = getExercisesFromDb()
-        builder.setItems(exerciseList.toTypedArray()) {
-                dialog, which ->
+         getExercisesFromDb().addOnSuccessListener { typeOfExercises ->
+             //TODO cycle through "names" of the typeOfWorkout
+             val typeOfExerciseList:  MutableList<String> = ArrayList()
+             for (typeOfExercise in typeOfExercises){
+                 typeOfExerciseList.add(typeOfExercise["name"].toString())
+             }
+             builder.setItems(typeOfExerciseList.toTypedArray()) {
+                     dialog, which ->
 
-            exerciseAdapter.addExercise(exerciseList[which])
+                 exerciseAdapter.addExercise(typeOfExerciseList[which])
 
-        }
-        val dialog = builder.create()
+             }
+             val dialog = builder.create()
 
-        dialog.show()
+             dialog.show()
+         }
+
 
 
 
     }
-    private fun getExercisesFromDb(): MutableList<String>{
+    private fun getExercisesFromDb(): Task<QuerySnapshot> {
+
         val dbExerciseList : MutableList<String> = ArrayList()
-        dbExerciseList.add("BÄNKA MIG!!!!")
-        //todo samuel! GE MIG EXERCISES!!!!!
-        return dbExerciseList
+        val listOfExercisesRef =
+            db.collection("typeOfExercise")
+
+        return listOfExercisesRef.get()
     }
 }
 

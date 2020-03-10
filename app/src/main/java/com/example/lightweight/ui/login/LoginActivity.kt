@@ -89,23 +89,6 @@ class LoginActivity : AppCompatActivity() {
             return false
     }
 
-    /*private fun updateUI(currentUser: FirebaseUser?) {  //TODO REMOVE AFTER TESTING
-        if (currentUser != null) {
-            Database.user.email = auth.currentUser!!.email
-            startActivity(Intent(this, NavigationActivity::class.java))
-            finish()
-        }
-        return
-    }
-
-    private fun updateUI(isLoggedIn: Boolean) {
-        if (isLoggedIn) {
-            startActivity(Intent(applicationContext, NavigationActivity::class.java))
-            finish()
-        }
-        return
-    }*/
-
     private fun passwordSignIn() {
         textInputEmail = findViewById(R.id.emailLogin_editText)
         textInputPassword = findViewById(R.id.passwordLogin_editText)

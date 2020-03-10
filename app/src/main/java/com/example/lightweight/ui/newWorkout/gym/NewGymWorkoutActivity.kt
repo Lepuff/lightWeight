@@ -138,29 +138,29 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
     private fun showNewExerciseDialog() {
 
-        val dialogExerciseList: MutableList<CharSequence> = ArrayList()
-
-        //todo Samuel lägg in de olika övningarna här med !
-        dialogExerciseList.add("Bench press")
-        dialogExerciseList.add("Squat")
-        dialogExerciseList.add("Dead lift")
-
-
-        val builder = AlertDialog.Builder(this,R.style.DialogStyle)
+        val builder = AlertDialog.Builder(this)
         builder.setTitle("Choose a new Exercise") //todo string res
 
 
-        builder.setItems(dialogExerciseList.toTypedArray(),DialogInterface.OnClickListener {
-            dialog, which ->
+        val exerciseList = getExercisesFromDb()
+        builder.setItems(exerciseList.toTypedArray()) {
+                dialog, which ->
 
-            exerciseAdapter.addExercise(dialogExerciseList[which].toString())
-            
-        })
+            exerciseAdapter.addExercise(exerciseList[which])
+
+        }
         val dialog = builder.create()
 
         dialog.show()
 
 
 
+    }
+    private fun getExercisesFromDb(): MutableList<String>{
+
+        val dbExerciseList : MutableList<String> = ArrayList()
+        dbExerciseList.add("BÄNKA MIG!!!!")
+        //todo samuel! GE MIG EXERCISES!!!!!
+        return dbExerciseList
     }
 }

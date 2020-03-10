@@ -37,18 +37,15 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
 
         Log.d("Test after intent", id!!.toString())
         var currentGymWorkoutRef = db.collection("users")
-            .document(Database.user.email!!).collection("workouts").document(id).collection("exercises")
+            .document(Database.user.email!!).collection("workouts").document(id)
 
         val list : MutableList<Exercise> = ArrayList()
         currentGymWorkoutRef.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
-                    Log.d("oskarTest", "DocumentSnapshot data: ${document}")
-                    for (test in document){
-                        val exercise = Exercise(test["name"].toString())
-                        Log.d("exercise item loop test",test["name"].toString())
+                    
+                    Log.d("oskarTest", "DocumentSnapshot data: ${document.data}")
 
-                    }
 
                 } else {
                     Log.d("oskarTest", "No such document")

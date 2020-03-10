@@ -73,23 +73,20 @@ class FeedFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initRecyclerView()
-        workOutAdapter.submitList(workoutList)
+        workOutAdapter.submitList(feedViewModel.workoutList.value!!)
 
     }
     override fun onResume() {
         super.onResume()
+        feedViewModel.clear()
         addWorkoutToFeed()
     }
     
     private fun addWorkoutToFeed() {
-
-
-
-
         workoutsRef.orderBy("workoutDate", Query.Direction.DESCENDING).get().addOnSuccessListener { workouts ->
             if (workouts != null) {
                 for (workout in workouts) {
-                    val id = workoutsRef.id
+                    val id = workout.id
                     val type = workout["typeOfWorkout"].toString()
                     val date = workout["workoutDate"].toString()
                     val title = workout["workoutTitle"].toString()

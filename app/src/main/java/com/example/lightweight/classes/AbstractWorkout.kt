@@ -14,15 +14,7 @@ abstract class AbstractWorkout(
 
 
 
-    fun getWorkoutTitle() : String? {
-        return title
-    }
-    fun setWorkoutTitle(newTitle: String){
-        title = newTitle
-    }
 
-    fun getWorkoutList(){
-    }
 
 
 

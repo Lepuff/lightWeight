@@ -22,6 +22,7 @@ object Database {
         return user.email
     }
 
+
     private fun userInfoToDb() {
         val userInfo = hashMapOf(
             "firstName" to user.firstName,

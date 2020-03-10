@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.lightweight.Database
 import com.example.lightweight.R
 import com.google.firebase.auth.FirebaseAuth
 
@@ -19,7 +20,7 @@ class NavigationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_navigation)
         auth = FirebaseAuth.getInstance()
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        var email = intent.getStringExtra("email")
+
 
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(

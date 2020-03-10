@@ -24,8 +24,7 @@
     <string name="title_analytics">Analytics</string>
     <string name="title_feed">Feed</string>
     <string name="title_social">Social</string>
-  
-    <!--Todo från arvin, kolla igenom ! -->
+
     <string name="timing">Timing</string>
     <string name="total">Total</string>
     <string name="total_time">Total time</string>
@@ -47,6 +46,7 @@
     <string name="add_set">Add set</string>
     <string name="set">Set</string>
     <string name="weight">Weight</string>
+
     <string name="reps">Reps</string>
     <string name="delete_exercise_button">delete_exercise_button</string>
     <string name="save_workout">Save workout</string>
@@ -72,11 +72,11 @@
     <string name="new_password">New Password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="save_password">Save password</string>
-
     <string name="login_failed">Login failed</string>
     <string name="average_force">Average force</string>
-
     <string name="save">save</string>
+
+    <!--Todo allt efter detta! -->
 
 
 

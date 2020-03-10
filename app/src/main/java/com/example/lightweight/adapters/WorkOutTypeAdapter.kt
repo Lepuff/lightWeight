@@ -36,7 +36,7 @@ class WorkOutTypeAdapter(private val dialog: Dialog) : RecyclerView.Adapter<Work
 
 
 
-    class WorkOutTypeViewHolder constructor(itemView: View,val dialog: Dialog) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
+    class WorkOutTypeViewHolder constructor(itemView: View, private val dialog: Dialog) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
         private var  selectedWorkoutType : AbstractWorkout? = null
         init {
            itemView.setOnClickListener(this)

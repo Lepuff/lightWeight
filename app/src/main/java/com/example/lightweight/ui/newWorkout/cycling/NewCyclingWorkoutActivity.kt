@@ -26,6 +26,7 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(NewCyclingWorkoutViewModel::class.java)
         val saveButton: Button = findViewById(R.id.new_cycling_save_button)
 
+        findViewById<TextInputEditText>(R.id.new_cycling_total_time_editText).requestFocus()
         saveButton.setOnClickListener {
             saveCyclingDialog()
         }

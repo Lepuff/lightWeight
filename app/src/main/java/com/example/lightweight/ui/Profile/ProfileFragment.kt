@@ -31,7 +31,6 @@ class ProfileFragment : Fragment() {
             FirebaseAuth.getInstance().signOut() //sign out user
             LoginManager.getInstance().logOut()
             AccessToken.setCurrentAccessToken(null)
-            Database.user.email
             startActivity(Intent(activity, LoginActivity::class.java))
         }
 

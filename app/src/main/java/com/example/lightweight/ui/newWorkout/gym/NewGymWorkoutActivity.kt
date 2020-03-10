@@ -1,10 +1,12 @@
 package com.example.lightweight.ui.newWorkout.gym
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -47,13 +49,10 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         initRecyclerView()
         exerciseAdapter.submitList(newGymWorkoutViewModel.getExerciseList().value!!)
 
-        var i = 1
+        
         val addExerciseButton = findViewById<Button>(R.id.new_gym_add_exercise_button)
         addExerciseButton.setOnClickListener {
-            exerciseName = "Test $i" //todo remove
-            exerciseAdapter.addExercise(exerciseName)
-            i++
-
+            showNewExerciseDialog()
         }
 
         val saveWorkoutButton = findViewById<Button>(R.id.new_gym_save_workout_button)
@@ -126,4 +125,34 @@ class NewGymWorkoutActivity : AppCompatActivity() {
             adapter = exerciseAdapter
         }
     }
+
+
+    private fun showNewExerciseDialog() {
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Choose a new Exercise") //todo string res
+
+
+        val exerciseList = getExercisesFromDb()
+        builder.setItems(exerciseList.toTypedArray()) {
+                dialog, which ->
+
+            exerciseAdapter.addExercise(exerciseList[which])
+
+        }
+        val dialog = builder.create()
+
+        dialog.show()
+
+
+
+    }
+    private fun getExercisesFromDb(): MutableList<String>{
+
+        val dbExerciseList : MutableList<String> = ArrayList()
+        dbExerciseList.add("BÄNKA MIG!!!!")
+        //todo samuel! GE MIG EXERCISES!!!!!
+        return dbExerciseList
+    }
 }
+

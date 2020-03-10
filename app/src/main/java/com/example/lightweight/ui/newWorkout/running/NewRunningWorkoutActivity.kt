@@ -9,6 +9,7 @@ import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import com.example.lightweight.R
 import com.google.android.material.textfield.TextInputEditText
+import org.w3c.dom.Text
 import java.time.LocalDate
 
 class NewRunningWorkoutActivity : AppCompatActivity() {
@@ -52,7 +53,13 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
         val totalTime = findViewById<TextInputEditText>(R.id.new_cycling_total_time_editText).text
         val averageSpeed =
             findViewById<TextInputEditText>(R.id.new_running_average_speed_editText).text
-        //todo ARVIN fixa resten
+        val topSpeed = findViewById<TextInputEditText>(R.id.new_running_top_speed_edittext).text
+        val averagePulse = findViewById<TextInputEditText>(R.id.new_running_average_pulse_editText).text
+        val maxPulse = findViewById<TextInputEditText>(R.id.new_running_max_pulse_editText).text
+        val averageForce = findViewById<TextInputEditText>(R.id.new_running_average_force_editText).text
+        val maxForce = findViewById<TextInputEditText>(R.id.new_running_max_force_editText).text
+        val calories = findViewById<TextInputEditText>(R.id.new_running_calories_editText).text
+        //todo samuel databas
 
 
     }

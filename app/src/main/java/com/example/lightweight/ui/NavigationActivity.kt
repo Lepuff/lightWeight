@@ -10,9 +10,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.lightweight.Database
 import com.example.lightweight.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class NavigationActivity : AppCompatActivity() {
-
 
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {

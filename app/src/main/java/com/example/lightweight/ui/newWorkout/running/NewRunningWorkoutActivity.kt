@@ -2,14 +2,14 @@ package com.example.lightweight.ui.newWorkout.running
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-<<<<<<< Updated upstream
-=======
+
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
->>>>>>> Stashed changes
 import com.example.lightweight.R
+import com.google.android.material.textfield.TextInputEditText
+import java.time.LocalDate
 
 class NewRunningWorkoutActivity : AppCompatActivity() {
 
@@ -17,8 +17,7 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_running_workout)
     }
-<<<<<<< Updated upstream
-=======
+
 
     private fun getCurrentDate() = LocalDate.now().toString()
     private fun saveRunningDialog() {
@@ -34,9 +33,6 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
 
 
-
-
-
             saveRunningWorkout(dialogView)
             dialog.cancel()
             finish()
@@ -45,20 +41,20 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
     }
 
 
-    private fun saveRunningWorkout(dialogView : View) {
+    private fun saveRunningWorkout(dialogView: View) {
 
 
         val date = dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
         val title = dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText)
 
 
-
         val distance = findViewById<TextInputEditText>(R.id.new_running_distance_editText).text
         val totalTime = findViewById<TextInputEditText>(R.id.new_cycling_total_time_editText).text
-        val averageSpeed = findViewById<TextInputEditText>(R.id.new_running_average_speed_editText).text
+        val averageSpeed =
+            findViewById<TextInputEditText>(R.id.new_running_average_speed_editText).text
         //todo ARVIN fixa resten
 
 
     }
->>>>>>> Stashed changes
 }
+

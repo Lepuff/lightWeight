@@ -43,7 +43,7 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
         currentGymWorkoutRef.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
-                    
+
                     Log.d("oskarTest", "DocumentSnapshot data: ${document.data}")
 
 

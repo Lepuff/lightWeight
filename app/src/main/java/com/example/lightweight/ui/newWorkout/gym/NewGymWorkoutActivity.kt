@@ -18,7 +18,9 @@ import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.adapters.ExerciseAdapter
 import com.example.lightweight.classes.Exercise
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 
 import kotlinx.android.synthetic.main.activity_new_gym_workout.*
 import java.time.LocalDate
@@ -27,6 +29,8 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
     private lateinit var exerciseAdapter: ExerciseAdapter
     private lateinit var newGymWorkoutViewModel: NewGymWorkoutViewModel
+
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +47,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
         initRecyclerView()
         exerciseAdapter.submitList(newGymWorkoutViewModel.getExerciseList().value!!)
+
 
         val addExerciseButton = findViewById<Button>(R.id.new_gym_add_exercise_button)
         addExerciseButton.setOnClickListener {
@@ -67,8 +72,6 @@ class NewGymWorkoutActivity : AppCompatActivity() {
             saveButton.setOnClickListener {
 
 
-                val db = FirebaseFirestore.getInstance()
-
                 val exerciseList = newGymWorkoutViewModel.getExerciseList().value!!
                 val workoutTitle =
                     dialogView.findViewById<TextInputEditText>(R.id.new_workout_name_editText)
@@ -79,47 +82,35 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                         .text
 
 
+                var currentGymWorkoutRef = db.collection("users")
+                    .document(Database.user.email!!).collection("workouts").document()
+
+
                 val workoutInfo = hashMapOf(
-                    "Title of workout" to workoutTitle,
-                    "Date of workout" to workoutDate
+                    "exercises" to exerciseList,
+                    "timestamp" to FieldValue.serverTimestamp(),
+                    "typeOfWorkout" to "gymWorkout",
+                    "workoutTitle" to workoutTitle.toString(),
+                    "workoutDate" to workoutDate.toString()
                 )
 
-                var currentGymWorkoutRef =
-                    db.collection("users").document(Database.user.email!!).collection("workouts")
-                        .document("Gym")//.collection("Gym Workouts").document()
-
+                //adds current workout to database
                 currentGymWorkoutRef.set(workoutInfo)
 
-                exerciseList.forEach {
-                    var setNumber = 0
-                    for (sets in it.sets) {
-                        setNumber++
-                        currentGymWorkoutRef.collection(it.name).document("Set $setNumber")
-                            .set(sets)
-                            .addOnSuccessListener { documentReference ->
-                                Log.d("TAG", "DocumentSnapshot added with ID: $documentReference")
-                            }
-                            .addOnFailureListener { e ->
-                                Log.d("TAG", "Error adding Set", e)
-                            }
-                    }
-                }
-
-
-                for (exercise in exerciseList) {
-
-
-                    dialog.cancel()
-                    finish()
-
-                }
-
+                dialog.cancel()
+                finish()
 
             }
 
 
         }
 
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        //TODO workoutsRef.addSnapshotListener
     }
 
     private fun initRecyclerView() {
@@ -133,6 +124,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
             adapter = exerciseAdapter
         }
     }
+
 
     private fun showNewExerciseDialog() {
 
@@ -161,3 +153,4 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         return dbExerciseList
     }
 }
+

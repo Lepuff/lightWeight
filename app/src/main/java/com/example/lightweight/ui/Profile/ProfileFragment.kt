@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import com.example.lightweight.Database
 
 import com.example.lightweight.R
 import com.example.lightweight.ui.login.LoginActivity
@@ -30,7 +31,7 @@ class ProfileFragment : Fragment() {
             FirebaseAuth.getInstance().signOut() //sign out user
             LoginManager.getInstance().logOut()
             AccessToken.setCurrentAccessToken(null)
-            startActivity(Intent(context, LoginActivity::class.java))
+            startActivity(Intent(activity, LoginActivity::class.java))
         }
 
         return root

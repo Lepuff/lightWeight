@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lightweight.*
 import com.example.lightweight.R
+import com.example.lightweight.classes.User
 import com.example.lightweight.ui.NavigationActivity
 import com.example.lightweight.ui.Register.RegisterActivity
 import com.facebook.*
@@ -67,20 +68,30 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    public override fun onStart() {
+    override fun onStart() {
         super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        val accessToken = AccessToken.getCurrentAccessToken()
-        val isLoggedIn: Boolean = accessToken != null && !accessToken.isExpired
-        updateUI(currentUser)
-        updateUI(isLoggedIn)
-
+        if (isAlreadyLoggedIn()){
+            startActivity(Intent(this, NavigationActivity::class.java))
+            finish()
+        }
 
     }
 
-    private fun updateUI(currentUser: FirebaseUser?) {
+    private fun isAlreadyLoggedIn(): Boolean{
+        val accessToken = AccessToken.getCurrentAccessToken()
+        if (accessToken != null && !accessToken.isExpired){
+            Database.updateUserData(accessToken)
+            return true
+        } else if (auth.currentUser != null){
+            Database.user.email = auth.currentUser!!.email
+            return true
+        }else
+            return false
+    }
+
+    /*private fun updateUI(currentUser: FirebaseUser?) {  //TODO REMOVE AFTER TESTING
         if (currentUser != null) {
+            Database.user.email = auth.currentUser!!.email
             startActivity(Intent(this, NavigationActivity::class.java))
             finish()
         }
@@ -93,7 +104,7 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
         return
-    }
+    }*/
 
     private fun passwordSignIn() {
         textInputEmail = findViewById(R.id.emailLogin_editText)
@@ -127,7 +138,10 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
-                    updateUI(user)
+
+                    // add email to Database.user.email
+                    Database.user.email = email
+                    startActivity(Intent(this, NavigationActivity::class.java))
                     progressBar.visibility = View.INVISIBLE
                 } else {
                     // If sign in fails, display a message to the user.
@@ -135,7 +149,6 @@ class LoginActivity : AppCompatActivity() {
                         baseContext, getString(R.string.login_failed),
                         Toast.LENGTH_SHORT
                     ).show()
-                    updateUI(null)
                     progressBar.visibility = View.INVISIBLE
                 }
 

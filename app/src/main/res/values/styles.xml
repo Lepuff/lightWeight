@@ -1,11 +1,13 @@
 <resources>
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:alertDialogStyle">@style/DialogStyle</item>
         <item name="colorPrimary">@color/background_item</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
 
+    </style>
 
 
     <style name="ErrorText" parent="TextAppearance.AppCompat">
@@ -17,6 +19,7 @@
         <item name="android:textColor">@color/text_item</item>
         <item name="android:textSize">14sp</item>
     </style>
+
     <style name="TextInputLayoutAppearance" parent="Widget.Design.TextInputLayout">
         <!-- reference our hint & error styles -->
         <item name="hintTextAppearance">@style/HintText</item>
@@ -28,4 +31,31 @@
         <item name="colorControlHighlight">@color/text_item</item>
 
     </style>
+
+
+    <style name="SetdartDialog">
+        <item name="android:background">@color/sd_blue</item> <!-- MUST HAVE with white bg-->
+        <!--<item name="android:windowBackground">@color/sd_blue</item> -->
+        <!--<item name="android:windowBackground">@color/transparent</item> needed with white bg ? -->
+        <item name="android:windowFrame">@color/transparent</item><!-- not sure what this changes-->
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@color/transparent</item>
+        <item name="android:windowTitleStyle">@style/setwindowTitleStyle</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <!--<item name="android:colorBackgroundCacheHint">@android:color/white</item>-->
+    </style>
+    <style name="setwindowTitleStyle">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@color/sd_blue</item>
+    </style>
+
+
+
+
 </resources>

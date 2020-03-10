@@ -1,10 +1,12 @@
 package com.example.lightweight.ui.newWorkout.gym
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -46,10 +48,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         var i = 1
         val addExerciseButton = findViewById<Button>(R.id.new_gym_add_exercise_button)
         addExerciseButton.setOnClickListener {
-            exerciseName = "Test $i" //todo remove
-            exerciseAdapter.addExercise(exerciseName)
-            i++
-
+            showNewExerciseDialog()
         }
 
         val saveWorkoutButton = findViewById<Button>(R.id.new_gym_save_workout_button)
@@ -121,10 +120,10 @@ class NewGymWorkoutActivity : AppCompatActivity() {
             }
 
 
-
         }
 
     }
+
     private fun initRecyclerView() {
         exercise_recycle_view.apply {
             layoutManager = LinearLayoutManager(this.context)
@@ -135,5 +134,33 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                 ExerciseAdapter(this)
             adapter = exerciseAdapter
         }
+    }
+
+    private fun showNewExerciseDialog() {
+
+        val dialogExerciseList: MutableList<CharSequence> = ArrayList()
+
+        //todo Samuel lägg in de olika övningarna här med !
+        dialogExerciseList.add("Bench press")
+        dialogExerciseList.add("Squat")
+        dialogExerciseList.add("Dead lift")
+
+
+        val builder = AlertDialog.Builder(this,R.style.DialogStyle)
+        builder.setTitle("Choose a new Exercise") //todo string res
+
+
+        builder.setItems(dialogExerciseList.toTypedArray(),DialogInterface.OnClickListener {
+            dialog, which ->
+
+            exerciseAdapter.addExercise(dialogExerciseList[which].toString())
+            
+        })
+        val dialog = builder.create()
+
+        dialog.show()
+
+
+
     }
 }

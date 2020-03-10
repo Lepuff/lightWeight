@@ -42,7 +42,7 @@ class EditGymWorkoutActivity : AppCompatActivity() {
                 LayoutInflater.from(this).inflate(R.layout.dialog_save_workout, null)
             val saveButton = dialogView.findViewById<Button>(R.id.save_workout_save_button)
             val currentDate = LocalDate.now().toString()
-            dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
+            dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
                 .setText(currentDate)
 
             val dialogBuilder = AlertDialog.Builder(this)
@@ -54,11 +54,11 @@ class EditGymWorkoutActivity : AppCompatActivity() {
 
                 viewModel.getExerciseList()
                 val workoutTitle =
-                    dialogView.findViewById<TextInputEditText>(R.id.new_workout_name_editText)
+                    dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText)
                         .text
 
                 val workoutDate =
-                    dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
+                    dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
                         .text
 
                 //TODO en yttre for loop som går igenom size (alla exercises)

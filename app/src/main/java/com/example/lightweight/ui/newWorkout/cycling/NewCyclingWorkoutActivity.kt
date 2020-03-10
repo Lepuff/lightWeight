@@ -36,7 +36,7 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
             LayoutInflater.from(this).inflate(R.layout.dialog_save_workout, null)
         val saveButton = dialogView.findViewById<Button>(R.id.save_workout_save_button)
         val currentDate = getCurrentDate()
-        dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
+        dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
             .setText(currentDate)
         val dialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)
@@ -68,11 +68,11 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
         var maxCadence = findViewById<TextInputEditText>(R.id.new_cycling_max_cadence_editText).text
         var calories = findViewById<TextInputEditText>(R.id.new_cycling_calories_editText).text
         val workoutTitle =
-            dialogView.findViewById<TextInputEditText>(R.id.new_workout_name_editText)
+            dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText)
                 .text
 
         val workoutDate =
-            dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
+            dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
                 .text
 
         //TODO spara allt där typ

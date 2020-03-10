@@ -25,10 +25,10 @@ class EditGymWorkoutActivity : AppCompatActivity() {
         setContentView(R.layout.activity_new_gym_workout)
         viewModel = ViewModelProviders.of(this).get(ViewEditGymWorkoutViewModel::class.java)
         initRecyclerView()
-        viewModel.init()
-        viewModel.getExerciseList().observe(this,
+
+        viewModel.exerciseList.observe(this,
             Observer<MutableList<Exercise>> { exerciseAdapter.notifyDataSetChanged() })
-        exerciseAdapter.submitList(viewModel.getExerciseList().value!!)
+        exerciseAdapter.submitList(viewModel.exerciseList.value!!)
 
         val addExerciseButton = findViewById<Button>(R.id.new_gym_add_exercise_button)
         addExerciseButton.setOnClickListener {
@@ -42,7 +42,7 @@ class EditGymWorkoutActivity : AppCompatActivity() {
                 LayoutInflater.from(this).inflate(R.layout.dialog_save_workout, null)
             val saveButton = dialogView.findViewById<Button>(R.id.save_workout_save_button)
             val currentDate = LocalDate.now().toString()
-            dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
+            dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
                 .setText(currentDate)
 
             val dialogBuilder = AlertDialog.Builder(this)
@@ -51,14 +51,12 @@ class EditGymWorkoutActivity : AppCompatActivity() {
 
             saveButton.setOnClickListener {
 
-
-                viewModel.getExerciseList()
                 val workoutTitle =
-                    dialogView.findViewById<TextInputEditText>(R.id.new_workout_name_editText)
+                    dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText)
                         .text
 
                 val workoutDate =
-                    dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
+                    dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
                         .text
 
                 //TODO en yttre for loop som går igenom size (alla exercises)

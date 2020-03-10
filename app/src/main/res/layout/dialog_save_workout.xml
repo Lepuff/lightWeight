@@ -21,7 +21,7 @@
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/new_workout_name_editText"
+                android:id="@+id/save_workout_title_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/new_workout_name"
@@ -35,7 +35,7 @@
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/new_workout_date_editText"
+                android:id="@+id/save_workout_date_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/date"

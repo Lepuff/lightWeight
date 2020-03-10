@@ -16,8 +16,11 @@ class GymWorkout(
 ) : AbstractWorkout(R.drawable.ic_fitness_center_yellow_24dp) {
 
     override fun showWorkout(context: Context) {
+        
+        
         val intent = Intent(context, ViewGymWorkoutActivity::class.java)
         intent.putExtra("workoutTitle", title)
+        intent.putExtra("id",id)
         context.startActivity(intent)
     }
 

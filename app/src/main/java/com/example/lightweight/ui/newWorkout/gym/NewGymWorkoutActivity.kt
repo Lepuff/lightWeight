@@ -1,12 +1,9 @@
 package com.example.lightweight.ui.newWorkout.gym
 
-import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -21,8 +18,10 @@ import com.google.android.gms.tasks.Task
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.SetOptions
+
 
 import kotlinx.android.synthetic.main.activity_new_gym_workout.*
 import java.time.LocalDate
@@ -32,9 +31,8 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
     private lateinit var exerciseAdapter: ExerciseAdapter
     private lateinit var newGymWorkoutViewModel: NewGymWorkoutViewModel
-    private lateinit var exerciseName: String
-    private val db = FirebaseFirestore.getInstance()
 
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +50,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         initRecyclerView()
         exerciseAdapter.submitList(newGymWorkoutViewModel.getExerciseList().value!!)
 
-        
+
         val addExerciseButton = findViewById<Button>(R.id.new_gym_add_exercise_button)
         addExerciseButton.setOnClickListener {
             showNewExerciseDialog()
@@ -64,7 +62,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                 LayoutInflater.from(this).inflate(R.layout.dialog_save_workout, null)
             val saveButton = dialogView.findViewById<Button>(R.id.save_workout_save_button)
             val currentDate = LocalDate.now().toString()
-            dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
+            dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
                 .setText(currentDate)
 
 
@@ -79,11 +77,11 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
                 val exerciseList = newGymWorkoutViewModel.getExerciseList().value!!
                 val workoutTitle =
-                    dialogView.findViewById<TextInputEditText>(R.id.new_workout_name_editText)
+                    dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText)
                         .text
 
                 val workoutDate =
-                    dialogView.findViewById<TextInputEditText>(R.id.new_workout_date_editText)
+                    dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
                         .text
 
 
@@ -133,7 +131,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
     private fun showNewExerciseDialog() {
 
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this,R.style.DialogStyle)
         builder.setTitle("Choose a new Exercise") //todo string res
 
 
@@ -165,10 +163,6 @@ class NewGymWorkoutActivity : AppCompatActivity() {
             db.collection("typeOfExercise")
 
         return listOfExercisesRef.get()
-
-        //dbExerciseList.add(listOfExercisesRef)
-        //todo samuel! GE MIG EXERCISES!!!!!
-        //return dbExerciseList
     }
 }
 

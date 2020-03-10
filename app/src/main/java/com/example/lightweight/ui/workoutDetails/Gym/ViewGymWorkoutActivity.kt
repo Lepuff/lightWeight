@@ -21,13 +21,15 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gym_workout_details)
-
+        val id = intent.getStringExtra("id") //todo samme , detta är id i string.
+        val workoutTitle = intent.getStringExtra("workoutTitle")
+        title = workoutTitle
         viewModel = ViewModelProviders.of(this).get(ViewEditGymWorkoutViewModel::class.java)
-        viewModel.init()
-        viewModel.getExerciseList().observe(this,
+        viewModel.exerciseList.observe(this,
             Observer<MutableList<Exercise>> { exerciseAdapter.notifyDataSetChanged() })
         initRecyclerView()
-        exerciseAdapter.submitList(viewModel.getExerciseList().value!!)
+        exerciseAdapter.submitList(viewModel.exerciseList.value!!)
+         // todo    ge mig en lista på detta sätt viewModel.exerciseList.value =
 
 
         val editButton : Button = findViewById(R.id.gym_details_edit_button)

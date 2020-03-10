@@ -57,4 +57,12 @@
     <string name="title_feed">Flöde</string>
     <string name="title_analytics">Analys</string>
     <string name="add_exercise">Övning</string>
+    <string name="profile_name">Namn:</string>
+    <string name="profile_age">Ålder:</string>
+    <string name="profile_email">Email:</string>
+    <string name="profile_information">Profil information</string>
+    <string name="new_password">Nytt Lösenord</string>
+    <string name="confirm_password">Bekräfta Lösenord</string>
+    <string name="save_password">Spara lösenord</string>
+    <string name="save">Spara</string>
 </resources>

@@ -29,9 +29,8 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
     private lateinit var exerciseAdapter: ExerciseAdapter
     private lateinit var newGymWorkoutViewModel: NewGymWorkoutViewModel
-    private lateinit var exerciseName: String
-    private val db = FirebaseFirestore.getInstance()
 
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +48,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         initRecyclerView()
         exerciseAdapter.submitList(newGymWorkoutViewModel.getExerciseList().value!!)
 
-        
+
         val addExerciseButton = findViewById<Button>(R.id.new_gym_add_exercise_button)
         addExerciseButton.setOnClickListener {
             showNewExerciseDialog()
@@ -129,7 +128,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
     private fun showNewExerciseDialog() {
 
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this,R.style.DialogStyle)
         builder.setTitle("Choose a new Exercise") //todo string res
 
 
@@ -148,7 +147,6 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
     }
     private fun getExercisesFromDb(): MutableList<String>{
-
         val dbExerciseList : MutableList<String> = ArrayList()
         dbExerciseList.add("BÄNKA MIG!!!!")
         //todo samuel! GE MIG EXERCISES!!!!!

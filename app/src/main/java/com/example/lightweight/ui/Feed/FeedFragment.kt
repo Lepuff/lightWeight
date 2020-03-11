@@ -26,7 +26,6 @@ import kotlin.collections.ArrayList
 
 class FeedFragment : Fragment() {
 
-    private  val workoutList : MutableList<AbstractWorkout> = ArrayList()
     private lateinit var feedViewModel: FeedViewModel
     private lateinit var workOutAdapter: WorkOutAdapter
     private var db = FirebaseFirestore.getInstance()
@@ -78,8 +77,13 @@ class FeedFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
-        feedViewModel.clear()
+
         addWorkoutToFeed()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        feedViewModel.clear()
     }
     
     private fun addWorkoutToFeed() {

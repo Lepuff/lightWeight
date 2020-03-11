@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     android:background="@color/background_item">
 
-
     <LinearLayout
         android:id="@+id/save_workout_linear_layout"
         android:layout_width="match_parent"

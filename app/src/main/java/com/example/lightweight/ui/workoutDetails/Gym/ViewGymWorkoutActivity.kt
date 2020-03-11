@@ -12,7 +12,7 @@ import com.example.lightweight.Database
 import com.example.lightweight.R
 import com.example.lightweight.adapters.ViewExerciseAdapter
 import com.example.lightweight.classes.Exercise
-import com.example.lightweight.classes.GymWorkoutDataClass
+import com.example.lightweight.classes.Sets
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_gym_workout_details.*
@@ -36,19 +36,34 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
         exerciseAdapter.submitList(viewModel.exerciseList.value!!)
 
         Log.d("Test after intent", id!!.toString())
-        var currentGymWorkoutRef = db.collection("users")
+        val currentGymWorkoutRef = db.collection("users")
             .document(Database.user.email!!).collection("workouts").document(id)
 
-        val list : MutableList<Exercise> = ArrayList()
+        val exerciseList: MutableList<Exercise> = ArrayList()
         currentGymWorkoutRef.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
-
-                    Log.d("oskarTest", "DocumentSnapshot data: ${document.data}")
+                    val tempExerciseList = document["exercises"] as ArrayList<*>
+                    for (exercise in tempExerciseList) {
+                        val currentExercise = exercise as HashMap<*, *>
+                        val sets = currentExercise["sets"] as ArrayList<*>
+                        val tempExercise = Exercise(currentExercise["name"].toString())
+                        for (set in sets) {
+                            val currentSet = set as HashMap<*, *>
+                            val tempSet = Sets()
+                            tempSet.weight = currentSet["weight"].toString()
+                            tempSet.reps = currentSet["reps"].toString()
+                            tempExercise.sets.add(tempSet)
+                        }
+                        exerciseList.add(tempExercise)
+                    }
+                    Log.d("view gym workout tempList :", tempExerciseList.toString())
+                    exerciseAdapter.submitList(exerciseList)
+                    exerciseAdapter.notifyDataSetChanged()
 
 
                 } else {
-                    Log.d("oskarTest", "No such document")
+                    Log.d("view gym workout document query:", "No such document")
                 }
             }
 

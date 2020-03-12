@@ -2,9 +2,6 @@ package com.example.lightweight.classes
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import kotlin.properties.Delegates
-import kotlin.properties.ObservableProperty
-
 
 data class User(
 

@@ -1,6 +1,7 @@
 package com.example.lightweight.ui.Feed
 
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_show_cycling_activity.*
 import kotlinx.android.synthetic.main.fragment_feed.*
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.runBlocking
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -77,17 +80,40 @@ class FeedFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
-
         addWorkoutToFeed()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        //await(Database.user.email != null)
+        workOutAdapter.submitList(workoutList)
+        workOutAdapter.notifyDataSetChanged()
+
+        //TODO borde finnas bättre lösning
+        when (Database.user.email){
+            null -> null
+            else -> addWorkoutToFeed()
+        }
+
     }
 
     override fun onPause() {
         super.onPause()
         feedViewModel.clear()
     }
-    
+
+
+
+
+
+ 
+
     private fun addWorkoutToFeed() {
+        val workoutsRef = db.collection("users").document(Database.user.email!!)
+            .collection("workouts")
+
         workoutsRef.orderBy("workoutDate", Query.Direction.DESCENDING).get().addOnSuccessListener { workouts ->
+
             if (workouts != null) {
                 for (workout in workouts) {
                     val id = workout.id

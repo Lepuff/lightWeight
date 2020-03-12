@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -70,6 +71,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                 .setView(dialogView)
 
 
+
             val dialog = dialogBuilder.show()
 
             saveButton.setOnClickListener {
@@ -114,6 +116,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         //TODO workoutsRef.addSnapshotListener
+        //TODO findViewById<EditText>(R.id.sets_weight_editText).requestFocus()
     }
 
     private fun initRecyclerView() {
@@ -125,6 +128,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
             exerciseAdapter =
                 ExerciseAdapter(this)
             adapter = exerciseAdapter
+
         }
     }
 

@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
 import java.net.URL
+import java.util.*
 
 
 class LoginActivity : AppCompatActivity() {
@@ -93,8 +94,10 @@ class LoginActivity : AppCompatActivity() {
         textInputEmail = findViewById(R.id.emailLogin_editText)
         textInputPassword = findViewById(R.id.passwordLogin_editText)
 
-        email = textInputEmail.text.toString().trim()
-        password = textInputPassword.text.toString().trim()
+        val s: String = "AbC"
+
+        email = textInputEmail.text.toString().trim().toLowerCase(Locale.ROOT)
+        password = textInputPassword.text.toString().trim().toLowerCase(Locale.ROOT)
 
         if (!Validation.isValidEmail(email)) {
             if (Validation.isFieldEmpty(email)) {

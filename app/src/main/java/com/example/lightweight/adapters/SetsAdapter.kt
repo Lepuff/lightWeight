@@ -63,7 +63,7 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
         RecyclerView.ViewHolder(itemView) {
         private var selectedSet: Sets? = null
         private val adapter = recyclerView.adapter as SetsAdapter
-
+        
         private val setNumber: TextView = itemView.sets_number_textView
         private val setWeight: EditText = itemView.sets_weight_editText.apply {
             addTextChangedListener(object : TextWatcher {

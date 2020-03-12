@@ -18,6 +18,7 @@ import com.example.lightweight.ui.login.LoginActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_register.*
+import java.util.*
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -55,10 +56,10 @@ class RegisterActivity : AppCompatActivity() {
         textInputFirstName = findViewById(R.id.firstNameRegister_editText)
         textInputLastName = findViewById(R.id.lastNameRegister_editText)
 
-        val email = textInputEmail.text.toString().trim()
+        val email = textInputEmail.text.toString().trim().toLowerCase(Locale.ROOT)
         val password = textInputPassword.text.toString().trim()
-        val firstName = textInputFirstName.text.toString().trim()
-        val lastName = textInputLastName.text.toString().trim()
+        val firstName = textInputFirstName.text.toString()
+        val lastName = textInputLastName.text.toString()
 
 
         if (Validation.isFieldEmpty(firstName)){
@@ -112,10 +113,6 @@ class RegisterActivity : AppCompatActivity() {
                     progressBar.visibility = View.INVISIBLE
                     finish()
                 } else {
-                    /*Toast.makeText(
-                        baseContext, getString(R.string.sign_up_failed),
-                        Toast.LENGTH_SHORT
-                    ).show()*/
                     Log.d("TAG", "createUserWithEmail:failure", task.exception)
                     Toast.makeText(
                         baseContext, getString(R.string.authentication_failed), //TODO set message to $exception

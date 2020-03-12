@@ -3,6 +3,7 @@ package com.example.lightweight.classes
 import android.content.Context
 import android.content.Intent
 import android.text.Editable
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.lightweight.Database
 import com.example.lightweight.R
@@ -17,7 +18,7 @@ class GymWorkout(
 
     override fun showWorkout(context: Context) {
         
-        
+        Log.d("Test before intent",id)
         val intent = Intent(context, ViewGymWorkoutActivity::class.java)
         intent.putExtra("workoutTitle", title)
         intent.putExtra("id",id)

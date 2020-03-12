@@ -25,11 +25,12 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
         workouts = workOutList
     }
 
-    fun addWorkout(workOut: AbstractWorkout){
+    fun addWorkout(workOut: AbstractWorkout) {
         workouts.add(workOut)
-        this.notifyItemInserted(workouts.size-1)
+        this.notifyItemInserted(workouts.size - 1)
     }
-    fun removeWorkout(position: Int){
+
+    fun removeWorkout(position: Int) {
         workouts.removeAt(position)
         this.notifyDataSetChanged()
     }
@@ -47,13 +48,13 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
     }
 
 
-    class WorkOutViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
-        private var selectedWorkout : AbstractWorkout? = null
+    class WorkOutViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
+        private var selectedWorkout: AbstractWorkout? = null
 
         init {
             itemView.setOnClickListener(this)
         }
-
 
 
         private val workoutImage: CircleImageView = itemView.workout_image

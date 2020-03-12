@@ -16,6 +16,7 @@ import com.example.lightweight.adapters.WorkOutAdapter
 import com.example.lightweight.classes.*
 import com.facebook.internal.Mutable
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_show_cycling_activity.*
@@ -25,10 +26,11 @@ import kotlin.collections.ArrayList
 
 class FeedFragment : Fragment() {
 
-    private lateinit var workoutList : MutableList<AbstractWorkout>
     private lateinit var feedViewModel: FeedViewModel
     private lateinit var workOutAdapter: WorkOutAdapter
     private var db = FirebaseFirestore.getInstance()
+    private var workoutsRef = db.collection("users").document(Database.user.email!!)
+        .collection("workouts")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,37 +72,25 @@ class FeedFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initRecyclerView()
-        workoutList = ArrayList()
+        workOutAdapter.submitList(feedViewModel.workoutList.value!!)
 
     }
+    override fun onResume() {
+        super.onResume()
 
-    override fun onStart() {
-        super.onStart()
-        workOutAdapter.submitList(workoutList)
-        workOutAdapter.notifyDataSetChanged()
         addWorkoutToFeed()
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
+        feedViewModel.clear()
     }
-
-    private enum class WorkoutType {
-        gymWorkout,
-        runningWorkout,
-        cyclingWorkout
-    }
-
+    
     private fun addWorkoutToFeed() {
-
-
-        val workoutsRef = db.collection("users").document(Database.user.email!!)
-            .collection("workouts")
-
-        workoutsRef.orderBy("workoutDate", Query.Direction.DESCENDING).limit(10).get().addOnSuccessListener { workouts ->
+        workoutsRef.orderBy("workoutDate", Query.Direction.DESCENDING).get().addOnSuccessListener { workouts ->
             if (workouts != null) {
                 for (workout in workouts) {
-                    val id = workoutsRef.id
+                    val id = workout.id
                     val type = workout["typeOfWorkout"].toString()
                     val date = workout["workoutDate"].toString()
                     val title = workout["workoutTitle"].toString()
@@ -112,6 +102,5 @@ class FeedFragment : Fragment() {
                 }
             }
         }
-
     }
 }

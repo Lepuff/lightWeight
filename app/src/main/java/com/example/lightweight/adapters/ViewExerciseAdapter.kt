@@ -23,6 +23,7 @@ class ViewExerciseAdapter() :
 
     fun submitList(workOutList: MutableList<Exercise>) {
         exercises = workOutList
+
     }
 
     override fun getItemCount(): Int {

@@ -143,7 +143,6 @@ class NewGymWorkoutActivity : AppCompatActivity() {
              }
              builder.setItems(typeOfExerciseList.toTypedArray()) {
                      dialog, which ->
-
                  exerciseAdapter.addExercise(typeOfExerciseList[which])
 
              }
@@ -157,11 +156,8 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
     }
     private fun getExercisesFromDb(): Task<QuerySnapshot> {
-
-        val dbExerciseList : MutableList<String> = ArrayList()
         val listOfExercisesRef =
             db.collection("typeOfExercise")
-
         return listOfExercisesRef.get()
     }
 }

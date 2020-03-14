@@ -50,9 +50,8 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
 
     private fun saveRunningWorkout(dialogView: View) {
 
-        val date = dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
-        val title = dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText)
-
+        val date = dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText).text.toString()
+        val title = dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText).text.toString()
         val currentRunningWorkoutRef = db.collection("users")
             .document(Database.user.email!!).collection("workouts").document()
 

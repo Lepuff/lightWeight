@@ -18,6 +18,36 @@ object Database {
     var user: User = User(true, null, null, null)
 
 
+    const val WORKOUTS = "workouts"
+    const val USERS = "users"
+    const val TYPEOFEXERCISE = "typeOfExercise"
+    const val EXERCISES = "exercises"
+
+
+
+    const val averagePulse = "averagePulse"
+    const val averageSpeed = "averageSpeed"
+    const val calories = "calories"
+    const val distance = "distance"
+
+    const val maxPulse = "maxPulse"
+
+    const val timestamp = "timestamp"
+
+    const val topSpeed = "topSpeed"
+
+    const val totalTime = "totalTime"
+
+    const val typeOfWorkout = "typeOfWorkout"
+
+    const val workoutDate = "workoutDate"
+
+    const val workoutTitle = "workoutTitle"
+
+
+
+
+
 
     fun getUserEmail(): String? {
         return user.email

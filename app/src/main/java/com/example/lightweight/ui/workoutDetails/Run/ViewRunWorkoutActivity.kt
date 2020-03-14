@@ -26,12 +26,7 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         val id = intent.getStringExtra("id")
         viewModel = ViewModelProviders.of(this).get(RunViewModel::class.java)
         setObservers()
-
-
-
         getRunningInfoFromDb(id!!)
-
-
 
 
 
@@ -48,7 +43,7 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
             saveRunningDialog()
         }
-        
+
     }
 
 
@@ -70,20 +65,61 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
 
         val dialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)
+
+
+        dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText).setText(viewModel.title.value)
+        dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText).setText(viewModel.date.value)
         val dialog = dialogBuilder.show()
 
-        saveButton.setOnClickListener {
 
+
+        saveButton.setOnClickListener {
+            saveRunningWorkout(dialogView)
             dialog.cancel()
             finish()
             findViewById<Button>(R.id.new_running_edit_button).visibility = View.VISIBLE
             findViewById<Button>(R.id.new_running_save_button).visibility = View.GONE
         }
-
     }
 
-    private fun saveRunningWorkout() {
+    private fun saveRunningWorkout(dialogView: View) {
+        val currentRunWorkoutRef = db.collection(Database.USERS)
+            .document(Database.user.email!!).collection(Database.WORKOUTS).document(intent.getStringExtra("id")!!)//todo fix constants
+        currentRunWorkoutRef.update(
+            Database.averagePulse,
+            findViewById<TextInputEditText>(R.id.new_running_average_pulse_editText).text.toString()
+        )
+        currentRunWorkoutRef.update(
+            Database.distance,
+            findViewById<TextInputEditText>(R.id.new_running_distance_editText).text.toString()
+        )
+        currentRunWorkoutRef.update(
+            Database.totalTime,
+            findViewById<TextInputEditText>(R.id.new_running_total_time_editText).text.toString()
+        )
+        currentRunWorkoutRef.update(
+            Database.averageSpeed,
+            findViewById<TextInputEditText>(R.id.new_running_average_speed_editText).text.toString()
+        )
+        currentRunWorkoutRef.update(
+            Database.topSpeed,
+            findViewById<TextInputEditText>(R.id.new_running_top_speed_editText).text.toString()
+        )
+        currentRunWorkoutRef.update(
+            Database.averagePulse,
+            findViewById<TextInputEditText>(R.id.new_running_average_pulse_editText).text.toString()
+        )
+        currentRunWorkoutRef.update(
+            Database.maxPulse,
+            findViewById<TextInputEditText>(R.id.new_running_max_pulse_editText).text.toString()
+        )
+        currentRunWorkoutRef.update(
+            Database.calories,
+            findViewById<TextInputEditText>(R.id.new_running_calories_editText).text.toString()
+        )
 
+        currentRunWorkoutRef.update(Database.workoutTitle, dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText).text.toString())
+        currentRunWorkoutRef.update(Database.workoutDate , dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText).text.toString())
     }
 
 
@@ -101,23 +137,21 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
                 viewModel.maxPulse.value = document["maxPulse"].toString().toInt()
                 viewModel.topSpeed.value = document["topSpeed"].toString().toFloat()
                 viewModel.totalTime.value = document["totalTime"].toString().toFloat()
-                Log.d("title test value", viewModel.title.value.toString())
 
             } else {
                 Log.d("view run workout document query:", "No such document")
 
             }
         }
-
-
     }
-
 
 
     private fun setObservers() {
 
         viewModel.averagePulse.observe(this, Observer {
-            findViewById<TextInputEditText>(R.id.new_running_average_pulse_editText).setText(viewModel.averagePulse.value.toString())
+            findViewById<TextInputEditText>(R.id.new_running_average_pulse_editText).setText(
+                viewModel.averagePulse.value.toString()
+            )
         })
 
         viewModel.distance.observe(this, Observer {
@@ -128,10 +162,12 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
             findViewById<TextInputEditText>(R.id.new_running_total_time_editText).setText(viewModel.totalTime.value.toString())
         })
         viewModel.averageSpeed.observe(this, Observer {
-            findViewById<TextInputEditText>(R.id.new_running_average_speed_editText).setText(viewModel.averageSpeed.value.toString())
+            findViewById<TextInputEditText>(R.id.new_running_average_speed_editText).setText(
+                viewModel.averageSpeed.value.toString()
+            )
         })
 
-        viewModel.topSpeed.observe(this , Observer {
+        viewModel.topSpeed.observe(this, Observer {
             findViewById<TextInputEditText>(R.id.new_running_top_speed_editText).setText(viewModel.topSpeed.value.toString())
         })
 

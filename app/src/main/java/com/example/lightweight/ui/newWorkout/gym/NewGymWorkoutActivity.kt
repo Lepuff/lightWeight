@@ -84,7 +84,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                         .text
 
 
-                var currentGymWorkoutRef = db.collection("users")
+                val currentGymWorkoutRef = db.collection("users")
                     .document(Database.user.email!!).collection("workouts").document()
 
 
@@ -143,7 +143,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                  typeOfExerciseList.add(typeOfExercise["name"].toString())
              }
              builder.setItems(typeOfExerciseList.toTypedArray()) {
-                     dialog, which ->
+                     _, which ->
                  exerciseAdapter.addExercise(typeOfExerciseList[which])
 
              }

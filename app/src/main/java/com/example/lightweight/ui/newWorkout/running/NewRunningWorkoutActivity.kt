@@ -65,8 +65,8 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
             "calories" to findViewById<TextInputEditText>(R.id.new_running_calories_editText).text.toString(),
             "timestamp" to FieldValue.serverTimestamp(),
             "typeOfWorkout" to "runningWorkout",
-            "workoutTitle" to title.toString(),
-            "workoutDate" to date.toString()
+            "workoutTitle" to title,
+            "workoutDate" to date
         )
         currentRunningWorkoutRef.set(workoutInfo)
 

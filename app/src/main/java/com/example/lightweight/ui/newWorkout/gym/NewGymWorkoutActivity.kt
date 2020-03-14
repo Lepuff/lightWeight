@@ -161,5 +161,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
             db.collection("typeOfExercise")
         return listOfExercisesRef.get()
     }
+
+
 }
 

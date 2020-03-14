@@ -67,8 +67,10 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
             .setView(dialogView)
 
 
-        dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText).setText(viewModel.title.value)
-        dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText).setText(viewModel.date.value)
+        dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText)
+            .setText(viewModel.title.value)
+        dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
+            .setText(viewModel.date.value)
         val dialog = dialogBuilder.show()
 
 
@@ -84,7 +86,8 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
 
     private fun saveRunningWorkout(dialogView: View) {
         val currentRunWorkoutRef = db.collection(Database.USERS)
-            .document(Database.user.email!!).collection(Database.WORKOUTS).document(intent.getStringExtra("id")!!)//todo fix constants
+            .document(Database.user.email!!).collection(Database.WORKOUTS)
+            .document(intent.getStringExtra("id")!!)//todo fix constants
         currentRunWorkoutRef.update(
             Database.averagePulse,
             findViewById<TextInputEditText>(R.id.new_running_average_pulse_editText).text.toString()
@@ -118,8 +121,14 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
             findViewById<TextInputEditText>(R.id.new_running_calories_editText).text.toString()
         )
 
-        currentRunWorkoutRef.update(Database.workoutTitle, dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText).text.toString())
-        currentRunWorkoutRef.update(Database.workoutDate , dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText).text.toString())
+        currentRunWorkoutRef.update(
+            Database.workoutTitle,
+            dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText).text.toString()
+        )
+        currentRunWorkoutRef.update(
+            Database.workoutDate,
+            dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText).text.toString()
+        )
     }
 
 
@@ -129,7 +138,7 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         currentRunWorkoutRef.get().addOnSuccessListener { document ->
             if (document != null) {
                 viewModel.title.value = document["workoutTitle"].toString()
-                viewModel.date.value = document["workoutDate"].toString()
+                viewModel.date.value = document["workoutDate"].toString() //todo fix constants
                 viewModel.averagePulse.value = document["averagePulse"].toString().toInt()
                 viewModel.averageSpeed.value = document["averageSpeed"].toString().toFloat()
                 viewModel.calories.value = document["calories"].toString().toInt()
@@ -161,6 +170,7 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         viewModel.totalTime.observe(this, Observer {
             findViewById<TextInputEditText>(R.id.new_running_total_time_editText).setText(viewModel.totalTime.value.toString())
         })
+
         viewModel.averageSpeed.observe(this, Observer {
             findViewById<TextInputEditText>(R.id.new_running_average_speed_editText).setText(
                 viewModel.averageSpeed.value.toString()
@@ -183,6 +193,4 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
             title = viewModel.title.value
         })
     }
-
-
 }

@@ -70,12 +70,9 @@ class NewGymWorkoutActivity : AppCompatActivity() {
             val dialogBuilder = AlertDialog.Builder(this)
                 .setView(dialogView)
 
-
-
             val dialog = dialogBuilder.show()
 
             saveButton.setOnClickListener {
-
 
                 val exerciseList = newGymWorkoutViewModel.getExerciseList().value!!
                 val workoutTitle =

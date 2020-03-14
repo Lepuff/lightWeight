@@ -80,16 +80,17 @@ class FeedFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
+        addWorkoutToFeed()
 
     }
 
     override fun onStart() {
         super.onStart()
         //TODO borde finnas bättre lösning
-        when (Database.user.email){
+   /*     when (Database.user.email){
             null -> null
             else -> addWorkoutToFeed()
-        }
+        }*/
 
     }
 
@@ -105,9 +106,6 @@ class FeedFragment : Fragment() {
  
 
     private fun addWorkoutToFeed() {
-        val workoutsRef = db.collection("users").document(Database.user.email!!)
-            .collection("workouts")
-
         workoutsRef.orderBy("workoutDate", Query.Direction.DESCENDING).get().addOnSuccessListener { workouts ->
 
             if (workouts != null) {

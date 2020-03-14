@@ -21,10 +21,19 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_running_workout)
+
+
+        val test =
+            findViewById<Button>(R.id.new_running_save_button).setOnClickListener {
+                saveRunningDialog()
+            }
+
+
+
+
+
+
     }
-
-
-    private fun getCurrentDate() = LocalDate.now().toString()
     private fun saveRunningDialog() {
         val dialogView =
             LayoutInflater.from(this).inflate(R.layout.dialog_save_workout, null)
@@ -35,17 +44,15 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
         val dialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)
         val dialog = dialogBuilder.show()
+
+
         saveButton.setOnClickListener {
-
-
             saveRunningWorkout(dialogView)
             dialog.cancel()
             finish()
         }
 
     }
-
-
     private fun saveRunningWorkout(dialogView: View) {
 
         val runningWorkoutList: MutableList<String> = ArrayList()
@@ -54,17 +61,20 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
         val title = dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText)
 
 
-        val distance = findViewById<TextInputEditText>(R.id.new_running_distance_editText).text.toString()
-        val totalTime = findViewById<TextInputEditText>(R.id.new_cycling_total_time_editText).text.toString()
+        val distance =
+            findViewById<TextInputEditText>(R.id.new_running_distance_editText).text.toString()
+        val totalTime =
+            findViewById<TextInputEditText>(R.id.new_cycling_total_time_editText).text.toString()
         val averageSpeed =
             findViewById<TextInputEditText>(R.id.new_running_average_speed_editText).text.toString()
-        val topSpeed = findViewById<TextInputEditText>(R.id.new_running_top_speed_edittext).text.toString()
-        val averagePulse = findViewById<TextInputEditText>(R.id.new_running_average_pulse_editText).text.toString()
-        val maxPulse = findViewById<TextInputEditText>(R.id.new_running_max_pulse_editText).text.toString()
-        val averageForce = findViewById<TextInputEditText>(R.id.new_running_average_force_editText).text.toString()
-        val maxForce = findViewById<TextInputEditText>(R.id.new_running_max_force_editText).text.toString()
-        val calories = findViewById<TextInputEditText>(R.id.new_running_calories_editText).text.toString()
-
+        val topSpeed =
+            findViewById<TextInputEditText>(R.id.new_running_top_speed_edittext).text.toString()
+        val averagePulse =
+            findViewById<TextInputEditText>(R.id.new_running_average_pulse_editText).text.toString()
+        val maxPulse =
+            findViewById<TextInputEditText>(R.id.new_running_max_pulse_editText).text.toString()
+        val calories =
+            findViewById<TextInputEditText>(R.id.new_running_calories_editText).text.toString()
         val currentRunningWorkoutRef = db.collection("users")
             .document(Database.user.email!!).collection("workouts").document()
 
@@ -74,8 +84,6 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
         runningWorkoutList.add(averageSpeed)
         runningWorkoutList.add(maxPulse)
         runningWorkoutList.add(averagePulse)
-        runningWorkoutList.add(maxForce)
-        runningWorkoutList.add(averageForce)
         runningWorkoutList.add(calories)
 
         val workoutInfo = hashMapOf(
@@ -91,5 +99,8 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
 
 
     }
+    fun getCurrentDate() = LocalDate.now().toString()
+
+
 }
 

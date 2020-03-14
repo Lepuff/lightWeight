@@ -80,7 +80,7 @@ class FeedFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
-        addWorkoutToFeed()
+
     }
 
     override fun onStart() {

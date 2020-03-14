@@ -85,10 +85,6 @@ class FeedFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        //await(Database.user.email != null)
-        workOutAdapter.submitList(workoutList)
-        workOutAdapter.notifyDataSetChanged()
-
         //TODO borde finnas bättre lösning
         when (Database.user.email){
             null -> null

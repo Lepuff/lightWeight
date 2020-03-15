@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.newWorkout.running
+package com.example.lightweight.ui.workouts.running
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

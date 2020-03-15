@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.newWorkout.cycling
+package com.example.lightweight.ui.workouts.cycling
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,14 +16,14 @@ import java.time.LocalDate
 
 class NewCyclingWorkoutActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: NewCyclingWorkoutViewModel
+    private lateinit var viewModel: CyclingViewModel
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cycling_workout)
 
-        viewModel = ViewModelProviders.of(this).get(NewCyclingWorkoutViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(CyclingViewModel::class.java)
         val saveButton: Button = findViewById(R.id.cycling_save_button)
 
         findViewById<TextInputEditText>(R.id.cycling_total_time_editText).requestFocus()
@@ -58,21 +58,26 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
     private fun saveCyclingWorkout(dialogView: View) {
 
 
-
-        var averageSpeed =
+        val averageSpeed =
             findViewById<TextInputEditText>(R.id.cycling_average_speed_editText).text.toString()
-        var topSpeed = findViewById<TextInputEditText>(R.id.cycling_top_speed_editText).text.toString()
-        var totalTime = findViewById<TextInputEditText>(R.id.cycling_total_time_editText).text.toString()
-        var averagePulse =
+        val topSpeed =
+            findViewById<TextInputEditText>(R.id.cycling_top_speed_editText).text.toString()
+        val totalTime =
+            findViewById<TextInputEditText>(R.id.cycling_total_time_editText).text.toString()
+        val averagePulse =
             findViewById<TextInputEditText>(R.id.cycling_average_pulse_editText).text.toString()
-        var maxPulse = findViewById<TextInputEditText>(R.id.cycling_max_pulse_editText).text.toString()
-        var averageForce =
+        val maxPulse =
+            findViewById<TextInputEditText>(R.id.cycling_max_pulse_editText).text.toString()
+        val averageForce =
             findViewById<TextInputEditText>(R.id.cycling_average_force_editText).text.toString()
-        var maxForce = findViewById<TextInputEditText>(R.id.cycling_max_force_editText).text.toString()
-        var averageCadence =
+        val maxForce =
+            findViewById<TextInputEditText>(R.id.cycling_max_force_editText).text.toString()
+        val averageCadence =
             findViewById<TextInputEditText>(R.id.cycling_average_cadence_editText).text.toString()
-        var maxCadence = findViewById<TextInputEditText>(R.id.cycling_max_cadence_editText).text.toString()
-        var calories = findViewById<TextInputEditText>(R.id.cycling_calories_editText).text.toString()
+        val maxCadence =
+            findViewById<TextInputEditText>(R.id.cycling_max_cadence_editText).text.toString()
+        val calories =
+            findViewById<TextInputEditText>(R.id.cycling_calories_editText).text.toString()
         val workoutTitle =
             dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText)
                 .text.toString()
@@ -82,24 +87,26 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
                 .text.toString()
 
 
-
         val currentCyclingWorkoutRef = db.collection("users")
             .document(Database.user.email!!).collection("workouts").document()
 
 
         val workoutInfo = hashMapOf(
-
-
-
-
-
-            Database.timestamp to FieldValue.serverTimestamp(),
-            Database.typeOfWorkout to "cyclingWorkout",
-            Database.workoutTitle to workoutTitle,
-            Database.workoutDate to workoutDate
+            Database.AVERAGE_SPEED to averageSpeed,
+            Database.TOP_SPEED to topSpeed,
+            Database.TOTAL_TIME to totalTime,
+            Database.AVERAGE_PULSE to averagePulse,
+            Database.MAX_PULSE to maxPulse,
+            Database.AVERAGE_FORCE to averageForce,
+            Database.MAX_FORCE to maxForce,
+            Database.AVERAGE_CADENCE to averageCadence,
+            Database.MAX_CADENCE to maxCadence,
+            Database.CALORIES to calories,
+            Database.TIMESTAMP to FieldValue.serverTimestamp(),
+            Database.TYPE_OF_WORKOUT to "cyclingWorkout",
+            Database.WORKOUT_TITLE to workoutTitle,
+            Database.WORKOUT_DATE to workoutDate
         )
-
-        //adds current workout to database
         currentCyclingWorkoutRef.set(workoutInfo)
     }
 }

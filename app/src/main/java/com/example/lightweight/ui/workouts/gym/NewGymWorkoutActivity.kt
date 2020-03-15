@@ -1,10 +1,9 @@
-package com.example.lightweight.ui.newWorkout.gym
+package com.example.lightweight.ui.workouts.gym
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Button
-import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -21,12 +20,10 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.SetOptions
 
 
 import kotlinx.android.synthetic.main.activity_new_gym_workout.*
 import java.time.LocalDate
-import java.time.LocalDateTime
 
 class NewGymWorkoutActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.workoutDetails.Run
+package com.example.lightweight.ui.workouts.running
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,7 +11,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.lightweight.Database
 import com.example.lightweight.R
-import com.example.lightweight.ui.newWorkout.running.RunViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -88,44 +87,44 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
             .document(Database.user.email!!).collection(Database.WORKOUTS)
             .document(intent.getStringExtra("id")!!)//todo fix constants
         currentRunWorkoutRef.update(
-            Database.averagePulse,
+            Database.AVERAGE_PULSE,
             findViewById<TextInputEditText>(R.id.running_average_pulse_editText).text.toString()
         )
         currentRunWorkoutRef.update(
-            Database.distance,
+            Database.DISTANCE,
             findViewById<TextInputEditText>(R.id.running_distance_editText).text.toString()
         )
         currentRunWorkoutRef.update(
-            Database.totalTime,
+            Database.TOTAL_TIME,
             findViewById<TextInputEditText>(R.id.running_total_time_editText).text.toString()
         )
         currentRunWorkoutRef.update(
-            Database.averageSpeed,
+            Database.AVERAGE_SPEED,
             findViewById<TextInputEditText>(R.id.running_average_speed_editText).text.toString()
         )
         currentRunWorkoutRef.update(
-            Database.topSpeed,
+            Database.TOP_SPEED,
             findViewById<TextInputEditText>(R.id.running_top_speed_editText).text.toString()
         )
         currentRunWorkoutRef.update(
-            Database.averagePulse,
+            Database.AVERAGE_PULSE,
             findViewById<TextInputEditText>(R.id.running_average_pulse_editText).text.toString()
         )
         currentRunWorkoutRef.update(
-            Database.maxPulse,
+            Database.MAX_PULSE,
             findViewById<TextInputEditText>(R.id.running_max_pulse_editText).text.toString()
         )
         currentRunWorkoutRef.update(
-            Database.calories,
+            Database.CALORIES,
             findViewById<TextInputEditText>(R.id.running_calories_editText).text.toString()
         )
 
         currentRunWorkoutRef.update(
-            Database.workoutTitle,
+            Database.WORKOUT_TITLE,
             dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText).text.toString()
         )
         currentRunWorkoutRef.update(
-            Database.workoutDate,
+            Database.WORKOUT_DATE,
             dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText).text.toString()
         )
     }

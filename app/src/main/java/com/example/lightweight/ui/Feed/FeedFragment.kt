@@ -20,7 +20,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import kotlinx.android.synthetic.main.activity_show_cycling_activity.*
 import kotlinx.android.synthetic.main.fragment_feed.*
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.runBlocking

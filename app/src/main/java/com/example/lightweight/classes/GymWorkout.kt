@@ -2,13 +2,10 @@ package com.example.lightweight.classes
 
 import android.content.Context
 import android.content.Intent
-import android.text.Editable
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import com.example.lightweight.Database
 import com.example.lightweight.R
 import com.example.lightweight.ui.workoutDetails.Gym.ViewGymWorkoutActivity
-import com.example.lightweight.ui.newWorkout.gym.NewGymWorkoutActivity
+import com.example.lightweight.ui.workouts.gym.NewGymWorkoutActivity
 
 class GymWorkout(
     override var id: String?, override var title: String?, override var date: String?

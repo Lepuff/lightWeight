@@ -2,10 +2,8 @@ package com.example.lightweight.classes
 
 import android.content.Context
 import android.content.Intent
-import android.text.Editable
-import androidx.lifecycle.MutableLiveData
 import com.example.lightweight.R
-import com.example.lightweight.ui.newWorkout.cycling.NewCyclingWorkoutActivity
+import com.example.lightweight.ui.workouts.cycling.NewCyclingWorkoutActivity
 
 class CyclingWorkout(
     override var id: String?,

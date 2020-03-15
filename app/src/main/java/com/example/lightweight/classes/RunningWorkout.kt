@@ -2,15 +2,9 @@ package com.example.lightweight.classes
 
 import android.content.Context
 import android.content.Intent
-import android.text.Editable
-import androidx.lifecycle.MutableLiveData
-import com.example.lightweight.Database
 import com.example.lightweight.R
-import com.example.lightweight.ui.newWorkout.cycling.NewCyclingWorkoutActivity
-import com.example.lightweight.ui.newWorkout.running.NewRunningWorkoutActivity
-import com.example.lightweight.ui.workoutDetails.Run.ViewRunWorkoutActivity
-import com.google.firebase.firestore.FirebaseFirestore
-import java.util.*
+import com.example.lightweight.ui.workouts.running.NewRunningWorkoutActivity
+import com.example.lightweight.ui.workouts.running.ViewRunWorkoutActivity
 
 class RunningWorkout(
     override var id: String?,

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_item"
-    tools:context=".ui.newWorkout.cycling.NewCyclingWorkoutActivity">
+    tools:context=".ui.workouts.cycling.NewCyclingWorkoutActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -205,14 +205,16 @@
             android:layout_height="wrap_content"
             android:background="@color/background_button"
             android:text="@string/save_workout"
-            android:textColor="@color/text_button" />
+            android:textColor="@color/text_button"
+            android:visibility="gone"/>
         <Button
             android:id="@+id/cycling_edit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/background_button"
-            android:text="@string/save_workout"
-            android:textColor="@color/text_button" />
+            android:text="@string/edit_workout"
+            android:textColor="@color/text_button"
+            android:visibility="gone"/>
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

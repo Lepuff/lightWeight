@@ -1,9 +1,9 @@
-package com.example.lightweight.ui.newWorkout.cycling
+package com.example.lightweight.ui.workouts.cycling
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NewCyclingWorkoutViewModel : ViewModel() {
+class CyclingViewModel : ViewModel() {
 
 
     var averageSpeed = MutableLiveData<Float>().apply {
@@ -34,6 +34,13 @@ class NewCyclingWorkoutViewModel : ViewModel() {
         value = null
     }
     var calories= MutableLiveData<Int>().apply {
+        value = null
+    }
+
+    var title = MutableLiveData<String>().apply {
+        value = null
+    }
+    var date = MutableLiveData<String>().apply {
         value = null
     }
 }

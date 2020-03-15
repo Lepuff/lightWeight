@@ -12,10 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.workoutDetails.Run.ViewRunWorkoutActivity"></activity>
-        <activity android:name=".ui.newWorkout.cycling.NewCyclingWorkoutActivity" />
-        <activity android:name=".ui.newWorkout.running.NewRunningWorkoutActivity" />
-        <activity android:name=".ui.newWorkout.gym.NewGymWorkoutActivity" />
+        <activity android:name=".ui.workouts.running.ViewRunWorkoutActivity"></activity>
+        <activity android:name=".ui.workouts.cycling.NewCyclingWorkoutActivity" />
+        <activity android:name=".ui.workouts.running.NewRunningWorkoutActivity" />
+        <activity android:name=".ui.workouts.gym.NewGymWorkoutActivity" />
         <activity android:name=".ui.workoutDetails.Gym.EditGymWorkoutActivity" /> <!-- Todo check this error? -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

@@ -42,7 +42,6 @@
     <string name="speed">Speed</string>
 
 
-
     <string name="add_set">Add set</string>
     <string name="set">Set</string>
     <string name="weight">Weight</string>
@@ -75,9 +74,9 @@
     <string name="login_failed">Login failed</string>
     <string name="average_force">Average force</string>
     <string name="save">save</string>
+    <string name="edit_workout">Edit Workout</string>
 
     <!--Todo allt efter detta! -->
-
 
 
 </resources>

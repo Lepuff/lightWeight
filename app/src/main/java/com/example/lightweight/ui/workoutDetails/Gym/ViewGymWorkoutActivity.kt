@@ -26,7 +26,7 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gym_workout_details)
-        val id = intent.getStringExtra("id") //todo samme , detta är id i string.
+        val id = intent.getStringExtra("id")
         val workoutTitle = intent.getStringExtra("workoutTitle")
         title = workoutTitle
         viewModel = ViewModelProviders.of(this).get(ViewEditGymWorkoutViewModel::class.java)
@@ -35,7 +35,7 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
         initRecyclerView()
         exerciseAdapter.submitList(viewModel.exerciseList.value!!)
 
-        Log.d("Test after intent", id!!.toString())
+
         val currentGymWorkoutRef = db.collection("users")
             .document(Database.user.email!!).collection("workouts").document(id)
 
@@ -57,7 +57,7 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
                         }
                         exerciseList.add(tempExercise)
                     }
-                    Log.d("view gym workout tempList :", tempExerciseList.toString())
+
                     exerciseAdapter.submitList(exerciseList)
                     exerciseAdapter.notifyDataSetChanged()
 

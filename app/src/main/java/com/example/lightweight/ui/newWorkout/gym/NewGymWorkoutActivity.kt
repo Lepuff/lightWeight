@@ -70,12 +70,9 @@ class NewGymWorkoutActivity : AppCompatActivity() {
             val dialogBuilder = AlertDialog.Builder(this)
                 .setView(dialogView)
 
-
-
             val dialog = dialogBuilder.show()
 
             saveButton.setOnClickListener {
-
 
                 val exerciseList = newGymWorkoutViewModel.getExerciseList().value!!
                 val workoutTitle =
@@ -87,7 +84,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                         .text
 
 
-                var currentGymWorkoutRef = db.collection("users")
+                val currentGymWorkoutRef = db.collection("users")
                     .document(Database.user.email!!).collection("workouts").document()
 
 
@@ -146,7 +143,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
                  typeOfExerciseList.add(typeOfExercise["name"].toString())
              }
              builder.setItems(typeOfExerciseList.toTypedArray()) {
-                     dialog, which ->
+                     _, which ->
                  exerciseAdapter.addExercise(typeOfExerciseList[which])
 
              }
@@ -164,5 +161,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
             db.collection("typeOfExercise")
         return listOfExercisesRef.get()
     }
+
+
 }
 

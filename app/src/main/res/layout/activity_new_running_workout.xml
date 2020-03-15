@@ -82,14 +82,16 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/new_running_top_speed_edittext"
+                android:id="@+id/new_running_top_speed_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/top_speed"
                 android:inputType="numberDecimal"
+
                 android:textColor="@color/text_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -130,42 +132,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/text_running_force_divider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/divider"
-            android:text="@string/force"
-            android:textColor="@color/text_divider" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/TextInputLayoutAppearance">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/new_running_average_force_editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/average_force"
-                android:inputType="number"
-                android:textColor="@color/text_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/TextInputLayoutAppearance">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/new_running_max_force_editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/max_force"
-                android:inputType="number"
-                android:textColor="@color/text_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/divider"
@@ -192,6 +158,16 @@
             android:layout_height="wrap_content"
             android:background="@color/background_button"
             android:text="@string/save_workout"
-            android:textColor="@color/text_button" />
+            android:textColor="@color/text_button"
+            android:visibility="gone"
+            />
+        <Button
+            android:id="@+id/new_running_edit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_button"
+            android:text="@string/edit"
+            android:textColor="@color/text_button"
+            android:visibility="gone"/>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

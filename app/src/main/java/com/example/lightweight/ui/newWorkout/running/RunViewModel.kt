@@ -1,8 +1,17 @@
 package com.example.lightweight.ui.newWorkout.running
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 
-class NewRunningViewModel {
+class RunViewModel : ViewModel() {
+
+
+    var title  = MutableLiveData<String>().apply {
+        value = null
+    }
+    var date = MutableLiveData<String>().apply {
+        value = null
+    }
 
     var distance = MutableLiveData<Float>().apply {
         value = null
@@ -28,16 +37,10 @@ class NewRunningViewModel {
         value = null
     }
 
-    var averageForce = MutableLiveData<Int>().apply {
-        value = null
-    }
-
-    var maxForce = MutableLiveData<Int>().apply {
-        value = null
-    }
-
     var calories = MutableLiveData<Int>().apply {
         value = null
     }
+
+
 
 }

@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.workoutDetails.Gym
+package com.example.lightweight.ui.workouts.gym
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -27,8 +27,8 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gym_workout_details)
         val id = intent.getStringExtra("id")
-        val workoutTitle = intent.getStringExtra("workoutTitle")
-        title = workoutTitle
+        //ToDo add title from db
+
         viewModel = ViewModelProviders.of(this).get(ViewEditGymWorkoutViewModel::class.java)
         viewModel.exerciseList.observe(this,
             Observer<MutableList<Exercise>> { exerciseAdapter.notifyDataSetChanged() })

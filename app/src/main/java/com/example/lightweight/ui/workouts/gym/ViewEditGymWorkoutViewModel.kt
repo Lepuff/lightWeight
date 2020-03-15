@@ -1,8 +1,7 @@
-package com.example.lightweight.ui.workoutDetails.Gym
+package com.example.lightweight.ui.workouts.gym
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.lightweight.classes.AbstractWorkout
 import com.example.lightweight.classes.Exercise
 
 class ViewEditGymWorkoutViewModel : ViewModel() {

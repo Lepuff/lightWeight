@@ -7,9 +7,9 @@ import com.example.lightweight.ui.workouts.running.NewRunningWorkoutActivity
 import com.example.lightweight.ui.workouts.running.ViewRunWorkoutActivity
 
 class RunningWorkout(
-    override var id: String?,
-    override var title: String?,
-    override var date: String?
+    override var id: String,
+    override var title: String,
+    override var date: String
 
 
 ) : AbstractWorkout(R.drawable.ic_directions_run_yellow_24dp) {
@@ -19,10 +19,6 @@ class RunningWorkout(
         val intent = Intent(context, ViewRunWorkoutActivity::class.java)
         intent.putExtra("id", id)
         context.startActivity(intent)
-    }
-
-    override fun editWorkout() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun newWorkout(context: Context) {

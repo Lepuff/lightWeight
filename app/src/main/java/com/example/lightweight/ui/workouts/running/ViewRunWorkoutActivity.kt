@@ -74,7 +74,7 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
 
 
         saveButton.setOnClickListener {
-            saveRunningWorkout(dialogView)
+            updateRunningWorkout(dialogView)
             dialog.cancel()
             finish()
             findViewById<Button>(R.id.running_edit_button).visibility = View.VISIBLE
@@ -82,7 +82,7 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveRunningWorkout(dialogView: View) {
+    private fun updateRunningWorkout(dialogView: View) {
         val currentRunWorkoutRef = db.collection(Database.USERS)
             .document(Database.user.email!!).collection(Database.WORKOUTS)
             .document(intent.getStringExtra("id")!!)//todo fix constants
@@ -106,10 +106,7 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
             Database.TOP_SPEED,
             findViewById<TextInputEditText>(R.id.running_top_speed_editText).text.toString()
         )
-        currentRunWorkoutRef.update(
-            Database.AVERAGE_PULSE,
-            findViewById<TextInputEditText>(R.id.running_average_pulse_editText).text.toString()
-        )
+
         currentRunWorkoutRef.update(
             Database.MAX_PULSE,
             findViewById<TextInputEditText>(R.id.running_max_pulse_editText).text.toString()

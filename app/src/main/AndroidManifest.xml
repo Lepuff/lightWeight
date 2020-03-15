@@ -12,11 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.workouts.running.ViewRunWorkoutActivity"></activity>
+        <activity android:name=".ui.workouts.cycling.ViewCyclingWorkoutActivity"></activity>
+        <activity android:name=".ui.workouts.running.ViewRunWorkoutActivity" />
         <activity android:name=".ui.workouts.cycling.NewCyclingWorkoutActivity" />
         <activity android:name=".ui.workouts.running.NewRunningWorkoutActivity" />
         <activity android:name=".ui.workouts.gym.NewGymWorkoutActivity" />
-        <activity android:name=".ui.workoutDetails.Gym.EditGymWorkoutActivity" /> <!-- Todo check this error? -->
+        <activity android:name=".ui.workouts.gym.EditGymWorkoutActivity" /> <!-- Todo check this error? -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -50,9 +51,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.workoutDetails.Gym.ViewGymWorkoutActivity"
+            android:name=".ui.workouts.gym.ViewGymWorkoutActivity"
             android:label="Details"
-            android:launchMode="singleTop"> <!-- todo Check this erroro? -->
+            android:launchMode="singleTop"> <!-- todo Check this error? -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.NavigationActivity" />

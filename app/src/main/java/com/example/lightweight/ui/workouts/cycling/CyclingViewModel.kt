@@ -6,6 +6,10 @@ import androidx.lifecycle.ViewModel
 class CyclingViewModel : ViewModel() {
 
 
+    var distance = MutableLiveData<Float>().apply {
+        value = null
+    }
+
     var averageSpeed = MutableLiveData<Float>().apply {
         value = null
     }

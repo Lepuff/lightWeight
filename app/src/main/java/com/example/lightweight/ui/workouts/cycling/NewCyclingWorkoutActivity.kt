@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.ViewModelProviders
 import com.example.lightweight.Database
 import com.example.lightweight.R
 import com.google.android.material.textfield.TextInputEditText
@@ -16,21 +15,18 @@ import java.time.LocalDate
 
 class NewCyclingWorkoutActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: CyclingViewModel
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cycling_workout)
 
-        viewModel = ViewModelProviders.of(this).get(CyclingViewModel::class.java)
         val saveButton: Button = findViewById(R.id.cycling_save_button)
-
-        findViewById<TextInputEditText>(R.id.cycling_total_time_editText).requestFocus()
+        saveButton.visibility = View.VISIBLE
         saveButton.setOnClickListener {
             saveCyclingDialog()
         }
-
+        findViewById<TextInputEditText>(R.id.cycling_total_time_editText).requestFocus()
 
     }
 
@@ -39,14 +35,15 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
     private fun saveCyclingDialog() {
         val dialogView =
             LayoutInflater.from(this).inflate(R.layout.dialog_save_workout, null)
-        val saveButton = dialogView.findViewById<Button>(R.id.save_workout_save_button)
+        val dialogSaveButton = dialogView.findViewById<Button>(R.id.save_workout_save_button)
         val currentDate = getCurrentDate()
         dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
             .setText(currentDate)
         val dialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)
         val dialog = dialogBuilder.show()
-        saveButton.setOnClickListener {
+
+        dialogSaveButton.setOnClickListener {
             saveCyclingWorkout(dialogView)
             dialog.cancel()
             finish()
@@ -57,6 +54,8 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
 
     private fun saveCyclingWorkout(dialogView: View) {
 
+
+        val distance = findViewById<TextInputEditText>(R.id.cycling_distance_editText).text.toString()
 
         val averageSpeed =
             findViewById<TextInputEditText>(R.id.cycling_average_speed_editText).text.toString()
@@ -92,6 +91,7 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
 
 
         val workoutInfo = hashMapOf(
+            Database.DISTANCE to distance,
             Database.AVERAGE_SPEED to averageSpeed,
             Database.TOP_SPEED to topSpeed,
             Database.TOTAL_TIME to totalTime,

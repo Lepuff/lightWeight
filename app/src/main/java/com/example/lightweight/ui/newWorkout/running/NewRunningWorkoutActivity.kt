@@ -22,8 +22,9 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
         setContentView(R.layout.activity_new_running_workout)
 
 
-        val saveButton = findViewById<Button>(R.id.new_running_save_button)
 
+        val saveButton = findViewById<Button>(R.id.new_running_save_button)
+            saveButton.visibility = View.VISIBLE
         saveButton.setOnClickListener {
             saveRunningDialog()
         }

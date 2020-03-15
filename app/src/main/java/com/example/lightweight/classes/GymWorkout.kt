@@ -2,16 +2,13 @@ package com.example.lightweight.classes
 
 import android.content.Context
 import android.content.Intent
-import android.text.Editable
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import com.example.lightweight.Database
 import com.example.lightweight.R
-import com.example.lightweight.ui.workoutDetails.Gym.ViewGymWorkoutActivity
-import com.example.lightweight.ui.newWorkout.gym.NewGymWorkoutActivity
+import com.example.lightweight.ui.workouts.gym.ViewGymWorkoutActivity
+import com.example.lightweight.ui.workouts.gym.NewGymWorkoutActivity
 
 class GymWorkout(
-    override var id: String?, override var title: String?, override var date: String?
+    override var id: String, override var title: String, override var date: String
 
 
 ) : AbstractWorkout(R.drawable.ic_fitness_center_yellow_24dp) {
@@ -20,13 +17,8 @@ class GymWorkout(
         
         Log.d("Test before intent",id)
         val intent = Intent(context, ViewGymWorkoutActivity::class.java)
-        intent.putExtra("workoutTitle", title)
         intent.putExtra("id",id)
         context.startActivity(intent)
-    }
-
-    override fun editWorkout() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun newWorkout(context: Context) {

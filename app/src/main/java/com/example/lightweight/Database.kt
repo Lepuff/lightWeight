@@ -20,29 +20,35 @@ object Database {
 
     const val WORKOUTS = "workouts"
     const val USERS = "users"
-    const val TYPEOFEXERCISE = "typeOfExercise"
-    const val EXERCISES = "exercises"
 
 
 
-    const val averagePulse = "averagePulse"
-    const val averageSpeed = "averageSpeed"
-    const val calories = "calories"
-    const val distance = "distance"
 
-    const val maxPulse = "maxPulse"
 
-    const val timestamp = "timestamp"
+    const val AVERAGE_PULSE = "averagePulse"
+    const val AVERAGE_SPEED = "averageSpeed"
+    const val CALORIES = "calories"
+    const val DISTANCE = "distance"
 
-    const val topSpeed = "topSpeed"
+    const val MAX_PULSE = "maxPulse"
 
-    const val totalTime = "totalTime"
+    const val TIMESTAMP = "timestamp"
 
-    const val typeOfWorkout = "typeOfWorkout"
+    const val TOP_SPEED = "topSpeed"
 
-    const val workoutDate = "workoutDate"
+    const val TOTAL_TIME = "totalTime"
 
-    const val workoutTitle = "workoutTitle"
+    const val TYPE_OF_WORKOUT = "typeOfWorkout"
+
+    const val WORKOUT_DATE = "workoutDate"
+
+    const val WORKOUT_TITLE = "workoutTitle"
+
+    const val AVERAGE_FORCE = "averageForce"
+
+    const val MAX_FORCE = "maxForce"
+    const val AVERAGE_CADENCE = "averageCadence"
+    const val MAX_CADENCE = "maxCadence"
 
 
 

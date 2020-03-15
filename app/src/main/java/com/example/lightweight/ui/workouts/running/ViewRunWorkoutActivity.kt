@@ -42,7 +42,6 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
             saveRunningDialog()
         }
-
     }
     
     private fun setEditable(boolean: Boolean) {
@@ -75,10 +74,10 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
 
         saveButton.setOnClickListener {
             updateRunningWorkout(dialogView)
-            dialog.cancel()
-            finish()
             findViewById<Button>(R.id.running_edit_button).visibility = View.VISIBLE
             findViewById<Button>(R.id.running_save_button).visibility = View.GONE
+            dialog.cancel()
+            finish()
         }
     }
 
@@ -134,13 +133,13 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
             if (document != null) {
                 viewModel.title.value = document["workoutTitle"].toString()
                 viewModel.date.value = document["workoutDate"].toString() //todo fix constants
-                viewModel.averagePulse.value = document["averagePulse"].toString().toInt()
-                viewModel.averageSpeed.value = document["averageSpeed"].toString().toFloat()
-                viewModel.calories.value = document["calories"].toString().toInt()
-                viewModel.distance.value = document["distance"].toString().toFloat()
-                viewModel.maxPulse.value = document["maxPulse"].toString().toInt()
-                viewModel.topSpeed.value = document["topSpeed"].toString().toFloat()
-                viewModel.totalTime.value = document["totalTime"].toString().toFloat()
+                viewModel.averagePulse.value = document["averagePulse"].toString().toIntOrNull()
+                viewModel.averageSpeed.value = document["averageSpeed"].toString().toFloatOrNull()
+                viewModel.calories.value = document["calories"].toString().toIntOrNull()
+                viewModel.distance.value = document["distance"].toString().toFloatOrNull()
+                viewModel.maxPulse.value = document["maxPulse"].toString().toIntOrNull()
+                viewModel.topSpeed.value = document["topSpeed"].toString().toFloatOrNull()
+                viewModel.totalTime.value = document["totalTime"].toString().toFloatOrNull()
 
             } else {
                 Log.d("view run workout document query:", "No such document")

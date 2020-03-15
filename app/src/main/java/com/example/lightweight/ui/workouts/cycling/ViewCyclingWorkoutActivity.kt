@@ -28,32 +28,20 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
         val id = intent.getStringExtra("id")//todo constants!
         setObservers()
         getCyclingInfoFromDb(id!!)
-
         setEditable(false)
+
         val editButton = findViewById<Button>(R.id.cycling_edit_button)
         editButton.visibility = View.VISIBLE
         val saveButton = findViewById<Button>(R.id.cycling_save_button)
-
 
         editButton.setOnClickListener {
             setEditable(true)
             editButton.visibility = View.GONE
             saveButton.visibility = View.VISIBLE
         }
-
-
         saveButton.setOnClickListener {
             saveCyclingDialog()
         }
-
-
-
-
-
-
-        setEditable(true)
-
-
     }
 
     private fun saveCyclingDialog() {
@@ -71,10 +59,11 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
         val dialog = dialogBuilder.show()
 
         dialogSaveButton.setOnClickListener {
-            dialog.cancel()
-            finish()
+            updateCyclingWorkout(dialogView)
             findViewById<Button>(R.id.cycling_edit_button).visibility = View.VISIBLE
             findViewById<Button>(R.id.cycling_save_button).visibility = View.GONE
+            dialog.cancel()
+            finish()
         }
     }
 
@@ -89,6 +78,8 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
         findViewById<TextInputEditText>(R.id.cycling_average_cadence_editText).isEnabled = boolean
         findViewById<TextInputEditText>(R.id.cycling_calories_editText).isEnabled = boolean
         findViewById<TextInputEditText>(R.id.cycling_max_cadence_editText).isEnabled = boolean
+        findViewById<TextInputEditText>(R.id.cycling_average_force_editText).isEnabled = boolean
+        findViewById<TextInputEditText>(R.id.cycling_max_force_editText).isEnabled = boolean
     }
 
 
@@ -181,18 +172,17 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
             .document(Database.user.email!!).collection(Database.WORKOUTS)
             .document(intent.getStringExtra("id")!!)//todo fix constants
 
-        currentRunWorkoutRef.update(
-            Database.AVERAGE_PULSE,
-            findViewById<TextInputEditText>(R.id.cycling_average_pulse_editText).text.toString()
-        )
+
         currentRunWorkoutRef.update(
             Database.DISTANCE,
             findViewById<TextInputEditText>(R.id.cycling_distance_editText).text.toString()
         )
+
         currentRunWorkoutRef.update(
             Database.TOTAL_TIME,
             findViewById<TextInputEditText>(R.id.cycling_total_time_editText).text.toString()
         )
+
         currentRunWorkoutRef.update(
             Database.AVERAGE_SPEED,
             findViewById<TextInputEditText>(R.id.cycling_average_speed_editText).text.toString()
@@ -206,6 +196,12 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
             Database.MAX_PULSE,
             findViewById<TextInputEditText>(R.id.cycling_max_pulse_editText).text.toString()
         )
+
+        currentRunWorkoutRef.update(
+            Database.AVERAGE_PULSE,
+            findViewById<TextInputEditText>(R.id.cycling_average_pulse_editText).text.toString()
+        )
+
         currentRunWorkoutRef.update(
             Database.CALORIES,
             findViewById<TextInputEditText>(R.id.cycling_calories_editText).text.toString()
@@ -227,7 +223,7 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
 
         currentRunWorkoutRef.update(
             Database.AVERAGE_CADENCE,
-            findViewById<TextInputEditText>(R.id.cycling_average_cadence_editText)
+            findViewById<TextInputEditText>(R.id.cycling_average_cadence_editText).text.toString()
         )
 
         currentRunWorkoutRef.update(
@@ -238,7 +234,5 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
             Database.WORKOUT_DATE,
             dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText).text.toString()
         )
-
-
     }
 }

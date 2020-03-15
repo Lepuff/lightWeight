@@ -19,11 +19,11 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_new_running_workout)
+        setContentView(R.layout.activity_running_workout)
 
 
 
-        val saveButton = findViewById<Button>(R.id.new_running_save_button)
+        val saveButton = findViewById<Button>(R.id.running_save_button)
             saveButton.visibility = View.VISIBLE
         saveButton.setOnClickListener {
             saveRunningDialog()
@@ -57,13 +57,13 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
             .document(Database.user.email!!).collection("workouts").document()
 
         val workoutInfo = hashMapOf(
-            "distance" to findViewById<TextInputEditText>(R.id.new_running_distance_editText).text.toString(),
-            "totalTime" to findViewById<TextInputEditText>(R.id.new_running_total_time_editText).text.toString(),
-            "averageSpeed" to findViewById<TextInputEditText>(R.id.new_running_average_speed_editText).text.toString(),
-            "topSpeed" to findViewById<TextInputEditText>(R.id.new_running_top_speed_editText).text.toString(),
-            "averagePulse" to findViewById<TextInputEditText>(R.id.new_running_average_pulse_editText).text.toString(),
-            "maxPulse" to findViewById<TextInputEditText>(R.id.new_running_max_pulse_editText).text.toString(),
-            "calories" to findViewById<TextInputEditText>(R.id.new_running_calories_editText).text.toString(),
+            "distance" to findViewById<TextInputEditText>(R.id.running_distance_editText).text.toString(),
+            "totalTime" to findViewById<TextInputEditText>(R.id.running_total_time_editText).text.toString(),
+            "averageSpeed" to findViewById<TextInputEditText>(R.id.running_average_speed_editText).text.toString(),
+            "topSpeed" to findViewById<TextInputEditText>(R.id.running_top_speed_editText).text.toString(),
+            "averagePulse" to findViewById<TextInputEditText>(R.id.running_average_pulse_editText).text.toString(),
+            "maxPulse" to findViewById<TextInputEditText>(R.id.running_max_pulse_editText).text.toString(),
+            "calories" to findViewById<TextInputEditText>(R.id.running_calories_editText).text.toString(),
             "timestamp" to FieldValue.serverTimestamp(),
             "typeOfWorkout" to "runningWorkout",
             "workoutTitle" to title,

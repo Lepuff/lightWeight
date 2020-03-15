@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    >
-
+    android:background="@color/background_item"
+    tools:context=".ui.newWorkout.cycling.NewCyclingWorkoutActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
@@ -21,16 +20,16 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/new_cycling_total_time_editText"
+                android:id="@+id/cycling_total_time_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/total_time"
                 android:textColor="@color/text_content"
-                android:inputType="none"/>
+                android:inputType="time"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -42,30 +41,30 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/new_cycling_average_speed_editText"
+                android:id="@+id/cycling_average_speed_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/average_speed"
                 android:textColor="@color/text_content"
-                android:inputType="none"/>
+                android:inputType="numberDecimal"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/new_cycling_top_speed_editText"
+                android:id="@+id/cycling_top_speed_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/top_speed"
                 android:textColor="@color/text_content"
-                android:inputType="none"/>
+                android:inputType="numberDecimal"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -79,32 +78,32 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:theme="@style/TextInputLayoutAppearance">
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/new_cycling_average_pulse_editText"
+                android:id="@+id/cycling_average_pulse_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/average_pulse_sa"
                 android:textColor="@color/text_content"
-                android:inputType="none"/>
+                android:inputType="number"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/new_cycling_max_pulse_editText"
+                android:id="@+id/cycling_max_pulse_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/max_pulse"
                 android:textColor="@color/text_content"
-                android:inputType="none"/>
+                android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -116,30 +115,30 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/new_cycling_average_force_editText"
+                android:id="@+id/cycling_average_force_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/average_force"
                 android:textColor="@color/text_content"
-                android:inputType="none"/>
+                android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/new_cycling_max_force_editText"
+                android:id="@+id/cycling_max_force_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/max_force"
                 android:textColor="@color/text_content"
-                android:inputType="none"/>
+                android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -151,32 +150,32 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:theme="@style/TextInputLayoutAppearance">
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/new_cycling_average_cadence_editText"
+                android:id="@+id/cycling_average_cadence_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/average_cadence"
                 android:textColor="@color/text_content"
-                android:inputType="none"/>
+                android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:theme="@style/TextInputLayoutAppearance">
 
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/new_cycling_max_cadence_editText"
+                android:id="@+id/cycling_max_cadence_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/max_cadence"
                 android:textColor="@color/text_content"
-                android:inputType="none"/>
+                android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -188,26 +187,32 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/new_cycling_calories_editText"
+                android:id="@+id/cycling_calories_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/calories"
                 android:textColor="@color/text_content"
-                android:inputType="none"/>
+                android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/view_cycling_edit_button"
+            android:id="@+id/cycling_save_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/background_button"
-            android:text="@string/edit"
+            android:text="@string/save_workout"
             android:textColor="@color/text_button" />
-
+        <Button
+            android:id="@+id/cycling_edit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_button"
+            android:text="@string/save_workout"
+            android:textColor="@color/text_button" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

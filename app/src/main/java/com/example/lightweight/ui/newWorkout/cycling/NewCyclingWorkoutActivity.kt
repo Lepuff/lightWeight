@@ -21,12 +21,12 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_new_cycling_workout)
+        setContentView(R.layout.activity_cycling_workout)
 
         viewModel = ViewModelProviders.of(this).get(NewCyclingWorkoutViewModel::class.java)
-        val saveButton: Button = findViewById(R.id.new_cycling_save_button)
+        val saveButton: Button = findViewById(R.id.cycling_save_button)
 
-        findViewById<TextInputEditText>(R.id.new_cycling_total_time_editText).requestFocus()
+        findViewById<TextInputEditText>(R.id.cycling_total_time_editText).requestFocus()
         saveButton.setOnClickListener {
             saveCyclingDialog()
         }
@@ -57,22 +57,22 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
 
     private fun saveCyclingWorkout(dialogView: View) {
 
-        val cyclingWorkoutList: MutableList<String> = ArrayList()
+
 
         var averageSpeed =
-            findViewById<TextInputEditText>(R.id.new_cycling_average_speed_editText).text.toString()
-        var topSpeed = findViewById<TextInputEditText>(R.id.new_cycling_top_speed_editText).text.toString()
-        var totalTime = findViewById<TextInputEditText>(R.id.new_cycling_total_time_editText).text.toString()
+            findViewById<TextInputEditText>(R.id.cycling_average_speed_editText).text.toString()
+        var topSpeed = findViewById<TextInputEditText>(R.id.cycling_top_speed_editText).text.toString()
+        var totalTime = findViewById<TextInputEditText>(R.id.cycling_total_time_editText).text.toString()
         var averagePulse =
-            findViewById<TextInputEditText>(R.id.new_cycling_average_pulse_editText).text.toString()
-        var maxPulse = findViewById<TextInputEditText>(R.id.new_cycling_max_pulse_editText).text.toString()
+            findViewById<TextInputEditText>(R.id.cycling_average_pulse_editText).text.toString()
+        var maxPulse = findViewById<TextInputEditText>(R.id.cycling_max_pulse_editText).text.toString()
         var averageForce =
-            findViewById<TextInputEditText>(R.id.new_cycling_average_force_editText).text.toString()
-        var maxForce = findViewById<TextInputEditText>(R.id.new_cycling_max_force_editText).text.toString()
+            findViewById<TextInputEditText>(R.id.cycling_average_force_editText).text.toString()
+        var maxForce = findViewById<TextInputEditText>(R.id.cycling_max_force_editText).text.toString()
         var averageCadence =
-            findViewById<TextInputEditText>(R.id.new_cycling_average_cadence_editText).text.toString()
-        var maxCadence = findViewById<TextInputEditText>(R.id.new_cycling_max_cadence_editText).text.toString()
-        var calories = findViewById<TextInputEditText>(R.id.new_cycling_calories_editText).text.toString()
+            findViewById<TextInputEditText>(R.id.cycling_average_cadence_editText).text.toString()
+        var maxCadence = findViewById<TextInputEditText>(R.id.cycling_max_cadence_editText).text.toString()
+        var calories = findViewById<TextInputEditText>(R.id.cycling_calories_editText).text.toString()
         val workoutTitle =
             dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText)
                 .text.toString()
@@ -81,27 +81,22 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
             dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
                 .text.toString()
 
-        cyclingWorkoutList.add(totalTime)
-        cyclingWorkoutList.add(topSpeed)
-        cyclingWorkoutList.add(averageSpeed)
-        cyclingWorkoutList.add(maxPulse)
-        cyclingWorkoutList.add(averagePulse)
-        cyclingWorkoutList.add(maxForce)
-        cyclingWorkoutList.add(averageForce)
-        cyclingWorkoutList.add(maxCadence)
-        cyclingWorkoutList.add(averageCadence)
-        cyclingWorkoutList.add(calories)
+
 
         val currentCyclingWorkoutRef = db.collection("users")
             .document(Database.user.email!!).collection("workouts").document()
 
 
         val workoutInfo = hashMapOf(
-            "exercises" to cyclingWorkoutList,
-            "timestamp" to FieldValue.serverTimestamp(),
-            "typeOfWorkout" to "cyclingWorkout",
-            "workoutTitle" to workoutTitle,
-            "workoutDate" to workoutDate
+
+
+
+
+
+            Database.timestamp to FieldValue.serverTimestamp(),
+            Database.typeOfWorkout to "cyclingWorkout",
+            Database.workoutTitle to workoutTitle,
+            Database.workoutDate to workoutDate
         )
 
         //adds current workout to database

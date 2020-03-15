@@ -52,7 +52,6 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         findViewById<TextInputEditText>(R.id.running_average_pulse_editText).isEnabled = boolean
         findViewById<TextInputEditText>(R.id.running_max_pulse_editText).isEnabled = boolean
         findViewById<TextInputEditText>(R.id.running_calories_editText).isEnabled = boolean
-
     }
 
     private fun saveRunningDialog() {

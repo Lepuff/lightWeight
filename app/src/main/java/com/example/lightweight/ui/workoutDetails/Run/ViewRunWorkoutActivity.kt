@@ -23,14 +23,14 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_running_workout)
+
         val id = intent.getStringExtra("id")
         viewModel = ViewModelProviders.of(this).get(RunViewModel::class.java)
         setObservers()
         getRunningInfoFromDb(id!!)
-
-
-
         setEditable(false)
+
+
         val editWorkoutButton = findViewById<Button>(R.id.new_running_edit_button)
         val saveButton = findViewById<Button>(R.id.new_running_save_button)
         editWorkoutButton.visibility = View.VISIBLE
@@ -45,8 +45,7 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         }
 
     }
-
-
+    
     private fun setEditable(boolean: Boolean) {
         findViewById<TextInputEditText>(R.id.new_running_distance_editText).isEnabled = boolean
         findViewById<TextInputEditText>(R.id.new_running_total_time_editText).isEnabled = boolean
@@ -153,7 +152,6 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun setObservers() {
 

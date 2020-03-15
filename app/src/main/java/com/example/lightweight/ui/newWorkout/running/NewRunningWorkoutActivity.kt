@@ -70,8 +70,6 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
             "workoutDate" to date
         )
         currentRunningWorkoutRef.set(workoutInfo)
-
-
     }
 
     private fun getCurrentDate() = LocalDate.now().toString()

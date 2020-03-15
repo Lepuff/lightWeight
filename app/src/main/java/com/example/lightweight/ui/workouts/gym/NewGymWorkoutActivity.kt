@@ -47,8 +47,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
         initRecyclerView()
         exerciseAdapter.submitList(newGymWorkoutViewModel.getExerciseList().value!!)
-
-
+        exerciseAdapter.isEditable(false)
         val addExerciseButton = findViewById<Button>(R.id.new_gym_add_exercise_button)
         addExerciseButton.setOnClickListener {
             showNewExerciseDialog()

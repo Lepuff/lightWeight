@@ -8,18 +8,6 @@
     tools:context=".ui.Profile.ProfileFragment">
 
 
-    <TextView
-        android:id="@+id/text_profile_divider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/profile"
-        android:textSize="20sp"
-        android:background="@color/divider"
-        android:textColor="@color/text_divider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
         android:layout_width="120dp"
@@ -27,7 +15,7 @@
         android:padding="10dp"
         android:src="@mipmap/ic_launcher_round"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_profile_divider">
+        app:layout_constraintTop_toTopOf="parent">
 
     </de.hdodenhof.circleimageview.CircleImageView>
 
@@ -48,7 +36,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profile_image"
-        app:layout_constraintTop_toBottomOf="@+id/text_profile_divider">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/text_profile_name"
@@ -84,30 +72,16 @@
         android:background="@color/background_button"
         android:text="@string/edit_profile"
         android:textColor="@color/text_button"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_image" />
 
     <Button
         android:id="@+id/button_change_password"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/background_button"
         android:text="@string/change_password"
         android:textColor="@color/text_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_profile_password_divider" />
-
-    <TextView
-        android:id="@+id/text_profile_password_divider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/password"
-        android:textSize="20sp"
-        android:background="@color/divider"
-        android:textColor="@color/text_divider"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_edit_profile" />
 

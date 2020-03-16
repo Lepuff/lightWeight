@@ -25,7 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+
 import com.google.firebase.firestore.DocumentChange
 
 import com.google.firebase.firestore.FirebaseFirestore
@@ -39,7 +39,7 @@ class FeedFragment : Fragment() {
     private lateinit var workOutAdapter: WorkOutAdapter
     private var db = FirebaseFirestore.getInstance()
 
-    private var workoutsRef = db.collection(Database.USERS).document(Database.getUserId!!)
+    private var workoutsRef = db.collection(Database.USERS).document(Database.getUserId()!!)
         .collection(Database.WORKOUTS)
 
 

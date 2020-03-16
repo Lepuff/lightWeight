@@ -85,7 +85,7 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
     private fun getGymWorkoutFromDb(id: String) {
 
         val currentGymWorkoutRef = db.collection(Database.USERS)
-            .document(Database.user.email!!).collection(Database.WORKOUTS).document(id)
+            .document(Database.getUserId()!!).collection(Database.WORKOUTS).document(id)
         currentGymWorkoutRef.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
@@ -164,7 +164,7 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
     private fun updateGymWorkout(dialogView: View) {
 
         val currentGymWorkoutRef = db.collection(Database.USERS)
-            .document(Database.user.email!!).collection(Database.WORKOUTS).document(intent.getStringExtra("id")!!) //todo fix constants
+            .document(Database.getUserId()!!).collection(Database.WORKOUTS).document(intent.getStringExtra("id")!!) //todo fix constants
 
         currentGymWorkoutRef.update(Database.WORKOUT_TITLE,dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText).text.toString())
         currentGymWorkoutRef.update(Database.WORKOUT_DATE,dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText).text.toString())

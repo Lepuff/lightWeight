@@ -29,7 +29,7 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
         editButton.setOnClickListener {
             viewModel.isInEditState.value = true
         }
-        
+
         val saveButton = findViewById<Button>(R.id.cycling_save_button)
         saveButton.setOnClickListener {
             saveCyclingDialog()

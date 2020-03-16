@@ -30,9 +30,28 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_gym_workout)
-        val id = intent.getStringExtra("id")//todo fix with constants
-
         viewModel = ViewModelProviders.of(this).get(GymViewModel::class.java)
+        setObservers()
+        initRecyclerView()
+
+        val newExerciseButton: Button = findViewById(R.id.new_gym_add_exercise_button)
+        newExerciseButton.setOnClickListener {
+            showNewExerciseDialog()
+        }
+
+        val savedButton: Button = findViewById(R.id.new_gym_save_workout_button)
+        savedButton.setOnClickListener {
+            updateGymDialog()
+        }
+
+        val editButton: Button = findViewById(R.id.new_gym_edit_workout_button)
+        editButton.setOnClickListener {
+            viewModel.isInEditState.value = true
+        }
+    }
+
+
+    private fun setObservers(){
         viewModel.exerciseLiveData.observe(this,
             Observer {
                 exerciseAdapter.notifyDataSetChanged()
@@ -41,41 +60,27 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
             title = viewModel.title.value
         })
 
-        if (viewModel.isLoadedFromDb.value == false){
-            getGymWorkoutFromDb(id!!)
-            viewModel.isLoadedFromDb.value = true
-        }
+        viewModel.isInEditState.observe(this, Observer {
 
-        initRecyclerView()
-        exerciseAdapter.submitList(viewModel.exerciseLiveData.value!!)
-        exerciseAdapter.isEditable(false)
-
-
-        val newExerciseButton: Button = findViewById(R.id.new_gym_add_exercise_button)
-        newExerciseButton.visibility = View.GONE
-        newExerciseButton.setOnClickListener {
-            showNewExerciseDialog()
-        }
-
-
-
-
-        val savedButton: Button = findViewById(R.id.new_gym_save_workout_button)
-        savedButton.visibility = View.GONE
-        savedButton.setOnClickListener {
-            updateGymDialog()
-        }
-
-        val editButton: Button = findViewById(R.id.new_gym_edit_workout_button)
-        editButton.visibility = View.VISIBLE
-        editButton.setOnClickListener {
-            exerciseAdapter.isEditable(true)
-            savedButton.visibility = View.VISIBLE
-            newExerciseButton.visibility = View.VISIBLE
-            editButton.visibility = View.GONE
-        }
+            if (viewModel.isInEditState.value == true){
+                exerciseAdapter.isEditable()
+                findViewById<Button>(R.id.new_gym_save_workout_button).visibility = View.VISIBLE
+                findViewById<Button>(R.id.new_gym_add_exercise_button).visibility = View.VISIBLE
+                findViewById<Button>(R.id.new_gym_edit_workout_button).visibility = View.GONE
+            }else {
+                exerciseAdapter.isNotEditable()
+                findViewById<Button>(R.id.new_gym_save_workout_button).visibility = View.GONE
+                findViewById<Button>(R.id.new_gym_add_exercise_button).visibility = View.GONE
+                findViewById<Button>(R.id.new_gym_edit_workout_button).visibility = View.VISIBLE
+            }
+        })
+        viewModel.isLoadedFromDb.observe(this , Observer {
+            if (viewModel.isLoadedFromDb.value == false){
+                getGymWorkoutFromDb(intent.getStringExtra("id")!!) // todo fix constant
+                viewModel.isLoadedFromDb.value = true
+            }
+        })
     }
-
 
     private fun getGymWorkoutFromDb(id: String) {
 
@@ -115,6 +120,7 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
             addItemDecoration(topSpacingItemDecoration)
             exerciseAdapter = ExerciseAdapter(this)
             adapter = exerciseAdapter
+            exerciseAdapter.submitList(viewModel.exerciseLiveData.value!!)
         }
     }
 
@@ -156,8 +162,6 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
     }
 
     private fun updateGymWorkout(dialogView: View) {
-
-
 
         val currentGymWorkoutRef = db.collection(Database.USERS)
             .document(Database.user.email!!).collection(Database.WORKOUTS).document(intent.getStringExtra("id")!!) //todo fix constants

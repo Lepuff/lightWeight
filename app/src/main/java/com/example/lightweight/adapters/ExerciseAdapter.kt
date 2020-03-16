@@ -25,8 +25,13 @@ class ExerciseAdapter(private val parentRecyclerView: RecyclerView) :
     fun submitList(workOutList: MutableList<Exercise>) {
         exercises = workOutList
     }
-    fun isEditable(boolean: Boolean){
-        isEditable = boolean
+    fun isEditable(){
+        isEditable = true
+        notifyDataSetChanged()
+    }
+
+    fun isNotEditable(){
+        isEditable = false
         notifyDataSetChanged()
     }
 

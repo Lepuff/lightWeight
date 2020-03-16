@@ -22,20 +22,14 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cycling_workout)
-
         viewModel = ViewModelProviders.of(this).get(CyclingViewModel::class.java)
-        val id = intent.getStringExtra("id")//todo constants!
         setObservers()
-        if (viewModel.isLoadedFromDb.value == false) {
-            getCyclingInfoFromDb(id!!)
-            viewModel.isLoadedFromDb.value == true
-        }
 
         val editButton = findViewById<Button>(R.id.cycling_edit_button)
-
         editButton.setOnClickListener {
             viewModel.isInEditState.value = true
         }
+        
         val saveButton = findViewById<Button>(R.id.cycling_save_button)
         saveButton.setOnClickListener {
             saveCyclingDialog()
@@ -100,6 +94,13 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
                 setEditable(true)
             } else {
                 setEditable(false)
+            }
+        })
+
+        viewModel.isLoadedFromDb.observe(this, Observer {
+            if (viewModel.isLoadedFromDb.value == false) {
+                getCyclingInfoFromDb(intent.getStringExtra("id")!!)//todo fix constants
+                viewModel.isLoadedFromDb.value == true
             }
         })
 

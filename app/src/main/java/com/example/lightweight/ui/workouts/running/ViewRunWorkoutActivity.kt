@@ -2,6 +2,7 @@ package com.example.lightweight.ui.workouts.running
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -23,22 +24,15 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_running_workout)
 
-        val id = intent.getStringExtra("id")
         viewModel = ViewModelProviders.of(this).get(RunViewModel::class.java)
         setObservers()
 
-        if (viewModel.isLoadedFromDb.value == false) {
-            getRunningInfoFromDb(id!!)
-            viewModel.isLoadedFromDb.value = true
-        }
-
-        setEditable(false)
-
         val editWorkoutButton = findViewById<Button>(R.id.running_edit_button)
-        val saveButton = findViewById<Button>(R.id.running_save_button)
         editWorkoutButton.setOnClickListener {
             viewModel.isInEditState.value = true
         }
+
+        val saveButton = findViewById<Button>(R.id.running_save_button)
         saveButton.setOnClickListener {
             saveRunningDialog()
         }
@@ -132,21 +126,20 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         )
     }
 
-
     private fun getRunningInfoFromDb(id: String) {
         val currentRunWorkoutRef = db.collection("users")
             .document(Database.user.email!!).collection("workouts").document(id)
         currentRunWorkoutRef.get().addOnSuccessListener { document ->
             if (document != null) {
-                viewModel.title.value = document["workoutTitle"].toString()
-                viewModel.date.value = document["workoutDate"].toString() //todo fix constants
-                viewModel.averagePulse.value = document["averagePulse"].toString().toIntOrNull()
-                viewModel.averageSpeed.value = document["averageSpeed"].toString().toFloatOrNull()
-                viewModel.calories.value = document["calories"].toString().toIntOrNull()
-                viewModel.distance.value = document["distance"].toString().toFloatOrNull()
-                viewModel.maxPulse.value = document["maxPulse"].toString().toIntOrNull()
-                viewModel.topSpeed.value = document["topSpeed"].toString().toFloatOrNull()
-                viewModel.totalTime.value = document["totalTime"].toString().toFloatOrNull()
+                viewModel.title.value = document[Database.WORKOUT_TITLE].toString()
+                viewModel.date.value = document[Database.WORKOUT_DATE].toString()
+                viewModel.averagePulse.value = document[Database.AVERAGE_PULSE].toString().toIntOrNull()
+                viewModel.averageSpeed.value = document[Database.AVERAGE_SPEED].toString().toFloatOrNull()
+                viewModel.calories.value = document[Database.CALORIES].toString().toIntOrNull()
+                viewModel.distance.value = document[Database.DISTANCE].toString().toFloatOrNull()
+                viewModel.maxPulse.value = document[Database.MAX_PULSE].toString().toIntOrNull()
+                viewModel.topSpeed.value = document[Database.TOP_SPEED].toString().toFloatOrNull()
+                viewModel.totalTime.value = document[Database.TOTAL_TIME].toString().toFloatOrNull()
 
             } else {
                 Log.d("view run workout document query:", "No such document")
@@ -157,6 +150,13 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
 
     private fun setObservers() {
 
+
+        viewModel.isLoadedFromDb.observe(this, Observer {
+            if (viewModel.isLoadedFromDb.value == false) {
+                getRunningInfoFromDb(intent.getStringExtra("id")!!)//todo fix constants
+                viewModel.isLoadedFromDb.value == true
+            }
+        })
 
         viewModel.isInEditState.observe(this, Observer {
             if (viewModel.isInEditState.value == true) {

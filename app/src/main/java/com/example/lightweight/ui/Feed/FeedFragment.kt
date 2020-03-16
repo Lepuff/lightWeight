@@ -105,9 +105,9 @@ class FeedFragment : Fragment() {
             if (workouts != null) {
                 for (workout in workouts) {
                     val id = workout.id
-                    val type = workout["typeOfWorkout"].toString()
-                    val date = workout["workoutDate"].toString()
-                    val title = workout["workoutTitle"].toString()
+                    val type = workout[Database.TYPE_OF_WORKOUT].toString()
+                    val date = workout[Database.WORKOUT_DATE].toString()
+                    val title = workout[Database.WORKOUT_TITLE].toString()
                     when (type) {
                         "gymWorkout" -> workOutAdapter.addWorkout(GymWorkout(id, title, date))
                         "runningWorkout" -> workOutAdapter.addWorkout(RunningWorkout(id, title, date))

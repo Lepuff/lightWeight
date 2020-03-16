@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.fragment_feed.*
 
 
 class FeedFragment : Fragment() {
-    val itemPadding = 30
+    private val itemPadding = 30
     private lateinit var feedViewModel: FeedViewModel
     private lateinit var workOutAdapter: WorkOutAdapter
     private var db = FirebaseFirestore.getInstance()
@@ -106,12 +106,12 @@ class FeedFragment : Fragment() {
         super.onStop()
 
         //todo remove listener?
-        
+
     }
 
 
     private fun addWorkoutToFeed() {
-        workoutsRef.orderBy("workoutDate", Query.Direction.DESCENDING).get()
+        workoutsRef.orderBy(Database.WORKOUT_DATE, Query.Direction.DESCENDING).get()
             .addOnSuccessListener { workouts ->
                 workOutAdapter.clearList()
                 if (workouts != null) {

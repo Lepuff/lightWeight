@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,7 +25,7 @@ import kotlinx.android.synthetic.main.fragment_feed.*
 
 class FeedFragment : Fragment() {
     private val itemPadding = 30
-    private lateinit var feedViewModel: FeedViewModel
+    private lateinit var viewModel: FeedViewModel
     private lateinit var workOutAdapter: WorkOutAdapter
     private var db = FirebaseFirestore.getInstance()
     private var workoutsRef = db.collection(Database.USERS).document(Database.user.email!!)
@@ -37,12 +36,12 @@ class FeedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        feedViewModel =
+        viewModel =
             ViewModelProviders.of(this).get(FeedViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_feed, container, false)
 
 
-        feedViewModel.workoutList.observe(
+        viewModel.workoutList.observe(
             viewLifecycleOwner,
             Observer<MutableList<AbstractWorkout>> {
                 workOutAdapter.notifyDataSetChanged()
@@ -61,7 +60,7 @@ class FeedFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initRecyclerView()
-        workOutAdapter.submitList(feedViewModel.workoutList.value!!)
+        workOutAdapter.submitList(viewModel.workoutList.value!!)
 
     }
 
@@ -79,7 +78,7 @@ class FeedFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val snapShotListener =workoutsRef.addSnapshotListener { snapshots, e ->
+        val snapShotListener = workoutsRef.addSnapshotListener { snapshots, e ->
             if (e != null) {
                 Log.w(TAG, "Listen failed.", e)
                 return@addSnapshotListener

@@ -64,9 +64,6 @@ class SocialFragment : Fragment() {
     private fun dbTest() { //todo remove after testing
         workoutsRef.get()
             .addOnSuccessListener { workouts ->
-
-
-                workOutAdapter.clearList()
                 if (workouts != null) {
                     for (workout in workouts) {
                         Log.d(

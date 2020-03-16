@@ -47,13 +47,21 @@ class FeedFragment : Fragment() {
             root.findViewById<FloatingActionButton>(R.id.feed_floating_action_button)
 
         floatingActionButton.setOnClickListener {
-            NewWorkoutDialog().show(childFragmentManager, "test")
+            NewWorkoutDialog().show(childFragmentManager, "test")//todo fix.
 
         }
 
         return root
     }
 
+
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        initRecyclerView()
+        workOutAdapter.submitList(feedViewModel.workoutList.value!!)
+
+    }
     private fun initRecyclerView() {
         feed_recycler_view.apply {
             layoutManager = LinearLayoutManager(this.context)
@@ -63,13 +71,6 @@ class FeedFragment : Fragment() {
             workOutAdapter = WorkOutAdapter()
             adapter = workOutAdapter
         }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        initRecyclerView()
-        workOutAdapter.submitList(feedViewModel.workoutList.value!!)
-
     }
     override fun onResume() {
         super.onResume()

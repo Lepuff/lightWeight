@@ -10,4 +10,13 @@ class GymViewModel : ViewModel() {
     var exerciseLiveData = MutableLiveData<MutableList<Exercise>>().apply {
         value = ArrayList()
     }
+    var title = MutableLiveData<String>().apply {
+        value = null
+    }
+    var date = MutableLiveData<String>().apply {
+        value = null
+    }
+    var alreadyLoaded = MutableLiveData<Boolean>().apply {
+        value = false
+    }
 }

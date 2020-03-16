@@ -36,12 +36,15 @@ class ExerciseAdapter(private val parentRecyclerView: RecyclerView) :
         exercises.add(newExercise)
         notifyItemInserted(exercises.size)
     }
+    fun addExercise(exercise :Exercise){
+        exercises.add(exercise)
+        notifyItemInserted(exercises.size)
+    }
 
     fun deleteExercise(position: Int) {
         exercises.removeAt(position)
         notifyItemRemoved(position)
     }
-
 
     override fun getItemCount(): Int {
         return exercises.size

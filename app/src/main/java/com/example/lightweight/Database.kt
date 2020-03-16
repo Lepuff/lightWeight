@@ -52,7 +52,9 @@ object Database {
 
     const val EXERCISES = "exercises"
     const val TYPE_OF_EXERCISE = "typeOfExercise"
-
+    const val SETS = "sets"
+    const val REPS = "reps"
+    const val WEIGHT = "weight"
 
 
 

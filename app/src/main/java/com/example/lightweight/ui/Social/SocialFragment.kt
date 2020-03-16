@@ -50,8 +50,6 @@ class SocialFragment : Fragment() {
                 workOutAdapter.notifyDataSetChanged()
             })
 
-
-        dbTest()
         return root
     }
 
@@ -61,25 +59,6 @@ class SocialFragment : Fragment() {
         workOutAdapter.submitList(viewModel.workoutList.value!!)
     }
 
-    private fun dbTest() { //todo remove after testing
-        workoutsRef.get()
-            .addOnSuccessListener { workouts ->
-                if (workouts != null) {
-                    for (workout in workouts) {
-                        Log.d(
-                            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaah",
-                            workout.toString()
-                        )
-
-                    }
-                }
-                Log.d(
-                    "failed: ",
-                    workouts.toString()
-                )
-
-            }
-    }
 
     private fun initRecyclerView() {
         social_recycler_view.apply {
@@ -97,7 +76,6 @@ class SocialFragment : Fragment() {
         super.onStart()
 
 
-/*
         val snapShotListener = workoutsRef.addSnapshotListener { snapshots, e ->
             if (e != null) {
                 Log.w("Social Fragment : snap shot listener :", "Listen failed.", e)
@@ -119,8 +97,6 @@ class SocialFragment : Fragment() {
             }
             addWorkoutToFeed()
         }
-
- */
     }
 
     override fun onStop() {
@@ -131,30 +107,29 @@ class SocialFragment : Fragment() {
     }
 
 
-
     private fun addWorkoutToFeed() {
-        workoutsRef.orderBy(Database.WORKOUT_DATE, Query.Direction.DESCENDING).get()
-            .addOnSuccessListener { workouts ->
+        workoutsRef.get()
+            .addOnSuccessListener { users ->
 
 
                 workOutAdapter.clearList()
-                if (workouts != null) {
-                    for (workout in workouts) {
-                        Log.d("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaah",workout.toString())
-                        val id = workout.id
-                        val type = workout[Database.TYPE_OF_WORKOUT].toString()
-                        val date = workout[Database.WORKOUT_DATE].toString()
-                        val title = workout[Database.WORKOUT_TITLE].toString()
-                        when (type) {
-                            "gymWorkout" ->
-                                workOutAdapter.addWorkout(GymWorkout(id, title, date))
-                            "runningWorkout" ->
-                                workOutAdapter.addWorkout(RunningWorkout(id, title, date))
-                            "cyclingWorkout" ->
-                                workOutAdapter.addWorkout(
-                                    CyclingWorkout(id, title, date)
-                                )
+                if (users != null) {
+                    for (user in users) {
+                       Log.d("users id", user.id)
+
+                        db.collection(Database.USERS).document(user.id).collection(Database.WORKOUTS).get().addOnSuccessListener { workouts ->
+
+                            if (workouts!=null){
+                                for (workout in workouts)
+                                    Log.d("workout",workout.data.toString())
+
+
+
+                            }
+
                         }
+
+
                     }
                 }
             }

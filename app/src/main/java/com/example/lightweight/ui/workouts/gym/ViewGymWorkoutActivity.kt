@@ -155,9 +155,6 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
             updateGymWorkout(dialogView)
             dialog.cancel()
             finish()
-            findViewById<Button>(R.id.new_gym_add_exercise_button).visibility = View.GONE
-            findViewById<Button>(R.id.new_gym_save_workout_button).visibility = View.GONE
-            findViewById<Button>(R.id.new_gym_edit_workout_button).visibility = View.VISIBLE
         }
     }
 
@@ -166,14 +163,10 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
 
 
         val currentGymWorkoutRef = db.collection(Database.USERS)
-            .document(Database.user.email!!).collection(Database.WORKOUTS).document()
+            .document(Database.user.email!!).collection(Database.WORKOUTS).document(intent.getStringExtra("id")!!) //todo fix constants
 
-
-
-        currentGymWorkoutRef.update(Database.WORKOUT_TITLE,findViewById<TextInputEditText>(R.id.save_workout_title_editText).text.toString())
-        currentGymWorkoutRef.update(Database.WORKOUT_DATE,findViewById<TextInputEditText>(R.id.save_workout_date_editText).text.toString())
-
-
+        currentGymWorkoutRef.update(Database.WORKOUT_TITLE,dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText).text.toString())
+        currentGymWorkoutRef.update(Database.WORKOUT_DATE,dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText).text.toString())
         currentGymWorkoutRef.update(Database.EXERCISES,viewModel.exerciseLiveData.value)
 
     }

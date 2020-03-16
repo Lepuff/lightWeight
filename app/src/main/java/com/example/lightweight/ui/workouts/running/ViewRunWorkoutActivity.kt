@@ -27,35 +27,42 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(RunViewModel::class.java)
         setObservers()
 
-        if ( viewModel.alreadyLoaded.value == false){
+        if (viewModel.isLoadedFromDb.value == false) {
             getRunningInfoFromDb(id!!)
-            viewModel.alreadyLoaded.value = true
+            viewModel.isLoadedFromDb.value = true
         }
 
         setEditable(false)
 
         val editWorkoutButton = findViewById<Button>(R.id.running_edit_button)
         val saveButton = findViewById<Button>(R.id.running_save_button)
-        editWorkoutButton.visibility = View.VISIBLE
         editWorkoutButton.setOnClickListener {
-            editWorkoutButton.visibility = View.GONE
-            saveButton.visibility = View.VISIBLE
-            setEditable(true)
+            viewModel.isInEditState.value = true
         }
-
         saveButton.setOnClickListener {
             saveRunningDialog()
         }
     }
-    
-    private fun setEditable(boolean: Boolean) {
-        findViewById<TextInputEditText>(R.id.running_distance_editText).isEnabled = boolean
-        findViewById<TextInputEditText>(R.id.running_total_time_editText).isEnabled = boolean
-        findViewById<TextInputEditText>(R.id.running_average_speed_editText).isEnabled = boolean
-        findViewById<TextInputEditText>(R.id.running_top_speed_editText).isEnabled = boolean
-        findViewById<TextInputEditText>(R.id.running_average_pulse_editText).isEnabled = boolean
-        findViewById<TextInputEditText>(R.id.running_max_pulse_editText).isEnabled = boolean
-        findViewById<TextInputEditText>(R.id.running_calories_editText).isEnabled = boolean
+
+    private fun setEditable(isEditable: Boolean) {
+        findViewById<TextInputEditText>(R.id.running_distance_editText).isEnabled = isEditable
+        findViewById<TextInputEditText>(R.id.running_total_time_editText).isEnabled = isEditable
+        findViewById<TextInputEditText>(R.id.running_average_speed_editText).isEnabled = isEditable
+        findViewById<TextInputEditText>(R.id.running_top_speed_editText).isEnabled = isEditable
+        findViewById<TextInputEditText>(R.id.running_average_pulse_editText).isEnabled = isEditable
+        findViewById<TextInputEditText>(R.id.running_max_pulse_editText).isEnabled = isEditable
+        findViewById<TextInputEditText>(R.id.running_calories_editText).isEnabled = isEditable
+
+        findViewById<TextInputEditText>(R.id.running_distance_editText).requestFocus()
+
+        if (isEditable) {
+            findViewById<Button>(R.id.running_edit_button).visibility = View.GONE
+            findViewById<Button>(R.id.running_save_button).visibility = View.VISIBLE
+        } else {
+            findViewById<Button>(R.id.running_edit_button).visibility = View.VISIBLE
+            findViewById<Button>(R.id.running_save_button).visibility = View.GONE
+        }
+
     }
 
     private fun saveRunningDialog() {
@@ -73,10 +80,9 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
             .setText(viewModel.date.value)
         val dialog = dialogBuilder.show()
 
-
-
         saveButton.setOnClickListener {
             updateRunningWorkout(dialogView)//todo check if we need to go back to this activity after this. in that case we need to update title and stuff
+            viewModel.isInEditState.value = false
             dialog.cancel()
             finish()
         }
@@ -150,6 +156,15 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
     }
 
     private fun setObservers() {
+
+
+        viewModel.isInEditState.observe(this, Observer {
+            if (viewModel.isInEditState.value == true) {
+                setEditable(true)
+            } else {
+                setEditable(false)
+            }
+        })
 
         viewModel.averagePulse.observe(this, Observer {
             findViewById<TextInputEditText>(R.id.running_average_pulse_editText).setText(

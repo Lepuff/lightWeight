@@ -79,6 +79,8 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
         findViewById<TextInputEditText>(R.id.cycling_average_force_editText).isEnabled = isEditable
         findViewById<TextInputEditText>(R.id.cycling_max_force_editText).isEnabled = isEditable
 
+
+        findViewById<TextInputEditText>(R.id.cycling_distance_editText).requestFocus()
         if (isEditable) {
             findViewById<Button>(R.id.cycling_save_button).visibility = View.VISIBLE
             findViewById<Button>(R.id.cycling_edit_button).visibility = View.GONE

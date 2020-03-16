@@ -16,7 +16,10 @@ class GymViewModel : ViewModel() {
     var date = MutableLiveData<String>().apply {
         value = null
     }
-    var alreadyLoaded = MutableLiveData<Boolean>().apply {
+    var isLoadedFromDb = MutableLiveData<Boolean>().apply {
         value = false // todo fix var names?
+    }
+    var isInEditState  = MutableLiveData<Boolean>().apply {
+        value = false
     }
 }

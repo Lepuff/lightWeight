@@ -41,9 +41,9 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
             title = viewModel.title.value
         })
 
-        if (viewModel.alreadyLoaded.value == false){
+        if (viewModel.isLoadedFromDb.value == false){
             getGymWorkoutFromDb(id!!)
-            viewModel.alreadyLoaded.value = true
+            viewModel.isLoadedFromDb.value = true
         }
 
         initRecyclerView()

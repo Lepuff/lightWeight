@@ -1,12 +1,15 @@
 package com.example.lightweight
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import com.example.lightweight.classes.User
 import com.facebook.AccessToken
 import com.facebook.GraphRequest
+import com.facebook.Profile
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import java.net.URI
 import java.time.LocalDateTime
 import java.util.*
 import kotlin.collections.HashMap
@@ -15,7 +18,8 @@ import kotlin.properties.Delegates
 
 object Database {
 
-    private var user: User = User(null, true, null, null, null)
+    //private var profilePicture: Uri = Uri.parse("android.resource://com.example.lightweight/drawable/@mipmap/ic_launcher_round")
+    private var user: User = User(null, true, null, null, null, null)
 
 
     const val WORKOUTS = "workouts"
@@ -63,6 +67,10 @@ object Database {
         user.lastName = lastName
     }
 
+    fun getUserPicture(): Uri{
+        return user.profilePicture!!
+    }
+
     fun getUserId(): String? {
         return user.id
     }
@@ -103,7 +111,8 @@ object Database {
             "firstName" to user.firstName,
             "lastName" to user.lastName,
             "email" to user.email,
-            "id" to user.id
+            "id" to user.id,
+            "pictureUri" to user.profilePicture.toString()
         )
         val db = FirebaseFirestore.getInstance()
         db.collection(USERS).document(getUserId()!!)
@@ -126,12 +135,13 @@ object Database {
                 user.email = `object`.getString("email")
                 user.firstName = `object`.getString("first_name")
                 user.lastName = `object`.getString("last_name")
+                user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120)
 
                 userInfoToDb()
             }
             //Here we put the requested fields to be returned from the JSONObject
             val parameters = Bundle()
-            parameters.putString("fields", "id, first_name, last_name, email")
+            parameters.putString("fields", "id, first_name, last_name, email, picture")
             request.parameters = parameters
             request.executeAsync()
         } else {

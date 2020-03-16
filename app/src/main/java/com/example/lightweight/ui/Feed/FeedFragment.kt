@@ -87,16 +87,6 @@ class FeedFragment : Fragment() {
 
     }
 
-    /*override fun onStart() {
-        super.onStart()
-        //TODO borde finnas bättre lösning
-        when (Database.user.email){
-            null -> null
-            else -> addWorkoutToFeed()
-        }
-
-    }*/
-
     override fun onPause() {
         super.onPause()
         feedViewModel.clear()

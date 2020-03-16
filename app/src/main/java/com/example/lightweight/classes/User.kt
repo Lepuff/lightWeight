@@ -1,7 +1,10 @@
 package com.example.lightweight.classes
 
+import android.net.Uri
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.io.InputStream
+import java.net.URI
 
 data class User(
 
@@ -23,5 +26,7 @@ data class User(
 
     @Expose
     @SerializedName("image")
-    var lastName: String? = null
+    var lastName: String? = null,
+
+    var profilePicture : Uri? = null
 )

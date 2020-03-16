@@ -33,7 +33,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var textInputPassword: TextInputEditText
     private lateinit var email: String
     private lateinit var password: String
-    private lateinit var profilePicture: URL
     private lateinit var progressBar: ProgressBar
 
 

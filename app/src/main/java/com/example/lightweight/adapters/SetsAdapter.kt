@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.layout_sets_item.view.*
 
 class SetsAdapter(private val childRecyclerView: RecyclerView) :
     RecyclerView.Adapter<SetsAdapter.SetsViewHolder>() {
-
+    private var isEditable: Boolean = true
     private var sets: MutableList<Sets> = ArrayList()
 
     fun submitList(sets: MutableList<Sets>) {
@@ -44,6 +44,11 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
         this.notifyItemInserted(sets.size - 1)
     }
 
+    fun isEditable(boolean: Boolean) {
+        isEditable = boolean
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int {
         return sets.size
     }
@@ -55,15 +60,19 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
                 R.layout.layout_sets_item,
                 parent,
                 false
-            ), childRecyclerView
+            ), childRecyclerView,isEditable
         )
     }
 
-    class SetsViewHolder constructor(itemView: View, private val recyclerView: RecyclerView) :
+    class SetsViewHolder constructor(
+        itemView: View,
+        private val recyclerView: RecyclerView,
+        isEditable: Boolean
+    ) :
         RecyclerView.ViewHolder(itemView) {
         private var selectedSet: Sets? = null
         private val adapter = recyclerView.adapter as SetsAdapter
-        
+
         private val setNumber: TextView = itemView.sets_number_textView
         private val setWeight: EditText = itemView.sets_weight_editText.apply {
             addTextChangedListener(object : TextWatcher {
@@ -119,6 +128,17 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
             }
         }
 
+        fun setEditable(editable: Boolean) {
+
+            if (editable){
+                button.visibility = View.VISIBLE
+            }else{
+                button.visibility = View.GONE
+            }
+            setWeight.isEnabled = editable
+            setsReps.isEnabled = editable
+        }
+
 
         fun bind(set: Sets, position: Int) {
             this.selectedSet = set
@@ -131,7 +151,7 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
     }
 
     override fun onBindViewHolder(holder: SetsViewHolder, position: Int) {
-
+        holder.setEditable(isEditable)
         val set = sets[position]
         holder.bind(set, position)
     }

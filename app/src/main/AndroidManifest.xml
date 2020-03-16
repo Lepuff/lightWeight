@@ -12,12 +12,50 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.workouts.cycling.ViewCyclingWorkoutActivity"></activity>
-        <activity android:name=".ui.workouts.running.ViewRunWorkoutActivity" />
-        <activity android:name=".ui.workouts.cycling.NewCyclingWorkoutActivity" />
-        <activity android:name=".ui.workouts.running.NewRunningWorkoutActivity" />
-        <activity android:name=".ui.workouts.gym.NewGymWorkoutActivity" />
-        <activity android:name=".ui.workouts.gym.EditGymWorkoutActivity" /> <!-- Todo check this error? -->
+        <activity
+            android:name=".ui.workouts.cycling.ViewCyclingWorkoutActivity"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.NavigationActivity" />
+        </activity>
+        <activity
+            android:name=".ui.workouts.running.ViewRunWorkoutActivity"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.NavigationActivity" />
+        </activity>
+        <activity
+            android:name=".ui.workouts.gym.ViewGymWorkoutActivity"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.NavigationActivity" />
+        </activity>
+        <activity
+            android:name=".ui.workouts.cycling.NewCyclingWorkoutActivity"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.NavigationActivity" />
+
+        </activity>
+        <activity
+            android:name=".ui.workouts.running.NewRunningWorkoutActivity"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.NavigationActivity" />
+        </activity>
+        <activity
+            android:name=".ui.workouts.gym.NewGymWorkoutActivity"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.NavigationActivity" />
+        </activity>
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -50,14 +88,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.workouts.gym.ViewGymWorkoutActivity"
-            android:label="Details"
-            android:launchMode="singleTop"> <!-- todo Check this error? -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.NavigationActivity" />
-        </activity>
+
         <activity
             android:name=".ui.NavigationActivity"
             android:label="LightWeight"

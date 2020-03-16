@@ -165,7 +165,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/background_button"
-            android:text="@string/edit"
+            android:text="@string/edit_workout"
             android:textColor="@color/text_button"
             android:visibility="gone"/>
     </LinearLayout>

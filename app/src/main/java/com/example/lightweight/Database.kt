@@ -24,36 +24,27 @@ object Database {
 
     const val WORKOUTS = "workouts"
     const val USERS = "users"
-
-
-
-
-
     const val AVERAGE_PULSE = "averagePulse"
     const val AVERAGE_SPEED = "averageSpeed"
     const val CALORIES = "calories"
     const val DISTANCE = "distance"
-
+    const val NAME ="name"
     const val MAX_PULSE = "maxPulse"
-
     const val TIMESTAMP = "timestamp"
-
     const val TOP_SPEED = "topSpeed"
-
     const val TOTAL_TIME = "totalTime"
-
     const val TYPE_OF_WORKOUT = "typeOfWorkout"
-
     const val WORKOUT_DATE = "workoutDate"
-
     const val WORKOUT_TITLE = "workoutTitle"
-
     const val AVERAGE_FORCE = "averageForce"
-
     const val MAX_FORCE = "maxForce"
     const val AVERAGE_CADENCE = "averageCadence"
     const val MAX_CADENCE = "maxCadence"
-
+    const val EXERCISES = "exercises"
+    const val TYPE_OF_EXERCISE = "typeOfExercise"
+    const val SETS = "sets"
+    const val REPS = "reps"
+    const val WEIGHT = "weight"
 
     fun getUser(): User{
         return user

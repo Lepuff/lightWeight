@@ -14,13 +14,9 @@ import com.example.lightweight.R
 
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.adapters.ExerciseAdapter
-import com.example.lightweight.classes.Exercise
-import com.google.android.gms.tasks.Task
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-
-import com.google.firebase.firestore.QuerySnapshot
 
 
 import kotlinx.android.synthetic.main.activity_new_gym_workout.*
@@ -29,23 +25,23 @@ import java.time.LocalDate
 class NewGymWorkoutActivity : AppCompatActivity() {
 
     private lateinit var exerciseAdapter: ExerciseAdapter
-    private lateinit var newGymWorkoutViewModel: GymViewModel
+    private lateinit var viewModel: GymViewModel
     private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_gym_workout)
 
-        newGymWorkoutViewModel = ViewModelProviders.of(this).get(
+        viewModel = ViewModelProviders.of(this).get(
             GymViewModel::class.java
         )
-        newGymWorkoutViewModel.exerciseLiveData.observe(
+        viewModel.exerciseLiveData.observe(
             this, Observer {
                 exerciseAdapter.notifyDataSetChanged()
             }
         )
         initRecyclerView()
-        exerciseAdapter.submitList(newGymWorkoutViewModel.exerciseLiveData.value!!)
+        exerciseAdapter.submitList(viewModel.exerciseLiveData.value!!)
 
         val addExerciseButton = findViewById<Button>(R.id.new_gym_add_exercise_button)
         addExerciseButton.visibility = View.VISIBLE
@@ -99,8 +95,6 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
             dialog.show()
         }
-
-
     }
 
     private fun saveGymDialog() {
@@ -136,7 +130,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
             .document(Database.user.email!!).collection(Database.WORKOUTS).document()
 
         val workoutInfo = hashMapOf(
-            Database.EXERCISES to newGymWorkoutViewModel.exerciseLiveData.value,
+            Database.EXERCISES to viewModel.exerciseLiveData.value,
             Database.TIMESTAMP to FieldValue.serverTimestamp(),
             Database.TYPE_OF_WORKOUT to "gymWorkout",
             Database.WORKOUT_TITLE to workoutTitle.toString(),

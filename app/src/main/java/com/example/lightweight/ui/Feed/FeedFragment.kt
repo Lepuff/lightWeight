@@ -1,8 +1,7 @@
 package com.example.lightweight.ui.Feed
 
 import android.os.Bundle
-import android.provider.ContactsContract
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,16 +14,11 @@ import com.example.lightweight.R
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.adapters.WorkOutAdapter
 import com.example.lightweight.classes.*
-import com.facebook.internal.Mutable
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_feed.*
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.runBlocking
-import java.util.*
-import kotlin.collections.ArrayList
+
 
 class FeedFragment : Fragment() {
 

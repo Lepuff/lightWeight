@@ -18,8 +18,8 @@ import kotlinx.android.synthetic.main.layout_exercises_list_item.view.*
 
 class ExerciseAdapter(private val parentRecyclerView: RecyclerView) :
     RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>() {
-    private var isEditable : Boolean = true
 
+    private var isEditable : Boolean = true
     private var exercises: MutableList<Exercise> = ArrayList()
 
     fun submitList(workOutList: MutableList<Exercise>) {

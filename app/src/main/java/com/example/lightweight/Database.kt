@@ -29,7 +29,7 @@ object Database {
     const val AVERAGE_SPEED = "averageSpeed"
     const val CALORIES = "calories"
     const val DISTANCE = "distance"
-
+    const val NAME ="name"
     const val MAX_PULSE = "maxPulse"
 
     const val TIMESTAMP = "timestamp"
@@ -49,6 +49,9 @@ object Database {
     const val MAX_FORCE = "maxForce"
     const val AVERAGE_CADENCE = "averageCadence"
     const val MAX_CADENCE = "maxCadence"
+
+    const val EXERCISES = "exercises"
+    const val TYPE_OF_EXERCISE = "typeOfExercise"
 
 
 

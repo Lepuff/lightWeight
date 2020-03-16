@@ -20,6 +20,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_new_gym_workout.*
+import kotlinx.android.synthetic.main.fragment_social.*
 import java.time.LocalDate
 
 class ViewGymWorkoutActivity : AppCompatActivity() {
@@ -162,18 +163,18 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
 
     private fun updateGymWorkout(dialogView: View) {
 
-        val workoutTitle =
-            dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText)
-                .text
 
-        val workoutDate =
-            dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
-                .text
 
         val currentGymWorkoutRef = db.collection(Database.USERS)
             .document(Database.user.email!!).collection(Database.WORKOUTS).document()
 
 
+
+        currentGymWorkoutRef.update(Database.WORKOUT_TITLE,findViewById<TextInputEditText>(R.id.save_workout_title_editText).text.toString())
+        currentGymWorkoutRef.update(Database.WORKOUT_DATE,findViewById<TextInputEditText>(R.id.save_workout_date_editText).text.toString())
+
+
+        currentGymWorkoutRef.update(Database.EXERCISES,viewModel.exerciseLiveData.value)
 
     }
 }

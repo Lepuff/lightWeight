@@ -26,9 +26,13 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         val id = intent.getStringExtra("id")
         viewModel = ViewModelProviders.of(this).get(RunViewModel::class.java)
         setObservers()
-        getRunningInfoFromDb(id!!)
-        setEditable(false)
 
+        if ( viewModel.alreadyLoaded.value == false){
+            getRunningInfoFromDb(id!!)
+            viewModel.alreadyLoaded.value = true
+        }
+
+        setEditable(false)
 
         val editWorkoutButton = findViewById<Button>(R.id.running_edit_button)
         val saveButton = findViewById<Button>(R.id.running_save_button)
@@ -72,9 +76,7 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
 
 
         saveButton.setOnClickListener {
-            updateRunningWorkout(dialogView)
-            findViewById<Button>(R.id.running_edit_button).visibility = View.VISIBLE
-            findViewById<Button>(R.id.running_save_button).visibility = View.GONE
+            updateRunningWorkout(dialogView)//todo check if we need to go back to this activity after this. in that case we need to update title and stuff
             dialog.cancel()
             finish()
         }

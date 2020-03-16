@@ -17,6 +17,6 @@ class GymViewModel : ViewModel() {
         value = null
     }
     var alreadyLoaded = MutableLiveData<Boolean>().apply {
-        value = false
+        value = false // todo fix var names?
     }
 }

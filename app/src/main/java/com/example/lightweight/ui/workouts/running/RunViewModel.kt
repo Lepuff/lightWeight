@@ -40,7 +40,9 @@ class RunViewModel : ViewModel() {
     var calories = MutableLiveData<Int>().apply {
         value = null
     }
-
+    var alreadyLoaded = MutableLiveData<Boolean>().apply {
+        value = false // todo fix var names?
+    }
 
 
 }

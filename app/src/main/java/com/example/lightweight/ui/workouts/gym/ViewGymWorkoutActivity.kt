@@ -17,11 +17,9 @@ import com.example.lightweight.classes.Exercise
 import com.example.lightweight.classes.Sets
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_new_gym_workout.*
-import kotlinx.android.synthetic.main.fragment_social.*
-import java.time.LocalDate
+
 
 class ViewGymWorkoutActivity : AppCompatActivity() {
 
@@ -39,7 +37,6 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
             Observer {
                 exerciseAdapter.notifyDataSetChanged()
             })
-
         viewModel.date.observe(this, Observer {
             title = viewModel.title.value
         })

@@ -18,8 +18,7 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()
     private lateinit var viewModel: CyclingViewModel
-
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cycling_workout)
@@ -27,7 +26,11 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(CyclingViewModel::class.java)
         val id = intent.getStringExtra("id")//todo constants!
         setObservers()
-        getCyclingInfoFromDb(id!!)
+        if (viewModel.alreadyLoaded.value == false) {
+            getCyclingInfoFromDb(id!!)
+            viewModel.alreadyLoaded.value == true
+        }
+
         setEditable(false)
 
         val editButton = findViewById<Button>(R.id.cycling_edit_button)

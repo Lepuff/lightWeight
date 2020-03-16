@@ -47,4 +47,8 @@ class CyclingViewModel : ViewModel() {
     var date = MutableLiveData<String>().apply {
         value = null
     }
+
+    var alreadyLoaded = MutableLiveData<Boolean>().apply {
+        value = false // todo fix var names?
+    }
 }

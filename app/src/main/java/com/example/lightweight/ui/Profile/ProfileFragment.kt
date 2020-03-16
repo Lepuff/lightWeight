@@ -1,5 +1,6 @@
 package com.example.lightweight.ui.Profile
 
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -17,6 +18,7 @@ import com.facebook.AccessToken
 import com.facebook.login.LoginManager
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
@@ -34,13 +36,12 @@ class ProfileFragment : Fragment() {
             LoginManager.getInstance().logOut()
             AccessToken.setCurrentAccessToken(null)
             startActivity(Intent(activity, LoginActivity::class.java))
+
         }
 
         var profileName = root.findViewById<TextView>(R.id.text_profile_name).text
         var profileAge = root.findViewById<TextView>(R.id.text_profile_age).text
         var profileEmail = root.findViewById<TextView>(R.id.text_profile_mail).text
-        var profileNewPassword = root.findViewById<TextInputEditText>(R.id.profile_new_password).text
-        var profileConfirmPassword = root.findViewById<TextInputEditText>(R.id.profile_confirm_password).text
 
 
 
@@ -53,6 +54,8 @@ class ProfileFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         // TODO: Use the ViewModel
     }
+
+
 
 
 }

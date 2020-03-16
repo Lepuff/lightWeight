@@ -13,10 +13,5 @@ class ProfileViewModel : ViewModel() {
     var profileEmail = MutableLiveData<String>().apply {
         value = null
     }
-     var profileNewPassword = MutableLiveData<String>().apply {
-         value = null
-     }
-    var profileConfirmPassword = MutableLiveData<String>().apply {
-        value = null
-    }
+
 }

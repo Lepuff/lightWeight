@@ -61,8 +61,9 @@
     <string name="profile_age">Ålder:</string>
     <string name="profile_email">Email:</string>
     <string name="profile_information">Profil information</string>
-    <string name="new_password">Nytt Lösenord</string>
-    <string name="confirm_password">Bekräfta Lösenord</string>
     <string name="save_password">Spara lösenord</string>
     <string name="save">Spara</string>
+    <string name="edit_profile">Ändra profil</string>
+    <string name="change_password">Ändra lösenord</string>
+
 </resources>

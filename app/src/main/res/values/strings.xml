@@ -42,7 +42,6 @@
     <string name="speed">Speed</string>
 
 
-
     <string name="add_set">Add set</string>
     <string name="set">Set</string>
     <string name="weight">Weight</string>
@@ -63,21 +62,20 @@
     <string name="average_temperature">Average temperature</string>
     <string name="min_temperature">Min temperature</string>
     <string name="max_temperature">Max temperature</string>
-    <string name="profile">Profile</string>
     <string name="log_out">Log out</string>
     <string name="profile_name">Name:</string>
     <string name="profile_age">Age:</string>
     <string name="profile_email">Email:</string>
     <string name="profile_information">Profile information</string>
-    <string name="new_password">New Password</string>
-    <string name="confirm_password">Confirm password</string>
     <string name="save_password">Save password</string>
     <string name="login_failed">Login failed</string>
     <string name="average_force">Average force</string>
     <string name="save">save</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="change_password">Change password</string>
+    <string name="profile">Profile</string>
 
     <!--Todo allt efter detta! -->
-
 
 
 </resources>

@@ -36,8 +36,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/divider"
             android:text="@string/time"
+            android:background="@color/divider"
             android:textColor="@color/text_divider" />
 
         <com.google.android.material.textfield.TextInputLayout

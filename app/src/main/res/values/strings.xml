@@ -77,6 +77,11 @@
     <string name="edit_workout">Edit Workout</string>
     <string name="choose_a_new_exercise">Choose a new Exercise</string>
 
+
+    <string name="edit_profile">Edit profile</string>
+    <string name="change_password">Change password</string>
+    <string name="profile">Profile</string>
+
     <!--Todo allt efter detta! -->
 
 

@@ -34,6 +34,10 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
         workouts.removeAt(position)
         this.notifyDataSetChanged()
     }
+    fun clearList(){
+        workouts.clear()
+        notifyDataSetChanged()
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkOutViewHolder {

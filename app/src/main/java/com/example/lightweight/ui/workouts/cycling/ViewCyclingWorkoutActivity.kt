@@ -18,7 +18,7 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()
     private lateinit var viewModel: CyclingViewModel
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cycling_workout)
@@ -26,22 +26,17 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(CyclingViewModel::class.java)
         val id = intent.getStringExtra("id")//todo constants!
         setObservers()
-        if (viewModel.alreadyLoaded.value == false) {
+        if (viewModel.isLoadedFromDb.value == false) {
             getCyclingInfoFromDb(id!!)
-            viewModel.alreadyLoaded.value == true
+            viewModel.isLoadedFromDb.value == true
         }
-
-        setEditable(false)
 
         val editButton = findViewById<Button>(R.id.cycling_edit_button)
-        editButton.visibility = View.VISIBLE
-        val saveButton = findViewById<Button>(R.id.cycling_save_button)
 
         editButton.setOnClickListener {
-            setEditable(true)
-            editButton.visibility = View.GONE
-            saveButton.visibility = View.VISIBLE
+            viewModel.isInEditState.value = true
         }
+        val saveButton = findViewById<Button>(R.id.cycling_save_button)
         saveButton.setOnClickListener {
             saveCyclingDialog()
         }
@@ -63,30 +58,48 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
 
         dialogSaveButton.setOnClickListener {
             updateCyclingWorkout(dialogView)
-            findViewById<Button>(R.id.cycling_edit_button).visibility = View.VISIBLE
-            findViewById<Button>(R.id.cycling_save_button).visibility = View.GONE
+            viewModel.isInEditState.value = false
             dialog.cancel()
             finish()
         }
     }
 
 
-    private fun setEditable(boolean: Boolean) {
-        findViewById<TextInputEditText>(R.id.cycling_distance_editText).isEnabled = boolean
-        findViewById<TextInputEditText>(R.id.cycling_total_time_editText).isEnabled = boolean
-        findViewById<TextInputEditText>(R.id.cycling_average_speed_editText).isEnabled = boolean
-        findViewById<TextInputEditText>(R.id.cycling_top_speed_editText).isEnabled = boolean
-        findViewById<TextInputEditText>(R.id.cycling_average_pulse_editText).isEnabled = boolean
-        findViewById<TextInputEditText>(R.id.cycling_max_pulse_editText).isEnabled = boolean
-        findViewById<TextInputEditText>(R.id.cycling_average_cadence_editText).isEnabled = boolean
-        findViewById<TextInputEditText>(R.id.cycling_calories_editText).isEnabled = boolean
-        findViewById<TextInputEditText>(R.id.cycling_max_cadence_editText).isEnabled = boolean
-        findViewById<TextInputEditText>(R.id.cycling_average_force_editText).isEnabled = boolean
-        findViewById<TextInputEditText>(R.id.cycling_max_force_editText).isEnabled = boolean
+    private fun setEditable(isEditable: Boolean) {
+        findViewById<TextInputEditText>(R.id.cycling_distance_editText).isEnabled = isEditable
+        findViewById<TextInputEditText>(R.id.cycling_total_time_editText).isEnabled = isEditable
+        findViewById<TextInputEditText>(R.id.cycling_average_speed_editText).isEnabled = isEditable
+        findViewById<TextInputEditText>(R.id.cycling_top_speed_editText).isEnabled = isEditable
+        findViewById<TextInputEditText>(R.id.cycling_average_pulse_editText).isEnabled = isEditable
+        findViewById<TextInputEditText>(R.id.cycling_max_pulse_editText).isEnabled = isEditable
+        findViewById<TextInputEditText>(R.id.cycling_average_cadence_editText).isEnabled =
+            isEditable
+        findViewById<TextInputEditText>(R.id.cycling_calories_editText).isEnabled = isEditable
+        findViewById<TextInputEditText>(R.id.cycling_max_cadence_editText).isEnabled = isEditable
+        findViewById<TextInputEditText>(R.id.cycling_average_force_editText).isEnabled = isEditable
+        findViewById<TextInputEditText>(R.id.cycling_max_force_editText).isEnabled = isEditable
+
+        if (isEditable) {
+            findViewById<Button>(R.id.cycling_save_button).visibility = View.VISIBLE
+            findViewById<Button>(R.id.cycling_edit_button).visibility = View.GONE
+        } else {
+            findViewById<Button>(R.id.cycling_save_button).visibility = View.GONE
+            findViewById<Button>(R.id.cycling_edit_button).visibility = View.VISIBLE
+        }
+
+
     }
 
 
     private fun setObservers() {
+
+        viewModel.isInEditState.observe(this, Observer {
+            if (viewModel.isInEditState.value == true) {
+                setEditable(true)
+            } else {
+                setEditable(false)
+            }
+        })
 
         viewModel.averagePulse.observe(this, Observer {
             findViewById<TextInputEditText>(R.id.cycling_average_pulse_editText).setText(

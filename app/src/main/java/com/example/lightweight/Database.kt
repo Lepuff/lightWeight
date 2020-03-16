@@ -15,7 +15,7 @@ import kotlin.properties.Delegates
 
 object Database {
 
-    var user: User = User(true, null, null, null)
+    private var user: User = User(null, true, null, null, null)
 
 
     const val WORKOUTS = "workouts"
@@ -51,24 +51,63 @@ object Database {
     const val MAX_CADENCE = "maxCadence"
 
 
+    fun getUser(): User{
+        return user
+    }
 
+    fun setUser(id: String, isFacebookUser: Boolean, email: String, firstName: String, lastName: String){
+        user.id = id
+        user.isFacebookUser = isFacebookUser
+        user.email = email
+        user.firstName = firstName
+        user.lastName = lastName
+    }
 
+    fun getUserId(): String? {
+        return user.id
+    }
 
+    fun setUserId(newId: String){
+        user.id = newId
+    }
 
     fun getUserEmail(): String? {
         return user.email
     }
 
+    fun setUserEmail(newEmail: String) {
+        user.email = newEmail
+        userInfoToDb()
+    }
+
+    fun getUserFirstName(): String? {
+        return user.firstName
+    }
+
+    fun setUserFirstName(newFirstName: String){
+        user.firstName = newFirstName
+        userInfoToDb()
+    }
+
+    fun getUserLastName(): String? {
+        return user.lastName
+    }
+
+    fun setUserLastName(newLastName: String){
+        user.lastName = newLastName
+        userInfoToDb()
+    }
 
     private fun userInfoToDb() {
         val userInfo = hashMapOf(
             "firstName" to user.firstName,
             "lastName" to user.lastName,
-            "email" to user.email
+            "email" to user.email,
+            "id" to user.id
         )
         val db = FirebaseFirestore.getInstance()
-        db.collection("users").document(getUserEmail()!!)
-            .set(userInfo)
+        db.collection(USERS).document(getUserId()!!)
+            .set(userInfo, SetOptions.merge())
             .addOnSuccessListener { documentReference ->
                 Log.d("TAG", "DocumentSnapshot added with ID: $documentReference")
             }
@@ -83,6 +122,7 @@ object Database {
                 accessToken
             ) { `object`, response ->
 
+                user.id = `object`.getString("id")
                 user.email = `object`.getString("email")
                 user.firstName = `object`.getString("first_name")
                 user.lastName = `object`.getString("last_name")
@@ -94,7 +134,8 @@ object Database {
             parameters.putString("fields", "id, first_name, last_name, email")
             request.parameters = parameters
             request.executeAsync()
-        } else
+        } else {
             userInfoToDb()
+        }
     }
 }

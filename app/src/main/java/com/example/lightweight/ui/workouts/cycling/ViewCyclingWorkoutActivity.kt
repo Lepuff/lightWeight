@@ -139,7 +139,7 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
 
     private fun getCyclingInfoFromDb(id: String) {
         val currentRunWorkoutRef = db.collection(Database.USERS)
-            .document(Database.user.email!!).collection(Database.WORKOUTS).document(id)
+            .document(Database.getUserId()!!).collection(Database.WORKOUTS).document(id)
         currentRunWorkoutRef.get().addOnSuccessListener { document ->
             if (document != null) {
                 viewModel.title.value = document[Database.WORKOUT_TITLE].toString()
@@ -169,7 +169,7 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
 
     private fun updateCyclingWorkout(dialogView: View) {
         val currentRunWorkoutRef = db.collection(Database.USERS)
-            .document(Database.user.email!!).collection(Database.WORKOUTS)
+            .document(Database.getUserId()!!).collection(Database.WORKOUTS)
             .document(intent.getStringExtra("id")!!)//todo fix constants
 
 

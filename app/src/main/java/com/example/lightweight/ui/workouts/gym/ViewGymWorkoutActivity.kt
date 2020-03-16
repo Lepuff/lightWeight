@@ -37,7 +37,7 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
 
 
         val currentGymWorkoutRef = db.collection("users")
-            .document(Database.user.email!!).collection("workouts").document(id)
+            .document(Database.getUserId()!!).collection("workouts").document(id)
 
         val exerciseList: MutableList<Exercise> = ArrayList()
         currentGymWorkoutRef.get()

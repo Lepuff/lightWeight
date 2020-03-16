@@ -82,7 +82,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
 
                 val currentGymWorkoutRef = db.collection("users")
-                    .document(Database.user.email!!).collection("workouts").document()
+                    .document(Database.getUserId()!!).collection("workouts").document()
 
 
                 val workoutInfo = hashMapOf(

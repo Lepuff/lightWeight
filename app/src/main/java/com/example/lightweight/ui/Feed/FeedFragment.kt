@@ -15,8 +15,11 @@ import com.example.lightweight.R
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.adapters.WorkOutAdapter
 import com.example.lightweight.classes.*
+import com.facebook.Profile
+import com.facebook.ProfileTracker
 import com.facebook.internal.Mutable
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -31,8 +34,8 @@ class FeedFragment : Fragment() {
     private lateinit var feedViewModel: FeedViewModel
     private lateinit var workOutAdapter: WorkOutAdapter
     private var db = FirebaseFirestore.getInstance()
-    private var workoutsRef = db.collection("users").document(Database.user.email!!)
-        .collection("workouts")
+    private lateinit var workoutsRef: CollectionReference
+    //val profile: Profile = Profile.getCurrentProfile()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,6 +77,7 @@ class FeedFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initRecyclerView()
+
         workOutAdapter.submitList(feedViewModel.workoutList.value!!)
 
     }
@@ -83,15 +87,15 @@ class FeedFragment : Fragment() {
 
     }
 
-    override fun onStart() {
+    /*override fun onStart() {
         super.onStart()
         //TODO borde finnas bättre lösning
-   /*     when (Database.user.email){
+        when (Database.user.email){
             null -> null
             else -> addWorkoutToFeed()
-        }*/
+        }
 
-    }
+    }*/
 
     override fun onPause() {
         super.onPause()
@@ -102,9 +106,12 @@ class FeedFragment : Fragment() {
 
 
 
- 
+
 
     private fun addWorkoutToFeed() {
+        workoutsRef = db.collection("users").document(Database.getUserId()!!)
+            .collection("workouts")
+
         workoutsRef.orderBy("workoutDate", Query.Direction.DESCENDING).get().addOnSuccessListener { workouts ->
 
             if (workouts != null) {

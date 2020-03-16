@@ -2,6 +2,7 @@ package com.example.lightweight.ui.Register
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Log
 import android.widget.Toast
 import android.view.View
@@ -102,12 +103,19 @@ class RegisterActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Database.user = User(false, email, firstName, lastName)
+                    val id = auth.currentUser!!.uid
+                    Database.setUser(id = id, isFacebookUser = false, email = email, firstName = firstName, lastName = lastName)
                     Toast.makeText(this, getString(R.string.sign_up_successful), Toast.LENGTH_SHORT)
                         .show()
 
                     //update database with user data
                     Database.updateUserData(null)
+
+                    //TODO remove after testing
+                    /*val a = Database.getUserEmail()
+                    val b = Database.getUserFirstName()
+                    val c = Database.getUserLastName()
+                    val d = Database.getUserId()*/
 
                     startActivity(Intent(this, NavigationActivity::class.java))
                     progressBar.visibility = View.INVISIBLE

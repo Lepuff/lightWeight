@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.lightweight.Database
 import com.example.lightweight.R
 import com.example.lightweight.classes.AbstractWorkout
 import com.google.android.material.textview.MaterialTextView
@@ -79,7 +80,7 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
 
             Glide.with(itemView.context)
                 .applyDefaultRequestOptions(requestOption)
-                .load("") //todo add image from db
+                .load(Database.getUserPicture().toString()) //todo add image from db
                 .into(workoutImage)
         }
 

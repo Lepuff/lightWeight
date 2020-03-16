@@ -87,7 +87,7 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
 
 
         val currentCyclingWorkoutRef = db.collection("users")
-            .document(Database.user.email!!).collection("workouts").document()
+            .document(Database.getUserId()!!).collection("workouts").document()
 
 
         val workoutInfo = hashMapOf(

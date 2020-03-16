@@ -52,7 +52,9 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         val saveWorkoutButton = findViewById<Button>(R.id.new_gym_save_workout_button)
         saveWorkoutButton.visibility = View.VISIBLE
         saveWorkoutButton.setOnClickListener {
+
             saveGymDialog()
+
         }
     }
 

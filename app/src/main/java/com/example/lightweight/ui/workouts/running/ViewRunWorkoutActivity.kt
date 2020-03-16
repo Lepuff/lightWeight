@@ -84,7 +84,7 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
 
     private fun updateRunningWorkout(dialogView: View) {
         val currentRunWorkoutRef = db.collection(Database.USERS)
-            .document(Database.user.email!!).collection(Database.WORKOUTS)
+            .document(Database.getUserId()!!).collection(Database.WORKOUTS)
             .document(intent.getStringExtra("id")!!)//todo fix constants
         currentRunWorkoutRef.update(
             Database.AVERAGE_PULSE,
@@ -128,7 +128,7 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
 
     private fun getRunningInfoFromDb(id: String) {
         val currentRunWorkoutRef = db.collection("users")
-            .document(Database.user.email!!).collection("workouts").document(id)
+            .document(Database.getUserId()!!).collection("workouts").document(id)
         currentRunWorkoutRef.get().addOnSuccessListener { document ->
             if (document != null) {
                 viewModel.title.value = document[Database.WORKOUT_TITLE].toString()

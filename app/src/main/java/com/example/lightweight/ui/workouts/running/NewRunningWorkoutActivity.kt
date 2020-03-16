@@ -54,7 +54,7 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
         val date = dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText).text.toString()
         val title = dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText).text.toString()
         val currentRunningWorkoutRef = db.collection("users")
-            .document(Database.user.email!!).collection("workouts").document()
+            .document(Database.getUserId()!!).collection("workouts").document()
 
         val workoutInfo = hashMapOf(
             "distance" to findViewById<TextInputEditText>(R.id.running_distance_editText).text.toString(),

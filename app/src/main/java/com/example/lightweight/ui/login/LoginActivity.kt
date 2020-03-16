@@ -33,7 +33,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var textInputPassword: TextInputEditText
     private lateinit var email: String
     private lateinit var password: String
-    private lateinit var profilePicture: URL
     private lateinit var progressBar: ProgressBar
 
 
@@ -75,16 +74,17 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, NavigationActivity::class.java))
             finish()
         }
-
     }
 
     private fun isAlreadyLoggedIn(): Boolean{
         val accessToken = AccessToken.getCurrentAccessToken()
         if (accessToken != null && !accessToken.isExpired){
+            val profile = Profile.getCurrentProfile()
+            Database.setUserId(profile.id)
             Database.updateUserData(accessToken)
             return true
         } else if (auth.currentUser != null){
-            Database.user.email = auth.currentUser!!.email
+            Database.setUserId(auth.currentUser!!.uid)
             return true
         }else
             return false
@@ -94,7 +94,6 @@ class LoginActivity : AppCompatActivity() {
         textInputEmail = findViewById(R.id.emailLogin_editText)
         textInputPassword = findViewById(R.id.passwordLogin_editText)
 
-        val s: String = "AbC"
 
         email = textInputEmail.text.toString().trim().toLowerCase(Locale.ROOT)
         password = textInputPassword.text.toString().trim().toLowerCase(Locale.ROOT)
@@ -123,10 +122,8 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    val user = auth.currentUser
-
-                    // add email to Database.user.email
-                    Database.user.email = email
+                    /*val user = auth.currentUser
+                    Database.user.id = user!!.uid*/
                     startActivity(Intent(this, NavigationActivity::class.java))
                     progressBar.visibility = View.INVISIBLE
                 } else {

@@ -17,8 +17,17 @@ import com.example.lightweight.R
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.adapters.WorkOutAdapter
 import com.example.lightweight.classes.*
+
+import com.facebook.Profile
+import com.facebook.ProfileTracker
+import com.facebook.internal.Mutable
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentSnapshot
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.DocumentChange
+
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.fragment_feed.*
@@ -29,8 +38,10 @@ class FeedFragment : Fragment() {
     private lateinit var feedViewModel: FeedViewModel
     private lateinit var workOutAdapter: WorkOutAdapter
     private var db = FirebaseFirestore.getInstance()
-    private var workoutsRef = db.collection(Database.USERS).document(Database.user.email!!)
+
+    private var workoutsRef = db.collection(Database.USERS).document(Database.getUserId!!)
         .collection(Database.WORKOUTS)
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,7 +87,6 @@ class FeedFragment : Fragment() {
         }
     }
 
-
     override fun onStart() {
         super.onStart()
         val snapShotListener =workoutsRef.addSnapshotListener { snapshots, e ->
@@ -108,7 +118,6 @@ class FeedFragment : Fragment() {
         //todo remove listener?
 
     }
-
 
     private fun addWorkoutToFeed() {
         workoutsRef.orderBy(Database.WORKOUT_DATE, Query.Direction.DESCENDING).get()

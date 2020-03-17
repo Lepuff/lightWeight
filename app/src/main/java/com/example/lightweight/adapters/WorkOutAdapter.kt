@@ -80,7 +80,7 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
 
             Glide.with(itemView.context)
                 .applyDefaultRequestOptions(requestOption)
-                .load(Database.getUserPicture().toString()) //todo add image from db
+                .load(Database.getUserPicture()) //todo add image from db
                 .into(workoutImage)
         }
 

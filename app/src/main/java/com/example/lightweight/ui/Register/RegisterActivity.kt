@@ -1,24 +1,24 @@
 package com.example.lightweight.ui.Register
 
+//import com.example.lightweight.Database.emailUser
+
+import android.content.ContentResolver
 import android.content.Intent
+import android.content.res.Resources
+import android.net.Uri
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.util.Log
-import android.widget.Toast
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lightweight.Database
-//import com.example.lightweight.Database.emailUser
 import com.example.lightweight.R
 import com.example.lightweight.Validation
-import com.example.lightweight.classes.User
 import com.example.lightweight.ui.NavigationActivity
-import com.example.lightweight.ui.login.LoginActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_register.*
 import java.util.*
 
 
@@ -104,18 +104,14 @@ class RegisterActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val id = auth.currentUser!!.uid
-                    Database.setUser(id = id, isFacebookUser = false, email = email, firstName = firstName, lastName = lastName)
+
+                    Database.setUser(id = id, isFacebookUser = false, email = email,
+                        firstName = firstName, lastName = lastName, picture = null)
                     Toast.makeText(this, getString(R.string.sign_up_successful), Toast.LENGTH_SHORT)
                         .show()
 
                     //update database with user data
                     Database.updateUserData(null)
-
-                    //TODO remove after testing
-                    /*val a = Database.getUserEmail()
-                    val b = Database.getUserFirstName()
-                    val c = Database.getUserLastName()
-                    val d = Database.getUserId()*/
 
                     startActivity(Intent(this, NavigationActivity::class.java))
                     progressBar.visibility = View.INVISIBLE

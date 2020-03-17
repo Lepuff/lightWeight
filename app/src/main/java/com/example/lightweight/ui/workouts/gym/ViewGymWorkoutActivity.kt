@@ -18,7 +18,7 @@ import com.example.lightweight.classes.Sets
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_new_gym_workout.*
+import kotlinx.android.synthetic.main.activity_gym_workout.*
 
 
 class ViewGymWorkoutActivity : AppCompatActivity() {
@@ -29,7 +29,7 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_new_gym_workout)
+        setContentView(R.layout.activity_gym_workout)
         viewModel = ViewModelProviders.of(this).get(GymViewModel::class.java)
         setObservers()
         initRecyclerView()

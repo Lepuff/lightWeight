@@ -19,7 +19,7 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-import kotlinx.android.synthetic.main.activity_new_gym_workout.*
+import kotlinx.android.synthetic.main.activity_gym_workout.*
 import java.time.LocalDate
 
 class NewGymWorkoutActivity : AppCompatActivity() {
@@ -30,7 +30,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_new_gym_workout)
+        setContentView(R.layout.activity_gym_workout)
 
         viewModel = ViewModelProviders.of(this).get(
             GymViewModel::class.java

@@ -1,29 +1,32 @@
 package com.example.lightweight
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.core.content.PermissionChecker.checkSelfPermission
 import com.example.lightweight.classes.User
 import com.facebook.AccessToken
 import com.facebook.GraphRequest
 import com.facebook.Profile
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import java.net.URI
-import java.time.LocalDateTime
-import java.util.*
-import kotlin.collections.HashMap
-import kotlin.properties.Delegates
+
+
 
 
 object Database {
 
-    //private var profilePicture: Uri = Uri.parse("android.resource://com.example.lightweight/drawable/@mipmap/ic_launcher_round")
     private var user: User = User(null, true, null, null, null, null)
 
 
     const val WORKOUTS = "workouts"
     const val USERS = "users"
+    const val FRIENDS = "friends"
     const val AVERAGE_PULSE = "averagePulse"
     const val AVERAGE_SPEED = "averageSpeed"
     const val CALORIES = "calories"
@@ -46,20 +49,35 @@ object Database {
     const val REPS = "reps"
     const val WEIGHT = "weight"
 
+    fun getFriendPicture(friendId: String){
+        val db = FirebaseFirestore.getInstance()
+        val friendRef = db.collection(USERS).document(getUserId()!!).collection(FRIENDS).document(friendId)
+        //TODO
+    }
+
     fun getUser(): User{
         return user
     }
 
-    fun setUser(id: String, isFacebookUser: Boolean, email: String, firstName: String, lastName: String){
+    fun isFacebookUser(): Boolean {
+        return user.isFacebookUser
+    }
+
+    fun setUser(id: String, isFacebookUser: Boolean, email: String, firstName: String, lastName: String, picture: String?){
         user.id = id
         user.isFacebookUser = isFacebookUser
         user.email = email
         user.firstName = firstName
         user.lastName = lastName
+        user.profilePicture = picture
     }
 
-    fun getUserPicture(): Uri{
-        return user.profilePicture!!
+    fun getUserPicture(): String?{
+        return user.profilePicture
+    }
+
+    fun setUserPicture(newPicture: String?){
+        user.profilePicture = newPicture
     }
 
     fun getUserId(): String? {
@@ -97,13 +115,28 @@ object Database {
         userInfoToDb()
     }
 
+    fun getUserInfoFromDb(){
+        val db = FirebaseFirestore.getInstance()
+        val user = db.collection(USERS).document(user.id!!).get()
+            .addOnSuccessListener {document ->
+            if (document != null){
+                user.email = document["email"].toString()
+                user.firstName = document["firstName"].toString()
+                user.lastName = document["lastName"].toString()
+                user.profilePicture = document["pictureUri"].toString()
+                user.isFacebookUser = document["isFacebookUser"].toString().toBoolean()
+            }
+        }
+    }
+
     private fun userInfoToDb() {
         val userInfo = hashMapOf(
             "firstName" to user.firstName,
             "lastName" to user.lastName,
             "email" to user.email,
             "id" to user.id,
-            "pictureUri" to user.profilePicture.toString()
+            "pictureUri" to user.profilePicture,
+            "isFacebookUser" to user.isFacebookUser
         )
         val db = FirebaseFirestore.getInstance()
         db.collection(USERS).document(getUserId()!!)
@@ -129,8 +162,9 @@ object Database {
                 user.email = `object`.getString("email")
                 user.firstName = `object`.getString("first_name")
                 user.lastName = `object`.getString("last_name")
-                user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120)
-
+                if (user.profilePicture == null)
+                    user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120).toString()
+                user.isFacebookUser = true
                 userInfoToDb()
             }
             //Here we put the requested fields to be returned from the JSONObject

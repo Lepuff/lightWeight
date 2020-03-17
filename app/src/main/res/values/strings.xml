@@ -76,6 +76,7 @@
     <string name="save">save</string>
     <string name="edit_workout">Edit Workout</string>
     <string name="choose_a_new_exercise">Choose a new Exercise</string>
+    <string name="delete_workout_message">Do you really want to delete?</string>
 
 
     <string name="edit_profile">Edit profile</string>
@@ -84,5 +85,7 @@
     <string name="friends">Friends</string>
     <string name="delete">delete</string>
     <string name="delete_workout">delete workout</string>
+    <string name="yes">yes</string>
+    <string name="no">No</string>
 
 </resources>

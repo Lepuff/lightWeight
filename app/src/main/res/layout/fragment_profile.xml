@@ -31,41 +31,62 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
-        android:layout_width="289dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profile_image"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/text_profile_name"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/profile_name"
-            android:textColor="@color/text_content"
-            android:textSize="20sp" />
+            android:layout_height="match_parent"
+            android:theme="@style/TextInputLayoutAppearance">
 
-        <TextView
-            android:id="@+id/text_profile_age"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/profile_age"
-            android:textColor="@color/text_content"
-            android:textSize="20sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fragment_profile_first_name_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:hint="@string/first_name"
+                android:textColor="@color/text_content"
+                android:inputType="text"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/text_profile_mail"
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/profile_email"
-            android:textColor="@color/text_content"
-            android:textSize="20sp" />
+            android:layout_height="match_parent"
+            android:theme="@style/TextInputLayoutAppearance">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fragment_profile_last_name_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:hint="@string/last_name"
+                android:textColor="@color/text_content"
+                android:inputType="none"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:theme="@style/TextInputLayoutAppearance">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fragment_profile_email_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:hint="@string/email"
+                android:textColor="@color/text_content"
+                android:inputType="none"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
     </LinearLayout>
 
     <Button
+        android:layout_marginTop="4dp"
         android:id="@+id/button_edit_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -76,6 +97,8 @@
         app:layout_constraintTop_toBottomOf="@+id/profile_image" />
 
     <Button
+
+        android:layout_marginTop="16dp"
         android:id="@+id/button_change_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -85,13 +108,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_edit_profile" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="409dp"
-        android:layout_height="282dp"
-        android:layout_marginTop="1dp"
+    <TextView
+        android:id="@+id/text_profile_friends"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/friends"
+        android:textColor="@color/text_content"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_change_password" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="409dp"
+        android:layout_height="282dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_profile_friends" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

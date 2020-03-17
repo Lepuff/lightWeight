@@ -8,18 +8,6 @@
     tools:context=".ui.Profile.ProfileFragment">
 
 
-    <TextView
-        android:id="@+id/text_profile_divider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/profile"
-        android:textSize="20sp"
-        android:background="@color/divider"
-        android:textColor="@color/text_divider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
         android:layout_width="120dp"
@@ -27,7 +15,7 @@
         android:padding="10dp"
         android:src="@mipmap/ic_launcher_round"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_profile_divider">
+        app:layout_constraintTop_toTopOf="parent">
 
     </de.hdodenhof.circleimageview.CircleImageView>
 
@@ -43,81 +31,110 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
-        android:layout_width="289dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profile_image"
-        app:layout_constraintTop_toBottomOf="@+id/text_profile_divider">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/text_profile_name"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/profile_name"
-            android:textColor="@color/text_content"
-            android:textSize="20sp" />
+            android:layout_height="match_parent"
+            android:theme="@style/TextInputLayoutAppearance">
 
-        <TextView
-            android:id="@+id/text_profile_age"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/profile_age"
-            android:textColor="@color/text_content"
-            android:textSize="20sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fragment_profile_first_name_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:hint="@string/first_name"
+                android:textColor="@color/text_content"
+                android:inputType="text"
+                android:enabled="false"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/text_profile_mail"
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/profile_email"
-            android:textColor="@color/text_content"
-            android:textSize="20sp" />
+            android:layout_height="match_parent"
+            android:theme="@style/TextInputLayoutAppearance">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fragment_profile_last_name_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:hint="@string/last_name"
+                android:textColor="@color/text_content"
+                android:inputType="text"
+                android:enabled="false"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:theme="@style/TextInputLayoutAppearance">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fragment_profile_email_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:hint="@string/email"
+                android:textColor="@color/text_content"
+                android:inputType="text"
+                android:enabled="false"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/button_edit_profile"
+        android:layout_marginTop="4dp"
+        android:id="@+id/profile_edit_profile_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:padding="5dp"
         android:background="@color/background_button"
         android:text="@string/edit_profile"
         android:textColor="@color/text_button"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_image"
+        tools:ignore="SmallSp" />
 
     <Button
-        android:id="@+id/button_change_password"
-        android:layout_width="match_parent"
+
+        android:layout_marginTop="16dp"
+        android:id="@+id/profile_change_password_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:padding="5dp"
         android:background="@color/background_button"
         android:text="@string/change_password"
         android:textColor="@color/text_button"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_profile_password_divider" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_edit_profile_button"
+        tools:ignore="SmallSp" />
 
     <TextView
-        android:id="@+id/text_profile_password_divider"
+        android:id="@+id/text_profile_friends"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/password"
+        android:text="@string/friends"
+        android:textColor="@color/text_content"
         android:textSize="20sp"
-        android:background="@color/divider"
-        android:textColor="@color/text_divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_edit_profile" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_change_password_button" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="409dp"
         android:layout_height="282dp"
-        android:layout_marginTop="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_change_password" />
+        app:layout_constraintTop_toBottomOf="@+id/text_profile_friends" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

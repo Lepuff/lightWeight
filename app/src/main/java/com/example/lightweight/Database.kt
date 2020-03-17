@@ -1,19 +1,22 @@
 package com.example.lightweight
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.core.content.PermissionChecker.checkSelfPermission
 import com.example.lightweight.classes.User
 import com.facebook.AccessToken
 import com.facebook.GraphRequest
 import com.facebook.Profile
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import java.net.URI
-import java.time.LocalDateTime
-import java.util.*
-import kotlin.collections.HashMap
-import kotlin.properties.Delegates
+
+
 
 
 object Database {
@@ -67,6 +70,10 @@ object Database {
 
     fun getUserPicture(): String?{
         return user.profilePicture
+    }
+
+    fun setUserPicture(newPicture: Uri?){
+        user.profilePicture = newPicture.toString()
     }
 
     fun getUserId(): String? {

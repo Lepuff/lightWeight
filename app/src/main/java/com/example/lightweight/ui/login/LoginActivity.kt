@@ -57,8 +57,6 @@ class LoginActivity : AppCompatActivity() {
 
         userLogin.setOnClickListener {
             passwordSignIn()
-            val user = Database.getUser()
-            finish()
         }
 
         fbLoginButton.setOnClickListener {

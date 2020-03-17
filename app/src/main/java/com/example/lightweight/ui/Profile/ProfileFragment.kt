@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import com.example.lightweight.Database
 
 import com.example.lightweight.R
@@ -42,6 +43,9 @@ class ProfileFragment : Fragment() {
         val logoutButton = root.findViewById<Button>(R.id.profile_logout_button)
 
         val profileImage = root.findViewById<CircleImageView>(R.id.profile_image)
+        if (Database.getUserPicture() != null)
+            profileImage.setImageURI(Database.getUserPicture()!!.toUri())
+
         profileImage.setOnClickListener{
             pickPhotoFromGallery()
         }
@@ -76,7 +80,7 @@ class ProfileFragment : Fragment() {
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_PHOTO_REQUEST){
             fileUri = data?.data
             profile_image.setImageURI(fileUri)
-            Database.setUserPicture(fileUri)
+            Database.setUserPicture(fileUri.toString())
         }
     }
 

@@ -59,6 +59,10 @@ object Database {
         return user
     }
 
+    fun isFacebookUser(): Boolean {
+        return user.isFacebookUser
+    }
+
     fun setUser(id: String, isFacebookUser: Boolean, email: String, firstName: String, lastName: String, picture: String?){
         user.id = id
         user.isFacebookUser = isFacebookUser
@@ -72,8 +76,8 @@ object Database {
         return user.profilePicture
     }
 
-    fun setUserPicture(newPicture: Uri?){
-        user.profilePicture = newPicture.toString()
+    fun setUserPicture(newPicture: String?){
+        user.profilePicture = newPicture
     }
 
     fun getUserId(): String? {

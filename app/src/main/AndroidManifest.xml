@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.Profile.AddFriendsActivity"></activity>
         <activity
             android:name=".ui.workouts.cycling.ViewCyclingWorkoutActivity"
             android:launchMode="singleTop">
@@ -33,14 +34,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.NavigationActivity" />
         </activity>
-
         <activity
             android:name=".ui.workouts.cycling.NewCyclingWorkoutActivity"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.NavigationActivity" />
-
         </activity>
         <activity
             android:name=".ui.workouts.running.NewRunningWorkoutActivity"
@@ -89,7 +88,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.NavigationActivity"
             android:label="LightWeight"

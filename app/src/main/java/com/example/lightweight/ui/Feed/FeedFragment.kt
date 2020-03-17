@@ -36,7 +36,6 @@ class FeedFragment : Fragment() {
     private var workoutsRef = db.collection(Database.USERS).document(Database.getUserId()!!)
         .collection(Database.WORKOUTS)
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -13,6 +13,7 @@ import com.example.lightweight.Database
 import com.example.lightweight.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_running_workout.view.*
 
 class ViewRunWorkoutActivity : AppCompatActivity() {
     private lateinit var viewModel: RunViewModel
@@ -35,8 +36,42 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
             saveRunningDialog()
         }
+        val deleteButton = findViewById<Button>(R.id.running_delete_button)
+        deleteButton.setOnClickListener {
+            deleteWorkoutDialog()
+        }
+    }
 
+    private fun deleteWorkoutDialog() {
+        val builder = AlertDialog.Builder(this, R.style.DialogStyle)
+        builder.setTitle(R.string.delete_workout_message)
+        builder.setPositiveButton(R.string.yes) { dialog, _ ->
+            deleteGymWorkout()
+            dialog.cancel()
+            finish()
+        }
+        builder.setNegativeButton(R.string.no) { dialog, _ ->
+            dialog.cancel()
+        }
+        builder.show()
+    }
 
+    private fun deleteGymWorkout() {
+        db.collection(Database.USERS).document(intent.getStringExtra("userId")!!)
+            .collection(Database.WORKOUTS).document(intent.getStringExtra("id")!!).delete()
+            .addOnSuccessListener {
+                Log.d(
+                    "viewRunningWorkoutActivity Delete:",
+                    "DocumentSnapshot successfully deleted!"
+                )
+            }
+            .addOnFailureListener { e ->
+                Log.w(
+                    "viewRunningWorkoutActivity Delete:",
+                    "Error deleting document",
+                    e
+                )
+            }
     }
 
     private fun setEditable(isEditable: Boolean) {
@@ -53,9 +88,11 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         if (isEditable) {
             findViewById<Button>(R.id.running_edit_button).visibility = View.GONE
             findViewById<Button>(R.id.running_save_button).visibility = View.VISIBLE
+            findViewById<Button>(R.id.running_delete_button).visibility = View.GONE
         } else {
             findViewById<Button>(R.id.running_edit_button).visibility = View.VISIBLE
             findViewById<Button>(R.id.running_save_button).visibility = View.GONE
+            findViewById<Button>(R.id.running_delete_button).visibility = View.VISIBLE
         }
 
     }
@@ -170,8 +207,7 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
                 } else {
                     setEditable(false)
                 }
-            }
-            else{
+            } else {
                 findViewById<Button>(R.id.running_edit_button).visibility = View.GONE
                 findViewById<Button>(R.id.running_save_button).visibility = View.GONE
             }

@@ -39,17 +39,53 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
             showNewExerciseDialog()
         }
 
-        val saveButton: Button = findViewById(R.id.gym_save_workout_button)
+        val saveButton = findViewById<Button>(R.id.gym_save_workout_button)
         saveButton.setOnClickListener {
             updateGymDialog()
         }
 
-        val editButton: Button = findViewById(R.id.gym_edit_workout_button)
+        val editButton = findViewById<Button>(R.id.gym_edit_workout_button)
         editButton.setOnClickListener {
             viewModel.isInEditState.value = true
         }
 
+        val deleteButton = findViewById<Button>(R.id.gym_delete_workout_button)
+        deleteButton.setOnClickListener {
+            deleteWorkoutDialog()
+        }
 
+    }
+    private fun deleteWorkoutDialog() {
+
+        val builder = AlertDialog.Builder(this, R.style.DialogStyle)
+        builder.setTitle(R.string.delete_workout_message)
+        builder.setPositiveButton(R.string.yes) { dialog, _ ->
+            deleteGymWorkout()
+            dialog.cancel()
+            finish()
+        }
+        builder.setNegativeButton(R.string.no) { dialog, _ ->
+            dialog.cancel()
+        }
+        builder.show()
+    }
+
+    private fun deleteGymWorkout() {
+        db.collection(Database.USERS).document(intent.getStringExtra("userId")!!)
+            .collection(Database.WORKOUTS).document(intent.getStringExtra("id")!!).delete()
+            .addOnSuccessListener {
+                Log.d(
+                    "viewGymWorkoutActivity Delete:",
+                    "DocumentSnapshot successfully deleted!"
+                )
+            }
+            .addOnFailureListener { e ->
+                Log.w(
+                    "viewGymWorkoutActivity Delete:",
+                    "Error deleting document",
+                    e
+                )
+            }
     }
 
 
@@ -70,11 +106,13 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
                     findViewById<Button>(R.id.gym_save_workout_button).visibility = View.VISIBLE
                     findViewById<Button>(R.id.gym_add_exercise_button).visibility = View.VISIBLE
                     findViewById<Button>(R.id.gym_edit_workout_button).visibility = View.GONE
+                    findViewById<Button>(R.id.gym_delete_workout_button).visibility = View.GONE
                 } else {
                     exerciseAdapter.isNotEditable()
                     findViewById<Button>(R.id.gym_save_workout_button).visibility = View.GONE
                     findViewById<Button>(R.id.gym_add_exercise_button).visibility = View.GONE
                     findViewById<Button>(R.id.gym_edit_workout_button).visibility = View.VISIBLE
+                    findViewById<Button>(R.id.gym_delete_workout_button).visibility = View.VISIBLE
                 }
             }
             else
@@ -83,6 +121,7 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
                 findViewById<Button>(R.id.gym_save_workout_button).visibility = View.GONE
                 findViewById<Button>(R.id.gym_add_exercise_button).visibility = View.GONE
                 findViewById<Button>(R.id.gym_edit_workout_button).visibility = View.GONE
+                findViewById<Button>(R.id.gym_delete_workout_button).visibility = View.GONE
             }
         })
         viewModel.isLoadedFromDb.observe(this, Observer {

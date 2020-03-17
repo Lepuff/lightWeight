@@ -69,26 +69,36 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
 
     private fun deleteWorkoutDialog() {
 
-        var builder = AlertDialog.Builder(this, R.style.DialogStyle)
+        val builder = AlertDialog.Builder(this, R.style.DialogStyle)
         builder.setTitle(R.string.delete_workout_message)
-        builder.setPositiveButton(R.string.yes){
-                dialog, _ ->
+        builder.setPositiveButton(R.string.yes) { dialog, _ ->
             deleteCyclingWorkout()
             dialog.cancel()
             finish()
         }
-        builder.setNegativeButton(R.string.no){
-                dialog, _ ->
+        builder.setNegativeButton(R.string.no) { dialog, _ ->
             dialog.cancel()
         }
         builder.show()
     }
 
-    private fun deleteCyclingWorkout(){
+    private fun deleteCyclingWorkout() {
 
-        db.collection(Database.USERS).document(intent.getStringExtra("userId")!!).collection(Database.WORKOUTS).document(intent.getStringExtra("id")!!).delete()
-            .addOnSuccessListener { Log.d("viewCyclingWorkoutActivity Delete:", "DocumentSnapshot successfully deleted!") }
-            .addOnFailureListener { e -> Log.w("viewCyclingWorkoutActivity Delete:", "Error deleting document", e) }
+        db.collection(Database.USERS).document(intent.getStringExtra("userId")!!)
+            .collection(Database.WORKOUTS).document(intent.getStringExtra("id")!!).delete()
+            .addOnSuccessListener {
+                Log.d(
+                    "viewCyclingWorkoutActivity Delete:",
+                    "DocumentSnapshot successfully deleted!"
+                )
+            }
+            .addOnFailureListener { e ->
+                Log.w(
+                    "viewCyclingWorkoutActivity Delete:",
+                    "Error deleting document",
+                    e
+                )
+            }
     }
 
 

@@ -18,6 +18,7 @@ import com.facebook.AccessToken
 import com.facebook.login.LoginManager
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
@@ -43,7 +44,26 @@ class ProfileFragment : Fragment() {
         var profileLastName = root.findViewById<TextView>(R.id.fragment_profile_last_name_edittext).text
         var profileEmail = root.findViewById<TextView>(R.id.fragment_profile_email_edittext).text
 
-        
+        if(Database.isFacebookUser()){
+            root.findViewById<Button>(R.id.profile_change_password_button).isEnabled = false
+            root.findViewById<Button>(R.id.profile_edit_profile_button).isEnabled = false
+        }
+
+        val profilePicture = root.findViewById<CircleImageView>(R.id.profile_image)
+        profilePicture.setOnClickListener{
+            //todo
+        }
+
+        val editProfile = root.findViewById<Button>(R.id.profile_edit_profile_button)
+        editProfile.setOnClickListener {
+            //todo
+
+        }
+
+        val changePassword = root.findViewById<Button>(R.id.profile_change_password_button)
+        changePassword.setOnClickListener {
+            //todo
+        }
 
         return root
 

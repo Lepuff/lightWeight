@@ -94,7 +94,6 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
             findViewById<Button>(R.id.running_save_button).visibility = View.GONE
             findViewById<Button>(R.id.running_delete_button).visibility = View.VISIBLE
         }
-
     }
 
     private fun saveRunningDialog() {

@@ -70,7 +70,14 @@ class ProfileFragment : Fragment() {
 
         val changePassword = root.findViewById<Button>(R.id.profile_change_password_button)
         changePassword.setOnClickListener {
-            //todo
+            val dialogView =
+                LayoutInflater.from(context).inflate(R.layout.dialog_change_password, null)
+
+            val dialog = AlertDialog.Builder(context)
+                .setView(dialogView)
+                .create()
+                .show()
+
         }
 
         return root

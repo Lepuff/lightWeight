@@ -34,17 +34,17 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
         setObservers()
         initRecyclerView()
 
-        val newExerciseButton: Button = findViewById(R.id.new_gym_add_exercise_button)
+        val newExerciseButton: Button = findViewById(R.id.gym_add_exercise_button)
         newExerciseButton.setOnClickListener {
             showNewExerciseDialog()
         }
 
-        val saveButton: Button = findViewById(R.id.new_gym_save_workout_button)
+        val saveButton: Button = findViewById(R.id.gym_save_workout_button)
         saveButton.setOnClickListener {
             updateGymDialog()
         }
 
-        val editButton: Button = findViewById(R.id.new_gym_edit_workout_button)
+        val editButton: Button = findViewById(R.id.gym_edit_workout_button)
         editButton.setOnClickListener {
             viewModel.isInEditState.value = true
         }
@@ -67,22 +67,22 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
             if (Database.getUserId() == intent.getStringExtra("userId")) {
                 if (viewModel.isInEditState.value == true) {
                     exerciseAdapter.isEditable()
-                    findViewById<Button>(R.id.new_gym_save_workout_button).visibility = View.VISIBLE
-                    findViewById<Button>(R.id.new_gym_add_exercise_button).visibility = View.VISIBLE
-                    findViewById<Button>(R.id.new_gym_edit_workout_button).visibility = View.GONE
+                    findViewById<Button>(R.id.gym_save_workout_button).visibility = View.VISIBLE
+                    findViewById<Button>(R.id.gym_add_exercise_button).visibility = View.VISIBLE
+                    findViewById<Button>(R.id.gym_edit_workout_button).visibility = View.GONE
                 } else {
                     exerciseAdapter.isNotEditable()
-                    findViewById<Button>(R.id.new_gym_save_workout_button).visibility = View.GONE
-                    findViewById<Button>(R.id.new_gym_add_exercise_button).visibility = View.GONE
-                    findViewById<Button>(R.id.new_gym_edit_workout_button).visibility = View.VISIBLE
+                    findViewById<Button>(R.id.gym_save_workout_button).visibility = View.GONE
+                    findViewById<Button>(R.id.gym_add_exercise_button).visibility = View.GONE
+                    findViewById<Button>(R.id.gym_edit_workout_button).visibility = View.VISIBLE
                 }
             }
             else
             {
                 exerciseAdapter.isNotEditable()
-                findViewById<Button>(R.id.new_gym_save_workout_button).visibility = View.GONE
-                findViewById<Button>(R.id.new_gym_add_exercise_button).visibility = View.GONE
-                findViewById<Button>(R.id.new_gym_edit_workout_button).visibility = View.GONE
+                findViewById<Button>(R.id.gym_save_workout_button).visibility = View.GONE
+                findViewById<Button>(R.id.gym_add_exercise_button).visibility = View.GONE
+                findViewById<Button>(R.id.gym_edit_workout_button).visibility = View.GONE
             }
         })
         viewModel.isLoadedFromDb.observe(this, Observer {

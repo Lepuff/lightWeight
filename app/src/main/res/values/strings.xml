@@ -82,5 +82,7 @@
     <string name="change_password">Change password</string>
     <string name="user_name">user name</string>
     <string name="friends">Friends</string>
+    <string name="delete">delete</string>
+    <string name="delete_workout">delete workout</string>
 
 </resources>

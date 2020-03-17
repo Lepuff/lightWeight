@@ -43,13 +43,13 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         initRecyclerView()
         exerciseAdapter.submitList(viewModel.exerciseLiveData.value!!)
 
-        val addExerciseButton = findViewById<Button>(R.id.new_gym_add_exercise_button)
+        val addExerciseButton = findViewById<Button>(R.id.gym_add_exercise_button)
         addExerciseButton.visibility = View.VISIBLE
         addExerciseButton.setOnClickListener {
             showNewExerciseDialog()
         }
 
-        val saveWorkoutButton = findViewById<Button>(R.id.new_gym_save_workout_button)
+        val saveWorkoutButton = findViewById<Button>(R.id.gym_save_workout_button)
         saveWorkoutButton.visibility = View.VISIBLE
         saveWorkoutButton.setOnClickListener {
 

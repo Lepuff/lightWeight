@@ -43,7 +43,7 @@ class ProfileFragment : Fragment() {
         var profileLastName = root.findViewById<TextView>(R.id.fragment_profile_last_name_edittext).text
         var profileEmail = root.findViewById<TextView>(R.id.fragment_profile_email_edittext).text
 
-
+        
 
         return root
 

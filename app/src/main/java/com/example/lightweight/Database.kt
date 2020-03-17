@@ -45,6 +45,9 @@ object Database {
     const val SETS = "sets"
     const val REPS = "reps"
     const val WEIGHT = "weight"
+    const val EMAIL = "email"
+    const val ID = "id"
+
 
     fun getUser(): User{
         return user

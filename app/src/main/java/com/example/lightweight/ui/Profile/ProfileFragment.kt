@@ -31,8 +31,6 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
-    private var fileUri: Uri? = null
-    private val PICK_PHOTO_REQUEST = 1
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,14 +39,6 @@ class ProfileFragment : Fragment() {
             ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_profile, container, false)
         val logoutButton = root.findViewById<Button>(R.id.profile_logout_button)
-
-        val profileImage = root.findViewById<CircleImageView>(R.id.profile_image)
-        if (Database.getUserPicture() != null)
-            profileImage.setImageURI(Database.getUserPicture()!!.toUri())
-
-        profileImage.setOnClickListener{
-            pickPhotoFromGallery()
-        }
 
         logoutButton.setOnClickListener{
             FirebaseAuth.getInstance().signOut() //sign out user
@@ -66,22 +56,6 @@ class ProfileFragment : Fragment() {
 
         return root
 
-    }
-
-    private fun pickPhotoFromGallery(){
-        val pickImageIntent = Intent(Intent.ACTION_PICK,
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(pickImageIntent, PICK_PHOTO_REQUEST)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (resultCode == Activity.RESULT_OK && requestCode == PICK_PHOTO_REQUEST){
-            fileUri = data?.data
-            profile_image.setImageURI(fileUri)
-            Database.setUserPicture(fileUri.toString())
-        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

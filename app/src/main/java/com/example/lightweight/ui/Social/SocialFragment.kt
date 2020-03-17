@@ -1,6 +1,7 @@
 package com.example.lightweight.ui.Social
 
 import android.content.ContentValues.TAG
+import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.util.Log
@@ -42,7 +43,6 @@ class SocialFragment : Fragment() {
         viewModel =
             ViewModelProviders.of(this).get(FeedViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_social, container, false)
-
 
         viewModel.workoutList.observe(
             viewLifecycleOwner,
@@ -106,30 +106,63 @@ class SocialFragment : Fragment() {
 
     }
 
-
     private fun addWorkoutToFeed() {
         workoutsRef.get()
             .addOnSuccessListener { users ->
 
-
                 workOutAdapter.clearList()
                 if (users != null) {
                     for (user in users) {
-                       Log.d("users id", user.id)
+                        Log.d("users id", user.id)
+                        val userName: String =
+                            user["firstName"].toString() + user["lastName"].toString()
+                        val profilePicture = user["pictureUri"].toString()
+                        db.collection(Database.USERS).document(user.id)
+                            .collection(Database.WORKOUTS).get().addOnSuccessListener { workouts ->
 
-                        db.collection(Database.USERS).document(user.id).collection(Database.WORKOUTS).get().addOnSuccessListener { workouts ->
+                                if (workouts != null) {
+                                    for (workout in workouts) {
+                                        Log.d("workout", workout.data.toString())
+                                        val id = workout.id
+                                        val type = workout[Database.TYPE_OF_WORKOUT].toString()
+                                        val date = workout[Database.WORKOUT_DATE].toString()
+                                        val title = workout[Database.WORKOUT_TITLE].toString()
+                                        when (type) {
+                                            "gymWorkout" ->
+                                                workOutAdapter.addWorkout(
+                                                    GymWorkout(
+                                                        id,
+                                                        title,
+                                                        date,
+                                                        userName,
+                                                        profilePicture
 
-                            if (workouts!=null){
-                                for (workout in workouts)
-                                    Log.d("workout",workout.data.toString())
-
-
-
+                                                    )
+                                                )
+                                            "runningWorkout" ->
+                                                workOutAdapter.addWorkout(
+                                                    RunningWorkout(
+                                                        id,
+                                                        title,
+                                                        date,
+                                                        userName,
+                                                        profilePicture
+                                                    )
+                                                )
+                                            "cyclingWorkout" ->
+                                                workOutAdapter.addWorkout(
+                                                    CyclingWorkout(
+                                                        id,
+                                                        title,
+                                                        date,
+                                                        userName,
+                                                        profilePicture
+                                                    )
+                                                )
+                                        }
+                                    }
+                                }
                             }
-
-                        }
-
-
                     }
                 }
             }

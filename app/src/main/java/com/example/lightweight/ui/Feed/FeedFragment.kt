@@ -119,23 +119,27 @@ class FeedFragment : Fragment() {
     }
 
     private fun addWorkoutToFeed() {
+
         workoutsRef.orderBy(Database.WORKOUT_DATE, Query.Direction.DESCENDING).get()
             .addOnSuccessListener { workouts ->
                 workOutAdapter.clearList()
+
                 if (workouts != null) {
                     for (workout in workouts) {
                         val id = workout.id
                         val type = workout[Database.TYPE_OF_WORKOUT].toString()
                         val date = workout[Database.WORKOUT_DATE].toString()
                         val title = workout[Database.WORKOUT_TITLE].toString()
+                        val name = Database.getUserName()
+                        val profilePicture = Database.getUserPicture().toString()
                         when (type) {
                             "gymWorkout" ->
-                                workOutAdapter.addWorkout(GymWorkout(id, title, date))
+                                workOutAdapter.addWorkout(GymWorkout(id, title, date,name,profilePicture))
                             "runningWorkout" ->
-                                workOutAdapter.addWorkout(RunningWorkout(id, title, date))
+                                workOutAdapter.addWorkout(RunningWorkout(id, title, date,name,profilePicture))
                             "cyclingWorkout" ->
                                 workOutAdapter.addWorkout(
-                                    CyclingWorkout(id, title, date)
+                                    CyclingWorkout(id, title, date,name,profilePicture)
                                 )
                         }
                     }

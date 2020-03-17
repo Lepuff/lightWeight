@@ -1,5 +1,6 @@
 package com.example.lightweight
 
+import android.net.Uri
 import com.example.lightweight.classes.AbstractWorkout
 import com.example.lightweight.classes.CyclingWorkout
 import com.example.lightweight.classes.GymWorkout
@@ -15,13 +16,13 @@ class WorkOutTypeSource {
             val list = ArrayList<AbstractWorkout>()
             list.add(
                 GymWorkout(
-                    "", "gym", "")
+                    "", "Gym", "","", "") //todo string res
             )
             list.add(
-                RunningWorkout("", "Run", "")
+                RunningWorkout("", "Run", "","", "")
             )
             list.add(
-                CyclingWorkout("","Cycling","")
+                CyclingWorkout("","Cycling","","", "")
             )
             return list
         }

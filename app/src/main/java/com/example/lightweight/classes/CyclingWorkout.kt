@@ -2,6 +2,7 @@ package com.example.lightweight.classes
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import com.example.lightweight.R
 import com.example.lightweight.ui.workouts.cycling.NewCyclingWorkoutActivity
 import com.example.lightweight.ui.workouts.cycling.ViewCyclingWorkoutActivity
@@ -9,7 +10,11 @@ import com.example.lightweight.ui.workouts.cycling.ViewCyclingWorkoutActivity
 class CyclingWorkout(
     override var id: String,
     override var title: String,
-    override var date: String
+    override var date: String,
+    override var userName: String,
+    override var userImage: String
+
+
 
     ) : AbstractWorkout(R.drawable.ic_directions_bike_yellow_24dp) {
 

@@ -18,7 +18,7 @@ import com.example.lightweight.classes.Sets
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_new_gym_workout.*
+import kotlinx.android.synthetic.main.activity_gym_workout.*
 
 
 class ViewGymWorkoutActivity : AppCompatActivity() {
@@ -29,27 +29,63 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_new_gym_workout)
+        setContentView(R.layout.activity_gym_workout)
         viewModel = ViewModelProviders.of(this).get(GymViewModel::class.java)
         setObservers()
         initRecyclerView()
 
-        val newExerciseButton: Button = findViewById(R.id.new_gym_add_exercise_button)
+        val newExerciseButton: Button = findViewById(R.id.gym_add_exercise_button)
         newExerciseButton.setOnClickListener {
             showNewExerciseDialog()
         }
 
-        val saveButton: Button = findViewById(R.id.new_gym_save_workout_button)
+        val saveButton = findViewById<Button>(R.id.gym_save_workout_button)
         saveButton.setOnClickListener {
             updateGymDialog()
         }
 
-        val editButton: Button = findViewById(R.id.new_gym_edit_workout_button)
+        val editButton = findViewById<Button>(R.id.gym_edit_workout_button)
         editButton.setOnClickListener {
             viewModel.isInEditState.value = true
         }
 
+        val deleteButton = findViewById<Button>(R.id.gym_delete_workout_button)
+        deleteButton.setOnClickListener {
+            deleteWorkoutDialog()
+        }
 
+    }
+    private fun deleteWorkoutDialog() {
+
+        val builder = AlertDialog.Builder(this, R.style.DialogStyle)
+        builder.setTitle(R.string.delete_workout_message)
+        builder.setPositiveButton(R.string.yes) { dialog, _ ->
+            deleteGymWorkout()
+            dialog.cancel()
+            finish()
+        }
+        builder.setNegativeButton(R.string.no) { dialog, _ ->
+            dialog.cancel()
+        }
+        builder.show()
+    }
+
+    private fun deleteGymWorkout() {
+        db.collection(Database.USERS).document(intent.getStringExtra("userId")!!)
+            .collection(Database.WORKOUTS).document(intent.getStringExtra("id")!!).delete()
+            .addOnSuccessListener {
+                Log.d(
+                    "viewGymWorkoutActivity Delete:",
+                    "DocumentSnapshot successfully deleted!"
+                )
+            }
+            .addOnFailureListener { e ->
+                Log.w(
+                    "viewGymWorkoutActivity Delete:",
+                    "Error deleting document",
+                    e
+                )
+            }
     }
 
 
@@ -67,22 +103,25 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
             if (Database.getUserId() == intent.getStringExtra("userId")) {
                 if (viewModel.isInEditState.value == true) {
                     exerciseAdapter.isEditable()
-                    findViewById<Button>(R.id.new_gym_save_workout_button).visibility = View.VISIBLE
-                    findViewById<Button>(R.id.new_gym_add_exercise_button).visibility = View.VISIBLE
-                    findViewById<Button>(R.id.new_gym_edit_workout_button).visibility = View.GONE
+                    findViewById<Button>(R.id.gym_save_workout_button).visibility = View.VISIBLE
+                    findViewById<Button>(R.id.gym_add_exercise_button).visibility = View.VISIBLE
+                    findViewById<Button>(R.id.gym_edit_workout_button).visibility = View.GONE
+                    findViewById<Button>(R.id.gym_delete_workout_button).visibility = View.GONE
                 } else {
                     exerciseAdapter.isNotEditable()
-                    findViewById<Button>(R.id.new_gym_save_workout_button).visibility = View.GONE
-                    findViewById<Button>(R.id.new_gym_add_exercise_button).visibility = View.GONE
-                    findViewById<Button>(R.id.new_gym_edit_workout_button).visibility = View.VISIBLE
+                    findViewById<Button>(R.id.gym_save_workout_button).visibility = View.GONE
+                    findViewById<Button>(R.id.gym_add_exercise_button).visibility = View.GONE
+                    findViewById<Button>(R.id.gym_edit_workout_button).visibility = View.VISIBLE
+                    findViewById<Button>(R.id.gym_delete_workout_button).visibility = View.VISIBLE
                 }
             }
             else
             {
                 exerciseAdapter.isNotEditable()
-                findViewById<Button>(R.id.new_gym_save_workout_button).visibility = View.GONE
-                findViewById<Button>(R.id.new_gym_add_exercise_button).visibility = View.GONE
-                findViewById<Button>(R.id.new_gym_edit_workout_button).visibility = View.GONE
+                findViewById<Button>(R.id.gym_save_workout_button).visibility = View.GONE
+                findViewById<Button>(R.id.gym_add_exercise_button).visibility = View.GONE
+                findViewById<Button>(R.id.gym_edit_workout_button).visibility = View.GONE
+                findViewById<Button>(R.id.gym_delete_workout_button).visibility = View.GONE
             }
         })
         viewModel.isLoadedFromDb.observe(this, Observer {

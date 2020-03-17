@@ -148,9 +148,6 @@ object Database {
                 Log.w("TAG", "Error adding document", e)
             }
     }
-    fun isFacebookUser(): Boolean {
-        return user.isFacebookUser
-    }
 
     fun updateUserData(accessToken: AccessToken?) {
         if (user.isFacebookUser) {

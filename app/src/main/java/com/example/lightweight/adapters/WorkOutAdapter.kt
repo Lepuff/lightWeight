@@ -7,12 +7,13 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.lightweight.Database
 import com.example.lightweight.R
 import com.example.lightweight.classes.AbstractWorkout
 import com.google.android.material.textview.MaterialTextView
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.layout_wo_list_item.view.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
 class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() {
@@ -61,17 +62,19 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
             itemView.setOnClickListener(this)
         }
 
-
-        private val workoutImage: CircleImageView = itemView.workout_image
+        private val userName : MaterialTextView = itemView.workout_user_name
+        private val userImage: CircleImageView = itemView.workout_image
         private val workoutIcon: AppCompatImageView = itemView.workout_icon
         private val workoutTitle: MaterialTextView = itemView.workout_title
         private val workoutDate: MaterialTextView = itemView.workout_date
 
         fun bind(workOut: AbstractWorkout) {
             this.selectedWorkout = workOut
+
             workoutTitle.text = workOut.title
             workoutDate.text = workOut.date
             workoutIcon.setImageResource(workOut.icon)
+            userName.text = workOut.userName
 
             val requestOption = RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background)
@@ -80,8 +83,8 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
 
             Glide.with(itemView.context)
                 .applyDefaultRequestOptions(requestOption)
-                .load(Database.getUserPicture().toString()) //todo add image from db
-                .into(workoutImage)
+                .load(workOut.userImage)
+                .into(userImage)
         }
 
         override fun onClick(v: View?) {

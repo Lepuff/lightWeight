@@ -33,6 +33,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.NavigationActivity" />
         </activity>
+
         <activity
             android:name=".ui.workouts.cycling.NewCyclingWorkoutActivity"
             android:launchMode="singleTop">

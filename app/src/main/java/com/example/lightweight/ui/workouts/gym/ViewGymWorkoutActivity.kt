@@ -39,8 +39,8 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
             showNewExerciseDialog()
         }
 
-        val savedButton: Button = findViewById(R.id.new_gym_save_workout_button)
-        savedButton.setOnClickListener {
+        val saveButton: Button = findViewById(R.id.new_gym_save_workout_button)
+        saveButton.setOnClickListener {
             updateGymDialog()
         }
 
@@ -48,10 +48,12 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
         editButton.setOnClickListener {
             viewModel.isInEditState.value = true
         }
+
+
     }
 
 
-    private fun setObservers(){
+    private fun setObservers() {
         viewModel.exerciseLiveData.observe(this,
             Observer {
                 exerciseAdapter.notifyDataSetChanged()
@@ -62,30 +64,40 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
 
         viewModel.isInEditState.observe(this, Observer {
 
-            if (viewModel.isInEditState.value == true){
-                exerciseAdapter.isEditable()
-                findViewById<Button>(R.id.new_gym_save_workout_button).visibility = View.VISIBLE
-                findViewById<Button>(R.id.new_gym_add_exercise_button).visibility = View.VISIBLE
-                findViewById<Button>(R.id.new_gym_edit_workout_button).visibility = View.GONE
-            }else {
+            if (Database.getUserId() == intent.getStringExtra("userId")) {
+                if (viewModel.isInEditState.value == true) {
+                    exerciseAdapter.isEditable()
+                    findViewById<Button>(R.id.new_gym_save_workout_button).visibility = View.VISIBLE
+                    findViewById<Button>(R.id.new_gym_add_exercise_button).visibility = View.VISIBLE
+                    findViewById<Button>(R.id.new_gym_edit_workout_button).visibility = View.GONE
+                } else {
+                    exerciseAdapter.isNotEditable()
+                    findViewById<Button>(R.id.new_gym_save_workout_button).visibility = View.GONE
+                    findViewById<Button>(R.id.new_gym_add_exercise_button).visibility = View.GONE
+                    findViewById<Button>(R.id.new_gym_edit_workout_button).visibility = View.VISIBLE
+                }
+            }
+            else
+            {
                 exerciseAdapter.isNotEditable()
                 findViewById<Button>(R.id.new_gym_save_workout_button).visibility = View.GONE
                 findViewById<Button>(R.id.new_gym_add_exercise_button).visibility = View.GONE
-                findViewById<Button>(R.id.new_gym_edit_workout_button).visibility = View.VISIBLE
+                findViewById<Button>(R.id.new_gym_edit_workout_button).visibility = View.GONE
             }
         })
-        viewModel.isLoadedFromDb.observe(this , Observer {
-            if (viewModel.isLoadedFromDb.value == false){
-                getGymWorkoutFromDb(intent.getStringExtra("id")!!) // todo fix constant
+        viewModel.isLoadedFromDb.observe(this, Observer {
+            if (viewModel.isLoadedFromDb.value == false) {
+                getGymWorkoutFromDb()
                 viewModel.isLoadedFromDb.value = true
             }
         })
     }
 
-    private fun getGymWorkoutFromDb(id: String) {
+    private fun getGymWorkoutFromDb() {
 
         val currentGymWorkoutRef = db.collection(Database.USERS)
-            .document(Database.getUserId()!!).collection(Database.WORKOUTS).document(id)
+            .document(intent.getStringExtra("userId")!!).collection(Database.WORKOUTS)
+            .document(intent.getStringExtra("id")!!)// todo fix constant
         currentGymWorkoutRef.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
@@ -148,9 +160,11 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
             LayoutInflater.from(this).inflate(R.layout.dialog_save_workout, null)
         val saveButton = dialogView.findViewById<Button>(R.id.save_workout_save_button)
         val workoutDate = viewModel.date.value
-        dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText).setText(workoutDate)
+        dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
+            .setText(workoutDate)
         val workoutTitle = viewModel.title.value
-        dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText).setText(workoutTitle)
+        dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText)
+            .setText(workoutTitle)
         val dialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)
         val dialog = dialogBuilder.show()
@@ -164,11 +178,18 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
     private fun updateGymWorkout(dialogView: View) {
 
         val currentGymWorkoutRef = db.collection(Database.USERS)
-            .document(Database.getUserId()!!).collection(Database.WORKOUTS).document(intent.getStringExtra("id")!!) //todo fix constants
+            .document(intent.getStringExtra("userId")!!).collection(Database.WORKOUTS)
+            .document(intent.getStringExtra("id")!!) //todo fix constants
 
-        currentGymWorkoutRef.update(Database.WORKOUT_TITLE,dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText).text.toString())
-        currentGymWorkoutRef.update(Database.WORKOUT_DATE,dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText).text.toString())
-        currentGymWorkoutRef.update(Database.EXERCISES,viewModel.exerciseLiveData.value)
+        currentGymWorkoutRef.update(
+            Database.WORKOUT_TITLE,
+            dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText).text.toString()
+        )
+        currentGymWorkoutRef.update(
+            Database.WORKOUT_DATE,
+            dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText).text.toString()
+        )
+        currentGymWorkoutRef.update(Database.EXERCISES, viewModel.exerciseLiveData.value)
 
     }
 }

@@ -34,6 +34,13 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
             saveCyclingDialog()
         }
+
+
+        if (intent.getStringExtra("userId")!! != Database.getUserId())
+        {
+            editButton.visibility = View.GONE
+            saveButton.visibility = View.GONE
+        }
     }
 
     private fun saveCyclingDialog() {
@@ -99,7 +106,7 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
 
         viewModel.isLoadedFromDb.observe(this, Observer {
             if (viewModel.isLoadedFromDb.value == false) {
-                getCyclingInfoFromDb(intent.getStringExtra("id")!!)//todo fix constants
+                getCyclingInfoFromDb()
                 viewModel.isLoadedFromDb.value == true
             }
         })
@@ -156,9 +163,9 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
         })
     }
 
-    private fun getCyclingInfoFromDb(id: String) {
+    private fun getCyclingInfoFromDb() {
         val currentRunWorkoutRef = db.collection(Database.USERS)
-            .document(Database.getUserId()!!).collection(Database.WORKOUTS).document(id)
+            .document(intent.getStringExtra("userId")!!).collection(Database.WORKOUTS).document(intent.getStringExtra("id")!!)
         currentRunWorkoutRef.get().addOnSuccessListener { document ->
             if (document != null) {
                 viewModel.title.value = document[Database.WORKOUT_TITLE].toString()

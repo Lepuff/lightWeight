@@ -1,9 +1,7 @@
 package com.example.lightweight.ui.Social
 
 import android.content.ContentValues.TAG
-import android.net.Uri
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.util.Log
 
 import android.view.LayoutInflater
@@ -15,22 +13,18 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lightweight.Database
 import com.example.lightweight.R
-import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.adapters.WorkOutAdapter
+import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.classes.*
-import com.example.lightweight.ui.Feed.FeedViewModel
-import com.example.lightweight.ui.Feed.NewWorkoutDialog
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.lightweight.ui.Feed.WorkoutFeedViewModel
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import kotlinx.android.synthetic.main.fragment_feed.*
 import kotlinx.android.synthetic.main.fragment_social.*
 
 
 class SocialFragment : Fragment() {
     private val itemPadding = 30
-    private lateinit var viewModel: FeedViewModel
+    private lateinit var viewModel: WorkoutFeedViewModel
     private lateinit var workOutAdapter: WorkOutAdapter
     private var db = FirebaseFirestore.getInstance()
     private var workoutsRef = db.collection(Database.USERS)
@@ -41,7 +35,7 @@ class SocialFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel =
-            ViewModelProviders.of(this).get(FeedViewModel::class.java)
+            ViewModelProviders.of(this).get(WorkoutFeedViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_social, container, false)
 
         viewModel.workoutList.observe(
@@ -127,6 +121,7 @@ class SocialFragment : Fragment() {
                                         val type = workout[Database.TYPE_OF_WORKOUT].toString()
                                         val date = workout[Database.WORKOUT_DATE].toString()
                                         val title = workout[Database.WORKOUT_TITLE].toString()
+
                                         when (type) {
                                             "gymWorkout" ->
                                                 workOutAdapter.addWorkout(
@@ -135,8 +130,8 @@ class SocialFragment : Fragment() {
                                                         title,
                                                         date,
                                                         userName,
-                                                        profilePicture
-
+                                                        profilePicture,
+                                                        user.id
                                                     )
                                                 )
                                             "runningWorkout" ->
@@ -146,7 +141,8 @@ class SocialFragment : Fragment() {
                                                         title,
                                                         date,
                                                         userName,
-                                                        profilePicture
+                                                        profilePicture,
+                                                        user.id
                                                     )
                                                 )
                                             "cyclingWorkout" ->
@@ -156,9 +152,11 @@ class SocialFragment : Fragment() {
                                                         title,
                                                         date,
                                                         userName,
-                                                        profilePicture
+                                                        profilePicture,
+                                                        user.id
                                                     )
                                                 )
+
                                         }
                                     }
                                 }

@@ -84,7 +84,7 @@ object Database {
     }
 
     fun getUserName():  String{
-        return user.firstName + user.lastName
+        return user.firstName +" "+ user.lastName
     }
 
     fun setUserFirstName(newFirstName: String){

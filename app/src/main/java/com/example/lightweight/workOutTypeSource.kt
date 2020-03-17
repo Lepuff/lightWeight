@@ -16,13 +16,13 @@ class WorkOutTypeSource {
             val list = ArrayList<AbstractWorkout>()
             list.add(
                 GymWorkout(
-                    "", "Gym", "","", "") //todo string res
+                    "", "Gym", "","", "","") //todo string res
             )
             list.add(
-                RunningWorkout("", "Run", "","", "")
+                RunningWorkout("", "Run", "","", "","")
             )
             list.add(
-                CyclingWorkout("","Cycling","","", "")
+                CyclingWorkout("","Cycling","","", "","")
             )
             return list
         }

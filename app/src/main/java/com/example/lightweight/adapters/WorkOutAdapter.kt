@@ -12,6 +12,8 @@ import com.example.lightweight.classes.AbstractWorkout
 import com.google.android.material.textview.MaterialTextView
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.layout_wo_list_item.view.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
 class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() {

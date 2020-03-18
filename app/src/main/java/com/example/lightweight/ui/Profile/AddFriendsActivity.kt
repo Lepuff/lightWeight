@@ -2,23 +2,20 @@ package com.example.lightweight.ui.Profile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lightweight.Database
 import com.example.lightweight.R
-import com.example.lightweight.adapters.FriendAdapter
-import com.example.lightweight.adapters.WorkOutAdapter
+import com.example.lightweight.adapters.UserAdapter
 import com.example.lightweight.classes.User
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_add_friends.*
-import kotlinx.android.synthetic.main.fragment_feed.*
 
 class AddFriendsActivity : AppCompatActivity() {
 
 
-    private lateinit var friendAdapter: FriendAdapter
+    private lateinit var userAdapter: UserAdapter
     private var db = FirebaseFirestore.getInstance()
 
 
@@ -53,7 +50,7 @@ class AddFriendsActivity : AppCompatActivity() {
                                     val _user = User()
                                     _user.email = user[Database.EMAIL].toString()
                                     _user.id = user[Database.ID].toString()
-                                    friendAdapter.addItem(_user)
+                                    userAdapter.addItem(_user)
                                 }
                             }
 
@@ -63,15 +60,14 @@ class AddFriendsActivity : AppCompatActivity() {
         }
     }
 
-
     private fun initRecyclerView() {
         add_friend_recyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
             val topSpacingItemDecoration =
                 TopSpacingItemDecoration(5)//todo fix
             addItemDecoration(topSpacingItemDecoration)
-            friendAdapter = FriendAdapter(this, db)
-            adapter = friendAdapter
+            userAdapter = UserAdapter(this, db,true)
+            adapter = userAdapter
         }
     }
 }

@@ -20,18 +20,9 @@
 
     </de.hdodenhof.circleimageview.CircleImageView>
 
-    <Button
-        android:id="@+id/profile_logout_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/background_button"
-        android:text="@string/log_out"
-        android:textColor="@color/text_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -48,11 +39,10 @@
                 android:id="@+id/fragment_profile_first_name_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/first_name"
-                android:textColor="@color/text_content"
-                android:inputType="text"
                 android:enabled="false"
-                />
+                android:hint="@string/first_name"
+                android:inputType="text"
+                android:textColor="@color/text_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -65,10 +55,10 @@
                 android:id="@+id/fragment_profile_last_name_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:hint="@string/last_name"
-                android:textColor="@color/text_content"
                 android:inputType="text"
-                android:enabled="false"/>
+                android:textColor="@color/text_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -80,10 +70,10 @@
                 android:id="@+id/fragment_profile_email_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:hint="@string/email"
-                android:textColor="@color/text_content"
                 android:inputType="text"
-                android:enabled="false"/>
+                android:textColor="@color/text_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -103,52 +93,6 @@
         app:layout_constraintTop_toBottomOf="@id/profile_image"
         tools:ignore="SmallSp" />
 
-    <Button
-        android:layout_marginTop="65dp"
-        android:id="@+id/profile_change_password_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/background_button"
-        android:padding="5dp"
-        android:text="@string/change_password"
-        android:textColor="@color/text_button"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_image"
-        tools:ignore="SmallSp" />
-    <Button
-        android:layout_marginTop="4dp"
-        android:id="@+id/profile_add_friends_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/background_button"
-        android:text="@string/add_friends"
-        android:textColor="@color/text_button"
-        android:textSize="12sp"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/profile_change_password_button"
-        tools:ignore="SmallSp"
-
-        />
-
-    <TextView
-        android:id="@+id/text_profile_friends"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/friends"
-        android:textColor="@color/text_content"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profile_change_password_button" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="409dp"
-        android:layout_height="282dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_profile_friends" />
 
     <Button
         android:layout_marginTop="4dp"
@@ -165,6 +109,65 @@
         tools:ignore="SmallSp"
         android:visibility="gone"
         />
+
+    <Button
+        android:layout_marginTop="65dp"
+        android:id="@+id/profile_change_password_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/background_button"
+        android:padding="5dp"
+        android:text="@string/change_password"
+        android:textColor="@color/text_button"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_image"
+        tools:ignore="SmallSp" />
+
+    <Button
+        android:layout_marginTop="15dp"
+        android:id="@+id/profile_add_friends_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/background_button"
+        android:padding="5dp"
+        android:text="@string/add_friends"
+        android:textColor="@color/text_button"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+
+        tools:ignore="SmallSp" />
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:id="@+id/text_profile_friends"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/friends"
+        android:textColor="@color/text_content"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_add_friends_button" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="409dp"
+        android:layout_height="282dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_profile_friends" />
+
+    <Button
+
+        android:id="@+id/profile_logout_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/background_button"
+        android:text="@string/log_out"
+        android:textColor="@color/text_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

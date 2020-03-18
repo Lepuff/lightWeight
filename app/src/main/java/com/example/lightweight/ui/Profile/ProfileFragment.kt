@@ -71,6 +71,7 @@ class ProfileFragment : Fragment() {
 
         if (Database.isFacebookUser()) {
             root.findViewById<Button>(R.id.profile_change_password_button).visibility = View.GONE
+            root.findViewById<Button>(R.id.profile_edit_profile_button).visibility = View.GONE
         }
 
 

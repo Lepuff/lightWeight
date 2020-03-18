@@ -7,10 +7,12 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.PermissionChecker.checkSelfPermission
 import androidx.core.net.toUri
 import com.example.lightweight.classes.User
+import com.example.lightweight.ui.Profile.ProfileFragment
 import com.facebook.AccessToken
 import com.facebook.GraphRequest
 import com.facebook.Profile

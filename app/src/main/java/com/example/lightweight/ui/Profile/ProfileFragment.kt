@@ -130,7 +130,7 @@ class ProfileFragment : Fragment() {
                 Toast.makeText(this.context, "Upload successful", Toast.LENGTH_LONG).show()
                 //val upload = Upload().Upload(Database.getUserFirstName()!!, imageReference.downloadUrl.toString())
                 mDatabaseRef.collection(Database.USERS).document(Database.getUserId()!!)
-                    .update("profilePicture", imageReference)
+                    .update("pictureUri", imageReference.downloadUrl.toString())
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this.context, e.message, Toast.LENGTH_LONG).show()

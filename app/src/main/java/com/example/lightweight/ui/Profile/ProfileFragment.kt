@@ -39,8 +39,11 @@ class ProfileFragment : Fragment() {
         viewModel =
             ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_profile, container, false)
-        val logoutButton = root.findViewById<Button>(R.id.profile_logout_button)
 
+
+
+
+        val logoutButton = root.findViewById<Button>(R.id.profile_logout_button)
         logoutButton.setOnClickListener{
             FirebaseAuth.getInstance().signOut() //sign out user
             LoginManager.getInstance().logOut()
@@ -48,13 +51,21 @@ class ProfileFragment : Fragment() {
             startActivity(Intent(activity, LoginActivity::class.java))
 
         }
-
         var profileFirstName = root.findViewById<TextView>(R.id.fragment_profile_first_name_editText).text
         var profileLastName = root.findViewById<TextView>(R.id.fragment_profile_last_name_editText).text
         var profileEmail = root.findViewById<TextView>(R.id.fragment_profile_email_editText).text
 
         if(Database.isFacebookUser()){
             root.findViewById<Button>(R.id.profile_change_password_button).visibility = View.GONE
+        }
+
+
+
+
+        val addFriendsButton = root.findViewById<Button>(R.id.profile_add_friends_button)
+        addFriendsButton.setOnClickListener {
+            val intent = Intent(activity,AddFriendsActivity::class.java)
+            startActivity(intent)
         }
 
 

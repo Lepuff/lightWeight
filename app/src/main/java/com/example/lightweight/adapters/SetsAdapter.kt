@@ -67,7 +67,7 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
     class SetsViewHolder constructor(
         itemView: View,
         private val recyclerView: RecyclerView,
-        isEditable: Boolean
+        isEditable: Boolean //todo needed?
     ) :
         RecyclerView.ViewHolder(itemView) {
         private var selectedSet: Sets? = null
@@ -142,10 +142,10 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
 
         fun bind(set: Sets, position: Int) {
             this.selectedSet = set
-            setNumber.text = (position + 1).toString()
+            setNumber.text = (position + 1).toString()// +1 for correct set numbers
 
-            setWeight.setText(set.weight.toString())
-            setsReps.setText(set.reps.toString())
+            setWeight.setText(set.weight)
+            setsReps.setText(set.reps)
 
         }
     }

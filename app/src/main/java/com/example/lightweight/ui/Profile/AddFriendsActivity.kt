@@ -2,6 +2,7 @@ package com.example.lightweight.ui.Profile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lightweight.Database
 import com.example.lightweight.R
@@ -25,7 +26,11 @@ class AddFriendsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_friends)
 
         initRecyclerView()
-        val list: MutableList<User> = ArrayList()
+        getUsers()
+
+
+    }
+    private fun getUsers(){
         db.collection(Database.USERS).get().addOnSuccessListener { users ->
 
             if (users != null) {
@@ -36,18 +41,18 @@ class AddFriendsActivity : AppCompatActivity() {
                     friendAdapter.addItem(_user)
                 }
             }
-
         }
-
     }
+
+
 
     private fun initRecyclerView() {
         add_friend_recyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
             val topSpacingItemDecoration =
-                TopSpacingItemDecoration(5)
+                TopSpacingItemDecoration(5)//todo fix
             addItemDecoration(topSpacingItemDecoration)
-            friendAdapter = FriendAdapter()
+            friendAdapter = FriendAdapter(this)
             adapter = friendAdapter
         }
     }

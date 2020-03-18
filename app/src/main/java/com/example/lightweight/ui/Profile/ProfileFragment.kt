@@ -14,6 +14,8 @@ import android.webkit.MimeTypeMap
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.net.toFile
+import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.lightweight.Database
@@ -31,6 +33,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_profile.*
+import java.net.URL
 
 class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
@@ -38,6 +41,7 @@ class ProfileFragment : Fragment() {
     private lateinit var mImageUri: Uri
     private lateinit var mStorageRef: StorageReference
     private lateinit var db: FirebaseFirestore
+    private lateinit var profilePicture: CircleImageView
 
 
     override fun onCreateView(
@@ -48,10 +52,9 @@ class ProfileFragment : Fragment() {
             ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_profile, container, false)
         val logoutButton = root.findViewById<Button>(R.id.profile_logout_button)
-        val profilePicture = root.findViewById<CircleImageView>(R.id.profile_image)
-        // TODO remove after testing mStorageRef = FirebaseStorage.getInstance().getReference("profilePictures")
+        mStorageRef = FirebaseStorage.getInstance().getReference("profilePictures")
         db = FirebaseFirestore.getInstance()
-
+        profilePicture = root.findViewById<CircleImageView>(R.id.profile_image)
 
         logoutButton.setOnClickListener {
             FirebaseAuth.getInstance().signOut()//sign out user
@@ -69,6 +72,9 @@ class ProfileFragment : Fragment() {
             root.findViewById<Button>(R.id.profile_change_password_button).isEnabled = false
             root.findViewById<Button>(R.id.profile_edit_profile_button).isEnabled = false
         }
+ 
+        //get profile pic from database and load into glide
+        val a = mStorageRef.child(Database.getUserId()!!).downloadUrl.addOnSuccessListener {task ->
             val requestOption = RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_error_layer)
@@ -76,9 +82,11 @@ class ProfileFragment : Fragment() {
 
             Glide.with(this)
                 .applyDefaultRequestOptions(requestOption)
-                .load(Database.getUserPicture())
+                .load(task)
                 .into(profilePicture)
+        }
 
+        //updateGlidePicture(Database.getUserPicture().toString().toUri().toFile())
 
 
         profilePicture.setOnClickListener {
@@ -99,6 +107,19 @@ class ProfileFragment : Fragment() {
 
     }
 
+    private fun updateGlidePicture(imageUri: Uri){
+
+        val requestOption = RequestOptions()
+            .placeholder(R.drawable.ic_launcher_background)
+            .error(R.drawable.ic_error_layer)
+            .fallback(R.drawable.ic_fallback_foreground)
+
+        Glide.with(this)
+            .applyDefaultRequestOptions(requestOption)
+            .load(imageUri)
+            .into(profilePicture)
+    }
+
 
     private fun pickPhotoFromGallery() {
         val intent = Intent()
@@ -107,15 +128,8 @@ class ProfileFragment : Fragment() {
         startActivityForResult(intent, PICK_PHOTO_REQUEST)
     }
 
-    fun getFileExtension(uri: Uri): String? {
-        val cr: ContentResolver = context!!.contentResolver
-        val mimeTypeMap = MimeTypeMap.getSingleton()
-        return mimeTypeMap.getExtensionFromMimeType(cr.getType(uri))
-    }
-
     fun uploadImageToDb() {
-        val imageReference = mStorageRef.child(Database.getUserId()
-                + "." + getFileExtension(mImageUri))
+        val imageReference = mStorageRef.child(Database.getUserId()!!)
 
         imageReference.putFile(mImageUri)
             .addOnSuccessListener {taskSnapshot ->
@@ -123,7 +137,7 @@ class ProfileFragment : Fragment() {
                 //Add image to db
                 Database.setUserPicture(imageReference.downloadUrl.toString())
                 db.collection(Database.USERS).document(Database.getUserId()!!)
-                    .update("pictureUri", imageReference.downloadUrl.toString())
+                    .update("pictureUri", taskSnapshot.storage.downloadUrl.toString()) //imageReference.downloadUrl.toString()
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this.context, e.message, Toast.LENGTH_LONG).show()
@@ -137,6 +151,7 @@ class ProfileFragment : Fragment() {
             data != null && data.data != null
         ) {
             mImageUri = data.data!!
+            updateGlidePicture(mImageUri)
             uploadImageToDb()
         }
     }

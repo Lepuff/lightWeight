@@ -61,7 +61,7 @@ object Database {
         return user.isFacebookUser
     }
 
-    fun setUser(id: String, isFacebookUser: Boolean, email: String, firstName: String, lastName: String, picture: String?){
+    fun setUser(id: String?, isFacebookUser: Boolean, email: String?, firstName: String?, lastName: String?, picture: String?){
         user.id = id
         user.isFacebookUser = isFacebookUser
         user.email = email

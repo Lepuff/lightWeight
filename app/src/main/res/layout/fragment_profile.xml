@@ -137,11 +137,11 @@
 
     <Button
         android:layout_marginTop="4dp"
-        android:id="@+id/profile_save_password_button"
+        android:id="@+id/profile_save_profile_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/background_button"
-        android:text="@string/save_password"
+        android:text="@string/save_profile"
         android:textColor="@color/text_button"
         android:textSize="12sp"
         android:padding="5dp"

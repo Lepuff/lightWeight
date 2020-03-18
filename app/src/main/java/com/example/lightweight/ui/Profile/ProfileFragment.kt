@@ -74,7 +74,7 @@ class ProfileFragment : Fragment() {
 
         }
 
-        val saveProfile = root.findViewById<Button>(R.id.profile_save_password_button)
+        val saveProfile = root.findViewById<Button>(R.id.profile_save_profile_button)
         saveProfile.setOnClickListener {
             saveProfileButtonVisibility()
             fragment_profile_first_name_editText.isEnabled = false
@@ -107,12 +107,12 @@ class ProfileFragment : Fragment() {
 
     fun editProfileButtonVisiblity(){
         profile_edit_profile_button.visibility = View.GONE
-        profile_save_password_button.visibility = View.VISIBLE
+        profile_save_profile_button.visibility = View.VISIBLE
     }
 
     fun saveProfileButtonVisibility(){
         profile_edit_profile_button.visibility = View.VISIBLE
-        profile_save_password_button.visibility = View.GONE
+        profile_save_profile_button.visibility = View.GONE
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.lightweight
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Picture
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -50,6 +51,9 @@ object Database {
     const val WEIGHT = "weight"
     const val EMAIL = "email"
     const val ID = "id"
+    const val FIRST_NAME = "firstName"
+    const val LAST_NAME = "lastName"
+    const val PICTURE_URI = "pictureUri"
 
 
     fun getFriendPicture(friendId: String){

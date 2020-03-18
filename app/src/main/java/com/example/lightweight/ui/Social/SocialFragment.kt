@@ -2,6 +2,7 @@ package com.example.lightweight.ui.Social
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Log
 
 import android.view.LayoutInflater
@@ -20,6 +21,7 @@ import com.example.lightweight.ui.Feed.WorkoutFeedViewModel
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_social.*
+import kotlinx.android.synthetic.main.layout_wo_list_item.*
 
 
 class SocialFragment : Fragment() {
@@ -27,7 +29,7 @@ class SocialFragment : Fragment() {
     private lateinit var viewModel: WorkoutFeedViewModel
     private lateinit var workOutAdapter: WorkOutAdapter
     private var db = FirebaseFirestore.getInstance()
-    private var usersRef = db.collection(Database.USERS)
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,28 +71,28 @@ class SocialFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        addWorkoutToFeed()
+        /*  val snapShotListener = db.collection(Database.USERS).addSnapshotListener { snapshots, e ->
+              if (e != null) {
+                  Log.w("Social Fragment : snap shot listener :", "Listen failed.", e)
+                  return@addSnapshotListener
+              } else {
+                  for (dc in snapshots!!.documentChanges) {
+                      when (dc.type) {
+                          DocumentChange.Type.ADDED -> Log.d(TAG, "New workout: ${dc.document.data}")
+                          DocumentChange.Type.MODIFIED -> Log.d(
+                              TAG,
+                              "Modified workout: ${dc.document.data}"
+                          )
+                          DocumentChange.Type.REMOVED -> Log.d(
+                              TAG,
+                              "Removed workout: ${dc.document.data}"
+                          )
+                      }
+                  }
+              }
 
-        val snapShotListener = usersRef.addSnapshotListener { snapshots, e ->
-            if (e != null) {
-                Log.w("Social Fragment : snap shot listener :", "Listen failed.", e)
-                return@addSnapshotListener
-            } else {
-                for (dc in snapshots!!.documentChanges) {
-                    when (dc.type) {
-                        DocumentChange.Type.ADDED -> Log.d(TAG, "New workout: ${dc.document.data}")
-                        DocumentChange.Type.MODIFIED -> Log.d(
-                            TAG,
-                            "Modified workout: ${dc.document.data}"
-                        )
-                        DocumentChange.Type.REMOVED -> Log.d(
-                            TAG,
-                            "Removed workout: ${dc.document.data}"
-                        )
-                    }
-                }
-            }
-            addWorkoutToFeed()
-        }
+          }*/
     }
 
     override fun onStop() {
@@ -101,64 +103,71 @@ class SocialFragment : Fragment() {
     }
 
     private fun addWorkoutToFeed() {
-        usersRef.get()
-            .addOnSuccessListener { users ->
-
+        db.collection(Database.USERS).document(Database.getUserId()!!).collection(Database.FRIENDS)
+            .get()
+            .addOnSuccessListener { friends ->
                 workOutAdapter.clearList()
-                if (users != null) {
-                    for (user in users) {
-                        Log.d("users id", user.id)
-                        val userName: String =
-                            user["firstName"].toString() + user["lastName"].toString()
-                        val profilePicture = user["pictureUri"].toString()
-                        db.collection(Database.USERS).document(user.id)
-                            .collection(Database.WORKOUTS).get().addOnSuccessListener { workouts ->
+                if (friends != null) {
+                    for (friend in friends) {
 
-                                if (workouts != null) {
-                                    for (workout in workouts) {
-                                        Log.d("workout", workout.data.toString())
-                                        val id = workout.id
-                                        val type = workout[Database.TYPE_OF_WORKOUT].toString()
-                                        val date = workout[Database.WORKOUT_DATE].toString()
-                                        val title = workout[Database.WORKOUT_TITLE].toString()
+                        db.collection(Database.USERS).document(friend[Database.ID].toString()).get()
+                            .addOnSuccessListener { user ->
+                                if (user != null) {
+                                    val userName: String =
+                                        user[Database.FIRST_NAME].toString() + " " + user[Database.LAST_NAME].toString()
+                                    val profilePicture = user[Database.PICTURE_URI].toString()
+                                    db.collection(Database.USERS)
+                                        .document(friend[Database.ID].toString())
+                                        .collection(Database.WORKOUTS).get()
+                                        .addOnSuccessListener { workouts ->
+                                            if (workouts != null) {
+                                                for (workout in workouts) {
+                                                    val id = workout.id
+                                                    val type =
+                                                        workout[Database.TYPE_OF_WORKOUT].toString()
+                                                    val date =
+                                                        workout[Database.WORKOUT_DATE].toString()
+                                                    val title =
+                                                        workout[Database.WORKOUT_TITLE].toString()
 
-                                        when (type) {
-                                            "gymWorkout" ->
-                                                workOutAdapter.addWorkout(
-                                                    GymWorkout(
-                                                        id,
-                                                        title,
-                                                        date,
-                                                        userName,
-                                                        profilePicture,
-                                                        user.id
-                                                    )
-                                                )
-                                            "runningWorkout" ->
-                                                workOutAdapter.addWorkout(
-                                                    RunningWorkout(
-                                                        id,
-                                                        title,
-                                                        date,
-                                                        userName,
-                                                        profilePicture,
-                                                        user.id
-                                                    )
-                                                )
-                                            "cyclingWorkout" ->
-                                                workOutAdapter.addWorkout(
-                                                    CyclingWorkout(
-                                                        id,
-                                                        title,
-                                                        date,
-                                                        userName,
-                                                        profilePicture,
-                                                        user.id
-                                                    )
-                                                )
-
+                                                    when (type) {
+                                                        "gymWorkout" ->
+                                                            workOutAdapter.addWorkout(
+                                                                GymWorkout(
+                                                                    id,
+                                                                    title,
+                                                                    date,
+                                                                    userName,
+                                                                    profilePicture,
+                                                                    friend.id
+                                                                )
+                                                            )
+                                                        "runningWorkout" ->
+                                                            workOutAdapter.addWorkout(
+                                                                RunningWorkout(
+                                                                    id,
+                                                                    title,
+                                                                    date,
+                                                                    userName,
+                                                                    profilePicture,
+                                                                    friend.id
+                                                                )
+                                                            )
+                                                        "cyclingWorkout" ->
+                                                            workOutAdapter.addWorkout(
+                                                                CyclingWorkout(
+                                                                    id,
+                                                                    title,
+                                                                    date,
+                                                                    userName,
+                                                                    profilePicture,
+                                                                    friend.id
+                                                                )
+                                                            )
+                                                    }
+                                                }
+                                            }
                                         }
-                                    }
                                 }
                             }
                     }

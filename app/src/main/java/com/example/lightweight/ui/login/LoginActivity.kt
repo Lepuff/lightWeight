@@ -161,7 +161,6 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnSuccessListener { result ->
                 Database.updateUserData(accessToken)
-
                 Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
 
                 startActivity(Intent(this, NavigationActivity::class.java))

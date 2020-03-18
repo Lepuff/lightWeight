@@ -1,5 +1,6 @@
 package com.example.lightweight.ui.workouts.cycling
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -34,8 +35,18 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
             saveCyclingDialog()
         }
+
+
+        val deleteButton = findViewById<Button>(R.id.cycling_delete_button)
+        deleteButton.setOnClickListener {
+            deleteWorkoutDialog()
+
+        }
+
+
     }
 
+    @SuppressLint("InflateParams")
     private fun saveCyclingDialog() {
         val dialogView =
             LayoutInflater.from(this).inflate(R.layout.dialog_save_workout, null)
@@ -58,6 +69,40 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
         }
     }
 
+    private fun deleteWorkoutDialog() {
+
+        val builder = AlertDialog.Builder(this, R.style.DialogStyle)
+        builder.setTitle(R.string.delete_workout_message)
+        builder.setPositiveButton(R.string.yes) { dialog, _ ->
+            deleteCyclingWorkout()
+            dialog.cancel()
+            finish()
+        }
+        builder.setNegativeButton(R.string.no) { dialog, _ ->
+            dialog.cancel()
+        }
+        builder.show()
+    }
+
+    private fun deleteCyclingWorkout() {
+
+        db.collection(Database.USERS).document(intent.getStringExtra("userId")!!)
+            .collection(Database.WORKOUTS).document(intent.getStringExtra("id")!!).delete()
+            .addOnSuccessListener {
+                Log.d(
+                    "viewCyclingWorkoutActivity Delete:",
+                    "DocumentSnapshot successfully deleted!"
+                )
+            }
+            .addOnFailureListener { e ->
+                Log.w(
+                    "viewCyclingWorkoutActivity Delete:",
+                    "Error deleting document",
+                    e
+                )
+            }
+    }
+
 
     private fun setEditable(isEditable: Boolean) {
         findViewById<TextInputEditText>(R.id.cycling_distance_editText).isEnabled = isEditable
@@ -78,28 +123,35 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
         if (isEditable) {
             findViewById<Button>(R.id.cycling_save_button).visibility = View.VISIBLE
             findViewById<Button>(R.id.cycling_edit_button).visibility = View.GONE
+            findViewById<Button>(R.id.cycling_delete_button).visibility = View.GONE
         } else {
             findViewById<Button>(R.id.cycling_save_button).visibility = View.GONE
             findViewById<Button>(R.id.cycling_edit_button).visibility = View.VISIBLE
+            findViewById<Button>(R.id.cycling_delete_button).visibility = View.VISIBLE
         }
-
-
     }
 
 
     private fun setObservers() {
 
         viewModel.isInEditState.observe(this, Observer {
-            if (viewModel.isInEditState.value == true) {
-                setEditable(true)
+            if (intent.getStringExtra("userId")!! == Database.getUserId()) {
+                if (viewModel.isInEditState.value == true) {
+                    setEditable(true)
+                } else {
+                    setEditable(false)
+                }
             } else {
                 setEditable(false)
+                findViewById<Button>(R.id.cycling_save_button).visibility = View.GONE
+                findViewById<Button>(R.id.cycling_edit_button).visibility = View.GONE
+                findViewById<Button>(R.id.cycling_delete_button).visibility = View.GONE
             }
         })
 
         viewModel.isLoadedFromDb.observe(this, Observer {
             if (viewModel.isLoadedFromDb.value == false) {
-                getCyclingInfoFromDb(intent.getStringExtra("id")!!)//todo fix constants
+                getCyclingInfoFromDb()
                 viewModel.isLoadedFromDb.value == true
             }
         })
@@ -156,9 +208,10 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
         })
     }
 
-    private fun getCyclingInfoFromDb(id: String) {
+    private fun getCyclingInfoFromDb() {
         val currentRunWorkoutRef = db.collection(Database.USERS)
-            .document(Database.getUserId()!!).collection(Database.WORKOUTS).document(id)
+            .document(intent.getStringExtra("userId")!!).collection(Database.WORKOUTS)
+            .document(intent.getStringExtra("id")!!)
         currentRunWorkoutRef.get().addOnSuccessListener { document ->
             if (document != null) {
                 viewModel.title.value = document[Database.WORKOUT_TITLE].toString()
@@ -254,4 +307,6 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
             dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText).text.toString()
         )
     }
+
+
 }

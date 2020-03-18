@@ -69,20 +69,34 @@
     <string name="profile_email">Email:</string>
     <string name="profile_information">Profile information</string>
     <string name="new_password">New Password</string>
-    <string name="confirm_password">Confirm password</string>
     <string name="save_password">Save password</string>
     <string name="login_failed">Login failed</string>
     <string name="average_force">Average force</string>
     <string name="save">save</string>
     <string name="edit_workout">Edit Workout</string>
     <string name="choose_a_new_exercise">Choose a new Exercise</string>
+    <string name="delete_workout_message">Do you really want to delete?</string>
 
 
     <string name="edit_profile">Edit profile</string>
     <string name="change_password">Change password</string>
+    <string name="user_name">user name</string>
     <string name="friends">Friends</string>
 
+    <string name="confirm_password">Confirm Password</string>
+    <string name="save_profile">Save profile</string>
+
     <!--Todo allt efter detta! -->
+
+
+    <string name="delete">delete</string>
+    <string name="delete_workout">delete workout</string>
+    <string name="yes">yes</string>
+    <string name="no">No</string>
+    <string name="add">add</string>
+    <string name="friend_name">friend name</string>
+    <string name="add_friends">Add friends</string>
+    <string name="remove">remove</string>
 
 
 </resources>

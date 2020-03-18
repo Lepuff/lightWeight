@@ -39,7 +39,6 @@
                 android:id="@+id/emailLogin_editText"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:background="@color/background_button"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/text_item" />
@@ -60,7 +59,6 @@
                 android:id="@+id/passwordLogin_editText"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:background="@color/background_button"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:textColor="@color/text_item"
@@ -107,7 +105,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/noAccount_textView"
-            app:layout_constraintVertical_bias="0.8">
+            >
 
         </Button>
 

@@ -1,5 +1,6 @@
 package com.example.lightweight.ui.Feed
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,15 +15,15 @@ import com.example.lightweight.WorkOutTypeSource
 
 
 class NewWorkoutDialog : DialogFragment() {
+    private val itemPaddingTop = 5
 
-
-    private lateinit var workoutTypeAdapter : WorkOutTypeAdapter
-    private fun initNewWorkoutRecycleView(recyclerView: RecyclerView,dialog: Dialog) {
+    private lateinit var workoutTypeAdapter: WorkOutTypeAdapter
+    private fun initNewWorkoutRecycleView(recyclerView: RecyclerView, dialog: Dialog) {
 
         recyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
             val topSpacingItemDecoration =
-                TopSpacingItemDecoration(5)
+                TopSpacingItemDecoration(itemPaddingTop)
             addItemDecoration(topSpacingItemDecoration)
             workoutTypeAdapter =
                 WorkOutTypeAdapter(dialog)
@@ -37,6 +38,7 @@ class NewWorkoutDialog : DialogFragment() {
         workoutTypeAdapter.submitList(data)
     }
 
+    @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
         val dialogView =
@@ -48,7 +50,7 @@ class NewWorkoutDialog : DialogFragment() {
             .create()
         dialog.setCanceledOnTouchOutside(true)
         val recyclerView = dialogView.findViewById<RecyclerView>(R.id.dialog_recycle_view)
-        initNewWorkoutRecycleView(recyclerView!!,dialog)
+        initNewWorkoutRecycleView(recyclerView!!, dialog)
         addWorkoutTypeDataSet()
         return dialog
     }

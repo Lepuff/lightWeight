@@ -28,6 +28,9 @@
         <item name="colorControlNormal">@color/text_item_unfocused</item>
         <item name="colorControlActivated">@color/text_item</item>
         <item name="colorControlHighlight">@color/text_item</item>
+        <item name="drawableTint">@color/text_content</item>
+        <item name="boxBackgroundMode">outline</item>
+        <item name="boxBackgroundColor">@color/text_content</item>
 
     </style>
 

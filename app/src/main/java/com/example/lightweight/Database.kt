@@ -3,6 +3,7 @@ package com.example.lightweight
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Picture
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -23,8 +24,8 @@ import com.google.firebase.storage.FirebaseStorage
 
 object Database {
 
+    //private var profilePicture: Uri = Uri.parse("android.resource://com.example.lightweight/drawable/@mipmap/ic_launcher_round")
     private var user: User = User(null, true, null, null, null, null)
-
 
     const val WORKOUTS = "workouts"
     const val USERS = "users"
@@ -50,6 +51,12 @@ object Database {
     const val SETS = "sets"
     const val REPS = "reps"
     const val WEIGHT = "weight"
+    const val EMAIL = "email"
+    const val ID = "id"
+    const val FIRST_NAME = "firstName"
+    const val LAST_NAME = "lastName"
+    const val PICTURE_URI = "pictureUri"
+
 
 
 
@@ -110,6 +117,10 @@ object Database {
 
     fun getUserFirstName(): String? {
         return user.firstName
+    }
+
+    fun getUserName():  String{
+        return user.firstName +" "+ user.lastName
     }
 
     fun setUserFirstName(newFirstName: String){

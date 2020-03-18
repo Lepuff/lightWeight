@@ -61,15 +61,15 @@ class ExerciseAdapter(private val parentRecyclerView: RecyclerView) :
                 R.layout.layout_exercises_list_item,
                 parent,
                 false
-            ), parentRecyclerView, isEditable
+            ), parentRecyclerView
         )
     }
 
 
     class ExerciseViewHolder constructor(
         itemView: View,
-        private val parentRecyclerView: RecyclerView,
-        private var isEditable : Boolean
+        private val parentRecyclerView: RecyclerView
+
     ) : RecyclerView.ViewHolder(itemView) {
         private var selectedExercise: Exercise? = null
         val childRecyclerView: RecyclerView = itemView.findViewById(R.id.sets_recycle_view)

@@ -1,8 +1,8 @@
 package com.example.lightweight.ui.workouts.running
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +14,7 @@ import com.example.lightweight.Database
 import com.example.lightweight.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_running_workout.view.*
 
 class ViewRunWorkoutActivity : AppCompatActivity() {
     private lateinit var viewModel: RunViewModel
@@ -27,8 +28,8 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(RunViewModel::class.java)
         setObservers()
 
-        val editWorkoutButton = findViewById<Button>(R.id.running_edit_button)
-        editWorkoutButton.setOnClickListener {
+        val editButton = findViewById<Button>(R.id.running_edit_button)
+        editButton.setOnClickListener {
             viewModel.isInEditState.value = true
         }
 
@@ -36,6 +37,42 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
             saveRunningDialog()
         }
+        val deleteButton = findViewById<Button>(R.id.running_delete_button)
+        deleteButton.setOnClickListener {
+            deleteWorkoutDialog()
+        }
+    }
+
+    private fun deleteWorkoutDialog() {
+        val builder = AlertDialog.Builder(this, R.style.DialogStyle)
+        builder.setTitle(R.string.delete_workout_message)
+        builder.setPositiveButton(R.string.yes) { dialog, _ ->
+            deleteGymWorkout()
+            dialog.cancel()
+            finish()
+        }
+        builder.setNegativeButton(R.string.no) { dialog, _ ->
+            dialog.cancel()
+        }
+        builder.show()
+    }
+
+    private fun deleteGymWorkout() {
+        db.collection(Database.USERS).document(intent.getStringExtra("userId")!!)
+            .collection(Database.WORKOUTS).document(intent.getStringExtra("id")!!).delete()
+            .addOnSuccessListener {
+                Log.d(
+                    "viewRunningWorkoutActivity Delete:",
+                    "DocumentSnapshot successfully deleted!"
+                )
+            }
+            .addOnFailureListener { e ->
+                Log.w(
+                    "viewRunningWorkoutActivity Delete:",
+                    "Error deleting document",
+                    e
+                )
+            }
     }
 
     private fun setEditable(isEditable: Boolean) {
@@ -52,13 +89,15 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         if (isEditable) {
             findViewById<Button>(R.id.running_edit_button).visibility = View.GONE
             findViewById<Button>(R.id.running_save_button).visibility = View.VISIBLE
+            findViewById<Button>(R.id.running_delete_button).visibility = View.GONE
         } else {
             findViewById<Button>(R.id.running_edit_button).visibility = View.VISIBLE
             findViewById<Button>(R.id.running_save_button).visibility = View.GONE
+            findViewById<Button>(R.id.running_delete_button).visibility = View.VISIBLE
         }
-
     }
 
+    @SuppressLint("InflateParams")
     private fun saveRunningDialog() {
         val dialogView =
             LayoutInflater.from(this).inflate(R.layout.dialog_save_workout, null)
@@ -84,7 +123,7 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
 
     private fun updateRunningWorkout(dialogView: View) {
         val currentRunWorkoutRef = db.collection(Database.USERS)
-            .document(Database.getUserId()!!).collection(Database.WORKOUTS)
+            .document(intent.getStringExtra("userId")!!).collection(Database.WORKOUTS)
             .document(intent.getStringExtra("id")!!)//todo fix constants
         currentRunWorkoutRef.update(
             Database.AVERAGE_PULSE,
@@ -126,15 +165,18 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         )
     }
 
-    private fun getRunningInfoFromDb(id: String) {
+    private fun getRunningInfoFromDb() {
         val currentRunWorkoutRef = db.collection("users")
-            .document(Database.getUserId()!!).collection("workouts").document(id)
+            .document(intent.getStringExtra("userId")!!).collection("workouts")
+            .document(intent.getStringExtra("id")!!) // todo constants
         currentRunWorkoutRef.get().addOnSuccessListener { document ->
             if (document != null) {
                 viewModel.title.value = document[Database.WORKOUT_TITLE].toString()
                 viewModel.date.value = document[Database.WORKOUT_DATE].toString()
-                viewModel.averagePulse.value = document[Database.AVERAGE_PULSE].toString().toIntOrNull()
-                viewModel.averageSpeed.value = document[Database.AVERAGE_SPEED].toString().toFloatOrNull()
+                viewModel.averagePulse.value =
+                    document[Database.AVERAGE_PULSE].toString().toIntOrNull()
+                viewModel.averageSpeed.value =
+                    document[Database.AVERAGE_SPEED].toString().toFloatOrNull()
                 viewModel.calories.value = document[Database.CALORIES].toString().toIntOrNull()
                 viewModel.distance.value = document[Database.DISTANCE].toString().toFloatOrNull()
                 viewModel.maxPulse.value = document[Database.MAX_PULSE].toString().toIntOrNull()
@@ -153,16 +195,22 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
 
         viewModel.isLoadedFromDb.observe(this, Observer {
             if (viewModel.isLoadedFromDb.value == false) {
-                getRunningInfoFromDb(intent.getStringExtra("id")!!)//todo fix constants
+                getRunningInfoFromDb()//todo fix constants
                 viewModel.isLoadedFromDb.value == true
             }
         })
 
         viewModel.isInEditState.observe(this, Observer {
-            if (viewModel.isInEditState.value == true) {
-                setEditable(true)
+
+            if (Database.getUserId() == intent.getStringExtra("userId")) {
+                if (viewModel.isInEditState.value == true) {
+                    setEditable(true)
+                } else {
+                    setEditable(false)
+                }
             } else {
-                setEditable(false)
+                findViewById<Button>(R.id.running_edit_button).visibility = View.GONE
+                findViewById<Button>(R.id.running_save_button).visibility = View.GONE
             }
         })
 

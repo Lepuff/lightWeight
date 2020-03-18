@@ -1,5 +1,6 @@
 package com.example.lightweight.ui.workouts.gym
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,7 +20,7 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-import kotlinx.android.synthetic.main.activity_new_gym_workout.*
+import kotlinx.android.synthetic.main.activity_gym_workout.*
 import java.time.LocalDate
 
 class NewGymWorkoutActivity : AppCompatActivity() {
@@ -30,7 +31,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_new_gym_workout)
+        setContentView(R.layout.activity_gym_workout)
 
         viewModel = ViewModelProviders.of(this).get(
             GymViewModel::class.java
@@ -43,13 +44,15 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         initRecyclerView()
         exerciseAdapter.submitList(viewModel.exerciseLiveData.value!!)
 
-        val addExerciseButton = findViewById<Button>(R.id.new_gym_add_exercise_button)
+        findViewById<Button>(R.id.gym_delete_workout_button).visibility =View.GONE
+        findViewById<Button>(R.id.gym_edit_workout_button).visibility =View.GONE
+        val addExerciseButton = findViewById<Button>(R.id.gym_add_exercise_button)
         addExerciseButton.visibility = View.VISIBLE
         addExerciseButton.setOnClickListener {
             showNewExerciseDialog()
         }
 
-        val saveWorkoutButton = findViewById<Button>(R.id.new_gym_save_workout_button)
+        val saveWorkoutButton = findViewById<Button>(R.id.gym_save_workout_button)
         saveWorkoutButton.visibility = View.VISIBLE
         saveWorkoutButton.setOnClickListener {
 
@@ -99,6 +102,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("InflateParams")
     private fun saveGymDialog() {
         val dialogView =
             LayoutInflater.from(this).inflate(R.layout.dialog_save_workout, null)

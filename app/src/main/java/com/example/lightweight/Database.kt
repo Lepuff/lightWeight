@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.PermissionChecker.checkSelfPermission
+import androidx.core.net.toUri
 import com.example.lightweight.classes.User
 import com.facebook.AccessToken
 import com.facebook.GraphRequest
@@ -49,11 +50,6 @@ object Database {
     const val REPS = "reps"
     const val WEIGHT = "weight"
 
-    fun getFriendPicture(friendId: String){
-        val db = FirebaseFirestore.getInstance()
-        val friendRef = db.collection(USERS).document(getUserId()!!).collection(FRIENDS).document(friendId)
-        //TODO
-    }
 
     fun getUser(): User{
         return user
@@ -63,7 +59,7 @@ object Database {
         return user.isFacebookUser
     }
 
-    fun setUser(id: String, isFacebookUser: Boolean, email: String, firstName: String, lastName: String, picture: String?){
+    fun setUser(id: String, isFacebookUser: Boolean, email: String, firstName: String, lastName: String, picture: Uri?){
         user.id = id
         user.isFacebookUser = isFacebookUser
         user.email = email
@@ -72,11 +68,11 @@ object Database {
         user.profilePicture = picture
     }
 
-    fun getUserPicture(): String?{
+    fun getUserPicture(): Uri?{
         return user.profilePicture
     }
 
-    fun setUserPicture(newPicture: String?){
+    fun setUserPicture(newPicture: Uri?){
         user.profilePicture = newPicture
     }
 
@@ -123,7 +119,7 @@ object Database {
                 user.email = document["email"].toString()
                 user.firstName = document["firstName"].toString()
                 user.lastName = document["lastName"].toString()
-                user.profilePicture = document["pictureUri"].toString()
+                user.profilePicture = document["pictureUri"].toString().toUri()
                 user.isFacebookUser = document["isFacebookUser"].toString().toBoolean()
             }
         }
@@ -160,7 +156,7 @@ object Database {
                 user.firstName = `object`.getString("first_name")
                 user.lastName = `object`.getString("last_name")
                 if (user.profilePicture == null)
-                    user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120).toString()
+                    user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120)
                 user.isFacebookUser = true
                 userInfoToDb()
             }

@@ -17,6 +17,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
+import androidx.core.view.isGone
 import com.example.lightweight.Database
 
 import com.example.lightweight.R
@@ -48,36 +49,48 @@ class ProfileFragment : Fragment() {
 
         }
 
-        var profileFirstName = root.findViewById<TextView>(R.id.fragment_profile_first_name_edittext).text
-        var profileLastName = root.findViewById<TextView>(R.id.fragment_profile_last_name_edittext).text
-        var profileEmail = root.findViewById<TextView>(R.id.fragment_profile_email_edittext).text
+        var profileFirstName = root.findViewById<TextView>(R.id.fragment_profile_first_name_editText).text
+        var profileLastName = root.findViewById<TextView>(R.id.fragment_profile_last_name_editText).text
+        var profileEmail = root.findViewById<TextView>(R.id.fragment_profile_email_editText).text
 
-        if(Database.isFacebookUser()){
+       /* if(Database.isFacebookUser()){
             root.findViewById<Button>(R.id.profile_change_password_button).isEnabled = false
             root.findViewById<Button>(R.id.profile_edit_profile_button).isEnabled = false
+            //todo måste ändras så knapparna ej syns
         }
+        */
 
         val profilePicture = root.findViewById<CircleImageView>(R.id.profile_image)
-        profilePicture.setOnClickListener{
+        profilePicture.setOnClickListener {
             //todo
         }
 
         val editProfile = root.findViewById<Button>(R.id.profile_edit_profile_button)
         editProfile.setOnClickListener {
-            //todo
+            editProfileButtonVisiblity()
+            fragment_profile_first_name_editText.isEnabled = true
+            fragment_profile_last_name_editText.isEnabled = true
+            fragment_profile_email_editText.isEnabled = true
 
         }
 
-        val changePassword = root.findViewById<Button>(R.id.profile_change_password_button)
-        changePassword.setOnClickListener {
-            val dialogView =
-                LayoutInflater.from(context).inflate(R.layout.dialog_change_password, null)
+        val saveProfile = root.findViewById<Button>(R.id.profile_save_password_button)
+        saveProfile.setOnClickListener {
+            saveProfileButtonVisibility()
+            fragment_profile_first_name_editText.isEnabled = false
+            fragment_profile_last_name_editText.isEnabled = false
+            fragment_profile_email_editText.isEnabled = false
+            //todo spara ändrad info
+        }
 
-            val dialog = AlertDialog.Builder(context)
-                .setView(dialogView)
-                .create()
-                .show()
+        val editPasswordButton = root.findViewById<Button>(R.id.profile_change_password_button)
+        editPasswordButton.setOnClickListener {
 
+
+            val dialogView = LayoutInflater.from(this.context).inflate(R.layout.dialog_change_password, null)
+            val builder = AlertDialog.Builder(this.context)
+            builder.setView(dialogView)
+            val dialog = builder.show()
         }
 
         return root
@@ -92,5 +105,14 @@ class ProfileFragment : Fragment() {
 
 
 
+    fun editProfileButtonVisiblity(){
+        profile_edit_profile_button.visibility = View.GONE
+        profile_save_password_button.visibility = View.VISIBLE
+    }
+
+    fun saveProfileButtonVisibility(){
+        profile_edit_profile_button.visibility = View.VISIBLE
+        profile_save_password_button.visibility = View.GONE
+    }
 
 }

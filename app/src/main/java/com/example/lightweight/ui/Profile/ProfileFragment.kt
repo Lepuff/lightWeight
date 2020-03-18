@@ -60,6 +60,15 @@ class ProfileFragment : Fragment() {
         }
         */
 
+
+
+        val addFriendsButton = root.findViewById<Button>(R.id.profile_add_friends_button)
+        addFriendsButton.setOnClickListener {
+            val intent = Intent(activity,AddFriendsActivity::class.java)
+            startActivity(intent)
+        }
+
+
         val profilePicture = root.findViewById<CircleImageView>(R.id.profile_image)
         profilePicture.setOnClickListener {
             //todo

@@ -28,5 +28,5 @@ data class User(
     @SerializedName("image")
     var lastName: String? = null,
 
-    var profilePicture : String? = null
+    var profilePicture : Uri? = null
 )

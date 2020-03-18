@@ -39,7 +39,6 @@
                 android:id="@+id/fragment_profile_first_name_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:enabled="false"
                 android:hint="@string/first_name"
                 android:inputType="text"
                 android:textColor="@color/text_content" />
@@ -55,7 +54,9 @@
                 android:id="@+id/fragment_profile_last_name_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:enabled="false"
+
                 android:hint="@string/last_name"
                 android:inputType="text"
                 android:textColor="@color/text_content" />
@@ -70,7 +71,9 @@
                 android:id="@+id/fragment_profile_email_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:enabled="false"
+
                 android:hint="@string/email"
                 android:inputType="text"
                 android:textColor="@color/text_content" />
@@ -82,6 +85,7 @@
     <Button
         android:layout_marginTop="4dp"
         android:id="@+id/profile_edit_profile_button"
+        android:enabled="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp"
@@ -94,9 +98,15 @@
         tools:ignore="SmallSp" />
 
 
+
+        android:layout_marginTop="16dp"
+        android:id="@+id/profile_change_password_button"
+        android:enabled="true"
+
     <Button
         android:layout_marginTop="4dp"
         android:id="@+id/profile_save_profile_button"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/background_button"
@@ -151,11 +161,13 @@
         app:layout_constraintTop_toBottomOf="@+id/profile_add_friends_button" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="409dp"
-        android:layout_height="282dp"
+        android:id="@+id/profile_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_profile_friends" />
+        app:layout_constraintTop_toBottomOf="@id/text_profile_friends"
+        app:layout_constraintBottom_toTopOf="@id/profile_logout_button"/>
 
     <Button
 

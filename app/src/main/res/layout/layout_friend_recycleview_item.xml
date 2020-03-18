@@ -16,7 +16,7 @@
         >
         <TextView
             android:padding="10dp"
-            android:id="@+id/friend_item_text"
+            android:id="@+id/profile_friend_item_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/friend_name"
@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
         <Button
-            android:id="@+id/friend_add_button"
+            android:id="@+id/profile_friend_delete_button"
             android:layout_width="wrap_content"
             android:padding="10dp"
             android:layout_height="wrap_content"
@@ -32,19 +32,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:background="@color/background_item"
-            android:text="@string/add"
-            android:visibility="gone"/>
-        <Button
-            android:id="@+id/friend_remove_button"
-            android:layout_width="wrap_content"
-            android:padding="10dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@color/background_item"
-            android:text="@string/remove"
-            android:visibility="gone"/>
+            android:text="@string/delete"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

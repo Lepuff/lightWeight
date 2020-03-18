@@ -96,6 +96,7 @@
     <string name="add">add</string>
     <string name="friend_name">friend name</string>
     <string name="add_friends">Add friends</string>
+    <string name="remove">remove</string>
 
 
 </resources>

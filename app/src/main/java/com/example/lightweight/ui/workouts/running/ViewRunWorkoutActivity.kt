@@ -1,5 +1,6 @@
 package com.example.lightweight.ui.workouts.running
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -96,6 +97,7 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("InflateParams")
     private fun saveRunningDialog() {
         val dialogView =
             LayoutInflater.from(this).inflate(R.layout.dialog_save_workout, null)

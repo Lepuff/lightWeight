@@ -1,5 +1,6 @@
 package com.example.lightweight.ui.Feed
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -37,6 +38,7 @@ class NewWorkoutDialog : DialogFragment() {
         workoutTypeAdapter.submitList(data)
     }
 
+    @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
         val dialogView =

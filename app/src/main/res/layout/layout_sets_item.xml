@@ -38,7 +38,8 @@
                 android:autofillHints="@string/weight"
                 android:inputType="number"
                 android:gravity="center"
-                android:id="@+id/sets_weight_editText"/>
+                android:id="@+id/sets_weight_editText"
+                android:hint="@string/weight"/>
 
             <EditText
                 android:layout_width="100dp"
@@ -48,6 +49,7 @@
                 android:inputType="number"
                 android:gravity="center"
                 android:id="@+id/sets_reps_editText"
+                android:hint="@string/reps"
                 />
 
             <Button

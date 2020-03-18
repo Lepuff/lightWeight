@@ -1,55 +1,33 @@
 package com.example.lightweight.ui.Profile
 
 import android.app.Activity
-import android.content.ContentResolver
 import android.content.Intent
 import android.net.Uri
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.app.AlertDialog
-import android.content.ContentValues
-import android.content.Intent
-import androidx.lifecycle.ViewModelProviders
-import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.MimeTypeMap
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.net.toFile
-import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.lightweight.Database
-
 import com.example.lightweight.R
-
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.lightweight.Database
-
-import com.example.lightweight.R
 import com.example.lightweight.adapters.UserAdapter
 import com.example.lightweight.classes.User
 import com.example.lightweight.ui.TopSpacingItemDecoration
-
 import com.example.lightweight.ui.login.LoginActivity
 import com.facebook.AccessToken
 import com.facebook.login.LoginManager
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import de.hdodenhof.circleimageview.CircleImageView
-
-
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_profile.*
-import java.net.URL
+
 
 class ProfileFragment : Fragment() {
 
@@ -78,9 +56,9 @@ class ProfileFragment : Fragment() {
             activity!!.finish()
         }
 
-        root.findViewById<TextView>(R.id.fragment_profile_first_name_edittext).text = Database.getUserFirstName()
-        root.findViewById<TextView>(R.id.fragment_profile_last_name_edittext).text = Database.getUserLastName()
-        root.findViewById<TextView>(R.id.fragment_profile_email_edittext).text = Database.getUserEmail()
+        root.findViewById<TextView>(R.id.fragment_profile_first_name_editText).text = Database.getUserFirstName()
+        root.findViewById<TextView>(R.id.fragment_profile_last_name_editText).text = Database.getUserLastName()
+        root.findViewById<TextView>(R.id.fragment_profile_email_editText).text = Database.getUserEmail()
 
 
         //get profile pic and load into glide
@@ -90,9 +68,6 @@ class ProfileFragment : Fragment() {
             pickPhotoFromGallery()
         }
 
-        val editProfile = root.findViewById<Button>(R.id.profile_edit_profile_button)
-        editProfile.setOnClickListener {
-            //todo
 
         if (Database.isFacebookUser()) {
             root.findViewById<Button>(R.id.profile_change_password_button).visibility = View.GONE

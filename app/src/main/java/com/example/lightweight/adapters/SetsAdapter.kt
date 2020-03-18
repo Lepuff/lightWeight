@@ -60,14 +60,14 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
                 R.layout.layout_sets_item,
                 parent,
                 false
-            ), childRecyclerView,isEditable
+            ), childRecyclerView
         )
     }
 
     class SetsViewHolder constructor(
         itemView: View,
-        private val recyclerView: RecyclerView,
-        isEditable: Boolean //todo needed?
+        private val recyclerView: RecyclerView
+
     ) :
         RecyclerView.ViewHolder(itemView) {
         private var selectedSet: Sets? = null

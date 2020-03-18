@@ -99,8 +99,6 @@ class UserAdapter(private val recyclerView: RecyclerView, private val db : Fireb
             holder.addFriendButton.visibility = View.GONE
             holder.removeFriendButton.visibility = View.VISIBLE
         }
-
-
         val user = users[position]
         holder.bind(user)
     }

@@ -50,7 +50,7 @@ class AddFriendsActivity : AppCompatActivity() {
         add_friend_recyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
             val topSpacingItemDecoration =
-                TopSpacingItemDecoration(5)
+                TopSpacingItemDecoration(5)//todo fix
             addItemDecoration(topSpacingItemDecoration)
             friendAdapter = FriendAdapter(this)
             adapter = friendAdapter

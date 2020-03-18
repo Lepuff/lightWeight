@@ -59,7 +59,7 @@ object Database {
         return user.isFacebookUser
     }
 
-    fun setUser(id: String, isFacebookUser: Boolean, email: String, firstName: String, lastName: String, picture: Uri?){
+    fun setUser(id: String, isFacebookUser: Boolean, email: String, firstName: String, lastName: String, picture: String?){
         user.id = id
         user.isFacebookUser = isFacebookUser
         user.email = email
@@ -68,11 +68,11 @@ object Database {
         user.profilePicture = picture
     }
 
-    fun getUserPicture(): Uri?{
+    fun getUserPicture(): String?{
         return user.profilePicture
     }
 
-    fun setUserPicture(newPicture: Uri?){
+    fun setUserPicture(newPicture: String?){
         user.profilePicture = newPicture
     }
 
@@ -119,7 +119,7 @@ object Database {
                 user.email = document["email"].toString()
                 user.firstName = document["firstName"].toString()
                 user.lastName = document["lastName"].toString()
-                user.profilePicture = document["pictureUri"].toString().toUri()
+                user.profilePicture = document["pictureUri"].toString()
                 user.isFacebookUser = document["isFacebookUser"].toString().toBoolean()
             }
         }
@@ -156,7 +156,7 @@ object Database {
                 user.firstName = `object`.getString("first_name")
                 user.lastName = `object`.getString("last_name")
                 if (user.profilePicture == null)
-                    user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120)
+                    user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120).toString()
                 user.isFacebookUser = true
                 userInfoToDb()
             }

@@ -82,24 +82,28 @@ class FeedFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        checkDatabaseForUpdates()
+    }
+
+    private fun checkDatabaseForUpdates() {
         val snapShotListener = workoutsRef.addSnapshotListener { snapshots, e ->
             if (e != null) {
                 Log.w(TAG, "Listen failed.", e)
                 return@addSnapshotListener
-            } else {
-                for (dc in snapshots!!.documentChanges) {
-                    when (dc.type) {
-                        DocumentChange.Type.ADDED -> Log.d(TAG, "New workout: ${dc.document.data}")
-                        DocumentChange.Type.MODIFIED -> Log.d(
-                            TAG,
-                            "Modified workout: ${dc.document.data}"
-                        )
-                        DocumentChange.Type.REMOVED -> Log.d(
-                            TAG,
-                            "Removed workout: ${dc.document.data}"
-                        )
-                    }
+            }
+            for (dc in snapshots!!.documentChanges) {
+                when (dc.type) {
+                    DocumentChange.Type.ADDED -> Log.d(TAG, "New workout: ${dc.document.data}")
+                    DocumentChange.Type.MODIFIED -> Log.d(
+                        TAG,
+                        "Modified workout: ${dc.document.data}"
+                    )
+                    DocumentChange.Type.REMOVED -> Log.d(
+                        TAG,
+                        "Removed workout: ${dc.document.data}"
+                    )
                 }
+
             }
             addWorkoutToFeed()
         }

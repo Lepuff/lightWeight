@@ -27,7 +27,7 @@ class SocialFragment : Fragment() {
     private lateinit var viewModel: WorkoutFeedViewModel
     private lateinit var workOutAdapter: WorkOutAdapter
     private var db = FirebaseFirestore.getInstance()
-    private var workoutsRef = db.collection(Database.USERS)
+    private var usersRef = db.collection(Database.USERS)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,7 +70,7 @@ class SocialFragment : Fragment() {
         super.onStart()
 
 
-        val snapShotListener = workoutsRef.addSnapshotListener { snapshots, e ->
+        val snapShotListener = usersRef.addSnapshotListener { snapshots, e ->
             if (e != null) {
                 Log.w("Social Fragment : snap shot listener :", "Listen failed.", e)
                 return@addSnapshotListener
@@ -101,7 +101,7 @@ class SocialFragment : Fragment() {
     }
 
     private fun addWorkoutToFeed() {
-        workoutsRef.get()
+        usersRef.get()
             .addOnSuccessListener { users ->
 
                 workOutAdapter.clearList()

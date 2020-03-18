@@ -93,6 +93,8 @@
     <string name="delete_workout">delete workout</string>
     <string name="yes">yes</string>
     <string name="no">No</string>
+    <string name="add">add</string>
+    <string name="friend_name">friend name</string>
 
 
 </resources>

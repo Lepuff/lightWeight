@@ -48,6 +48,9 @@ object Database {
     const val SETS = "sets"
     const val REPS = "reps"
     const val WEIGHT = "weight"
+    const val EMAIL = "email"
+    const val ID = "id"
+
 
     fun getFriendPicture(friendId: String){
         val db = FirebaseFirestore.getInstance()

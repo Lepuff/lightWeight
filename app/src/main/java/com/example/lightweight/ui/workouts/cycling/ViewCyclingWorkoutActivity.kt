@@ -1,5 +1,6 @@
 package com.example.lightweight.ui.workouts.cycling
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -45,6 +46,7 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("InflateParams")
     private fun saveCyclingDialog() {
         val dialogView =
             LayoutInflater.from(this).inflate(R.layout.dialog_save_workout, null)

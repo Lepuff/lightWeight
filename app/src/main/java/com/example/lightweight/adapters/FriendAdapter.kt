@@ -64,7 +64,7 @@ class FriendAdapter(private val recyclerView: RecyclerView) :
         private var adapter = recyclerView.adapter as FriendAdapter
         var name: TextView = itemView.friend_item_text
         private var db = FirebaseFirestore.getInstance()
-        private val userRef = db.collection(Database.USERS).document().collection(Database.FRIENDS).document()
+        private val userRef = db.collection(Database.USERS).document(Database.getUserId()!!).collection(Database.FRIENDS).document()
         val addButton: Button = itemView.friend_add_button.apply {
             setOnClickListener {
 

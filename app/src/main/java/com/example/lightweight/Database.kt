@@ -89,8 +89,6 @@ object Database {
             .addOnFailureListener { e ->
                 Log.d("TAG", e.message!!)
             }
-        /*val db = FirebaseFirestore.getInstance()
-        db.collection(USERS).document(getUserId()!!).update("pictureUri", newPicture)*/
     }
 
     fun getUserId(): String? {
@@ -129,20 +127,14 @@ object Database {
     }
 
     fun getUserInfoFromDb(){
-        val mStorageRef = FirebaseStorage.getInstance().getReference("profilePictures")
         val db = FirebaseFirestore.getInstance()
-        val user = db.collection(USERS).document(getUserId()!!).get()
+        db.collection(USERS).document(getUserId()!!).get()
             .addOnSuccessListener {document ->
             if (document != null){
                 user.email = document["email"].toString()
                 user.firstName = document["firstName"].toString()
                 user.lastName = document["lastName"].toString()
                 user.profilePicture = document["pictureUri"].toString().toUri()
-                /*mStorageRef.child(getUserId()!!).downloadUrl.addOnSuccessListener { picture ->
-                    user.profilePicture = picture
-                    //val a = picture //TODO REMOVE AFTER TESTING
-                }*/
-                //user.profilePicture = document["pictureUri"].toString()
                 user.isFacebookUser = document["isFacebookUser"].toString().toBoolean()
             }
         }

@@ -38,9 +38,6 @@ import java.net.URL
 class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
     private val PICK_PHOTO_REQUEST = 1
-    private lateinit var mImageUri: Uri
-    private lateinit var mStorageRef: StorageReference
-    private lateinit var db: FirebaseFirestore
     private lateinit var profilePicture: CircleImageView
 
 
@@ -52,8 +49,6 @@ class ProfileFragment : Fragment() {
             ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_profile, container, false)
         val logoutButton = root.findViewById<Button>(R.id.profile_logout_button)
-        //TODO REMOVE AFTER TESTING mStorageRef = FirebaseStorage.getInstance().getReference("profilePictures")
-        //TODO REMOVE AFTER TESTING db = FirebaseFirestore.getInstance()
         profilePicture = root.findViewById<CircleImageView>(R.id.profile_image)
 
         logoutButton.setOnClickListener {
@@ -73,23 +68,8 @@ class ProfileFragment : Fragment() {
             root.findViewById<Button>(R.id.profile_edit_profile_button).isEnabled = false
         }
 
-        //get profile pic from database and load into glide
+        //get profile pic and load into glide
         updateGlidePicture(Database.getUserPicture())
-        //TODO REMOVE AFTER TESTING
-        /*val a = mStorageRef.child(Database.getUserId()!!).downloadUrl.addOnSuccessListener {task ->
-            val requestOption = RequestOptions()
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_error_layer)
-                .fallback(R.drawable.ic_fallback_foreground)
-
-            Glide.with(this)
-                .applyDefaultRequestOptions(requestOption)
-                .load(task)
-                .into(profilePicture)
-        }*/
-
-        //updateGlidePicture(Database.getUserPicture().toString().toUri().toFile())
-
 
         profilePicture.setOnClickListener {
             pickPhotoFromGallery()
@@ -130,23 +110,6 @@ class ProfileFragment : Fragment() {
         startActivityForResult(intent, PICK_PHOTO_REQUEST)
     }
 
-    //TODO REMOVE AFTER TESTING
-    /*fun uploadImageToDb() {
-        val imageReference = mStorageRef.child(Database.getUserId()!!)
-
-        imageReference.putFile(mImageUri)
-            .addOnSuccessListener {taskSnapshot ->
-                Toast.makeText(this.context, "Upload successful", Toast.LENGTH_LONG).show()
-                //Add image to user and db
-                Database.setUserPicture(taskSnapshot.storage.downloadUrl.toString().toUri())
-                db.collection(Database.USERS).document(Database.getUserId()!!)
-                    .update("pictureUri", taskSnapshot.storage.downloadUrl.toString()) //imageReference.downloadUrl.toString()
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(this.context, e.message, Toast.LENGTH_LONG).show()
-            }
-    }*/
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -154,9 +117,7 @@ class ProfileFragment : Fragment() {
             data != null && data.data != null
         ) {
             Database.setUserPicture(data.data!!)
-            //TODO REMOVE AFTER TESTING mImageUri = data.data!!
             updateGlidePicture(data.data!!)
-            //TODO REMOVE AFTER TESTING uploadImageToDb()
         }
     }
 

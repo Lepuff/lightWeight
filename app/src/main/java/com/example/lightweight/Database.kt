@@ -21,8 +21,8 @@ import com.google.firebase.firestore.SetOptions
 
 object Database {
 
+    //private var profilePicture: Uri = Uri.parse("android.resource://com.example.lightweight/drawable/@mipmap/ic_launcher_round")
     private var user: User = User(null, true, null, null, null, null)
-
 
     const val WORKOUTS = "workouts"
     const val USERS = "users"
@@ -99,6 +99,10 @@ object Database {
 
     fun getUserFirstName(): String? {
         return user.firstName
+    }
+
+    fun getUserName():  String{
+        return user.firstName +" "+ user.lastName
     }
 
     fun setUserFirstName(newFirstName: String){

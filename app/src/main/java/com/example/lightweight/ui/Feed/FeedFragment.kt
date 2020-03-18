@@ -17,12 +17,7 @@ import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.adapters.WorkOutAdapter
 import com.example.lightweight.classes.*
 
-import com.facebook.Profile
-import com.facebook.ProfileTracker
-import com.facebook.internal.Mutable
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.DocumentSnapshot
 
 
 import com.google.firebase.firestore.DocumentChange
@@ -34,7 +29,7 @@ import kotlinx.android.synthetic.main.fragment_feed.*
 
 class FeedFragment : Fragment() {
     private val itemPadding = 30
-    private lateinit var viewModel: FeedViewModel
+    private lateinit var viewModel: WorkoutFeedViewModel
     private lateinit var workOutAdapter: WorkOutAdapter
     private var db = FirebaseFirestore.getInstance()
 
@@ -48,7 +43,7 @@ class FeedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel =
-            ViewModelProviders.of(this).get(FeedViewModel::class.java)
+            ViewModelProviders.of(this).get(WorkoutFeedViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_feed, container, false)
 
 
@@ -119,23 +114,52 @@ class FeedFragment : Fragment() {
     }
 
     private fun addWorkoutToFeed() {
+
         workoutsRef.orderBy(Database.WORKOUT_DATE, Query.Direction.DESCENDING).get()
             .addOnSuccessListener { workouts ->
                 workOutAdapter.clearList()
+
                 if (workouts != null) {
                     for (workout in workouts) {
                         val id = workout.id
                         val type = workout[Database.TYPE_OF_WORKOUT].toString()
                         val date = workout[Database.WORKOUT_DATE].toString()
                         val title = workout[Database.WORKOUT_TITLE].toString()
+                        val name = Database.getUserName()
+                        val profilePicture = Database.getUserPicture().toString()
                         when (type) {
                             "gymWorkout" ->
-                                workOutAdapter.addWorkout(GymWorkout(id, title, date))
+                                workOutAdapter.addWorkout(
+                                    GymWorkout(
+                                        id,
+                                        title,
+                                        date,
+                                        name,
+                                        profilePicture,
+                                        Database.getUserId().toString()
+                                    )
+                                )
                             "runningWorkout" ->
-                                workOutAdapter.addWorkout(RunningWorkout(id, title, date))
+                                workOutAdapter.addWorkout(
+                                    RunningWorkout(
+                                        id,
+                                        title,
+                                        date,
+                                        name,
+                                        profilePicture,
+                                        Database.getUserId().toString()
+                                    )
+                                )
                             "cyclingWorkout" ->
                                 workOutAdapter.addWorkout(
-                                    CyclingWorkout(id, title, date)
+                                    CyclingWorkout(
+                                        id,
+                                        title,
+                                        date,
+                                        name,
+                                        profilePicture,
+                                        Database.getUserId().toString()
+                                    )
                                 )
                         }
                     }

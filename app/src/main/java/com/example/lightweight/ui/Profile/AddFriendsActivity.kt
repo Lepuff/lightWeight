@@ -3,6 +3,7 @@ package com.example.lightweight.ui.Profile
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lightweight.Database
 import com.example.lightweight.R
@@ -27,23 +28,40 @@ class AddFriendsActivity : AppCompatActivity() {
 
         initRecyclerView()
         getUsers()
-
-
     }
-    private fun getUsers(){
-        db.collection(Database.USERS).get().addOnSuccessListener { users ->
 
-            if (users != null) {
-                for (user in users) {
-                    val _user = User()
-                    _user.email = user[Database.EMAIL].toString()
-                    _user.id = user[Database.ID].toString()
-                    friendAdapter.addItem(_user)
-                }
+    private fun getUsers() {
+        db.collection(Database.USERS).get().addOnSuccessListener { allUsers ->
+            if (allUsers != null) {
+                db.collection(Database.USERS).document(Database.getUserId()!!)
+                    .collection(Database.FRIENDS).get().addOnSuccessListener { friends ->
+                        if (friends != null) {
+                            for (user in allUsers) {
+                                var isNotFriend: Boolean = true
+                                for (friend in friends) {
+                                    Log.d("friend:", friend[Database.ID].toString())
+                                    Log.d("user:", user[Database.ID].toString())
+                                    if (user[Database.ID].toString() ==friend[Database.ID].toString())   {
+                                        isNotFriend = false
+                                    }
+                                    else if (user[Database.ID].toString() == Database.getUserId()){
+                                        isNotFriend = false
+                                    }
+                                }
+                                if (isNotFriend) { //todo borde finnas en bättre lösning...
+                                    Log.d("friend added!!:", user[Database.ID].toString())
+                                    val _user = User()
+                                    _user.email = user[Database.EMAIL].toString()
+                                    _user.id = user[Database.ID].toString()
+                                    friendAdapter.addItem(_user)
+                                }
+                            }
+
+                        }
+                    }
             }
         }
     }
-
 
 
     private fun initRecyclerView() {
@@ -52,7 +70,7 @@ class AddFriendsActivity : AppCompatActivity() {
             val topSpacingItemDecoration =
                 TopSpacingItemDecoration(5)//todo fix
             addItemDecoration(topSpacingItemDecoration)
-            friendAdapter = FriendAdapter(this)
+            friendAdapter = FriendAdapter(this, db)
             adapter = friendAdapter
         }
     }

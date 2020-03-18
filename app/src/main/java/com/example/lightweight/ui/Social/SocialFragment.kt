@@ -151,7 +151,7 @@ class SocialFragment : Fragment() {
                                                                     date,
                                                                     userName,
                                                                     profilePicture,
-                                                                    friend.id
+                                                                    user.id
                                                                 )
                                                             )
                                                         "runningWorkout" ->
@@ -162,7 +162,7 @@ class SocialFragment : Fragment() {
                                                                     date,
                                                                     userName,
                                                                     profilePicture,
-                                                                    friend.id
+                                                                    user.id
                                                                 )
                                                             )
                                                         "cyclingWorkout" ->
@@ -173,7 +173,7 @@ class SocialFragment : Fragment() {
                                                                     date,
                                                                     userName,
                                                                     profilePicture,
-                                                                    friend.id
+                                                                    user.id
                                                                 )
                                                             )
                                                     }

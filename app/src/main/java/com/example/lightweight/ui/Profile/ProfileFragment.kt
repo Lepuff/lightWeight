@@ -53,17 +53,16 @@ class ProfileFragment : Fragment() {
         var profileLastName = root.findViewById<TextView>(R.id.fragment_profile_last_name_editText).text
         var profileEmail = root.findViewById<TextView>(R.id.fragment_profile_email_editText).text
 
-       /* if(Database.isFacebookUser()){
-            root.findViewById<Button>(R.id.profile_change_password_button).isEnabled = false
-            root.findViewById<Button>(R.id.profile_edit_profile_button).isEnabled = false
-            //todo måste ändras så knapparna ej syns
+        if(Database.isFacebookUser()){
+            root.findViewById<Button>(R.id.profile_change_password_button).visibility = View.GONE
         }
-        */
+
 
         val profilePicture = root.findViewById<CircleImageView>(R.id.profile_image)
         profilePicture.setOnClickListener {
             //todo
         }
+
 
         val editProfile = root.findViewById<Button>(R.id.profile_edit_profile_button)
         editProfile.setOnClickListener {
@@ -72,15 +71,6 @@ class ProfileFragment : Fragment() {
             fragment_profile_last_name_editText.isEnabled = true
             fragment_profile_email_editText.isEnabled = true
 
-        }
-
-        val saveProfile = root.findViewById<Button>(R.id.profile_save_profile_button)
-        saveProfile.setOnClickListener {
-            saveProfileButtonVisibility()
-            fragment_profile_first_name_editText.isEnabled = false
-            fragment_profile_last_name_editText.isEnabled = false
-            fragment_profile_email_editText.isEnabled = false
-            //todo spara ändrad info
         }
 
         val editPasswordButton = root.findViewById<Button>(R.id.profile_change_password_button)
@@ -93,6 +83,14 @@ class ProfileFragment : Fragment() {
             val dialog = builder.show()
         }
 
+        val saveProfile = root.findViewById<Button>(R.id.profile_save_profile_button)
+        saveProfile.setOnClickListener {
+            saveProfileButtonVisibility()
+            fragment_profile_first_name_editText.isEnabled = false
+            fragment_profile_last_name_editText.isEnabled = false
+            fragment_profile_email_editText.isEnabled = false
+            //todo spara ändrad info
+        }
         return root
 
     }

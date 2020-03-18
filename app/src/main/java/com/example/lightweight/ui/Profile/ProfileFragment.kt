@@ -124,4 +124,5 @@ class ProfileFragment : Fragment() {
         profile_save_profile_button.visibility = View.GONE
     }
 
+
 }

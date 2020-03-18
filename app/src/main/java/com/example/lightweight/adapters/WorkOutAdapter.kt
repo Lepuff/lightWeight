@@ -83,6 +83,7 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
 
             Glide.with(itemView.context)
                 .applyDefaultRequestOptions(requestOption)
+
                 .load(workOut.userImage)
                 .into(userImage)
         }

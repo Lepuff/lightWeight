@@ -53,12 +53,10 @@ class LoginActivity : AppCompatActivity() {
 
         userSignUp.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
-            finish()
         }
 
         userLogin.setOnClickListener {
             passwordSignIn()
-
         }
 
         fbLoginButton.setOnClickListener {
@@ -85,6 +83,7 @@ class LoginActivity : AppCompatActivity() {
             return true
         } else if (auth.currentUser != null){
             Database.setUserId(auth.currentUser!!.uid)
+            Database.getUserInfoFromDb()
             return true
         }else
             return false
@@ -121,9 +120,7 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    /*val user = auth.currentUser
-                    Database.user.id = user!!.uid*/
+                    isAlreadyLoggedIn()
                     startActivity(Intent(this, NavigationActivity::class.java))
                     progressBar.visibility = View.INVISIBLE
                 } else {

@@ -18,8 +18,7 @@ import com.facebook.GraphRequest
 import com.facebook.Profile
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-
-
+import com.google.firebase.storage.FirebaseStorage
 
 
 object Database {
@@ -53,6 +52,7 @@ object Database {
     const val WEIGHT = "weight"
 
 
+
     fun getUser(): User{
         return user
     }
@@ -61,7 +61,7 @@ object Database {
         return user.isFacebookUser
     }
 
-    fun setUser(id: String?, isFacebookUser: Boolean, email: String?, firstName: String?, lastName: String?, picture: String?){
+    fun setUser(id: String?, isFacebookUser: Boolean, email: String?, firstName: String?, lastName: String?, picture: Uri?){
         user.id = id
         user.isFacebookUser = isFacebookUser
         user.email = email
@@ -70,12 +70,27 @@ object Database {
         user.profilePicture = picture
     }
 
-    fun getUserPicture(): String?{
+    fun getUserPicture(): Uri?{
         return user.profilePicture
     }
 
-    fun setUserPicture(newPicture: String?){
-        user.profilePicture = newPicture
+    fun setUserPicture(newPicture: Uri?){
+        val db = FirebaseFirestore.getInstance()
+        val mStorageRef = FirebaseStorage.getInstance().getReference("profilePictures")
+        val imageReference = mStorageRef.child(getUserId()!!)
+
+        imageReference.putFile(newPicture!!)
+            .addOnSuccessListener {taskSnapshot ->
+                //Add image to user and db
+                user.profilePicture = newPicture
+                db.collection(USERS).document(getUserId()!!)
+                    .update("pictureUri", taskSnapshot.storage.downloadUrl.toString()) //imageReference.downloadUrl.toString()
+            }
+            .addOnFailureListener { e ->
+                Log.d("TAG", e.message!!)
+            }
+        /*val db = FirebaseFirestore.getInstance()
+        db.collection(USERS).document(getUserId()!!).update("pictureUri", newPicture)*/
     }
 
     fun getUserId(): String? {
@@ -114,14 +129,20 @@ object Database {
     }
 
     fun getUserInfoFromDb(){
+        val mStorageRef = FirebaseStorage.getInstance().getReference("profilePictures")
         val db = FirebaseFirestore.getInstance()
-        val user = db.collection(USERS).document(user.id!!).get()
+        val user = db.collection(USERS).document(getUserId()!!).get()
             .addOnSuccessListener {document ->
             if (document != null){
                 user.email = document["email"].toString()
                 user.firstName = document["firstName"].toString()
                 user.lastName = document["lastName"].toString()
-                user.profilePicture = document["pictureUri"].toString()
+                user.profilePicture = document["pictureUri"].toString().toUri()
+                /*mStorageRef.child(getUserId()!!).downloadUrl.addOnSuccessListener { picture ->
+                    user.profilePicture = picture
+                    //val a = picture //TODO REMOVE AFTER TESTING
+                }*/
+                //user.profilePicture = document["pictureUri"].toString()
                 user.isFacebookUser = document["isFacebookUser"].toString().toBoolean()
             }
         }
@@ -133,7 +154,7 @@ object Database {
             "lastName" to user.lastName,
             "email" to user.email,
             "id" to user.id,
-            "pictureUri" to user.profilePicture,
+            "pictureUri" to user.profilePicture.toString(),
             "isFacebookUser" to user.isFacebookUser
         )
         val db = FirebaseFirestore.getInstance()
@@ -158,7 +179,7 @@ object Database {
                 user.firstName = `object`.getString("first_name")
                 user.lastName = `object`.getString("last_name")
                 if (user.profilePicture == null)
-                    user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120).toString()
+                    user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120)
                 user.isFacebookUser = true
                 userInfoToDb()
             }

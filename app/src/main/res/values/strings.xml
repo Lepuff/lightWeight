@@ -97,6 +97,7 @@
     <string name="friend_name">friend name</string>
     <string name="add_friends">Add friends</string>
     <string name="remove">remove</string>
+    <string name="old_password">Old password</string>
 
 
 </resources>

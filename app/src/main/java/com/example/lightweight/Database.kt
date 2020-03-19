@@ -17,6 +17,7 @@ import com.example.lightweight.ui.Profile.ProfileFragment
 import com.facebook.AccessToken
 import com.facebook.GraphRequest
 import com.facebook.Profile
+import com.google.firebase.auth.AdditionalUserInfo
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
@@ -92,7 +93,7 @@ object Database {
                 //Add image to user and db
                 user.profilePicture = newPicture
                 db.collection(USERS).document(getUserId()!!)
-                    .update("pictureUri", taskSnapshot.storage.downloadUrl.toString()) //imageReference.downloadUrl.toString()
+                    .update("pictureUri", taskSnapshot.storage.downloadUrl.toString())
             }
             .addOnFailureListener { e ->
                 Log.d("TAG", e.message!!)
@@ -155,7 +156,8 @@ object Database {
         }
     }
 
-    private fun userInfoToDb() {
+    fun userInfoToDb() {
+        val db = FirebaseFirestore.getInstance()
         val userInfo = hashMapOf(
             "firstName" to user.firstName,
             "lastName" to user.lastName,
@@ -164,7 +166,6 @@ object Database {
             "pictureUri" to user.profilePicture.toString(),
             "isFacebookUser" to user.isFacebookUser
         )
-        val db = FirebaseFirestore.getInstance()
         db.collection(USERS).document(getUserId()!!)
             .set(userInfo, SetOptions.merge())
             .addOnSuccessListener { documentReference ->
@@ -175,8 +176,7 @@ object Database {
             }
     }
 
-    fun updateUserData(accessToken: AccessToken?) {
-        if (user.isFacebookUser) {
+    fun updateUserDataFromFacebook(accessToken: AccessToken?) {
             val request = GraphRequest.newMeRequest(
                 accessToken
             ) { `object`, response ->
@@ -185,8 +185,7 @@ object Database {
                 user.email = `object`.getString("email")
                 user.firstName = `object`.getString("first_name")
                 user.lastName = `object`.getString("last_name")
-                if (user.profilePicture == null)
-                    user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120)
+                user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120)
                 user.isFacebookUser = true
                 userInfoToDb()
             }
@@ -195,8 +194,6 @@ object Database {
             parameters.putString("fields", "id, first_name, last_name, email, picture")
             request.parameters = parameters
             request.executeAsync()
-        } else {
-            userInfoToDb()
-        }
+
     }
 }

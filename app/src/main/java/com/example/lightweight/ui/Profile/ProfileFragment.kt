@@ -34,6 +34,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
 
+    val itemPaddingTop = 5
     private lateinit var viewModel: ProfileViewModel
     private val PICK_PHOTO_REQUEST = 1
     private lateinit var profilePicture: CircleImageView
@@ -140,7 +141,7 @@ class ProfileFragment : Fragment() {
         val dialog = builder.show()
 
         dialogView.findViewById<Button>(R.id.dialog_save_password_button).setOnClickListener {
-            saveNewPassWord(dialogView)
+            saveNewPassword(dialogView)
             dialog.cancel()
         }
 
@@ -148,7 +149,7 @@ class ProfileFragment : Fragment() {
     }
 
 
-    private fun saveNewPassWord(dialogView: View) {
+    private fun saveNewPassword(dialogView: View) {
         dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText).text
         dialogView.findViewById<TextInputEditText>(R.id.dialog_new_password_editText).text
         dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText).text
@@ -232,7 +233,7 @@ class ProfileFragment : Fragment() {
         profile_recyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
             val topSpacingItemDecoration =
-                TopSpacingItemDecoration(5)//todo fix
+                TopSpacingItemDecoration(itemPaddingTop)
             addItemDecoration(topSpacingItemDecoration)
             friendAdapter = UserAdapter(this, db, false)
             adapter = friendAdapter

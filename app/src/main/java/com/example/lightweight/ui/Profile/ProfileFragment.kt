@@ -19,6 +19,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.lightweight.Database
 import com.example.lightweight.R
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Registry
 import com.example.lightweight.adapters.UserAdapter
 import com.example.lightweight.classes.User
 import com.example.lightweight.ui.TopSpacingItemDecoration
@@ -37,6 +38,8 @@ class ProfileFragment : Fragment() {
     private val itemPaddingTop = 5
 
     private val PICK_PHOTO_REQUEST = 1
+
+
     private lateinit var viewModel: ProfileViewModel
     private lateinit var friendAdapter: UserAdapter
     private var db = FirebaseFirestore.getInstance()
@@ -52,7 +55,7 @@ class ProfileFragment : Fragment() {
         viewModel.isInEditState.observe(viewLifecycleOwner, Observer {
             handelEditStates()
         })
-        loadUserInfo()
+        loadUserInfo(root)
 
         val logoutButton = root.findViewById<Button>(R.id.profile_logout_button)
         logoutButton.setOnClickListener {
@@ -60,7 +63,7 @@ class ProfileFragment : Fragment() {
         }
 
         val profilePicture = root.findViewById<CircleImageView>(R.id.profile_image)
-        updateGlidePicture(Database.getUserPicture())
+        updateGlidePicture(Database.getUserPicture(),profilePicture)
         profilePicture.setOnClickListener {
             pickPhotoFromGallery()
         }
@@ -85,7 +88,7 @@ class ProfileFragment : Fragment() {
 
         val saveProfileButton = root.findViewById<Button>(R.id.profile_save_profile_button)
         saveProfileButton.setOnClickListener {
-            saveProfileInfo()
+            saveProfileInfo(root)
             viewModel.isInEditState.value = false
         }
         return root
@@ -132,20 +135,20 @@ class ProfileFragment : Fragment() {
         //todo samuel save stuff
     }
 
-    private fun saveProfileInfo() {
-        view!!.findViewById<TextInputEditText>(R.id.fragment_profile_first_name_editText).text
-        view!!.findViewById<TextInputEditText>(R.id.fragment_profile_last_name_editText).text
-        view!!.findViewById<TextInputEditText>(R.id.fragment_profile_email_editText).text
+    private fun saveProfileInfo(view: View) {
+        view.findViewById<TextInputEditText>(R.id.fragment_profile_first_name_editText).text
+        view.findViewById<TextInputEditText>(R.id.fragment_profile_last_name_editText).text
+        view.findViewById<TextInputEditText>(R.id.fragment_profile_email_editText).text
 
         //todo samuel
     }
 
-    private fun loadUserInfo() {
-        view!!.findViewById<TextView>(R.id.fragment_profile_first_name_editText).text =
+    private fun loadUserInfo(view: View) {
+        view.findViewById<TextView>(R.id.fragment_profile_first_name_editText).text =
             Database.getUserFirstName()
-        view!!.findViewById<TextView>(R.id.fragment_profile_last_name_editText).text =
+        view.findViewById<TextView>(R.id.fragment_profile_last_name_editText).text =
             Database.getUserLastName()
-        view!!.findViewById<TextView>(R.id.fragment_profile_email_editText).text =
+        view.findViewById<TextView>(R.id.fragment_profile_email_editText).text =
             Database.getUserEmail()
     }
 
@@ -157,19 +160,22 @@ class ProfileFragment : Fragment() {
         activity!!.finish()
     }
 
-    private fun updateGlidePicture(imageUri: Uri?) {
+    private fun updateGlidePicture(imageUri: Uri?,circleImageView: CircleImageView) {
         val requestOption = RequestOptions()
             .placeholder(R.drawable.ic_launcher_background)
             .error(R.drawable.ic_error_layer)
-            .fallback(R.drawable.ic_fallback_foreground)
+            .fallback(R.drawable.ic_person_yellow_24dp)
+
 
         Glide.with(this)
             .applyDefaultRequestOptions(requestOption)
             .load(imageUri)
-            .into(view!!.findViewById(R.id.profile_image))
+
+            .into(circleImageView)
     }
 
     private fun pickPhotoFromGallery() {
+
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
@@ -183,7 +189,7 @@ class ProfileFragment : Fragment() {
             data != null && data.data != null
         ) {
             Database.setUserPicture(data.data!!)
-            updateGlidePicture(data.data!!)
+            updateGlidePicture(data.data!!,profile_image)
         }
     }
 

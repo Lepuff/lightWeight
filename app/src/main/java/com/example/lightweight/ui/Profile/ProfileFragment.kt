@@ -34,10 +34,10 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
 
-    val itemPaddingTop = 5
-    private lateinit var viewModel: ProfileViewModel
+    private val itemPaddingTop = 5
+
     private val PICK_PHOTO_REQUEST = 1
-    private lateinit var profilePicture: CircleImageView
+    private lateinit var viewModel: ProfileViewModel
     private lateinit var friendAdapter: UserAdapter
     private var db = FirebaseFirestore.getInstance()
 
@@ -50,57 +50,17 @@ class ProfileFragment : Fragment() {
         viewModel =
             ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         viewModel.isInEditState.observe(viewLifecycleOwner, Observer {
-
-            if (Database.isFacebookUser()) {
-                root.findViewById<Button>(R.id.profile_change_password_button).visibility =
-                    View.GONE
-                root.findViewById<Button>(R.id.profile_edit_profile_button).visibility =
-                    View.GONE
-            } else {
-                root.findViewById<Button>(R.id.profile_change_password_button).visibility =
-                    View.VISIBLE
-                if (viewModel.isInEditState.value!!) {
-                    fragment_profile_first_name_editText.isEnabled = true
-                    fragment_profile_last_name_editText.isEnabled = true
-                    fragment_profile_email_editText.isEnabled = true
-                    root.findViewById<Button>(R.id.profile_edit_profile_button).visibility =
-                        View.GONE
-                    root.findViewById<Button>(R.id.profile_save_profile_button).visibility =
-                        View.VISIBLE
-                } else {
-                    fragment_profile_first_name_editText.isEnabled = false
-                    fragment_profile_last_name_editText.isEnabled = false
-                    fragment_profile_email_editText.isEnabled = false
-                    root.findViewById<Button>(R.id.profile_edit_profile_button).visibility =
-                        View.VISIBLE
-                    root.findViewById<Button>(R.id.profile_save_profile_button).visibility =
-                        View.GONE
-                }
-
-            }
+            handelEditStates()
         })
+        loadUserInfo()
 
-        profilePicture = root.findViewById<CircleImageView>(R.id.profile_image)
         val logoutButton = root.findViewById<Button>(R.id.profile_logout_button)
         logoutButton.setOnClickListener {
-            FirebaseAuth.getInstance().signOut() //sign out user
-            LoginManager.getInstance().logOut()
-            AccessToken.setCurrentAccessToken(null)
-            startActivity(Intent(activity, LoginActivity::class.java))
-            activity!!.finish()
+            logOut()
         }
 
-        root.findViewById<TextView>(R.id.fragment_profile_first_name_editText).text =
-            Database.getUserFirstName()
-        root.findViewById<TextView>(R.id.fragment_profile_last_name_editText).text =
-            Database.getUserLastName()
-        root.findViewById<TextView>(R.id.fragment_profile_email_editText).text =
-            Database.getUserEmail()
-
-
-        //get profile pic and load into glide
+        val profilePicture = root.findViewById<CircleImageView>(R.id.profile_image)
         updateGlidePicture(Database.getUserPicture())
-
         profilePicture.setOnClickListener {
             pickPhotoFromGallery()
         }
@@ -132,6 +92,22 @@ class ProfileFragment : Fragment() {
 
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
+        initRecyclerView()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getFriendsFromDb()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        friendAdapter.clearList()
+    }
+
     @SuppressLint("InflateParams")
     private fun changePasswordDialog() {
         val dialogView =
@@ -144,7 +120,6 @@ class ProfileFragment : Fragment() {
             saveNewPassword(dialogView)
             dialog.cancel()
         }
-
 
     }
 
@@ -165,9 +140,24 @@ class ProfileFragment : Fragment() {
         //todo samuel
     }
 
+    private fun loadUserInfo() {
+        view!!.findViewById<TextView>(R.id.fragment_profile_first_name_editText).text =
+            Database.getUserFirstName()
+        view!!.findViewById<TextView>(R.id.fragment_profile_last_name_editText).text =
+            Database.getUserLastName()
+        view!!.findViewById<TextView>(R.id.fragment_profile_email_editText).text =
+            Database.getUserEmail()
+    }
+
+    private fun logOut() {
+        FirebaseAuth.getInstance().signOut() //sign out user
+        LoginManager.getInstance().logOut()
+        AccessToken.setCurrentAccessToken(null)
+        startActivity(Intent(activity, LoginActivity::class.java))
+        activity!!.finish()
+    }
 
     private fun updateGlidePicture(imageUri: Uri?) {
-
         val requestOption = RequestOptions()
             .placeholder(R.drawable.ic_launcher_background)
             .error(R.drawable.ic_error_layer)
@@ -176,7 +166,7 @@ class ProfileFragment : Fragment() {
         Glide.with(this)
             .applyDefaultRequestOptions(requestOption)
             .load(imageUri)
-            .into(profilePicture)
+            .into(view!!.findViewById(R.id.profile_image))
     }
 
     private fun pickPhotoFromGallery() {
@@ -197,22 +187,35 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
-        initRecyclerView()
-
+    private fun handelEditStates() {
+        if (Database.isFacebookUser()) {
+            view!!.findViewById<Button>(R.id.profile_change_password_button).visibility =
+                View.GONE
+            view!!.findViewById<Button>(R.id.profile_edit_profile_button).visibility =
+                View.GONE
+        } else {
+            view!!.findViewById<Button>(R.id.profile_change_password_button).visibility =
+                View.VISIBLE
+            if (viewModel.isInEditState.value!!) {
+                fragment_profile_first_name_editText.isEnabled = true
+                fragment_profile_last_name_editText.isEnabled = true
+                fragment_profile_email_editText.isEnabled = true
+                view!!.findViewById<Button>(R.id.profile_edit_profile_button).visibility =
+                    View.GONE
+                view!!.findViewById<Button>(R.id.profile_save_profile_button).visibility =
+                    View.VISIBLE
+            } else {
+                fragment_profile_first_name_editText.isEnabled = false
+                fragment_profile_last_name_editText.isEnabled = false
+                fragment_profile_email_editText.isEnabled = false
+                view!!.findViewById<Button>(R.id.profile_edit_profile_button).visibility =
+                    View.VISIBLE
+                view!!.findViewById<Button>(R.id.profile_save_profile_button).visibility =
+                    View.GONE
+            }
+        }
     }
 
-    override fun onResume() {
-        super.onResume()
-        getFriendsFromDb()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        friendAdapter.clearList()
-    }
 
     private fun getFriendsFromDb() {
         db.collection(Database.USERS).document(Database.getUserId()!!).collection(Database.FRIENDS)

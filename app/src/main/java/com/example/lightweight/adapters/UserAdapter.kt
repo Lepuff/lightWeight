@@ -65,18 +65,17 @@ class UserAdapter(private val recyclerView: RecyclerView, private val db : Fireb
                     Database.ID to selectedUser?.id
                 )
                 db.collection(Database.USERS).document(Database.getUserId()!!).collection(Database.FRIENDS).document().set(userInfo)
-
-
-
-
-                val positon = adapterPosition
-                adapter.removeitem(positon)
+                val position = adapterPosition
+                adapter.removeitem(position)
             }
         }
         val removeFriendButton = itemView.findViewById<Button>(R.id.friend_remove_button).apply {
             setOnClickListener {
 
-
+                db.collection(Database.USERS).document(Database.getUserId()!!).collection(Database.FRIENDS).document(
+                    selectedUser?.id!!).delete()
+                val position = adapterPosition
+                adapter.removeitem(position)
             }
         }
 

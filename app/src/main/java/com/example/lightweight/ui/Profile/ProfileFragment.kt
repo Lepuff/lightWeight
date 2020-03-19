@@ -1,5 +1,6 @@
 package com.example.lightweight.ui.Profile
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -24,6 +25,7 @@ import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.ui.login.LoginActivity
 import com.facebook.AccessToken
 import com.facebook.login.LoginManager
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import de.hdodenhof.circleimageview.CircleImageView
@@ -129,27 +131,36 @@ class ProfileFragment : Fragment() {
 
     }
 
+    @SuppressLint("InflateParams")
     private fun changePasswordDialog() {
         val dialogView =
             LayoutInflater.from(this.context).inflate(R.layout.dialog_change_password, null)
-
-
-        dialogView.findViewById<Button>(R.id.dialog_save_password_button).setOnClickListener {
-            saveNewPassWord()
-        }
         val builder = AlertDialog.Builder(this.context)
         builder.setView(dialogView)
         val dialog = builder.show()
 
+        dialogView.findViewById<Button>(R.id.dialog_save_password_button).setOnClickListener {
+            saveNewPassWord(dialogView)
+            dialog.cancel()
+        }
+
 
     }
 
 
-    private fun saveNewPassWord() {
-        //todo samuel
+    private fun saveNewPassWord(dialogView: View) {
+        dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText).text
+        dialogView.findViewById<TextInputEditText>(R.id.dialog_new_password_editText).text
+        dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText).text
+
+        //todo samuel save stuff
     }
 
     private fun saveProfileInfo() {
+        view!!.findViewById<TextInputEditText>(R.id.fragment_profile_first_name_editText).text
+        view!!.findViewById<TextInputEditText>(R.id.fragment_profile_last_name_editText).text
+        view!!.findViewById<TextInputEditText>(R.id.fragment_profile_email_editText).text
+
         //todo samuel
     }
 

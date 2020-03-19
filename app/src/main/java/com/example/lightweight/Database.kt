@@ -133,6 +133,16 @@ object Database {
         return user.email
     }
 
+    fun updateUser(firstName: String, lastName: String, email: String){
+        val db = FirebaseFirestore.getInstance()
+
+        user.firstName = firstName
+        user.lastName = lastName
+        user.email = email
+        db.collection(USERS).document(getUserId()!!)
+            .update("firstName", user.firstName, "lastName", user.lastName, "email", email)
+    }
+
     fun updateUserEmail(newEmail: String) {
         val currentUser = FirebaseAuth.getInstance().currentUser
         currentUser!!.updateEmail(newEmail)

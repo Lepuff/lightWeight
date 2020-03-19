@@ -176,11 +176,11 @@ class ProfileFragment : Fragment() {
     }
 
     private fun saveProfileInfo(view: View) {
-        view.findViewById<TextInputEditText>(R.id.fragment_profile_first_name_editText).text
-        view.findViewById<TextInputEditText>(R.id.fragment_profile_last_name_editText).text
-        view.findViewById<TextInputEditText>(R.id.fragment_profile_email_editText).text
+        val firstName = view.findViewById<TextInputEditText>(R.id.fragment_profile_first_name_editText).text
+        val lastName = view.findViewById<TextInputEditText>(R.id.fragment_profile_last_name_editText).text
+        val email = view.findViewById<TextInputEditText>(R.id.fragment_profile_email_editText).text
 
-        //todo samuel
+        Database.updateUser(firstName.toString(), lastName.toString(), email.toString())
     }
 
     private fun loadUserInfo(view: View) {

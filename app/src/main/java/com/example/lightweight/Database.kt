@@ -17,6 +17,7 @@ import com.example.lightweight.ui.Profile.ProfileFragment
 import com.facebook.AccessToken
 import com.facebook.GraphRequest
 import com.facebook.Profile
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
@@ -110,9 +111,10 @@ object Database {
         return user.email
     }
 
-    fun setUserEmail(newEmail: String) {
+    fun updateUserEmail(newEmail: String) {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        currentUser!!.updateEmail(newEmail)
         user.email = newEmail
-        userInfoToDb()
     }
 
     fun getUserFirstName(): String? {
@@ -123,18 +125,20 @@ object Database {
         return user.firstName +" "+ user.lastName
     }
 
-    fun setUserFirstName(newFirstName: String){
+    fun updateUserFirstName(newFirstName: String){
+        val db = FirebaseFirestore.getInstance()
         user.firstName = newFirstName
-        userInfoToDb()
+        db.collection(USERS).document(getUserId()!!).update("firstName", newFirstName)
     }
 
     fun getUserLastName(): String? {
         return user.lastName
     }
 
-    fun setUserLastName(newLastName: String){
+    fun updateUserLastName(newLastName: String){
+        val db = FirebaseFirestore.getInstance()
         user.lastName = newLastName
-        userInfoToDb()
+        db.collection(USERS).document(getUserId()!!).update("lastName", newLastName)
     }
 
     fun getUserInfoFromDb(){

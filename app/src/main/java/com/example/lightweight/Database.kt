@@ -73,11 +73,6 @@ object Database {
 
 
 
-
-    fun getUser(): User{
-        return user
-    }
-
     fun isFacebookUser(): Boolean {
         return user.isFacebookUser
     }
@@ -99,6 +94,7 @@ object Database {
         val db = FirebaseFirestore.getInstance()
         val userRef = db.collection(USERS).document(user.id!!).get()
         userRef.addOnSuccessListener { document ->
+            val a = document["pictureUri"]
             user.profilePicture = document["pictureUri"].toString().toUri()
         }
         return user.profilePicture
@@ -133,20 +129,17 @@ object Database {
         return user.email
     }
 
-    fun updateUser(firstName: String, lastName: String, email: String){
+    fun updateUser(firstName: String?, lastName: String?, email: String?){
         val db = FirebaseFirestore.getInstance()
+        if (firstName != null)
+            user.firstName = firstName
+        if (lastName != null)
+            user.lastName = lastName
+        if (email != null)
+            user.email = email
 
-        user.firstName = firstName
-        user.lastName = lastName
-        user.email = email
         db.collection(USERS).document(getUserId()!!)
             .update("firstName", user.firstName, "lastName", user.lastName, "email", email)
-    }
-
-    fun updateUserEmail(newEmail: String) {
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        currentUser!!.updateEmail(newEmail)
-        user.email = newEmail
     }
 
     fun getUserFirstName(): String? {
@@ -157,20 +150,8 @@ object Database {
         return user.firstName +" "+ user.lastName
     }
 
-    fun updateUserFirstName(newFirstName: String){
-        val db = FirebaseFirestore.getInstance()
-        user.firstName = newFirstName
-        db.collection(USERS).document(getUserId()!!).update("firstName", newFirstName)
-    }
-
     fun getUserLastName(): String? {
         return user.lastName
-    }
-
-    fun updateUserLastName(newLastName: String){
-        val db = FirebaseFirestore.getInstance()
-        user.lastName = newLastName
-        db.collection(USERS).document(getUserId()!!).update("lastName", newLastName)
     }
 
     fun getUserInfoFromDb(){
@@ -209,12 +190,10 @@ object Database {
     }
 
     fun updateUserDataFromFacebook(accessToken: AccessToken?, firstTime: Boolean) {
-
-
+            val db = FirebaseFirestore.getInstance()
             val request = GraphRequest.newMeRequest(
                 accessToken
             ) { `object`, response ->
-
                 user.id = `object`.getString("id")
                 user.email = `object`.getString("email")
                 user.firstName = `object`.getString("first_name")
@@ -224,14 +203,21 @@ object Database {
                 } else
                     user.profilePicture = getUserPictureFromDb()
                 user.isFacebookUser = true
+                val userInfo = hashMapOf(
+                    "firstName" to user.firstName,
+                    "lastName" to user.lastName,
+                    "email" to user.email,
+                    "id" to user.id,
+                    "pictureUri" to user.profilePicture.toString(),
+                    "isFacebookUser" to user.isFacebookUser
+                )
 
-                userInfoToDb()
+                db.collection(USERS).document(user.id!!).set(userInfo, SetOptions.merge())
             }
             //Here we put the requested fields to be returned from the JSONObject
             val parameters = Bundle()
             parameters.putString("fields", "id, first_name, last_name, email, picture")
             request.parameters = parameters
             request.executeAsync()
-
     }
 }

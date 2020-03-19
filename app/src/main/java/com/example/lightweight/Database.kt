@@ -111,7 +111,7 @@ object Database {
                 //Add image to user and db
                 user.profilePicture = newPicture
                 db.collection(USERS).document(getUserId()!!)
-                    .update("pictureUri", taskSnapshot.storage.downloadUrl.toString())
+                    .update("pictureUri", imageReference.downloadUrl.toString())
             }
             .addOnFailureListener { e ->
                 Log.d("TAG", e.message!!)

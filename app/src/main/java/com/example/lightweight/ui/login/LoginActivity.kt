@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lightweight.*
 import com.example.lightweight.R
-import com.example.lightweight.classes.User
 import com.example.lightweight.ui.NavigationActivity
 import com.example.lightweight.ui.Register.RegisterActivity
 import com.facebook.*
@@ -19,9 +18,7 @@ import com.facebook.login.widget.LoginButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
-import java.net.URL
 import java.util.*
 
 
@@ -79,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
         if (accessToken != null && !accessToken.isExpired){
             val profile = Profile.getCurrentProfile()
             Database.setUserId(profile.id)
-            Database.updateUserData(accessToken)
+            Database.updateUserDataFromFacebook(accessToken)
             return true
         } else if (auth.currentUser != null){
             Database.setUserId(auth.currentUser!!.uid)
@@ -160,7 +157,7 @@ class LoginActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
         auth.signInWithCredential(credential)
             .addOnSuccessListener { result ->
-                Database.updateUserData(accessToken)
+                Database.updateUserDataFromFacebook(accessToken)
                 Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
 
                 startActivity(Intent(this, NavigationActivity::class.java))

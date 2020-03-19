@@ -83,6 +83,15 @@ object Database {
         return user.profilePicture
     }
 
+    fun getUserPictureFromDb(): Uri?{
+        val db = FirebaseFirestore.getInstance()
+        val userRef = db.collection(USERS).document(user.id!!).get()
+        userRef.addOnSuccessListener { document ->
+            user.profilePicture = document["pictureUri"].toString().toUri()
+        }
+        return user.profilePicture
+    }
+
     fun setUserPicture(newPicture: Uri?){
         val db = FirebaseFirestore.getInstance()
         val mStorageRef = FirebaseStorage.getInstance().getReference("profilePictures")
@@ -170,6 +179,7 @@ object Database {
             .set(userInfo, SetOptions.merge())
             .addOnSuccessListener { documentReference ->
                 Log.d("TAG", "DocumentSnapshot added with ID: $documentReference")
+
             }
             .addOnFailureListener { e ->
                 Log.w("TAG", "Error adding document", e)
@@ -185,8 +195,12 @@ object Database {
                 user.email = `object`.getString("email")
                 user.firstName = `object`.getString("first_name")
                 user.lastName = `object`.getString("last_name")
-                user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120)
+                if (getUserPictureFromDb() == null)
+                    user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120)
+                else
+                    user.profilePicture = getUserPictureFromDb()
                 user.isFacebookUser = true
+
                 userInfoToDb()
             }
             //Here we put the requested fields to be returned from the JSONObject

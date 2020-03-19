@@ -20,6 +20,7 @@
     <color name="text_item_unfocused">#80FFD54F</color>
     <color name="divider">#2e2e1f</color>
     <color name="text_divider">#ffc107</color>
+    <color name="details">#ffc107</color>
 
 
 

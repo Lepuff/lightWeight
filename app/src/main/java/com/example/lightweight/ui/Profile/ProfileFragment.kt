@@ -125,7 +125,7 @@ class ProfileFragment : Fragment() {
 
         dialogView.findViewById<Button>(R.id.dialog_save_password_button).setOnClickListener {
             saveNewPassword(dialogView, dialog)
-            Toast.makeText(this.context, "Password successfully changed", Toast.LENGTH_LONG).show()
+                //Toast.makeText(activity, "Password successfully changed", Toast.LENGTH_LONG).show()
         }
 
     }
@@ -139,50 +139,38 @@ class ProfileFragment : Fragment() {
             dialogView.findViewById<TextInputEditText>(R.id.dialog_new_password_editText).text
         val confirmPassword =
             dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText).text
-        val passwordUpdated = Database.updateUserPassword(
-            oldPassword = oldPassword.toString(), newPassword = newPassword.toString(),
-            confirmPassword = confirmPassword.toString()
-        )
-        if (passwordUpdated != Database.NO_ERROR) {
-            when (passwordUpdated){
-                Database.ERROR_OLD_PASSWORD_INVALID -> {
-                    dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText)
-                        .error = "Invalid password"
-                    dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText).requestFocus()
-                }
-                Database.ERROR_EMPTY_NEW_PASSWORD -> {
+
+        //Re-authenticate user by having to type in correct password
+        val credential =
+            EmailAuthProvider.getCredential(currentUser.email!!, oldPassword.toString())
+        currentUser.reauthenticate(credential).addOnCompleteListener { auth ->
+            if (auth.isSuccessful) {
+                if (newPassword.isNullOrEmpty() || !Validation.isValidPassword(newPassword)){
                     dialogView.findViewById<TextInputEditText>(R.id.dialog_new_password_editText)
-                        .error = "Password can't be empty"
+                        .error = "Password needs to be atleast 6 characters"
                     dialogView.findViewById<TextInputEditText>(R.id.dialog_new_password_editText).requestFocus()
                 }
-                Database.ERROR_EMPTY_CONFIRM_PASSWORD -> {
-                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
-                        .error = "Password can't be empty"
-                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText).requestFocus()
-                }
-                Database.ERROR_NOT_MATCHING -> {
-                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
-                        .error = "Passwords don't match"
-                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText).requestFocus()
-                }
-                Database.ERROR_CONFIRM_PASSWORD_INVALID -> {
+                else if (confirmPassword.isNullOrEmpty() || !Validation.isValidPassword(confirmPassword)){
                     dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
                         .error = "Password needs to be atleast 6 characters"
                     dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText).requestFocus()
                 }
-            }
-        }
-        //Re-authenticate user by having to type in correct password
-        val credential = EmailAuthProvider.getCredential(currentUser.email!!, oldPassword.toString())
-        currentUser.reauthenticate(credential).addOnCompleteListener {auth ->
-            if (auth.isSuccessful) {
-                currentUser.updatePassword(confirmPassword.toString())
-                dialog.cancel()
+                else if (newPassword.toString() != confirmPassword.toString()){
+                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
+                        .error = "Passwords don't match"
+                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText).requestFocus()
+                }
+                else {
+                    currentUser.updatePassword(confirmPassword.toString())
+                    Toast.makeText(this.context, "Password successfully changed", Toast.LENGTH_LONG).show()
+                    dialog.cancel()
+                }
 
-            } else{
+            } else {
                 dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText)
                     .error = "Invalid password"
-                dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText).requestFocus()
+                dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText)
+                    .requestFocus()
             }
         }
     }

@@ -136,21 +136,6 @@ object Database {
         user.email = newEmail
     }
 
-    fun updateUserPassword(oldPassword: String?, newPassword: String?, confirmPassword: String?): Int{
-        if (oldPassword.isNullOrEmpty() || !Validation.isValidPassword(oldPassword))
-            return ERROR_OLD_PASSWORD_INVALID
-        else if (newPassword.isNullOrEmpty() || !Validation.isValidPassword(newPassword))
-            return ERROR_EMPTY_NEW_PASSWORD
-        else if (confirmPassword.isNullOrEmpty() || !Validation.isValidPassword(confirmPassword))
-            return ERROR_EMPTY_CONFIRM_PASSWORD
-        else if (newPassword != confirmPassword)
-            return ERROR_NOT_MATCHING
-        else if (!Validation.isValidPassword(confirmPassword))
-            return ERROR_CONFIRM_PASSWORD_INVALID
-        else
-            return NO_ERROR
-    }
-
     fun getUserFirstName(): String? {
         return user.firstName
     }

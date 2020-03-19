@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -127,7 +128,7 @@ class SocialFragment : Fragment() {
                                 if (user != null) {
                                     val userName: String =
                                         user[Database.FIRST_NAME].toString() + " " + user[Database.LAST_NAME].toString()
-                                    val profilePicture = user[Database.PICTURE_URI].toString()
+                                    val profilePicture = user[Database.PICTURE_URI].toString().toUri()
                                     db.collection(Database.USERS)
                                         .document(friend[Database.ID].toString())
                                         .collection(Database.WORKOUTS).get()

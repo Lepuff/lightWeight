@@ -2,6 +2,7 @@ package com.example.lightweight.classes
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import com.example.lightweight.R
 import com.example.lightweight.ui.workouts.cycling.NewCyclingWorkoutActivity
@@ -12,7 +13,7 @@ class CyclingWorkout(
     override var title: String,
     override var date: String,
     override var userName: String,
-    override var userImage: String,
+    override var userImage: Uri?,
     override var userId: String
 
 

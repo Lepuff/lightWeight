@@ -14,7 +14,7 @@ abstract class AbstractWorkout(
     abstract var title: String
     abstract var date: String
     abstract var userName : String
-    abstract var userImage : String
+    abstract var userImage : Uri?
     abstract var userId: String
 
     abstract fun showWorkout(context: Context)

@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -20,6 +21,7 @@ import com.example.lightweight.Database
 import com.example.lightweight.R
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Registry
+import com.example.lightweight.Validation
 import com.example.lightweight.adapters.UserAdapter
 import com.example.lightweight.classes.User
 import com.example.lightweight.ui.TopSpacingItemDecoration
@@ -27,9 +29,11 @@ import com.example.lightweight.ui.login.LoginActivity
 import com.facebook.AccessToken
 import com.facebook.login.LoginManager
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.dialog_change_password.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 
@@ -63,7 +67,7 @@ class ProfileFragment : Fragment() {
         }
 
         val profilePicture = root.findViewById<CircleImageView>(R.id.profile_image)
-        updateGlidePicture(Database.getUserPicture(),profilePicture)
+        updateGlidePicture(Database.getUserPicture(), profilePicture)
         profilePicture.setOnClickListener {
             pickPhotoFromGallery()
         }
@@ -120,19 +124,67 @@ class ProfileFragment : Fragment() {
         val dialog = builder.show()
 
         dialogView.findViewById<Button>(R.id.dialog_save_password_button).setOnClickListener {
-            saveNewPassword(dialogView)
-            dialog.cancel()
+            saveNewPassword(dialogView, dialog)
+            Toast.makeText(this.context, "Password successfully changed", Toast.LENGTH_LONG).show()
         }
 
     }
 
 
-    private fun saveNewPassword(dialogView: View) {
-        dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText).text
-        dialogView.findViewById<TextInputEditText>(R.id.dialog_new_password_editText).text
-        dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText).text
+    private fun saveNewPassword(dialogView: View, dialog: AlertDialog){
+        val currentUser = FirebaseAuth.getInstance().currentUser!!
+        val oldPassword =
+            dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText).text
+        val newPassword =
+            dialogView.findViewById<TextInputEditText>(R.id.dialog_new_password_editText).text
+        val confirmPassword =
+            dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText).text
+        val passwordUpdated = Database.updateUserPassword(
+            oldPassword = oldPassword.toString(), newPassword = newPassword.toString(),
+            confirmPassword = confirmPassword.toString()
+        )
+        if (passwordUpdated != Database.NO_ERROR) {
+            when (passwordUpdated){
+                Database.ERROR_OLD_PASSWORD_INVALID -> {
+                    dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText)
+                        .error = "Invalid password"
+                    dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText).requestFocus()
+                }
+                Database.ERROR_EMPTY_NEW_PASSWORD -> {
+                    dialogView.findViewById<TextInputEditText>(R.id.dialog_new_password_editText)
+                        .error = "Password can't be empty"
+                    dialogView.findViewById<TextInputEditText>(R.id.dialog_new_password_editText).requestFocus()
+                }
+                Database.ERROR_EMPTY_CONFIRM_PASSWORD -> {
+                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
+                        .error = "Password can't be empty"
+                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText).requestFocus()
+                }
+                Database.ERROR_NOT_MATCHING -> {
+                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
+                        .error = "Passwords don't match"
+                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText).requestFocus()
+                }
+                Database.ERROR_CONFIRM_PASSWORD_INVALID -> {
+                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
+                        .error = "Password needs to be atleast 6 characters"
+                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText).requestFocus()
+                }
+            }
+        }
+        //Re-authenticate user by having to type in correct password
+        val credential = EmailAuthProvider.getCredential(currentUser.email!!, oldPassword.toString())
+        currentUser.reauthenticate(credential).addOnCompleteListener {auth ->
+            if (auth.isSuccessful) {
+                currentUser.updatePassword(confirmPassword.toString())
+                dialog.cancel()
 
-        //todo samuel save stuff
+            } else{
+                dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText)
+                    .error = "Invalid password"
+                dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText).requestFocus()
+            }
+        }
     }
 
     private fun saveProfileInfo(view: View) {
@@ -160,7 +212,7 @@ class ProfileFragment : Fragment() {
         activity!!.finish()
     }
 
-    private fun updateGlidePicture(imageUri: Uri?,circleImageView: CircleImageView) {
+    private fun updateGlidePicture(imageUri: Uri?, circleImageView: CircleImageView) {
         val requestOption = RequestOptions()
             .placeholder(R.drawable.ic_launcher_background)
             .error(R.drawable.ic_error_layer)
@@ -189,7 +241,7 @@ class ProfileFragment : Fragment() {
             data != null && data.data != null
         ) {
             Database.setUserPicture(data.data!!)
-            updateGlidePicture(data.data!!,profile_image)
+            updateGlidePicture(data.data!!, profile_image)
         }
     }
 

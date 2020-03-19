@@ -18,17 +18,26 @@ import com.facebook.AccessToken
 import com.facebook.GraphRequest
 import com.facebook.Profile
 import com.google.firebase.auth.AdditionalUserInfo
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 
 object Database {
 
-    //private var profilePicture: Uri = Uri.parse("android.resource://com.example.lightweight/drawable/@mipmap/ic_launcher_round")
+
     private var user: User = User(null, true, null, null, null, null)
 
+    const val NO_ERROR = 0
+    const val ERROR_OLD_PASSWORD_INVALID = 1
+    const val ERROR_EMPTY_NEW_PASSWORD = 2
+    const val ERROR_EMPTY_CONFIRM_PASSWORD = 3
+    const val ERROR_NOT_MATCHING = 4
+    const val ERROR_CONFIRM_PASSWORD_INVALID = 5
     const val WORKOUTS = "workouts"
     const val USERS = "users"
     const val FRIENDS = "friends"
@@ -83,7 +92,7 @@ object Database {
         return user.profilePicture
     }
 
-    fun getUserPictureFromDb(): Uri?{
+    private fun getUserPictureFromDb(): Uri?{
         val db = FirebaseFirestore.getInstance()
         val userRef = db.collection(USERS).document(user.id!!).get()
         userRef.addOnSuccessListener { document ->
@@ -125,6 +134,21 @@ object Database {
         val currentUser = FirebaseAuth.getInstance().currentUser
         currentUser!!.updateEmail(newEmail)
         user.email = newEmail
+    }
+
+    fun updateUserPassword(oldPassword: String?, newPassword: String?, confirmPassword: String?): Int{
+        if (oldPassword.isNullOrEmpty() || !Validation.isValidPassword(oldPassword))
+            return ERROR_OLD_PASSWORD_INVALID
+        else if (newPassword.isNullOrEmpty() || !Validation.isValidPassword(newPassword))
+            return ERROR_EMPTY_NEW_PASSWORD
+        else if (confirmPassword.isNullOrEmpty() || !Validation.isValidPassword(confirmPassword))
+            return ERROR_EMPTY_CONFIRM_PASSWORD
+        else if (newPassword != confirmPassword)
+            return ERROR_NOT_MATCHING
+        else if (!Validation.isValidPassword(confirmPassword))
+            return ERROR_CONFIRM_PASSWORD_INVALID
+        else
+            return NO_ERROR
     }
 
     fun getUserFirstName(): String? {

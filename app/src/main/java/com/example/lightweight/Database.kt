@@ -1,12 +1,16 @@
 package com.example.lightweight
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.graphics.Picture
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat.startActivityForResult
@@ -23,8 +27,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import kotlinx.android.synthetic.main.fragment_profile.view.*
+import java.io.FileInputStream
 
 
 object Database {
@@ -32,12 +39,8 @@ object Database {
 
     private var user: User = User(null, true, null, null, null, null)
 
-    const val NO_ERROR = 0
-    const val ERROR_OLD_PASSWORD_INVALID = 1
-    const val ERROR_EMPTY_NEW_PASSWORD = 2
-    const val ERROR_EMPTY_CONFIRM_PASSWORD = 3
-    const val ERROR_NOT_MATCHING = 4
-    const val ERROR_CONFIRM_PASSWORD_INVALID = 5
+
+    const val SP_INFO = "SP_INFO" //shared preferences info
     const val WORKOUTS = "workouts"
     const val USERS = "users"
     const val FRIENDS = "friends"
@@ -102,19 +105,19 @@ object Database {
     }
 
     fun setUserPicture(newPicture: Uri?){
-        val db = FirebaseFirestore.getInstance()
         val mStorageRef = FirebaseStorage.getInstance().getReference("profilePictures")
         val imageReference = mStorageRef.child(getUserId()!!)
 
         imageReference.putFile(newPicture!!)
-            .addOnSuccessListener {taskSnapshot ->
-                //Add image to user and db
-                user.profilePicture = newPicture
-                db.collection(USERS).document(getUserId()!!)
-                    .update("pictureUri", imageReference.downloadUrl.toString())
-            }
-            .addOnFailureListener { e ->
-                Log.d("TAG", e.message!!)
+            .addOnSuccessListener {
+                Log.d("ProfileFragment", "Successfully uploaded image: ${it.metadata?.path}")
+                imageReference.downloadUrl.addOnSuccessListener { imageLocation ->
+                    Log.d("ProfileFragment", "File location $imageLocation")
+                    user.profilePicture = imageLocation
+                    val db = FirebaseFirestore.getInstance()
+                    db.collection(USERS).document(getUserId()!!)
+                        .update("pictureUri", imageLocation.toString())
+                }
             }
     }
 
@@ -195,7 +198,9 @@ object Database {
             }
     }
 
-    fun updateUserDataFromFacebook(accessToken: AccessToken?) {
+    fun updateUserDataFromFacebook(accessToken: AccessToken?, firstTime: Boolean) {
+
+
             val request = GraphRequest.newMeRequest(
                 accessToken
             ) { `object`, response ->
@@ -204,9 +209,9 @@ object Database {
                 user.email = `object`.getString("email")
                 user.firstName = `object`.getString("first_name")
                 user.lastName = `object`.getString("last_name")
-                if (getUserPictureFromDb() == null)
+                if (firstTime){
                     user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120)
-                else
+                } else
                     user.profilePicture = getUserPictureFromDb()
                 user.isFacebookUser = true
 

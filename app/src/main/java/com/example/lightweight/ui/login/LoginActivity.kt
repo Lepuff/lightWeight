@@ -1,6 +1,8 @@
 package com.example.lightweight.ui.login
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -9,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lightweight.*
 import com.example.lightweight.R
+import com.example.lightweight.classes.Preferences
 import com.example.lightweight.ui.NavigationActivity
 import com.example.lightweight.ui.Register.RegisterActivity
 import com.facebook.*
@@ -31,6 +34,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var password: String
     private lateinit var progressBar: ProgressBar
+    private var prefs: Preferences? = null
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +44,8 @@ class LoginActivity : AppCompatActivity() {
 
         AppEventsLogger.activateApp(application)
 
+        prefs = Preferences(this)
+        val firstTime = prefs!!.firstTimeLogin
 
         callbackManager = CallbackManager.Factory.create()
         val fbLoginButton: LoginButton = findViewById(R.id.fbLogin_button)
@@ -76,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
         if (accessToken != null && !accessToken.isExpired){
             val profile = Profile.getCurrentProfile()
             Database.setUserId(profile.id)
-            Database.updateUserDataFromFacebook(accessToken)
+            Database.updateUserDataFromFacebook(accessToken, prefs!!.firstTimeLogin)
             return true
         } else if (auth.currentUser != null){
             Database.setUserId(auth.currentUser!!.uid)
@@ -157,7 +164,12 @@ class LoginActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
         auth.signInWithCredential(credential)
             .addOnSuccessListener { result ->
-                Database.updateUserDataFromFacebook(accessToken)
+                if (prefs!!.firstTimeLogin) {
+                    prefs!!.firstTimeLogin = false
+                    Database.updateUserDataFromFacebook(accessToken, firstTime = true)
+                }else
+                    Database.updateUserDataFromFacebook(accessToken, firstTime = prefs!!.firstTimeLogin)
+
                 Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
 
                 startActivity(Intent(this, NavigationActivity::class.java))

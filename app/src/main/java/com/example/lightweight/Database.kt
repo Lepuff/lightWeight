@@ -190,6 +190,7 @@ object Database {
 
     fun updateUserDataFromFacebook(accessToken: AccessToken?, firstTime: Boolean) {
             //val db = FirebaseFirestore.getInstance()
+        if (firstTime) {
             val request = GraphRequest.newMeRequest(
                 accessToken
             ) { `object`, response ->
@@ -200,7 +201,7 @@ object Database {
                 //if (firstTime){
                 user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120)
                 //} else
-                    //getUserPictureFromDb()
+                //getUserPictureFromDb()
                 /*user.isFacebookUser = true
                 val userInfo = hashMapOf(
                     "firstName" to user.firstName,//todo constants
@@ -214,10 +215,17 @@ object Database {
                 db.collection(USERS).document(user.id!!).set(userInfo, SetOptions.merge())*/
                 userInfoToDb()
             }
+
             //Here we put the requested fields to be returned from the JSONObject
             val parameters = Bundle()
-            parameters.putString("fields", "id, first_name, last_name, email, picture")//todo constants?
+            parameters.putString(
+                "fields",
+                "id, first_name, last_name, email, picture"
+            )//todo constants?
             request.parameters = parameters
             request.executeAsync()
+        }else
+            setUserId(accessToken!!.userId)
+            getUserInfoFromDb()
     }
 }

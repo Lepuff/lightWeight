@@ -189,7 +189,7 @@ object Database {
     }
 
     fun updateUserDataFromFacebook(accessToken: AccessToken?, firstTime: Boolean) {
-            //val db = FirebaseFirestore.getInstance()
+            val a = firstTime
         if (firstTime) {
             val request = GraphRequest.newMeRequest(
                 accessToken
@@ -224,8 +224,11 @@ object Database {
             )//todo constants?
             request.parameters = parameters
             request.executeAsync()
-        }else
-            setUserId(accessToken!!.userId)
+        }else {
+            val b = setUserId(accessToken!!.userId)
+            val a = setUserId(accessToken!!.userId).toString()
+            setUserId(accessToken.userId.toString())
             getUserInfoFromDb()
+        }
     }
 }

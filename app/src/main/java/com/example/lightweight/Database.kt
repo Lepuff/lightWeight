@@ -95,24 +95,24 @@ object Database {
         val userRef = db.collection(USERS).document(user.id!!).get()
         userRef.addOnSuccessListener { document ->
             val a = document["pictureUri"]
-            user.profilePicture = document["pictureUri"].toString().toUri()
+            user.profilePicture = document["pictureUri"].toString().toUri()//todo constants
         }
         return user.profilePicture
     }
 
     fun setUserPicture(newPicture: Uri?){
-        val mStorageRef = FirebaseStorage.getInstance().getReference("profilePictures")
+        val mStorageRef = FirebaseStorage.getInstance().getReference("profilePictures")//todo constants
         val imageReference = mStorageRef.child(getUserId()!!)
 
         imageReference.putFile(newPicture!!)
             .addOnSuccessListener {
                 Log.d("ProfileFragment", "Successfully uploaded image: ${it.metadata?.path}")
                 imageReference.downloadUrl.addOnSuccessListener { imageLocation ->
-                    Log.d("ProfileFragment", "File location $imageLocation")
+                    Log.d("ProfileFragment", "File location $imageLocation")//todo constants
                     user.profilePicture = imageLocation
                     val db = FirebaseFirestore.getInstance()
                     db.collection(USERS).document(getUserId()!!)
-                        .update("pictureUri", imageLocation.toString())
+                        .update("pictureUri", imageLocation.toString())//todo constants
                 }
             }
     }
@@ -139,7 +139,7 @@ object Database {
             user.email = email
 
         db.collection(USERS).document(getUserId()!!)
-            .update("firstName", user.firstName, "lastName", user.lastName, "email", email)
+            .update("firstName", user.firstName, "lastName", user.lastName, "email", email)//todo constants
     }
 
     fun getUserFirstName(): String? {
@@ -159,7 +159,7 @@ object Database {
         db.collection(USERS).document(getUserId()!!).get()
             .addOnSuccessListener {document ->
             if (document != null){
-                user.email = document["email"].toString()
+                user.email = document["email"].toString()//todo constants
                 user.firstName = document["firstName"].toString()
                 user.lastName = document["lastName"].toString()
                 user.profilePicture = document["pictureUri"].toString().toUri()
@@ -171,7 +171,7 @@ object Database {
     fun userInfoToDb() {
         val db = FirebaseFirestore.getInstance()
         val userInfo = hashMapOf(
-            "firstName" to user.firstName,
+            "firstName" to user.firstName,//todo constants
             "lastName" to user.lastName,
             "email" to user.email,
             "id" to user.id,
@@ -181,7 +181,7 @@ object Database {
         db.collection(USERS).document(getUserId()!!)
             .set(userInfo, SetOptions.merge())
             .addOnSuccessListener { documentReference ->
-                Log.d("TAG", "DocumentSnapshot added with ID: $documentReference")
+                Log.d("TAG", "DocumentSnapshot added with ID: $documentReference")//todo tag should be a context for error handeling
 
             }
             .addOnFailureListener { e ->
@@ -194,17 +194,17 @@ object Database {
             val request = GraphRequest.newMeRequest(
                 accessToken
             ) { `object`, response ->
-                user.id = `object`.getString("id")
+                user.id = `object`.getString("id") //todo constants
                 user.email = `object`.getString("email")
                 user.firstName = `object`.getString("first_name")
                 user.lastName = `object`.getString("last_name")
                 if (firstTime){
-                    user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120)
+                    user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120) //todo constants
                 } else
                     user.profilePicture = getUserPictureFromDb()
                 user.isFacebookUser = true
                 val userInfo = hashMapOf(
-                    "firstName" to user.firstName,
+                    "firstName" to user.firstName,//todo constants
                     "lastName" to user.lastName,
                     "email" to user.email,
                     "id" to user.id,
@@ -217,7 +217,7 @@ object Database {
             }
             //Here we put the requested fields to be returned from the JSONObject
             val parameters = Bundle()
-            parameters.putString("fields", "id, first_name, last_name, email, picture")
+            parameters.putString("fields", "id, first_name, last_name, email, picture")//todo constants?
             request.parameters = parameters
             request.executeAsync()
     }

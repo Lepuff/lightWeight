@@ -2,6 +2,7 @@ package com.example.lightweight.ui.Social
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Log
 
 import android.view.LayoutInflater
@@ -20,6 +21,7 @@ import com.example.lightweight.ui.Feed.WorkoutFeedViewModel
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_social.*
+import kotlinx.android.synthetic.main.layout_wo_list_item.*
 
 
 class SocialFragment : Fragment() {
@@ -40,7 +42,7 @@ class SocialFragment : Fragment() {
 
         viewModel.workoutList.observe(
             viewLifecycleOwner,
-            Observer<MutableList<Workout>> {
+            Observer<MutableList<AbstractWorkout>> {
                 workOutAdapter.notifyDataSetChanged()
             })
 

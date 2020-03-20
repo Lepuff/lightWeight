@@ -14,7 +14,7 @@ class RunningWorkout(
     override var userImage: String,
     override var userId: String
 
-) : Workout(R.drawable.ic_directions_run_yellow_24dp) {
+) : AbstractWorkout(R.drawable.ic_directions_run_yellow_24dp) {
 
 
     override fun showWorkout(context: Context) {

@@ -272,7 +272,7 @@ class ProfileFragment : Fragment() {
                     for (friend in friends) {
                         val user = User()
                         user.email = friend[Database.EMAIL].toString()
-                        user.id = friend[Database.ID].toString()
+                        user.id = friend.id
                         friendAdapter.addItem(user)
                     }
                 }

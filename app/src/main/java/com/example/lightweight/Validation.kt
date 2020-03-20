@@ -6,6 +6,7 @@ import android.util.Patterns
 import com.google.android.material.textfield.TextInputEditText
 
 object Validation {
+    private const val MIN_PASSWORD_LENGTH = 5
     fun isFieldEmpty(target: CharSequence): Boolean {
         return TextUtils.isEmpty(target)
     }
@@ -15,6 +16,6 @@ object Validation {
     }
 
     fun isValidPassword(target: CharSequence?): Boolean {
-        return target!!.length > 5
+        return target!!.length > MIN_PASSWORD_LENGTH
     }
 }

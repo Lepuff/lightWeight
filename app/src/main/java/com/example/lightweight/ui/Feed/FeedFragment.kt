@@ -46,7 +46,6 @@ class FeedFragment : Fragment() {
             ViewModelProviders.of(this).get(WorkoutFeedViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_feed, container, false)
 
-
         viewModel.workoutList.observe(
             viewLifecycleOwner,
             Observer<MutableList<AbstractWorkout>> {

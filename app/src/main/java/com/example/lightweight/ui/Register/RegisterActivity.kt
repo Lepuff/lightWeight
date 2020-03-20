@@ -61,20 +61,23 @@ class RegisterActivity : AppCompatActivity() {
         val lastName = textInputLastName.text.toString()
 
 
-        if (Validation.isFieldEmpty(firstName)){
+        //check if firstName is empty
+        if (firstName.isEmpty()){
             textInputFirstName.error = getString(R.string.field_cant_be_empty)
             textInputFirstName.requestFocus()
             return
         }
 
-        if (Validation.isFieldEmpty(lastName)) {
+        //check if lastName is empty
+        if (lastName.isEmpty()) {
             textInputLastName.error = getString(R.string.field_cant_be_empty)
             textInputLastName.requestFocus()
             return
         }
 
+        //check if email is empty or invalid
         if (!Validation.isValidEmail(email)) {
-            if (Validation.isFieldEmpty(email)) {
+            if (email.isEmpty()) {
                 textInputEmail.error = getString(R.string.field_cant_be_empty)
                 textInputEmail.requestFocus()
                 return
@@ -85,8 +88,9 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
+        //check if password is empty or too short
         if (!Validation.isValidPassword(password)) {
-            if (Validation.isFieldEmpty(password)) {
+            if (password.isEmpty()) {
                 textInputPassword.error = getString(R.string.field_cant_be_empty)
                 textInputPassword.requestFocus()
                 return

@@ -10,9 +10,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="4dp"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
         android:padding="10dp"
         android:src="@mipmap/ic_launcher_round"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,146 +19,148 @@
 
     </de.hdodenhof.circleimageview.CircleImageView>
 
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/profile_first_name_textLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:theme="@style/TextInputLayoutAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/profile_image"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputLayout
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_profile_first_name_editText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:theme="@style/TextInputLayoutAppearance">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/fragment_profile_first_name_editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/first_name"
-                android:inputType="text"
-                android:textColor="@color/text_content" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:hint="@string/first_name"
+            android:inputType="text"
+            android:textColor="@color/text_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.google.android.material.textfield.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/profile_last_name_textLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:theme="@style/TextInputLayoutAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/profile_image"
+        app:layout_constraintTop_toBottomOf="@id/profile_first_name_textLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_profile_last_name_editText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:theme="@style/TextInputLayoutAppearance">
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:hint="@string/last_name"
+            android:inputType="text"
+            android:textColor="@color/text_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/fragment_profile_last_name_editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/profile_email_textLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:theme="@style/TextInputLayoutAppearance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_last_name_textLayout">
 
-                android:enabled="false"
-
-                android:hint="@string/last_name"
-                android:inputType="text"
-                android:textColor="@color/text_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_profile_email_editText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:theme="@style/TextInputLayoutAppearance">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/fragment_profile_email_editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:enabled="false"
-
-                android:hint="@string/email"
-                android:inputType="text"
-                android:textColor="@color/text_content" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:hint="@string/email"
+            android:inputType="text"
+            android:textColor="@color/text_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
+    <LinearLayout
+        android:id="@+id/profile_buttons_linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_email_textLayout">
+
+
+        <Button
+
+            android:id="@+id/profile_edit_profile_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:background="@color/background_button"
+            android:enabled="true"
+            android:text="@string/edit_profile"
+            android:textColor="@color/text_button"
+            android:textSize="12sp"
+            style="?android:attr/buttonBarButtonStyle"
+
+
+            />
+
+        <Button
+            android:id="@+id/profile_save_profile_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:background="@color/background_button"
+            android:text="@string/save_profile"
+            android:textColor="@color/text_button"
+            android:textSize="12sp"
+            style="?android:attr/buttonBarButtonStyle"/>
+
+        <Button
+            android:id="@+id/profile_change_password_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:background="@color/background_button"
+            android:text="@string/change_password"
+            android:textColor="@color/text_button"
+            android:textSize="12sp"
+            style="?android:attr/buttonBarButtonStyle"
+
+
+            />
+
+
+        <Button
+            android:id="@+id/profile_add_friends_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:background="@color/background_button"
+            android:text="@string/add_friends"
+            android:textColor="@color/text_button"
+            android:textSize="12sp"
+            style="?android:attr/buttonBarButtonStyle"/>
     </LinearLayout>
 
-    <Button
-        android:layout_marginTop="4dp"
-        android:id="@+id/profile_edit_profile_button"
-        android:enabled="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:padding="5dp"
-        android:background="@color/background_button"
-        android:text="@string/edit_profile"
-        android:textColor="@color/text_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profile_image"
-         />
-
-    <Button
-        android:layout_marginTop="4dp"
-        android:id="@+id/profile_save_profile_button"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/background_button"
-        android:text="@string/save_profile"
-        android:textColor="@color/text_button"
-        android:textSize="12sp"
-        android:padding="5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profile_image"
-        android:visibility="gone"
-        />
-
-    <Button
-        android:layout_marginTop="65dp"
-        android:id="@+id/profile_change_password_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/background_button"
-        android:padding="5dp"
-        android:text="@string/change_password"
-        android:textColor="@color/text_button"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profile_image"
-        />
-
-    <Button
-        android:layout_marginTop="15dp"
-        android:id="@+id/profile_add_friends_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/background_button"
-        android:padding="5dp"
-        android:text="@string/add_friends"
-        android:textColor="@color/text_button"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        tools:ignore="SmallSp" />
 
     <TextView
-        android:layout_marginTop="5dp"
         android:id="@+id/text_profile_friends"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/friends"
         android:textColor="@color/text_content"
-        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_add_friends_button" />
+        app:layout_constraintTop_toBottomOf="@id/profile_buttons_linearLayout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/profile_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/profile_logout_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_profile_friends"
-        app:layout_constraintBottom_toTopOf="@id/profile_logout_button"/>
+        app:layout_constraintTop_toBottomOf="@id/text_profile_friends" />
 
     <Button
 

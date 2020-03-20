@@ -213,6 +213,7 @@ object Database {
                 )
 
                 db.collection(USERS).document(user.id!!).set(userInfo, SetOptions.merge())
+
             }
             //Here we put the requested fields to be returned from the JSONObject
             val parameters = Bundle()

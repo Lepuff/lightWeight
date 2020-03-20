@@ -32,21 +32,19 @@ class AddFriendsActivity : AppCompatActivity() {
             if (allUsers != null) {
                 db.collection(Database.USERS).document(Database.getUserId()!!)
                     .collection(Database.FRIENDS).get().addOnSuccessListener { friends ->
+
                         if (friends != null) {
                             for (user in allUsers) {
-                                var isNotFriend: Boolean = true
+                                var isNotFriend = true
+                                if (user[Database.ID].toString() == Database.getUserId()) {
+                                    isNotFriend = false
+                                }
                                 for (friend in friends) {
-                                    Log.d("friend:", friend[Database.ID].toString())
-                                    Log.d("user:", user[Database.ID].toString())
-                                    if (user[Database.ID].toString() ==friend[Database.ID].toString())   {
-                                        isNotFriend = false
-                                    }
-                                    else if (user[Database.ID].toString() == Database.getUserId()){
+                                    if (user[Database.ID].toString() == friend[Database.ID].toString()) {
                                         isNotFriend = false
                                     }
                                 }
                                 if (isNotFriend) { //todo borde finnas en bättre lösning...
-                                    Log.d("friend added!!:", user[Database.ID].toString())
                                     val _user = User()
                                     _user.email = user[Database.EMAIL].toString()
                                     _user.id = user[Database.ID].toString()
@@ -66,7 +64,7 @@ class AddFriendsActivity : AppCompatActivity() {
             val topSpacingItemDecoration =
                 TopSpacingItemDecoration(5)//todo fix
             addItemDecoration(topSpacingItemDecoration)
-            userAdapter = UserAdapter(this, db,true)
+            userAdapter = UserAdapter(this, db, true)
             adapter = userAdapter
         }
     }

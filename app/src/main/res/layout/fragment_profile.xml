@@ -95,13 +95,7 @@
         android:textColor="@color/text_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profile_image"
-        tools:ignore="SmallSp" />
-
-
-
-        android:layout_marginTop="16dp"
-        android:id="@+id/profile_change_password_button"
-        android:enabled="true"
+         />
 
     <Button
         android:layout_marginTop="4dp"
@@ -116,7 +110,6 @@
         android:padding="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profile_image"
-        tools:ignore="SmallSp"
         android:visibility="gone"
         />
 
@@ -132,7 +125,7 @@
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profile_image"
-        tools:ignore="SmallSp" />
+        />
 
     <Button
         android:layout_marginTop="15dp"
@@ -146,7 +139,6 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-
         tools:ignore="SmallSp" />
 
     <TextView

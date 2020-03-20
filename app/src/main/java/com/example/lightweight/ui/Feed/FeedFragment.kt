@@ -1,6 +1,7 @@
 package com.example.lightweight.ui.Feed
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 
@@ -48,7 +49,7 @@ class FeedFragment : Fragment() {
 
         viewModel.workoutList.observe(
             viewLifecycleOwner,
-            Observer<MutableList<Workout>> {
+            Observer<MutableList<AbstractWorkout>> {
                 workOutAdapter.notifyDataSetChanged()
             })
         val floatingActionButton =

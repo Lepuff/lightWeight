@@ -1,6 +1,7 @@
 package com.example.lightweight
 
-import com.example.lightweight.classes.Workout
+import android.net.Uri
+import com.example.lightweight.classes.AbstractWorkout
 import com.example.lightweight.classes.CyclingWorkout
 import com.example.lightweight.classes.GymWorkout
 import com.example.lightweight.classes.RunningWorkout
@@ -11,8 +12,8 @@ class WorkOutTypeSource {
 
     companion object {
 
-        fun createNWDataSet(): MutableList<Workout> {
-            val list = ArrayList<Workout>()
+        fun createNWDataSet(): MutableList<AbstractWorkout> {
+            val list = ArrayList<AbstractWorkout>()
             list.add(
                 GymWorkout(
                     "", "Gym", "","", "","") //todo string res

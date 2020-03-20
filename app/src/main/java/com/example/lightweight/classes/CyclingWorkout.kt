@@ -2,7 +2,6 @@ package com.example.lightweight.classes
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import com.example.lightweight.R
 import com.example.lightweight.ui.workouts.cycling.NewCyclingWorkoutActivity
 import com.example.lightweight.ui.workouts.cycling.ViewCyclingWorkoutActivity
@@ -16,7 +15,7 @@ class CyclingWorkout(
     override var userId: String
 
 
-) : AbstractWorkout(R.drawable.ic_directions_bike_yellow_24dp) {
+) : Workout(R.drawable.ic_directions_bike_yellow_24dp) {
 
     override fun showWorkout(context: Context) {
         val intent = Intent(context, ViewCyclingWorkoutActivity::class.java)

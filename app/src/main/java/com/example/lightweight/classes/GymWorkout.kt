@@ -14,7 +14,7 @@ class GymWorkout(
     override var userImage: String,
     override var userId: String
 
-) : AbstractWorkout(R.drawable.ic_fitness_center_yellow_24dp) {
+) : Workout(R.drawable.ic_fitness_center_yellow_24dp) {
 
     override fun showWorkout(context: Context) {
 

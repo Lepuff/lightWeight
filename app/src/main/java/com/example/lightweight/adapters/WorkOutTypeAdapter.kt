@@ -7,20 +7,20 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lightweight.R
-import com.example.lightweight.classes.AbstractWorkout
+import com.example.lightweight.classes.Workout
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.android.synthetic.main.layout_dialog_new_workout_list_item.view.*
 
 
 class WorkOutTypeAdapter(private val dialog: Dialog) : RecyclerView.Adapter<WorkOutTypeAdapter.WorkOutTypeViewHolder>() {
 
-    private var items: MutableList<AbstractWorkout> = ArrayList()
+    private var items: MutableList<Workout> = ArrayList()
 
     override fun getItemCount(): Int {
         return items.size
     }
 
-    fun submitList(workOutTypeList: MutableList<AbstractWorkout>){
+    fun submitList(workOutTypeList: MutableList<Workout>){
         items = workOutTypeList
     }
 
@@ -37,7 +37,7 @@ class WorkOutTypeAdapter(private val dialog: Dialog) : RecyclerView.Adapter<Work
 
 
     class WorkOutTypeViewHolder constructor(itemView: View, private val dialog: Dialog) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
-        private var  selectedWorkoutType : AbstractWorkout? = null
+        private var  selectedWorkoutType : Workout? = null
         init {
            itemView.setOnClickListener(this)
         }
@@ -45,7 +45,7 @@ class WorkOutTypeAdapter(private val dialog: Dialog) : RecyclerView.Adapter<Work
         val icon: AppCompatImageView = itemView.new_workout_icon
         val title: MaterialTextView = itemView.new_workout_textView
 
-        fun bind(workOutType: AbstractWorkout) {
+        fun bind(workOutType: Workout) {
             this.selectedWorkoutType = workOutType
             icon.setImageResource(workOutType.icon)
             title.text = workOutType.title

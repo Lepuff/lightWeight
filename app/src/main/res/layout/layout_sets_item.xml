@@ -56,7 +56,7 @@
                 android:layout_width="50dp"
                 android:id="@+id/delete_set_button"
                 android:layout_height="wrap_content"
-                android:background="@drawable/md_transparent"
+                android:background="@color/background_button"
                 android:drawableStart="@drawable/ic_delete_forever_yellow_24dp" />
         </LinearLayout>
 

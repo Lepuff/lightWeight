@@ -38,8 +38,8 @@
     <style name="DialogStyle">
         <item name="textColorAlertDialogListItem">@color/text_item</item>
         <item name="android:background">@color/background_item</item>
-        <item name="android:windowBackground">@drawable/md_transparent</item>
-        <item name="android:windowFrame">@drawable/md_transparent</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowFrame">@color/transparent</item>
         <item name="android:textColor">@color/text_content</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:textSize">14sp</item>
@@ -59,7 +59,7 @@
 
 
     <style name="setWindowTitleStyle">
-        <item name="android:drawableStart">@drawable/md_transparent</item>
+        <item name="android:drawableStart">@color/transparent</item>
         <item name="android:textColor">@color/text_content</item>
         <item name="android:background">@color/background_item</item>
         <item name="android:textSize">20sp</item>

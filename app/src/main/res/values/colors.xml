@@ -21,6 +21,7 @@
     <color name="divider">#2e2e1f</color>
     <color name="text_divider">#ffc107</color>
     <color name="details">#ffc107</color>
+    <color name="transparent">#00000000</color>
 
 
 

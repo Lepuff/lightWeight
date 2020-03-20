@@ -74,8 +74,7 @@ dependencies {
     def glide_version = "4.11.0"
     implementation("com.github.bumptech.glide:concurrent-integration:$glide_version")
     //material dialogs
-    def material_dialogs_version = "3.1.0"
-    implementation "com.afollestad.material-dialogs:core:$material_dialogs_version"
+
 
     //CircleImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'

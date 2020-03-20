@@ -1,6 +1,7 @@
 package com.example.lightweight.ui.Feed
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 
@@ -68,6 +69,8 @@ class FeedFragment : Fragment() {
         workOutAdapter.submitList(viewModel.workoutList.value!!)
 
     }
+
+
 
     private fun initRecyclerView() {
         feed_recycler_view.apply {

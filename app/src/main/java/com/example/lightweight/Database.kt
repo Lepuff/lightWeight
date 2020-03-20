@@ -90,14 +90,13 @@ object Database {
         return user.profilePicture
     }
 
-    private fun getUserPictureFromDb(): Uri?{
+    fun getUserPictureFromDb(){
         val db = FirebaseFirestore.getInstance()
         val userRef = db.collection(USERS).document(user.id!!).get()
         userRef.addOnSuccessListener { document ->
             val a = document["pictureUri"]
             user.profilePicture = document["pictureUri"].toString().toUri()//todo constants
         }
-        return user.profilePicture
     }
 
     fun setUserPicture(newPicture: Uri?){
@@ -190,7 +189,7 @@ object Database {
     }
 
     fun updateUserDataFromFacebook(accessToken: AccessToken?, firstTime: Boolean) {
-            val db = FirebaseFirestore.getInstance()
+            //val db = FirebaseFirestore.getInstance()
             val request = GraphRequest.newMeRequest(
                 accessToken
             ) { `object`, response ->
@@ -198,11 +197,11 @@ object Database {
                 user.email = `object`.getString("email")
                 user.firstName = `object`.getString("first_name")
                 user.lastName = `object`.getString("last_name")
-                if (firstTime){
-                    user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120) //todo constants
-                } else
-                    user.profilePicture = getUserPictureFromDb()
-                user.isFacebookUser = true
+                //if (firstTime){
+                user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120)
+                //} else
+                    //getUserPictureFromDb()
+                /*user.isFacebookUser = true
                 val userInfo = hashMapOf(
                     "firstName" to user.firstName,//todo constants
                     "lastName" to user.lastName,
@@ -212,8 +211,8 @@ object Database {
                     "isFacebookUser" to user.isFacebookUser
                 )
 
-                db.collection(USERS).document(user.id!!).set(userInfo, SetOptions.merge())
-
+                db.collection(USERS).document(user.id!!).set(userInfo, SetOptions.merge())*/
+                userInfoToDb()
             }
             //Here we put the requested fields to be returned from the JSONObject
             val parameters = Bundle()

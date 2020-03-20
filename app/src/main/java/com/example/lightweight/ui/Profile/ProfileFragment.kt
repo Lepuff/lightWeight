@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -65,7 +66,6 @@ class ProfileFragment : Fragment() {
         logoutButton.setOnClickListener {
             logOut()
         }
-
         val profilePicture = root.findViewById<CircleImageView>(R.id.profile_image)
         updateGlidePicture(Database.getUserPicture(), profilePicture)
         profilePicture.setOnClickListener {
@@ -125,7 +125,6 @@ class ProfileFragment : Fragment() {
 
         dialogView.findViewById<Button>(R.id.dialog_save_password_button).setOnClickListener {
             saveNewPassword(dialogView, dialog)
-                //Toast.makeText(activity, "Password successfully changed", Toast.LENGTH_LONG).show()
         }
 
     }
@@ -147,28 +146,28 @@ class ProfileFragment : Fragment() {
             if (auth.isSuccessful) {
                 if (newPassword.isNullOrEmpty() || !Validation.isValidPassword(newPassword)){
                     dialogView.findViewById<TextInputEditText>(R.id.dialog_new_password_editText)
-                        .error = "Password needs to be atleast 6 characters"
+                        .error = getString(R.string.password_too_short)
                     dialogView.findViewById<TextInputEditText>(R.id.dialog_new_password_editText).requestFocus()
                 }
                 else if (confirmPassword.isNullOrEmpty() || !Validation.isValidPassword(confirmPassword)){
                     dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
-                        .error = "Password needs to be atleast 6 characters"
+                        .error = getString(R.string.password_too_short)
                     dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText).requestFocus()
                 }
                 else if (newPassword.toString() != confirmPassword.toString()){
                     dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
-                        .error = "Passwords don't match"
+                        .error = getString(R.string.passwords_dont_match)
                     dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText).requestFocus()
                 }
                 else {
                     currentUser.updatePassword(confirmPassword.toString())
-                    Toast.makeText(this.context, "Password successfully changed", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this.context, getString(R.string.password_successfully_changed), Toast.LENGTH_LONG).show()
                     dialog.cancel()
                 }
 
             } else {
                 dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText)
-                    .error = "Invalid password"
+                    .error = getString(R.string.invalid_password)
                 dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText)
                     .requestFocus()
             }

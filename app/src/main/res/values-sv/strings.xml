@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">LightWeight</string>
-    <string name="authentication_failed">Autentisering misslyckades.</string>
+    <string name="authentication_failed">Autentisering misslyckades</string>
     <string name="create_new_account">Skapa nytt konto</string>
     <string name="email">Email</string>
     <string name="enter_valid_email">Ange en giltig email</string>
@@ -33,7 +33,7 @@
     <string name="edit">Redigera</string>
     <string name="date">Datum</string>
     <string name="how_did_it_go">Hur gick det?</string>
-    <string name="new_workout_name">Träningspass namn</string>
+    <string name="new_workout_name">Namn på träningspasset</string>
     <string name="save_workout">Spara träningspass</string>
     <string name="reps">Reps</string>
     <string name="weight">Vikt</string>
@@ -65,4 +65,24 @@
     <string name="confirm_password">Bekräfta Lösenord</string>
     <string name="save_password">Spara lösenord</string>
     <string name="save">Spara</string>
+    <string name="invalid_password">Felaktigt lösenord</string>
+    <string name="password_successfully_changed">Lösenordet har ändrats</string>
+    <string name="passwords_dont_match">Lösenorden stämmer ej överens</string>
+    <string name="old_password">Nuvarande lösenord</string>
+    <string name="remove">Ta bort</string>
+    <string name="add_friends">Lägg till vänner</string>
+    <string name="friend_name">Vännens namn</string>
+    <string name="add">Lägg till</string>
+    <string name="no">Nej</string>
+    <string name="yes">Ja</string>
+    <string name="delete_workout">Ta bort träningspass</string>
+    <string name="delete">Ta bort</string>
+    <string name="save_profile">Spara profil</string>
+    <string name="friends">Vänner</string>
+    <string name="user_name">Användarnamn</string>
+    <string name="change_password">Byt lösenord</string>
+    <string name="edit_profile">Redigera profil</string>
+    <string name="delete_workout_message">Vill du verkligen ta bort?</string>
+    <string name="choose_a_new_exercise">Välj ny övning</string>
+    <string name="edit_workout">Redigera träningspass</string>
 </resources>

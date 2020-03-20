@@ -14,7 +14,7 @@
     <string name="password_too_short">Password needs to be atleast 6 characters</string>
     <string name="sign_up_successful">Sign up successful</string>
     <string name="sign_up_failed">Sign up failed</string>
-    <string name="authentication_failed">Authentication failed.</string>
+    <string name="authentication_failed">Authentication failed</string>
     <string name="field_cant_be_empty">Field can\'t be empty</string>
     <string name="log_in_using_email">Log in using Email</string>
     <string name="or">Or</string>
@@ -80,7 +80,7 @@
 
     <string name="edit_profile">Edit profile</string>
     <string name="change_password">Change password</string>
-    <string name="user_name">user name</string>
+    <string name="user_name">User name</string>
     <string name="friends">Friends</string>
 
     <string name="confirm_password">Confirm Password</string>
@@ -89,15 +89,18 @@
     <!--Todo allt efter detta! -->
 
 
-    <string name="delete">delete</string>
-    <string name="delete_workout">delete workout</string>
-    <string name="yes">yes</string>
+    <string name="delete">Delete</string>
+    <string name="delete_workout">Delete workout</string>
+    <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="add">add</string>
-    <string name="friend_name">friend name</string>
+    <string name="add">Add</string>
+    <string name="friend_name">Friend\'s name</string>
     <string name="add_friends">Add friends</string>
-    <string name="remove">remove</string>
-    <string name="old_password">Old password</string>
+    <string name="remove">Remove</string>
+    <string name="old_password">Current password</string>
+    <string name="passwords_dont_match">Passwords don\'t match</string>
+    <string name="password_successfully_changed">Password successfully changed</string>
+    <string name="invalid_password">Invalid password</string>
 
 
 </resources>

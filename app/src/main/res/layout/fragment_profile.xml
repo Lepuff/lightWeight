@@ -18,6 +18,16 @@
 
     </de.hdodenhof.circleimageview.CircleImageView>
 
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/profile_camera_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintEnd_toEndOf="@id/profile_image"
+        app:layout_constraintBottom_toBottomOf="@id/profile_image"
+        android:src="@drawable/ic_photo_camera_yellow_24dp"
+        android:background="@color/background_button"
+        />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/profile_first_name_textLayout"
         android:layout_width="0dp"

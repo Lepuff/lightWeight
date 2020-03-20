@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.net.toUri
@@ -68,10 +69,12 @@ class ProfileFragment : Fragment() {
         }
         val profilePicture = root.findViewById<CircleImageView>(R.id.profile_image)
         updateGlidePicture(Database.getUserPicture(), profilePicture)
-        profilePicture.setOnClickListener {
+
+        val cameraButton =
+            root.findViewById<ImageButton>(R.id.profile_camera_button)
+        cameraButton.setOnClickListener {
             pickPhotoFromGallery()
         }
-
 
         val addFriendsButton = root.findViewById<Button>(R.id.profile_add_friends_button)
         addFriendsButton.setOnClickListener {
@@ -101,7 +104,6 @@ class ProfileFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         initRecyclerView()
     }
 
@@ -130,7 +132,7 @@ class ProfileFragment : Fragment() {
     }
 
 
-    private fun saveNewPassword(dialogView: View, dialog: AlertDialog){
+    private fun saveNewPassword(dialogView: View, dialog: AlertDialog) {
         val currentUser = FirebaseAuth.getInstance().currentUser!!
         val oldPassword =
             dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText).text
@@ -144,24 +146,31 @@ class ProfileFragment : Fragment() {
             EmailAuthProvider.getCredential(currentUser.email!!, oldPassword.toString())
         currentUser.reauthenticate(credential).addOnCompleteListener { auth ->
             if (auth.isSuccessful) {
-                if (newPassword.isNullOrEmpty() || !Validation.isValidPassword(newPassword)){
+                if (newPassword.isNullOrEmpty() || !Validation.isValidPassword(newPassword)) {
                     dialogView.findViewById<TextInputEditText>(R.id.dialog_new_password_editText)
                         .error = getString(R.string.password_too_short)
-                    dialogView.findViewById<TextInputEditText>(R.id.dialog_new_password_editText).requestFocus()
-                }
-                else if (confirmPassword.isNullOrEmpty() || !Validation.isValidPassword(confirmPassword)){
+                    dialogView.findViewById<TextInputEditText>(R.id.dialog_new_password_editText)
+                        .requestFocus()
+                } else if (confirmPassword.isNullOrEmpty() || !Validation.isValidPassword(
+                        confirmPassword
+                    )
+                ) {
                     dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
                         .error = getString(R.string.password_too_short)
-                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText).requestFocus()
-                }
-                else if (newPassword.toString() != confirmPassword.toString()){
+                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
+                        .requestFocus()
+                } else if (newPassword.toString() != confirmPassword.toString()) {
                     dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
                         .error = getString(R.string.passwords_dont_match)
-                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText).requestFocus()
-                }
-                else {
+                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
+                        .requestFocus()
+                } else {
                     currentUser.updatePassword(confirmPassword.toString())
-                    Toast.makeText(this.context, getString(R.string.password_successfully_changed), Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this.context,
+                        getString(R.string.password_successfully_changed),
+                        Toast.LENGTH_LONG
+                    ).show()
                     dialog.cancel()
                 }
 
@@ -175,8 +184,10 @@ class ProfileFragment : Fragment() {
     }
 
     private fun saveProfileInfo(view: View) {
-        val firstName = view.findViewById<TextInputEditText>(R.id.fragment_profile_first_name_editText).text
-        val lastName = view.findViewById<TextInputEditText>(R.id.fragment_profile_last_name_editText).text
+        val firstName =
+            view.findViewById<TextInputEditText>(R.id.fragment_profile_first_name_editText).text
+        val lastName =
+            view.findViewById<TextInputEditText>(R.id.fragment_profile_last_name_editText).text
         val email = view.findViewById<TextInputEditText>(R.id.fragment_profile_email_editText).text
 
         Database.updateUser(firstName.toString(), lastName.toString(), email.toString())
@@ -202,7 +213,7 @@ class ProfileFragment : Fragment() {
     private fun updateGlidePicture(imageUri: Uri?, circleImageView: CircleImageView) {
         val requestOption = RequestOptions()
             .placeholder(R.drawable.ic_launcher_background)
-            .error(R.drawable.ic_error_layer)
+            .error(R.drawable.ic_person_yellow_24dp)
             .fallback(R.drawable.ic_person_yellow_24dp)
 
         if (imageUri.toString() == "null") {
@@ -218,6 +229,7 @@ class ProfileFragment : Fragment() {
                 .into(circleImageView)
         }
     }
+
     private fun pickPhotoFromGallery() {
 
         val intent = Intent()
@@ -239,28 +251,34 @@ class ProfileFragment : Fragment() {
 
     private fun handelEditStates() {
         if (Database.isFacebookUser()) {
-            view!!.findViewById<Button>(R.id.profile_change_password_button).visibility =
+            requireView().findViewById<Button>(R.id.profile_change_password_button).visibility =
                 View.GONE
-            view!!.findViewById<Button>(R.id.profile_edit_profile_button).visibility =
+            requireView().findViewById<Button>(R.id.profile_edit_profile_button).visibility =
                 View.GONE
+            requireView().findViewById<Button>(R.id.profile_save_profile_button).visibility =
+                View.GONE
+            requireView().findViewById<ImageButton>(R.id.profile_camera_button).visibility = View.GONE
         } else {
-            view!!.findViewById<Button>(R.id.profile_change_password_button).visibility =
+
+            
+            requireView().findViewById<ImageButton>(R.id.profile_camera_button).visibility = View.VISIBLE
+            requireView().findViewById<Button>(R.id.profile_change_password_button).visibility =
                 View.VISIBLE
             if (viewModel.isInEditState.value!!) {
                 fragment_profile_first_name_editText.isEnabled = true
                 fragment_profile_last_name_editText.isEnabled = true
                 fragment_profile_email_editText.isEnabled = true
-                view!!.findViewById<Button>(R.id.profile_edit_profile_button).visibility =
+                requireView().findViewById<Button>(R.id.profile_edit_profile_button).visibility =
                     View.GONE
-                view!!.findViewById<Button>(R.id.profile_save_profile_button).visibility =
+                requireView().findViewById<Button>(R.id.profile_save_profile_button).visibility =
                     View.VISIBLE
             } else {
                 fragment_profile_first_name_editText.isEnabled = false
                 fragment_profile_last_name_editText.isEnabled = false
                 fragment_profile_email_editText.isEnabled = false
-                view!!.findViewById<Button>(R.id.profile_edit_profile_button).visibility =
+                requireView().findViewById<Button>(R.id.profile_edit_profile_button).visibility =
                     View.VISIBLE
-                view!!.findViewById<Button>(R.id.profile_save_profile_button).visibility =
+                requireView().findViewById<Button>(R.id.profile_save_profile_button).visibility =
                     View.GONE
             }
         }

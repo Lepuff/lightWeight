@@ -8,26 +8,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.lightweight.R
-import com.example.lightweight.classes.AbstractWorkout
+import com.example.lightweight.classes.Workout
 import com.google.android.material.textview.MaterialTextView
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.layout_wo_list_item.view.*
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 
 class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() {
 
-    private var workouts: MutableList<AbstractWorkout> = ArrayList()
+    private var workouts: MutableList<Workout> = ArrayList()
     override fun getItemCount(): Int {
         return workouts.size
     }
 
-    fun submitList(workOutList: MutableList<AbstractWorkout>) {
+    fun submitList(workOutList: MutableList<Workout>) {
         workouts = workOutList
     }
 
-    fun addWorkout(workOut: AbstractWorkout) {
+    fun addWorkout(workOut: Workout) {
         workouts.add(workOut)
         this.notifyItemInserted(workouts.size - 1)
     }
@@ -56,7 +54,7 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
 
     class WorkOutViewHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
-        private var selectedWorkout: AbstractWorkout? = null
+        private var selectedWorkout: Workout? = null
 
         init {
             itemView.setOnClickListener(this)
@@ -68,7 +66,7 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
         private val workoutTitle: MaterialTextView = itemView.workout_title
         private val workoutDate: MaterialTextView = itemView.workout_date
 
-        fun bind(workOut: AbstractWorkout) {
+        fun bind(workOut: Workout) {
             this.selectedWorkout = workOut
 
             workoutTitle.text = workOut.title

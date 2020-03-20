@@ -7,7 +7,7 @@ import android.text.Editable
 import androidx.lifecycle.MutableLiveData
 import java.net.URI
 
-abstract class AbstractWorkout(
+abstract class Workout(
     val icon: Int
 ) {
     abstract var id : String

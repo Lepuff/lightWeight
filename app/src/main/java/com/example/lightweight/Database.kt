@@ -95,12 +95,7 @@ object Database {
         val userRef = db.collection(USERS).document(user.id!!).get()
         userRef.addOnSuccessListener { document ->
             val a = document["pictureUri"]
-<<<<<<< Updated upstream
             user.profilePicture = document["pictureUri"].toString().toUri()//todo constants
-=======
-            user.profilePicture = document["pictureUri"].toString().toUri()
-            getUserPicture()
->>>>>>> Stashed changes
         }
     }
 
@@ -202,19 +197,11 @@ object Database {
                 user.email = `object`.getString("email")
                 user.firstName = `object`.getString("first_name")
                 user.lastName = `object`.getString("last_name")
-<<<<<<< Updated upstream
-                if (firstTime){
-                    user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120) //todo constants
-                } else
-                    user.profilePicture = getUserPictureFromDb()
-                user.isFacebookUser = true
-=======
                 //if (firstTime){
                 user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120)
                 //} else
                     //getUserPictureFromDb()
                 /*user.isFacebookUser = true
->>>>>>> Stashed changes
                 val userInfo = hashMapOf(
                     "firstName" to user.firstName,//todo constants
                     "lastName" to user.lastName,

@@ -128,7 +128,7 @@ class FeedFragment : Fragment() {
                         val date = workout[Database.WORKOUT_DATE].toString()
                         val title = workout[Database.WORKOUT_TITLE].toString()
                         val name = Database.getUserName()
-                        val profilePicture = Database.getUserPicture()
+                        val profilePicture = Database.getUserPicture().toString()
                         when (type) {
                             "gymWorkout" ->
                                 workOutAdapter.addWorkout(
@@ -137,7 +137,7 @@ class FeedFragment : Fragment() {
                                         title,
                                         date,
                                         name,
-                                        profilePicture.toString(),
+                                        profilePicture,
                                         Database.getUserId().toString()
                                     )
                                 )
@@ -148,7 +148,7 @@ class FeedFragment : Fragment() {
                                         title,
                                         date,
                                         name,
-                                        profilePicture.toString(),
+                                        profilePicture,
                                         Database.getUserId().toString()
                                     )
                                 )
@@ -159,7 +159,7 @@ class FeedFragment : Fragment() {
                                         title,
                                         date,
                                         name,
-                                        profilePicture.toString(),
+                                        profilePicture,
                                         Database.getUserId().toString()
                                     )
                                 )

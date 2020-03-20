@@ -128,7 +128,7 @@ class SocialFragment : Fragment() {
                                 if (user != null) {
                                     val userName: String =
                                         user[Database.FIRST_NAME].toString() + " " + user[Database.LAST_NAME].toString()
-                                    val profilePicture = user[Database.PICTURE_URI].toString().toUri()
+                                    val profilePicture = user[Database.PICTURE_URI].toString()
                                     db.collection(Database.USERS)
                                         .document(friend[Database.ID].toString())
                                         .collection(Database.WORKOUTS).get()
@@ -151,7 +151,7 @@ class SocialFragment : Fragment() {
                                                                     title,
                                                                     date,
                                                                     userName,
-                                                                    profilePicture.toString(),
+                                                                    profilePicture,
                                                                     user.id
                                                                 )
                                                             )
@@ -162,7 +162,7 @@ class SocialFragment : Fragment() {
                                                                     title,
                                                                     date,
                                                                     userName,
-                                                                    profilePicture.toString(),
+                                                                    profilePicture,
                                                                     user.id
                                                                 )
                                                             )
@@ -173,7 +173,7 @@ class SocialFragment : Fragment() {
                                                                     title,
                                                                     date,
                                                                     userName,
-                                                                    profilePicture.toString(),
+                                                                    profilePicture,
                                                                     user.id
                                                                 )
                                                             )

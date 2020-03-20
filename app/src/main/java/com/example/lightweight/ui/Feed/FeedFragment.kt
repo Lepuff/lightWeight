@@ -137,7 +137,7 @@ class FeedFragment : Fragment() {
                                         title,
                                         date,
                                         name,
-                                        profilePicture,
+                                        profilePicture.toString(),
                                         Database.getUserId().toString()
                                     )
                                 )
@@ -148,7 +148,7 @@ class FeedFragment : Fragment() {
                                         title,
                                         date,
                                         name,
-                                        profilePicture,
+                                        profilePicture.toString(),
                                         Database.getUserId().toString()
                                     )
                                 )
@@ -159,7 +159,7 @@ class FeedFragment : Fragment() {
                                         title,
                                         date,
                                         name,
-                                        profilePicture,
+                                        profilePicture.toString(),
                                         Database.getUserId().toString()
                                     )
                                 )

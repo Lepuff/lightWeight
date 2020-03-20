@@ -13,7 +13,7 @@ class CyclingWorkout(
     override var title: String,
     override var date: String,
     override var userName: String,
-    override var userImage: Uri?,
+    override var userImage: String?,
     override var userId: String
 
 

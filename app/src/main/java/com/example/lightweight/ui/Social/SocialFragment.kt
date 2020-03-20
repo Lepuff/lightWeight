@@ -151,7 +151,7 @@ class SocialFragment : Fragment() {
                                                                     title,
                                                                     date,
                                                                     userName,
-                                                                    profilePicture,
+                                                                    profilePicture.toString(),
                                                                     user.id
                                                                 )
                                                             )
@@ -162,7 +162,7 @@ class SocialFragment : Fragment() {
                                                                     title,
                                                                     date,
                                                                     userName,
-                                                                    profilePicture,
+                                                                    profilePicture.toString(),
                                                                     user.id
                                                                 )
                                                             )
@@ -173,7 +173,7 @@ class SocialFragment : Fragment() {
                                                                     title,
                                                                     date,
                                                                     userName,
-                                                                    profilePicture,
+                                                                    profilePicture.toString(),
                                                                     user.id
                                                                 )
                                                             )

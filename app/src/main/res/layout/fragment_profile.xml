@@ -7,7 +7,6 @@
     android:background="@color/background"
     tools:context=".ui.Profile.ProfileFragment">
 
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
         android:layout_width="115dp"
@@ -76,7 +75,6 @@
             android:textColor="@color/text_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <LinearLayout
         android:id="@+id/profile_buttons_linearLayout"
         android:layout_width="match_parent"
@@ -89,7 +87,6 @@
 
 
         <Button
-
             android:id="@+id/profile_edit_profile_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,8 +97,6 @@
             android:textColor="@color/text_button"
             android:textSize="12sp"
             style="?android:attr/buttonBarButtonStyle"
-
-
             />
 
         <Button
@@ -125,8 +120,6 @@
             android:textColor="@color/text_button"
             android:textSize="12sp"
             style="?android:attr/buttonBarButtonStyle"
-
-
             />
 
 
@@ -161,9 +154,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_profile_friends" />
-
     <Button
-
         android:id="@+id/profile_logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

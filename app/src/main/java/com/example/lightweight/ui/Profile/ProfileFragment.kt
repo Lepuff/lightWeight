@@ -196,7 +196,7 @@ class ProfileFragment : Fragment() {
         LoginManager.getInstance().logOut()
         AccessToken.setCurrentAccessToken(null)
         startActivity(Intent(activity, LoginActivity::class.java))
-        activity!!.finish()
+        requireActivity().finish()
     }
 
     private fun updateGlidePicture(imageUri: Uri?, circleImageView: CircleImageView) {
@@ -205,15 +205,19 @@ class ProfileFragment : Fragment() {
             .error(R.drawable.ic_error_layer)
             .fallback(R.drawable.ic_person_yellow_24dp)
 
+        if (imageUri.toString() == "null") {
+            Glide.with(this)
+                .applyDefaultRequestOptions(requestOption)
+                .load(R.drawable.ic_person_yellow_24dp)
+                .into(circleImageView)
+        } else {
 
-        Log.d("image Uri value::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: ",imageUri.toString())
-        Glide.with(this)
-            .applyDefaultRequestOptions(requestOption)
-            .load(imageUri)
-
-            .into(circleImageView)
+            Glide.with(this)
+                .applyDefaultRequestOptions(requestOption)
+                .load(imageUri)
+                .into(circleImageView)
+        }
     }
-
     private fun pickPhotoFromGallery() {
 
         val intent = Intent()

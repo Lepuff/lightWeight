@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.app.AlertDialog
 import android.content.pm.PackageManager
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +17,6 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -75,7 +73,8 @@ class ProfileFragment : Fragment() {
         val cameraButton =
             root.findViewById<ImageButton>(R.id.profile_camera_button)
         cameraButton.setOnClickListener {
-                requestStoragePermission()
+                checkStoragePermission()
+            //pickPhotoFromGallery()
         }
 
         val addFriendsButton = root.findViewById<Button>(R.id.profile_add_friends_button)
@@ -118,9 +117,10 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun requestStoragePermission(){
-        if (ActivityCompat.checkSelfPermission(context!!, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+    private fun checkStoragePermission(){
+        if (ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED){
+            //Permission is not granted
             requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), PICK_PHOTO_REQUEST)
         } else{
             pickPhotoFromGallery()

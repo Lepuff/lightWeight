@@ -197,6 +197,7 @@ object Database {
                 user.email = `object`.getString("email")
                 user.firstName = `object`.getString("first_name")
                 user.lastName = `object`.getString("last_name")
+                user.isFacebookUser = true
                 user.profilePicture = Profile.getCurrentProfile().getProfilePictureUri(120, 120)
                 userInfoToDb()
             }

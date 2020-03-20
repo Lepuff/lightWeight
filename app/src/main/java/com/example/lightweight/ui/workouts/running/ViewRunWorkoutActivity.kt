@@ -12,9 +12,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.lightweight.Database
 import com.example.lightweight.R
+import com.example.lightweight.ViewModels.RunViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_running_workout.view.*
 
 class ViewRunWorkoutActivity : AppCompatActivity() {
     private lateinit var viewModel: RunViewModel

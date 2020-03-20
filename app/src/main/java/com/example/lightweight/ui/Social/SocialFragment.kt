@@ -2,13 +2,11 @@ package com.example.lightweight.ui.Social
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -18,11 +16,10 @@ import com.example.lightweight.R
 import com.example.lightweight.adapters.WorkOutAdapter
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.classes.*
-import com.example.lightweight.ui.Feed.WorkoutFeedViewModel
+import com.example.lightweight.ViewModels.WorkoutFeedViewModel
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_social.*
-import kotlinx.android.synthetic.main.layout_wo_list_item.*
 
 
 class SocialFragment : Fragment() {
@@ -43,7 +40,7 @@ class SocialFragment : Fragment() {
 
         viewModel.workoutList.observe(
             viewLifecycleOwner,
-            Observer<MutableList<AbstractWorkout>> {
+            Observer<MutableList<Workout>> {
                 workOutAdapter.notifyDataSetChanged()
             })
 

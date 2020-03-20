@@ -21,8 +21,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.lightweight.Database
 import com.example.lightweight.R
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Registry
 import com.example.lightweight.Validation
+import com.example.lightweight.ViewModels.ProfileViewModel
 import com.example.lightweight.adapters.UserAdapter
 import com.example.lightweight.classes.User
 import com.example.lightweight.ui.TopSpacingItemDecoration
@@ -34,7 +34,6 @@ import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.dialog_change_password.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 

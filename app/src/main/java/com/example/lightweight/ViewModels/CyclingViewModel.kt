@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.workouts.cycling
+package com.example.lightweight.ViewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

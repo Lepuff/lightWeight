@@ -2,7 +2,6 @@ package com.example.lightweight.classes
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import com.example.lightweight.R
 import com.example.lightweight.ui.workouts.running.NewRunningWorkoutActivity
 import com.example.lightweight.ui.workouts.running.ViewRunWorkoutActivity
@@ -15,7 +14,7 @@ class RunningWorkout(
     override var userImage: String?,
     override var userId: String
 
-) : AbstractWorkout(R.drawable.ic_directions_run_yellow_24dp) {
+) : Workout(R.drawable.ic_directions_run_yellow_24dp) {
 
 
     override fun showWorkout(context: Context) {

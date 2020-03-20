@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.Profile
+package com.example.lightweight.ViewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

@@ -1,12 +1,12 @@
-package com.example.lightweight.ui.Feed
+package com.example.lightweight.ViewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.lightweight.classes.AbstractWorkout
+import com.example.lightweight.classes.Workout
 
 class WorkoutFeedViewModel : ViewModel() {
 
-    val workoutList = MutableLiveData<MutableList<AbstractWorkout>>().apply {
+    val workoutList = MutableLiveData<MutableList<Workout>>().apply {
         value = ArrayList()
     }
 

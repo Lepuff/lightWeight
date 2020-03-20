@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lightweight.Database
 import com.example.lightweight.R
+import com.example.lightweight.ViewModels.GymViewModel
 
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.adapters.ExerciseAdapter

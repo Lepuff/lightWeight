@@ -68,14 +68,9 @@ class SocialFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        checkDatabaseForUpdates()
-    }
-
-    override fun onStop() {
-        super.onStop()
-
-        //todo remove listener?
-
+        workOutAdapter.clearList()
+        addWorkoutToFeed()
+        //checkDatabaseForUpdates()
     }
 
     private  fun checkDatabaseForUpdates(){

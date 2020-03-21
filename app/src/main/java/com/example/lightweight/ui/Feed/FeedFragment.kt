@@ -111,13 +111,6 @@ class FeedFragment : Fragment() {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-
-        //todo remove listener?
-
-    }
-
     private fun addWorkoutToFeed() {
 
         workoutsRef.orderBy(Database.WORKOUT_DATE, Query.Direction.DESCENDING).get()

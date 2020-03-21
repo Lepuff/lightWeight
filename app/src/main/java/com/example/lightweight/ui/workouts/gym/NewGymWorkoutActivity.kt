@@ -62,12 +62,6 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        //TODO workoutsRef.addSnapshotListener
-        //TODO findViewById<EditText>(R.id.sets_weight_editText).requestFocus()
-    }
-
     private fun initRecyclerView() {
         exercise_recycle_view.apply {
             layoutManager = LinearLayoutManager(this.context)
@@ -109,7 +103,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
             LayoutInflater.from(this).inflate(R.layout.dialog_save_workout, null)
         val saveButton = dialogView.findViewById<Button>(R.id.save_workout_save_button)
         val currentDate = LocalDate.now().toString()
-        dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
+        dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText)
             .setText(currentDate)
         val dialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)
@@ -126,11 +120,11 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
 
         val workoutTitle =
-            dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText)
+            dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_title_editText)
                 .text
 
         val workoutDate =
-            dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
+            dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText)
                 .text
 
         val currentGymWorkoutRef = db.collection(Database.USERS)

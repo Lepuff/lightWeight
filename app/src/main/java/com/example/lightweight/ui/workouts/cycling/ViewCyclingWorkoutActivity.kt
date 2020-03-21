@@ -51,22 +51,20 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
     private fun saveCyclingDialog() {
         val dialogView =
             LayoutInflater.from(this).inflate(R.layout.dialog_save_workout, null)
-        val dialogSaveButton = dialogView.findViewById<Button>(R.id.save_workout_save_button)
+        val saveButton = dialogView.findViewById<Button>(R.id.save_workout_save_button)
 
+        dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText)
+            .setText(viewModel.title.value.toString())
+        dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText)
+            .setText(viewModel.date.value.toString())
         val dialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)
-
-        dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText)
-            .setText(viewModel.title.value)
-        dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
-            .setText(viewModel.date.value)
         val dialog = dialogBuilder.show()
-
-        dialogSaveButton.setOnClickListener {
-            updateCyclingWorkout(dialogView)
+        saveButton.setOnClickListener {
             viewModel.isInEditState.value = false
-            dialog.cancel()
+            updateCyclingWorkout(dialogView)
             finish()
+            dialog.cancel()
         }
     }
 
@@ -301,11 +299,11 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
 
         currentRunWorkoutRef.update(
             Database.WORKOUT_TITLE,
-            dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText).text.toString()
+            dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_title_editText).text.toString()
         )
         currentRunWorkoutRef.update(
             Database.WORKOUT_DATE,
-            dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText).text.toString()
+            dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText).text.toString()
         )
     }
 

@@ -107,9 +107,9 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
             .setView(dialogView)
 
 
-        dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText)
+        dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_title_editText)
             .setText(viewModel.title.value)
-        dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
+        dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText)
             .setText(viewModel.date.value)
         val dialog = dialogBuilder.show()
 
@@ -157,11 +157,11 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
 
         currentRunWorkoutRef.update(
             Database.WORKOUT_TITLE,
-            dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText).text.toString()
+            dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_title_editText).text.toString()
         )
         currentRunWorkoutRef.update(
             Database.WORKOUT_DATE,
-            dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText).text.toString()
+            dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText).text.toString()
         )
     }
 

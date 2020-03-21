@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/background_item">
@@ -12,20 +11,21 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/TextInputLayoutAppearance"
-            >
+            android:theme="@style/TextInputLayoutAppearance">
+
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/save_workout_title_editText"
+                android:id="@+id/dialog_save_workout_title_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/new_workout_name"
+                android:hint="@string/date"
+                android:inputType="textImeMultiLine"
                 android:textColor="@color/text_item" />
-
         </com.google.android.material.textfield.TextInputLayout>
+
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -33,7 +33,7 @@
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/save_workout_date_editText"
+                android:id="@+id/dialog_save_workout_date_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/date"
@@ -54,4 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/save_workout_linear_layout" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

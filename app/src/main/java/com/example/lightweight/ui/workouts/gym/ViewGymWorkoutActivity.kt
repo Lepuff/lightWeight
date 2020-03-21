@@ -201,21 +201,25 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
         val dialogView =
             LayoutInflater.from(this).inflate(R.layout.dialog_save_workout, null)
         val saveButton = dialogView.findViewById<Button>(R.id.save_workout_save_button)
-        val workoutDate = viewModel.date.value
-        dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
-            .setText(workoutDate)
-        val workoutTitle = viewModel.title.value
-        dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText)
-            .setText(workoutTitle)
+
+        val dateEditText = dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText)
+            dateEditText.setText(viewModel.date.value.toString())
+
+        val titleEditText = dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_title_editText)
+        titleEditText.setText(viewModel.title.value.toString())
+
         val dialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)
         val dialog = dialogBuilder.show()
         saveButton.setOnClickListener {
+            viewModel.isInEditState.value = false
             updateGymWorkout(dialogView)
-            dialog.cancel()
             finish()
+            dialog.cancel()
         }
     }
+
+
 
     private fun updateGymWorkout(dialogView: View) {
 
@@ -225,11 +229,11 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
 
         currentGymWorkoutRef.update(
             Database.WORKOUT_TITLE,
-            dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText).text.toString()
+            dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_title_editText).text.toString()
         )
         currentGymWorkoutRef.update(
             Database.WORKOUT_DATE,
-            dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText).text.toString()
+            dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText).text.toString()
         )
         currentGymWorkoutRef.update(Database.EXERCISES, viewModel.exerciseLiveData.value)
 

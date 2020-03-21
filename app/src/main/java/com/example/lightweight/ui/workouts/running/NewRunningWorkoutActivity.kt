@@ -37,7 +37,7 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
             LayoutInflater.from(this).inflate(R.layout.dialog_save_workout, null)
         val saveButton = dialogView.findViewById<Button>(R.id.save_workout_save_button)
         val currentDate = getCurrentDate()
-        dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
+        dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText)
             .setText(currentDate)
         val dialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)
@@ -53,8 +53,8 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
 
     private fun saveRunningWorkout(dialogView: View) {
 
-        val date = dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText).text.toString()
-        val title = dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText).text.toString()
+        val date = dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText).text.toString()
+        val title = dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_title_editText).text.toString()
         val currentRunningWorkoutRef = db.collection("users")
             .document(Database.getUserId()!!).collection("workouts").document()
 

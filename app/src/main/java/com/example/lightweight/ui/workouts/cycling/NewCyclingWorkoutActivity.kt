@@ -39,7 +39,7 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
             LayoutInflater.from(this).inflate(R.layout.dialog_save_workout, null)
         val dialogSaveButton = dialogView.findViewById<Button>(R.id.save_workout_save_button)
         val currentDate = getCurrentDate()
-        dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
+        dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText)
             .setText(currentDate)
         val dialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)
@@ -80,11 +80,11 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
         val calories =
             findViewById<TextInputEditText>(R.id.cycling_calories_editText).text.toString()
         val workoutTitle =
-            dialogView.findViewById<TextInputEditText>(R.id.save_workout_title_editText)
+            dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_title_editText)
                 .text.toString()
 
         val workoutDate =
-            dialogView.findViewById<TextInputEditText>(R.id.save_workout_date_editText)
+            dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText)
                 .text.toString()
 
 

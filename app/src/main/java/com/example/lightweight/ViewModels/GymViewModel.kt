@@ -19,6 +19,7 @@ class GymViewModel : ViewModel() {
     var isLoadedFromDb = MutableLiveData<Boolean>().apply {
         value = false // todo fix var names?
     }
+
     var isInEditState  = MutableLiveData<Boolean>().apply {
         value = false
     }

@@ -113,10 +113,11 @@ class SocialFragment : Fragment() {
     }
 
     private fun addWorkoutToFeed() {
+        workOutAdapter.clearList()
         db.collection(Database.USERS).document(Database.getUserId()!!).collection(Database.FRIENDS)
             .get()
             .addOnSuccessListener { friends ->
-                workOutAdapter.clearList()
+
                 if (friends != null) {
                     for (friend in friends) {
 

@@ -24,7 +24,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/firstNameRegister_editText"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:hint="@string/first_name"
                 android:inputType="text"
                 android:textColor="@color/text_item"
@@ -41,7 +41,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/lastNameRegister_editText"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:hint="@string/last_name"
                 android:inputType="text"
                 android:textColor="@color/text_item" />
@@ -57,7 +57,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailRegister_editText"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/text_item" />
@@ -75,7 +75,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordRegister_editText"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:textColor="@color/text_item" />
@@ -91,7 +91,7 @@
             android:background="@color/background_button"
             android:text="@string/register"
             android:textColor="@color/text_button"
-            android:textSize="14sp" />
+            />
 
         <ProgressBar
             android:id="@+id/progressBarRegister"

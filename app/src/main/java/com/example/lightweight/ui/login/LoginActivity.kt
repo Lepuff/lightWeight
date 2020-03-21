@@ -102,7 +102,7 @@ class LoginActivity : AppCompatActivity() {
         password = textInputPassword.text.toString().trim().toLowerCase(Locale.ROOT)
 
         if (!Validation.isValidEmail(email)) {
-            if (Validation.isFieldEmpty(email)) {
+            if (email.isEmpty()) {
                 textInputEmail.error = getString(R.string.field_cant_be_empty)
                 textInputEmail.requestFocus()
                 return
@@ -114,7 +114,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         if (!Validation.isValidPassword(password)) {
-            if (Validation.isFieldEmpty(password)) {
+            if (password.isEmpty()) {
                 textInputPassword.error = getString(R.string.field_cant_be_empty)
                 textInputPassword.requestFocus()
                 return

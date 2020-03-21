@@ -134,8 +134,11 @@ object Database {
             user.firstName = firstName
         if (lastName != null)
             user.lastName = lastName
-        if (email != null)
+        if (email != null) {
             user.email = email
+            FirebaseAuth.getInstance().currentUser!!.updateEmail(email)
+        }
+
 
         db.collection(USERS).document(getUserId()!!)
             .update("firstName", user.firstName, "lastName", user.lastName, "email", email)//todo constants

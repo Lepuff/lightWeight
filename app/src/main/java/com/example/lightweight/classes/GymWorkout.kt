@@ -16,7 +16,7 @@ class GymWorkout(
 
 ) : Workout(R.drawable.ic_fitness_center_yellow_24dp) {
 
-    override fun showWorkout(context: Context) {
+    override fun viewWorkout(context: Context) {
 
 
         val intent = Intent(context, ViewGymWorkoutActivity::class.java)

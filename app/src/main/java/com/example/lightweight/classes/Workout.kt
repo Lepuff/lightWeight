@@ -17,6 +17,6 @@ abstract class Workout(
     abstract var userImage : String?
     abstract var userId: String
 
-    abstract fun showWorkout(context: Context)
+    abstract fun viewWorkout(context: Context)
     abstract fun newWorkout(context: Context)
 }

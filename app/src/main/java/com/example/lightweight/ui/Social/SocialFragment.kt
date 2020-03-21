@@ -68,6 +68,17 @@ class SocialFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        checkDatabaseForUpdates()
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        //todo remove listener?
+
+    }
+
+    private  fun checkDatabaseForUpdates(){
         db.collection(Database.USERS).document(Database.getUserId()!!).collection(Database.FRIENDS)
             .get().addOnSuccessListener {friends->
                 if (friends!=null)
@@ -103,13 +114,6 @@ class SocialFragment : Fragment() {
                             }
                     }
             }
-    }
-
-    override fun onStop() {
-        super.onStop()
-
-        //todo remove listener?
-
     }
 
     private fun addWorkoutToFeed() {

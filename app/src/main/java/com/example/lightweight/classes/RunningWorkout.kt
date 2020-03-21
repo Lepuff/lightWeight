@@ -17,7 +17,7 @@ class RunningWorkout(
 ) : Workout(R.drawable.ic_directions_run_yellow_24dp) {
 
 
-    override fun showWorkout(context: Context) {
+    override fun viewWorkout(context: Context) {
         val intent = Intent(context, ViewRunWorkoutActivity::class.java)
         intent.putExtra("id", id)
         intent.putExtra("userId", userId)

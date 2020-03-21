@@ -87,7 +87,7 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
         }
 
         override fun onClick(v: View?) {
-            selectedWorkout?.showWorkout(itemView.context)
+            selectedWorkout?.viewWorkout(itemView.context)
         }
     }
 

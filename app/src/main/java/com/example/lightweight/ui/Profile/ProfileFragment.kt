@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.Profile
+package com.example.lightweight.ui.profile
 
 import android.annotation.SuppressLint
 import android.app.Activity

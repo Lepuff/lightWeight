@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.Feed
+package com.example.lightweight.ui.feed
 
 import android.content.ContentValues.TAG
 import android.os.Bundle

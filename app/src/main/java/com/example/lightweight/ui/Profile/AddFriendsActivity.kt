@@ -1,8 +1,7 @@
-package com.example.lightweight.ui.Profile
+package com.example.lightweight.ui.profile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lightweight.Database
 import com.example.lightweight.R

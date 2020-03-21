@@ -1,37 +1,17 @@
 package com.example.lightweight
 
-import android.Manifest
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
-import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
-import android.graphics.Picture
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.util.Log
-import android.widget.Toast
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.core.content.PermissionChecker.checkSelfPermission
 import androidx.core.net.toUri
 import com.example.lightweight.classes.User
-import com.example.lightweight.ui.Profile.ProfileFragment
 import com.facebook.AccessToken
 import com.facebook.GraphRequest
 import com.facebook.Profile
-import com.google.firebase.auth.AdditionalUserInfo
-import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
-import kotlinx.android.synthetic.main.fragment_profile.view.*
-import java.io.FileInputStream
 
 
 object Database {

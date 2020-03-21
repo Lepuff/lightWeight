@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.Feed
+package com.example.lightweight.ui.feed
 
 import android.annotation.SuppressLint
 import android.app.Dialog

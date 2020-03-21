@@ -12,11 +12,12 @@
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_fitness_center_yellow_24dp"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.Profile.AddFriendsActivity"
+            android:name=".ui.profile.AddFriendsActivity"
+            android:label="Add friends"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -87,7 +88,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.Register.RegisterActivity"
+            android:name=".ui.register.RegisterActivity"
             android:exported="true" /> <!-- todo Check this erroro? -->
         <activity
             android:name=".ui.login.LoginActivity"

@@ -1,8 +1,6 @@
 package com.example.lightweight.ui.login
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,9 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lightweight.*
 import com.example.lightweight.R
-import com.example.lightweight.classes.Preferences
 import com.example.lightweight.ui.NavigationActivity
-import com.example.lightweight.ui.Register.RegisterActivity
+import com.example.lightweight.ui.register.RegisterActivity
 import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginResult

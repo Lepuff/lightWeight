@@ -7,9 +7,6 @@ import com.google.android.material.textfield.TextInputEditText
 
 object Validation {
     private const val MIN_PASSWORD_LENGTH = 5
-    fun isFieldEmpty(target: CharSequence): Boolean {
-        return TextUtils.isEmpty(target)
-    }
 
     fun isValidEmail(target: CharSequence): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(target).matches()

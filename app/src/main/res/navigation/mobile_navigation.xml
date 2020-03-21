@@ -11,11 +11,7 @@
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile"/>
 
-    <fragment
-        android:id="@+id/navigation_analytics"
-        android:name="com.example.lightweight.ui.Analytics.AnalyticsFragment"
-        android:label="@string/title_analytics"
-        tools:layout="@layout/fragment_analytics"  />
+
 
     <fragment
         android:id="@+id/navigation_feed"

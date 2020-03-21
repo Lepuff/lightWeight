@@ -6,11 +6,6 @@
         android:title="@string/profile" />
 
     <item
-        android:id="@+id/navigation_analytics"
-        android:icon="@drawable/ic_timeline_yellow_24dp"
-        android:title="@string/title_analytics" />
-
-    <item
         android:id="@+id/navigation_feed"
         android:icon="@drawable/ic_fitness_center_yellow_24dp"
         android:title="@string/title_feed" />

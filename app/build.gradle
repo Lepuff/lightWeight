@@ -74,7 +74,7 @@ dependencies {
     //glide
     def glide_version = "4.11.0"
     implementation("com.github.bumptech.glide:concurrent-integration:$glide_version")
-    
+
     //CircleImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 

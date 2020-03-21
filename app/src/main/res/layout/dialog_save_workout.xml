@@ -9,8 +9,8 @@
         android:id="@+id/save_workout_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,7 +24,6 @@
                 android:inputType="textImeMultiLine"
                 android:textColor="@color/text_item" />
         </com.google.android.material.textfield.TextInputLayout>
-
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -54,7 +53,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/save_workout_linear_layout" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

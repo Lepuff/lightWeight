@@ -3,25 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background_item"
+    android:padding="10dp"
     tools:context=".ui.workouts.cycling.NewCyclingWorkoutActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/divider"
-            android:text="@string/distance"
-            android:textColor="@color/text_divider" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/TextInputLayoutAppearance">
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            app:suffixText="Km"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
+
                 android:id="@+id/cycling_distance_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -31,17 +31,14 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/divider"
-            android:text="@string/time"
-            android:textColor="@color/text_divider" />
+
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/TextInputLayoutAppearance">
+            android:theme="@style/TextInputLayoutAppearance"
+            app:suffixText="h:m:s">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/cycling_total_time_editText"

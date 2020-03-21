@@ -150,8 +150,8 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
                         for (set in sets) {
                             val currentSet = set as HashMap<*, *>
                             val tempSet = Sets()
-                            tempSet.weight = currentSet[Database.WEIGHT].toString()
-                            tempSet.reps = currentSet[Database.REPS].toString()
+                            tempSet.weight = currentSet[Database.WEIGHT].toString().toInt()
+                            tempSet.reps = currentSet[Database.REPS].toString().toInt()
                             tempExercise.sets.add(tempSet)
                         }
                         exerciseAdapter.addExercise(tempExercise)

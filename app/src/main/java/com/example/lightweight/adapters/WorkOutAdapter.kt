@@ -34,7 +34,8 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
         workouts.removeAt(position)
         this.notifyDataSetChanged()
     }
-    fun clearList(){
+
+    fun clearList() {
         workouts.clear()
         notifyDataSetChanged()
     }
@@ -60,7 +61,7 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
             itemView.setOnClickListener(this)
         }
 
-        private val userName : MaterialTextView = itemView.workout_user_name
+        private val userName: MaterialTextView = itemView.workout_user_name
         private val userImage: CircleImageView = itemView.workout_image
         private val workoutIcon: AppCompatImageView = itemView.workout_icon_imageView
         private val workoutTitle: MaterialTextView = itemView.workout_title

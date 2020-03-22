@@ -57,8 +57,8 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
         }
 
     }
-    private fun deleteWorkoutDialog() {
 
+    private fun deleteWorkoutDialog() {
         val builder = AlertDialog.Builder(this, R.style.DialogStyle)
         builder.setTitle(R.string.delete_workout_message)
         builder.setPositiveButton(R.string.yes) { dialog, _ ->
@@ -90,7 +90,6 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
             }
     }
 
-
     private fun setObservers() {
         viewModel.exerciseLiveData.observe(this,
             Observer {
@@ -116,9 +115,7 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
                     findViewById<Button>(R.id.gym_edit_workout_button).visibility = View.VISIBLE
                     findViewById<Button>(R.id.gym_delete_workout_button).visibility = View.VISIBLE
                 }
-            }
-            else
-            {
+            } else {
                 exerciseAdapter.isNotEditable()
                 findViewById<Button>(R.id.gym_save_workout_button).visibility = View.GONE
                 findViewById<Button>(R.id.gym_add_exercise_button).visibility = View.GONE
@@ -138,7 +135,7 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
 
         val currentGymWorkoutRef = db.collection(Database.USERS)
             .document(intent.getStringExtra("userId")!!).collection(Database.WORKOUTS)
-            .document(intent.getStringExtra("id")!!)// todo fix constant
+            .document(intent.getStringExtra("id")!!)
         currentGymWorkoutRef.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
@@ -183,7 +180,6 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
         val listOfExercisesRef = db.collection(Database.TYPE_OF_EXERCISE).get()
 
         listOfExercisesRef.addOnSuccessListener { typeOfExercises ->
-            //TODO cycle through "names" of the typeOfWorkout
             val typeOfExerciseList: MutableList<String> = ArrayList()
             for (typeOfExercise in typeOfExercises) {
                 typeOfExerciseList.add(typeOfExercise[Database.NAME].toString())
@@ -202,10 +198,12 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
             LayoutInflater.from(this).inflate(R.layout.dialog_save_workout, null)
         val saveButton = dialogView.findViewById<Button>(R.id.save_workout_save_button)
 
-        val dateEditText = dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText)
-            dateEditText.setText(viewModel.date.value.toString())
+        val dateEditText =
+            dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText)
+        dateEditText.setText(viewModel.date.value.toString())
 
-        val titleEditText = dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_title_editText)
+        val titleEditText =
+            dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_title_editText)
         titleEditText.setText(viewModel.title.value.toString())
 
         val dialogBuilder = AlertDialog.Builder(this)
@@ -220,12 +218,10 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
     }
 
 
-
     private fun updateGymWorkout(dialogView: View) {
-
         val currentGymWorkoutRef = db.collection(Database.USERS)
             .document(intent.getStringExtra("userId")!!).collection(Database.WORKOUTS)
-            .document(intent.getStringExtra("id")!!) //todo fix constants
+            .document(intent.getStringExtra("id")!!)
 
         currentGymWorkoutRef.update(
             Database.WORKOUT_TITLE,

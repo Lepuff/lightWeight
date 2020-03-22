@@ -12,16 +12,17 @@ import com.google.android.material.textview.MaterialTextView
 import kotlinx.android.synthetic.main.layout_dialog_new_workout_list_item.view.*
 
 
-class WorkOutTypeAdapter(private val dialog: Dialog) : RecyclerView.Adapter<WorkOutTypeAdapter.WorkOutTypeViewHolder>() {
+class WorkOutTypeAdapter(private val dialog: Dialog) :
+    RecyclerView.Adapter<WorkOutTypeAdapter.WorkOutTypeViewHolder>() {
 
-    private var items: MutableList<Workout> = ArrayList()
+    private var workoutType: MutableList<Workout> = ArrayList()
 
     override fun getItemCount(): Int {
-        return items.size
+        return workoutType.size
     }
 
-    fun submitList(workOutTypeList: MutableList<Workout>){
-        items = workOutTypeList
+    fun submitList(workOutTypeList: MutableList<Workout>) {
+        workoutType = workOutTypeList
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkOutTypeViewHolder {
@@ -35,11 +36,12 @@ class WorkOutTypeAdapter(private val dialog: Dialog) : RecyclerView.Adapter<Work
     }
 
 
+    class WorkOutTypeViewHolder constructor(itemView: View, private val dialog: Dialog) :
+        RecyclerView.ViewHolder(itemView), View.OnClickListener {
+        private var selectedWorkoutType: Workout? = null
 
-    class WorkOutTypeViewHolder constructor(itemView: View, private val dialog: Dialog) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
-        private var  selectedWorkoutType : Workout? = null
         init {
-           itemView.setOnClickListener(this)
+            itemView.setOnClickListener(this)
         }
 
         val icon: AppCompatImageView = itemView.new_workout_icon_imageView
@@ -58,7 +60,7 @@ class WorkOutTypeAdapter(private val dialog: Dialog) : RecyclerView.Adapter<Work
     }
 
     override fun onBindViewHolder(holder: WorkOutTypeViewHolder, position: Int) {
-        val workoutType = items[position]
+        val workoutType = workoutType[position]
         holder.bind(workoutType)
     }
 }

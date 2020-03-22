@@ -13,7 +13,11 @@ import com.example.lightweight.classes.User
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.layout_friend_item.view.*
 
-class UserAdapter(private val recyclerView: RecyclerView, private val db : FirebaseFirestore, private val isInAddMode: Boolean) :
+class UserAdapter(
+    private val recyclerView: RecyclerView,
+    private val db: FirebaseFirestore,
+    private val isInAddMode: Boolean
+) :
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
 
@@ -26,16 +30,18 @@ class UserAdapter(private val recyclerView: RecyclerView, private val db : Fireb
     fun submitList(friendList: MutableList<User>) {
         users = friendList
     }
-    fun clearList(){
+
+    fun clearList() {
         users.clear()
         notifyDataSetChanged()
     }
 
-    fun removeitem(position: Int) {
+    fun removeUser(position: Int) {
         users.removeAt(position)
         notifyItemRemoved(position)
     }
-    fun addItem(user: User) {
+
+    fun addUser(user: User) {
         users.add(user)
         notifyItemInserted(users.size - 1)
     }
@@ -46,17 +52,22 @@ class UserAdapter(private val recyclerView: RecyclerView, private val db : Fireb
                 R.layout.layout_friend_item,
                 parent,
                 false
-            ), recyclerView,db
+            ), recyclerView, db
         )
     }
 
 
-    class UserViewHolder constructor(itemView: View, recyclerView: RecyclerView, db: FirebaseFirestore) :
+    class UserViewHolder constructor(
+        itemView: View,
+        recyclerView: RecyclerView,
+        db: FirebaseFirestore
+    ) :
         RecyclerView.ViewHolder(itemView) {
         private var selectedUser: User? = null
-
         private var adapter = recyclerView.adapter as UserAdapter
+
         var name: TextView = itemView.friend_item_textView
+
 
         val addFriendButton: Button = itemView.findViewById<Button>(R.id.friend_add_button).apply {
             this.setOnClickListener {
@@ -64,34 +75,37 @@ class UserAdapter(private val recyclerView: RecyclerView, private val db : Fireb
                     Database.EMAIL to selectedUser?.email,
                     Database.ID to selectedUser?.id
                 )
-                db.collection(Database.USERS).document(Database.getUserId()!!).collection(Database.FRIENDS).document().set(userInfo)
+                db.collection(Database.USERS).document(Database.getUserId()!!)
+                    .collection(Database.FRIENDS).document().set(userInfo)
                 val position = adapterPosition
-                adapter.removeitem(position)
+                adapter.removeUser(position)
             }
         }
-        val removeFriendButton: Button = itemView.findViewById<Button>(R.id.friend_remove_button).apply {
-            setOnClickListener {
-                db.collection(Database.USERS).document(Database.getUserId()!!).collection(Database.FRIENDS).document(
-                    selectedUser?.id!!).delete()
+        val removeFriendButton: Button =
+            itemView.findViewById<Button>(R.id.friend_remove_button).apply {
+                setOnClickListener {
+                    db.collection(Database.USERS).document(Database.getUserId()!!)
+                        .collection(Database.FRIENDS).document(
+                            selectedUser?.id!!
+                        ).delete()
+                }
             }
-        }
-
 
 
         fun bind(user: User) {
 
             this.selectedUser = user
-            name.text = user.email.toString()
+            userName.text = user.email.toString()
         }
 
     }
 
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        if (isInAddMode){
+        if (isInAddMode) {
             holder.addFriendButton.visibility = View.VISIBLE
             holder.removeFriendButton.visibility = View.GONE
-        }else{
+        } else {
             holder.addFriendButton.visibility = View.GONE
             holder.removeFriendButton.visibility = View.VISIBLE
         }

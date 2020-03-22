@@ -114,7 +114,7 @@ class ViewRunningWorkoutActivity : AppCompatActivity() {
         val dialog = dialogBuilder.show()
 
         saveButton.setOnClickListener {
-            updateRunningWorkout(dialogView)//todo check if we need to go back to this activity after this. in that case we need to update title and stuff
+            updateRunningWorkout(dialogView)
             viewModel.isInEditState.value = false
             dialog.cancel()
             finish()
@@ -124,7 +124,7 @@ class ViewRunningWorkoutActivity : AppCompatActivity() {
     private fun updateRunningWorkout(dialogView: View) {
         val currentRunWorkoutRef = db.collection(Database.USERS)
             .document(intent.getStringExtra("userId")!!).collection(Database.WORKOUTS)
-            .document(intent.getStringExtra("id")!!)//todo fix constants
+            .document(intent.getStringExtra("id")!!)
         currentRunWorkoutRef.update(
             Database.AVERAGE_PULSE,
             findViewById<TextInputEditText>(R.id.running_average_pulse_editText).text.toString()
@@ -166,9 +166,9 @@ class ViewRunningWorkoutActivity : AppCompatActivity() {
     }
 
     private fun getRunningInfoFromDb() {
-        val currentRunWorkoutRef = db.collection("users")
-            .document(intent.getStringExtra("userId")!!).collection("workouts")
-            .document(intent.getStringExtra("id")!!) // todo constants
+        val currentRunWorkoutRef = db.collection(Database.USERS)
+            .document(intent.getStringExtra("userId")!!).collection(Database.WORKOUTS)
+            .document(intent.getStringExtra("id")!!)
         currentRunWorkoutRef.get().addOnSuccessListener { document ->
             if (document != null) {
                 viewModel.title.value = document[Database.WORKOUT_TITLE].toString()
@@ -195,7 +195,7 @@ class ViewRunningWorkoutActivity : AppCompatActivity() {
 
         viewModel.isLoadedFromDb.observe(this, Observer {
             if (viewModel.isLoadedFromDb.value == false) {
-                getRunningInfoFromDb()//todo fix constants
+                getRunningInfoFromDb()
                 viewModel.isLoadedFromDb.value == true
             }
         })

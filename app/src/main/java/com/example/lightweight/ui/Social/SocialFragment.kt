@@ -42,15 +42,12 @@ class SocialFragment : Fragment() {
                 workOutAdapter.notifyDataSetChanged()
             })
 
-       val swipeRefreshLayout = root.findViewById<SwipeRefreshLayout>(R.id.social_swipeRefreshLayout)
+        val swipeRefreshLayout =
+            root.findViewById<SwipeRefreshLayout>(R.id.social_swipeRefreshLayout)
         swipeRefreshLayout.setOnRefreshListener {
-            addWorkoutToFeed()
+            addWorkoutsToFeed()
             swipeRefreshLayout.isRefreshing = false
         }
-
-
-
-
         return root
     }
 
@@ -58,6 +55,12 @@ class SocialFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         initRecyclerView()
         workOutAdapter.submitList(viewModel.workoutList.value!!)
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        addWorkoutsToFeed()
     }
 
 
@@ -73,13 +76,7 @@ class SocialFragment : Fragment() {
     }
 
 
-    override fun onStart() {
-        super.onStart()
-        addWorkoutToFeed()
-    }
-
-
-    private fun addWorkoutToFeed() {
+    private fun addWorkoutsToFeed() {
         workOutAdapter.clearList()
         db.collection(Database.USERS).document(Database.getUserId()!!).collection(Database.FRIENDS)
             .get()

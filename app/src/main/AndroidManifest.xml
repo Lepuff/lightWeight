@@ -74,7 +74,7 @@
             android:name=".ui.register.RegisterActivity"
 
             android:windowSoftInputMode="stateVisible"
-            android:exported="true" /> <!-- todo Check this erroro? -->
+            android:exported="true" /> 
 
 
         <activity

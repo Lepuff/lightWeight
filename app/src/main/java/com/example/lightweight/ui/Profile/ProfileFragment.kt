@@ -81,7 +81,7 @@ class ProfileFragment : Fragment() {
         val cameraButton =
             root.findViewById<ImageButton>(R.id.profile_camera_button)
         cameraButton.setOnClickListener {
-                checkStoragePermission()
+            checkStoragePermission()
         }
 
         val addFriendsButton = root.findViewById<Button>(R.id.profile_add_friends_button)
@@ -116,23 +116,12 @@ class ProfileFragment : Fragment() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PICK_PHOTO_REQUEST){
-            if (permissions[0].equals(android.Manifest.permission.READ_EXTERNAL_STORAGE) && grantResults[0]
-            == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == PICK_PHOTO_REQUEST) {
+            if (permissions[0] == android.Manifest.permission.READ_EXTERNAL_STORAGE && grantResults[0]
+                == PackageManager.PERMISSION_GRANTED
+            ) {
                 pickPhotoFromGallery()
             }
-        }
-    }
-
-    private fun checkStoragePermission(){
-        //If permission is not already granted
-        if (ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED){
-            //Request permission to read storage
-            requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), PICK_PHOTO_REQUEST)
-        } else{
-            //if permission is already granted
-            pickPhotoFromGallery()
         }
     }
 
@@ -141,6 +130,34 @@ class ProfileFragment : Fragment() {
         initRecyclerView()
         checkUpdates()
     }
+
+    private fun checkStoragePermission() {
+        //If permission is not already granted
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            //Request permission to read storage
+            requestPermissions(
+                arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
+                PICK_PHOTO_REQUEST
+            )
+        } else {
+            //if permission is already granted
+            pickPhotoFromGallery()
+        }
+    }
+
+    private fun pickPhotoFromGallery() {
+
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(intent, PICK_PHOTO_REQUEST)
+    }
+
     @SuppressLint("InflateParams")
     private fun changePasswordDialog() {
         val dialogView =
@@ -149,18 +166,19 @@ class ProfileFragment : Fragment() {
         builder.setView(dialogView)
         val dialog = builder.show()
 
-
         textInputOldLayout = dialogView.findViewById(R.id.dialog_old_password_textLayout)
         textInputNewLayout = dialogView.findViewById(R.id.dialog_new_password_textLayout)
         textInputConfirmLayout = dialogView.findViewById(R.id.dialog_confirm_password_textLayout)
         //adds textChangedListeners to all password fields
         setTextChangedListeners(dialogView)
 
+
+        setTextChangedListeners(dialogView)
         dialogView.findViewById<Button>(R.id.dialog_save_password_button).setOnClickListener {
             saveNewPassword(dialogView, dialog)
         }
-
     }
+
 
     private fun saveNewPassword(dialogView: View, dialog: AlertDialog) {
         val currentUser = FirebaseAuth.getInstance().currentUser!!
@@ -225,7 +243,6 @@ class ProfileFragment : Fragment() {
         }
     }
 
-
     private fun saveProfileInfo(view: View) {
         val firstName =
             view.findViewById<TextInputEditText>(R.id.profile_first_name_editText).text
@@ -236,6 +253,7 @@ class ProfileFragment : Fragment() {
         Database.updateUser(firstName.toString(), lastName.toString(), email.toString())
     }
 
+
     private fun loadUserInfo(view: View) {
         view.findViewById<TextView>(R.id.profile_first_name_editText).text =
             Database.getUserFirstName()
@@ -244,7 +262,6 @@ class ProfileFragment : Fragment() {
         view.findViewById<TextView>(R.id.profile_email_editText).text =
             Database.getUserEmail()
     }
-
 
     private fun setTextChangedListeners(dialogView: View) {
         dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText)
@@ -289,9 +306,10 @@ class ProfileFragment : Fragment() {
         })
     }
 
-    private fun logOutDialog(){
+    private fun logOutDialog() {
 
-        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext(), R.style.DialogStyle)
+        val builder =
+            androidx.appcompat.app.AlertDialog.Builder(requireContext(), R.style.DialogStyle)
         builder.setTitle(R.string.log_out_message)
         builder.setPositiveButton(R.string.yes) { dialog, _ ->
             logOut()
@@ -332,14 +350,6 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun pickPhotoFromGallery() {
-
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(intent, PICK_PHOTO_REQUEST)
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -359,11 +369,13 @@ class ProfileFragment : Fragment() {
                 View.GONE
             requireView().findViewById<Button>(R.id.profile_save_profile_button).visibility =
                 View.GONE
-            requireView().findViewById<ImageButton>(R.id.profile_camera_button).visibility = View.GONE
+            requireView().findViewById<ImageButton>(R.id.profile_camera_button).visibility =
+                View.GONE
         } else {
 
-            
-            requireView().findViewById<ImageButton>(R.id.profile_camera_button).visibility = View.VISIBLE
+
+            requireView().findViewById<ImageButton>(R.id.profile_camera_button).visibility =
+                View.VISIBLE
             requireView().findViewById<Button>(R.id.profile_change_password_button).visibility =
                 View.VISIBLE
             if (viewModel.isInEditState.value!!) {
@@ -387,32 +399,31 @@ class ProfileFragment : Fragment() {
     }
 
 
-    private fun checkUpdates(){
-        db.collection(Database.USERS).document(Database.getUserId()!!).collection(Database.FRIENDS).addSnapshotListener { snapshot, e ->
-            if (e != null) {
-                Log.w(ContentValues.TAG, "Listen failed.", e)
-                return@addSnapshotListener
-            }
-            for (dc in snapshot!!.documentChanges) {
-                when (dc.type) {
-                    DocumentChange.Type.ADDED -> Log.d(ContentValues.TAG, "New Friend: ${dc.document.data}")
-                    DocumentChange.Type.MODIFIED -> Log.d(
-                        ContentValues.TAG,
-                        "Modified Friend: ${dc.document.data}"
-                    )
-                    DocumentChange.Type.REMOVED -> Log.d(
-                        ContentValues.TAG,
-                        "Removed Friend: ${dc.document.data}"
-                    )
+    private fun checkUpdates() {
+        db.collection(Database.USERS).document(Database.getUserId()!!).collection(Database.FRIENDS)
+            .addSnapshotListener { snapshot, e ->
+                if (e != null) {
+                    Log.w(ContentValues.TAG, "Listen failed.", e)
+                    return@addSnapshotListener
                 }
+                for (dc in snapshot!!.documentChanges) {
+                    when (dc.type) {
+                        DocumentChange.Type.ADDED -> Log.d(
+                            ContentValues.TAG,
+                            "New Friend: ${dc.document.data}"
+                        )
+                        DocumentChange.Type.MODIFIED -> Log.d(
+                            ContentValues.TAG,
+                            "Modified Friend: ${dc.document.data}"
+                        )
+                        DocumentChange.Type.REMOVED -> Log.d(
+                            ContentValues.TAG,
+                            "Removed Friend: ${dc.document.data}"
+                        )
+                    }
+                }
+                getFriendsFromDb()
             }
-            getFriendsFromDb()
-        }
-
-
-
-
-
     }
 
     private fun getFriendsFromDb() {
@@ -425,7 +436,7 @@ class ProfileFragment : Fragment() {
                         val user = User()
                         user.email = friend[Database.EMAIL].toString()
                         user.id = friend.id
-                        friendAdapter.addItem(user)
+                        friendAdapter.addUser(user)
                     }
                 }
             }

@@ -55,7 +55,7 @@ class FeedFragment : Fragment() {
             root.findViewById<FloatingActionButton>(R.id.feed_floating_action_button)
 
         floatingActionButton.setOnClickListener {
-            NewWorkoutDialog().show(childFragmentManager, "test")//todo fix.
+            NewWorkoutDialog().show(childFragmentManager, "new_workout_dialog_fragment")
 
         }
         return root
@@ -68,7 +68,6 @@ class FeedFragment : Fragment() {
         workOutAdapter.submitList(viewModel.workoutList.value!!)
 
     }
-
 
 
     private fun initRecyclerView() {
@@ -88,7 +87,7 @@ class FeedFragment : Fragment() {
     }
 
     private fun checkDatabaseForUpdates() {
-        val snapShotListener = workoutsRef.addSnapshotListener { snapshots, e ->
+        workoutsRef.addSnapshotListener { snapshots, e ->
             if (e != null) {
                 Log.w(TAG, "Listen failed.", e)
                 return@addSnapshotListener
@@ -107,11 +106,11 @@ class FeedFragment : Fragment() {
                 }
 
             }
-            addWorkoutToFeed()
+            addWorkoutsToFeed()
         }
     }
 
-    private fun addWorkoutToFeed() {
+    private fun addWorkoutsToFeed() {
 
         workoutsRef.orderBy(Database.WORKOUT_DATE, Query.Direction.DESCENDING).get()
             .addOnSuccessListener { workouts ->
@@ -123,10 +122,10 @@ class FeedFragment : Fragment() {
                         val type = workout[Database.TYPE_OF_WORKOUT].toString()
                         val date = workout[Database.WORKOUT_DATE].toString()
                         val title = workout[Database.WORKOUT_TITLE].toString()
-                        val name = Database.getUserName()
+                        val name = Database.getUserFullName()
                         val profilePicture = Database.getUserPicture().toString()
                         when (type) {
-                            "gymWorkout" ->
+                            Database.GYM_WORKOUT ->
                                 workOutAdapter.addWorkout(
                                     GymWorkout(
                                         id,
@@ -137,7 +136,7 @@ class FeedFragment : Fragment() {
                                         Database.getUserId().toString()
                                     )
                                 )
-                            "runningWorkout" ->
+                            Database.RUNNING_WORKOUT ->
                                 workOutAdapter.addWorkout(
                                     RunningWorkout(
                                         id,
@@ -148,7 +147,7 @@ class FeedFragment : Fragment() {
                                         Database.getUserId().toString()
                                     )
                                 )
-                            "cyclingWorkout" ->
+                            Database.CYCLING_WORKOUT ->
                                 workOutAdapter.addWorkout(
                                     CyclingWorkout(
                                         id,

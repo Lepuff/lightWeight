@@ -30,5 +30,5 @@ class RunningWorkout(
         )
         context.startActivity(intent)
     }
-    
+
 }

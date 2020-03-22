@@ -12,8 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_add_friends.*
 
 class AddFriendsActivity : AppCompatActivity() {
-
-
+    val itemPaddingTop = 5
     private lateinit var userAdapter: UserAdapter
     private var db = FirebaseFirestore.getInstance()
 
@@ -23,31 +22,30 @@ class AddFriendsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_friends)
 
         initRecyclerView()
-        getUsers()
+        findPossibleFriends()
     }
 
-    private fun getUsers() {
+    private fun findPossibleFriends() {
         db.collection(Database.USERS).get().addOnSuccessListener { allUsers ->
             if (allUsers != null) {
                 db.collection(Database.USERS).document(Database.getUserId()!!)
                     .collection(Database.FRIENDS).get().addOnSuccessListener { friends ->
-
                         if (friends != null) {
                             for (user in allUsers) {
-                                var isNotFriend = true
+                                var isPossibleFriend = true
                                 if (user[Database.ID].toString() == Database.getUserId()) {
-                                    isNotFriend = false
+                                    isPossibleFriend = false
                                 }
                                 for (friend in friends) {
                                     if (user[Database.ID].toString() == friend[Database.ID].toString()) {
-                                        isNotFriend = false
+                                        isPossibleFriend = false
                                     }
                                 }
-                                if (isNotFriend) { //todo borde finnas en bättre lösning...
+                                if (isPossibleFriend) {
                                     val _user = User()
                                     _user.email = user[Database.EMAIL].toString()
                                     _user.id = user[Database.ID].toString()
-                                    userAdapter.addItem(_user)
+                                    userAdapter.addUser(_user)
                                 }
                             }
 
@@ -61,7 +59,7 @@ class AddFriendsActivity : AppCompatActivity() {
         add_friend_recyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
             val topSpacingItemDecoration =
-                TopSpacingItemDecoration(5)//todo fix
+                TopSpacingItemDecoration(itemPaddingTop)
             addItemDecoration(topSpacingItemDecoration)
             userAdapter = UserAdapter(this, db, true)
             adapter = userAdapter

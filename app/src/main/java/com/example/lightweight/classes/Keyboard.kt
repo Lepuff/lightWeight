@@ -1,4 +1,4 @@
-package com.example.lightweight.ui.workouts
+package com.example.lightweight.classes
 
 import android.content.Context
 import android.view.inputmethod.InputMethodManager

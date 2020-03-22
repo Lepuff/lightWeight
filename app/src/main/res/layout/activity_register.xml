@@ -7,18 +7,15 @@
     android:background="@color/background"
     android:orientation="vertical"
     tools:context=".ui.register.RegisterActivity">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
-
-
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/TextInputLayoutAppearance"
+            style="@style/TextInputLayoutOutlined"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -27,15 +24,14 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/first_name"
                 android:inputType="text"
-                android:textColor="@color/text_item"
-                android:theme="@style/TextInputLayoutAppearance" />
+                android:textColor="@color/text_item" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/TextInputLayoutAppearance"
+            style="@style/TextInputLayoutOutlined"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -51,7 +47,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/TextInputLayoutAppearance"
+            style="@style/TextInputLayoutOutlined"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -67,7 +63,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/TextInputLayoutAppearance"
+            style="@style/TextInputLayoutOutlined"
             app:errorEnabled="true"
             app:passwordToggleTint="@color/text_item"
             app:passwordToggleEnabled="true">
@@ -83,6 +79,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            style="@style/ButtonOutlined"
             android:id="@+id/registerButton_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -90,7 +87,6 @@
             android:layout_marginTop="48dp"
             android:background="@color/background_button"
             android:text="@string/register"
-            android:textColor="@color/text_button"
             />
 
         <ProgressBar

@@ -218,7 +218,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            style="@style/ButtonOutlined"
+            style="@style/ButtonTextOnly"
             android:id="@+id/cycling_save_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -227,7 +227,7 @@
             android:layout_gravity="center"/>
 
         <Button
-            style="@style/ButtonOutlined"
+            style="@style/ButtonTextOnly"
             android:id="@+id/cycling_edit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -236,7 +236,7 @@
             android:layout_gravity="center"/>
 
         <Button
-            style="@style/ButtonOutlined"
+            style="@style/ButtonTextOnly"
             android:id="@+id/cycling_delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

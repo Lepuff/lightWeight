@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lightweight.R
@@ -132,7 +133,7 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
             }
             )
         }
-        val button: Button = itemView.findViewById<Button>(R.id.delete_set_button).apply {
+        val button: ImageButton = itemView.findViewById<ImageButton>(R.id.delete_set_button).apply {
             setOnClickListener {
                 adapter.deleteSet(recyclerView.getChildLayoutPosition(itemView) + 1)
             }

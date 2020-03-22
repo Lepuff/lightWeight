@@ -37,15 +37,18 @@
             android:launchMode="singleTop">
         </activity>
         <activity
+            android:label="@string/new_cycling_workout"
             android:name=".ui.workouts.cycling.NewCyclingWorkoutActivity"
             android:launchMode="singleTop">
         </activity>
         <activity
+            android:label="@string/new_running_workout"
             android:name=".ui.workouts.running.NewRunningWorkoutActivity"
             android:launchMode="singleTop">
 
         </activity>
         <activity
+            android:label="@string/new_gym_workout"
             android:name=".ui.workouts.gym.NewGymWorkoutActivity"
             android:launchMode="singleTop">
         </activity>

@@ -98,38 +98,41 @@
 
 
         <Button
-
+            android:textSize="12sp"
             android:id="@+id/profile_edit_profile_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:enabled="true"
             android:text="@string/edit_profile"
-            style="@style/ButtonOutlined"
+            style="@style/ButtonTextOnly"
             />
 
         <Button
+            android:textSize="12sp"
             android:id="@+id/profile_save_profile_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/save_profile"
-            style="@style/ButtonOutlined"/>
+            style="@style/ButtonTextOnly"/>
 
         <Button
+            android:textSize="12sp"
             android:id="@+id/profile_change_password_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/change_password"
-            style="@style/ButtonOutlined"
+            style="@style/ButtonTextOnly"
             />
 
 
         <Button
+            android:textSize="12sp"
             android:id="@+id/profile_add_friends_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/background_button"
             android:text="@string/add_friends"
-            style="@style/ButtonOutlined"/>
+            style="@style/ButtonTextOnly"/>
     </LinearLayout>
 
 
@@ -151,7 +154,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_profile_friends" />
     <Button
-        style="@style/ButtonOutlined"
+        style="@style/ButtonTextOnly"
         android:id="@+id/profile_logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

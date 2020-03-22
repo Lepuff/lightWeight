@@ -39,7 +39,7 @@
     </style>
 
     <style name="TextInputLayoutFilled" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
-
+<item name="passwordToggleTint">@color/details</item>
         <item name="backgroundTint">@color/transparent</item>
         <item name="boxBackgroundColor">@color/transparent</item>
         <item name="android:textColorHint">@color/text_content</item>
@@ -56,6 +56,10 @@
     </style>
 
     <style name="ButtonOutlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/details</item>
+        <item name="android:textColor">@color/text_button</item>
+    </style>
+    <style name="ButtonTextOnly" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="strokeColor">@color/details</item>
         <item name="android:textColor">@color/text_button</item>
     </style>
@@ -86,21 +90,10 @@
         <item name="android:background">@color/background_item</item>
         <item name="android:textSize">20sp</item>
     </style>
-
-    <style name="TextInputLayoutAppearance" parent="Widget.Design.TextInputLayout">
-
-        <item name="hintTextAppearance">@style/HintText</item>
-        <item name="errorTextAppearance">@style/ErrorText</item>
-        <item name="android:textColor">@color/text_item</item>
-        <item name="android:textColorHint">@color/text_item_unfocused</item>
-        <item name="colorControlNormal">@color/text_item_unfocused</item>
-        <item name="colorControlActivated">@color/text_item</item>
-        <item name="colorControlHighlight">@color/text_item</item>
-        <item name="drawableTint">@color/text_content</item>
-        <item name="boxBackgroundMode">outline</item>
-        <item name="boxBackgroundColor">@color/text_content</item>
-        <item name="boxStrokeColor">@color/input_text_border_box</item>
-
+    <style name="EditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/details_unfocused</item>
+        <item name="colorControlActivated">@color/details</item>
+        <item name="colorControlHighlight">@color/details</item>
     </style>
 
 </resources>

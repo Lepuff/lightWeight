@@ -17,9 +17,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.profile.AddFriendsActivity"
-            android:label="Add friends"
+            android:label="@string/add_friends"
             android:launchMode="singleTop">
-            
+
         </activity>
         <activity
             android:name=".ui.workouts.cycling.ViewCyclingWorkoutActivity"

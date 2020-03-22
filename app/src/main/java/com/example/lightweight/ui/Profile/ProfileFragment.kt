@@ -140,16 +140,6 @@ class ProfileFragment : Fragment() {
         initRecyclerView()
         checkUpdates()
     }
-
-    override fun onResume() {
-        super.onResume()
-
-    }
-
-    override fun onPause() {
-        super.onPause()
-    }
-
     @SuppressLint("InflateParams")
     private fun changePasswordDialog() {
         //TODO

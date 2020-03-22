@@ -36,20 +36,15 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var password: String
     private lateinit var progressBar: ProgressBar
     private lateinit var textInputPasswordLayout: TextInputLayout
-    //private var prefs: Preferences? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         AppEventsLogger.activateApp(application)
-        /*Unused shared preferences due to deadline
-        prefs = Preferences(this)
-        val firstTime = prefs!!.firstTimeLogin*/
 
         callbackManager = CallbackManager.Factory.create()
-        val fbLoginButton: LoginButton = findViewById(R.id.login_fb_button)
+        val facebookLoginButton: LoginButton = findViewById(R.id.login_facebook_button)
         val userSignUp = findViewById<Button>(R.id.login_signUp_button)
         val userLoginButton = findViewById<Button>(R.id.login_userLogin_button)
         progressBar = findViewById(R.id.login_progressBar)
@@ -66,6 +61,7 @@ class LoginActivity : AppCompatActivity() {
                 if (textInputPasswordLayout.endIconMode != TextInputLayout.END_ICON_PASSWORD_TOGGLE)
                     textInputPasswordLayout.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
             }
+
             override fun afterTextChanged(s: Editable?) {}
         })
 
@@ -77,8 +73,8 @@ class LoginActivity : AppCompatActivity() {
             passwordSignIn()
         }
 
-        fbLoginButton.setOnClickListener {
-            fbSignIn()
+        facebookLoginButton.setOnClickListener {
+            facebookSignIn()
         }
 
 
@@ -129,7 +125,7 @@ class LoginActivity : AppCompatActivity() {
                 textInputPassword.requestFocus()
                 textInputPasswordLayout.endIconMode = TextInputLayout.END_ICON_NONE
                 return
-            } else{
+            } else {
                 textInputPassword.error = getString(R.string.password_too_short)
                 textInputPassword.requestFocus()
                 textInputPasswordLayout.endIconMode = TextInputLayout.END_ICON_NONE
@@ -155,26 +151,27 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-    private fun fbSignIn() {
-        login_fb_button.setPermissions(listOf("email", "public_profile", "user_friends"))
-        login_fb_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
-            override fun onSuccess(result: LoginResult) {
-                handleFacebookAccessToken(result.accessToken)
-            }
+    private fun facebookSignIn() {
+        login_facebook_button.setPermissions(listOf("email", "public_profile", "user_friends"))
+        login_facebook_button.registerCallback(
+            callbackManager,
+            object : FacebookCallback<LoginResult> {
+                override fun onSuccess(result: LoginResult) {
+                    handleFacebookAccessToken(result.accessToken)
+                }
 
-            override fun onCancel() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
+                override fun onCancel() {
+                    Log.d("loginActivity", "Facebook login canceled")
+                }
 
-            override fun onError(error: FacebookException?) {
-                Log.d("LoginActivity", "FacebookException: ${error!!.message}")
-            }
-        })
+                override fun onError(error: FacebookException?) {
+                    Log.d("LoginActivity", "FacebookException: ${error!!.message}")
+                }
+            })
     }
 
 
     private fun handleFacebookAccessToken(accessToken: AccessToken?) {
-        //get credential
         val credential = FacebookAuthProvider.getCredential(accessToken!!.token)
 
         progressBar.visibility = View.VISIBLE
@@ -183,7 +180,7 @@ class LoginActivity : AppCompatActivity() {
                 Database.updateUserDataFromFacebook(accessToken)
                 Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
                 progressBar.visibility = View.INVISIBLE
-                val intent = Intent(this,NavigationActivity::class.java)
+                val intent = Intent(this, NavigationActivity::class.java)
                 startActivity(intent)
 
             }

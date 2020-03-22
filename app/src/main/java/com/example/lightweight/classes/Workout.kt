@@ -10,11 +10,11 @@ import java.net.URI
 abstract class Workout(
     val icon: Int
 ) {
-    abstract var id : String
+    abstract var id: String
     abstract var title: String
     abstract var date: String
-    abstract var userName : String
-    abstract var userImage : String?
+    abstract var userName: String
+    abstract var userImage: String?
     abstract var userId: String
 
     abstract fun viewWorkout(context: Context)

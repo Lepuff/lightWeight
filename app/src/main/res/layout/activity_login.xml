@@ -122,7 +122,7 @@
             android:layout_height="wrap_content"
             android:text="@string/or"
             android:textColor="@color/text_item"
-            app:layout_constraintBottom_toTopOf="@id/login_fb_button"
+            app:layout_constraintBottom_toTopOf="@id/login_facebook_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/login_signUp_button">
@@ -131,7 +131,7 @@
 
 
         <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_fb_button"
+            android:id="@+id/login_facebook_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -152,7 +152,7 @@
             android:visibility="invisible"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_fb_button" />
+            app:layout_constraintTop_toBottomOf="@+id/login_facebook_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

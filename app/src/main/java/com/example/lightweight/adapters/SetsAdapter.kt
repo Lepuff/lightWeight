@@ -6,7 +6,6 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
@@ -34,14 +33,14 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
 
     fun addSet() {
         var weight: Int? = 0
-        var rep : Int? = 0
+        var reps: Int? = 0
 
         if (sets.isNotEmpty()) {
-            rep = sets[sets.size - 1].reps
+            reps = sets[sets.size - 1].reps
             weight = sets[sets.size - 1].weight
         }
 
-        sets.add(Sets(weight, rep))
+        sets.add(Sets(weight, reps))
         this.notifyItemInserted(sets.size - 1)
     }
 
@@ -92,10 +91,10 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     val position = adapterPosition
                     val weight = s.toString()
-                    if (weight.isEmpty()){
+                    if (weight.isEmpty()) {
                         adapter.sets[position].weight = 0
 
-                    }else {
+                    } else {
                         adapter.sets[position].weight = s.toString().toInt()
                     }
                 }
@@ -123,17 +122,17 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     val position = adapterPosition
                     val reps = s.toString()
-                    if (reps.isEmpty()){
+                    if (reps.isEmpty()) {
                         adapter.sets[position].reps = 0
 
-                    }else {
+                    } else {
                         adapter.sets[position].reps = s.toString().toInt()
                     }
                 }
             }
             )
         }
-        val button: ImageButton = itemView.findViewById<ImageButton>(R.id.delete_set_button).apply {
+        private val deleteSetbutton: ImageButton = itemView.findViewById<ImageButton>(R.id.delete_set_button).apply {
             setOnClickListener {
                 adapter.deleteSet(recyclerView.getChildLayoutPosition(itemView) + 1)
             }
@@ -141,10 +140,10 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
 
         fun setEditable(editable: Boolean) {
 
-            if (editable){
-                button.visibility = View.VISIBLE
-            }else{
-                button.visibility = View.GONE
+            if (editable) {
+                deleteSetbutton.visibility = View.VISIBLE
+            } else {
+                deleteSetbutton.visibility = View.GONE
             }
             setWeight.isEnabled = editable
             setsReps.isEnabled = editable
@@ -155,7 +154,7 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
             this.selectedSet = set
             setNumber.text = (position + 1).toString()// +1 for correct set numbers
 
-            if (set.weight == 0)setWeight.setText("")
+            if (set.weight == 0) setWeight.setText("")
             else setWeight.setText(set.weight.toString())
 
             if (set.reps == 0) setsReps.setText("")

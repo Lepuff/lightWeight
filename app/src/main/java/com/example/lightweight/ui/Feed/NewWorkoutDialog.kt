@@ -38,10 +38,11 @@ class NewWorkoutDialog : DialogFragment() {
 
 
     private fun addWorkoutTypeDataSet() {
-        val workoutTypeList : MutableList<Workout> = ArrayList()
-        workoutTypeList.add(GymWorkout("",getString(R.string.gym),"","","",""))
-        workoutTypeList.add(CyclingWorkout("",getString(R.string.cycling),"","","",""))
-        workoutTypeList.add(RunningWorkout("",getString(R.string.run),"","","",""))
+        val workoutTypeList: MutableList<Workout> = ArrayList()
+        //for using the abstract functions calls in Workout.
+        workoutTypeList.add(GymWorkout("", getString(R.string.gym), "", "", "", ""))
+        workoutTypeList.add(CyclingWorkout("", getString(R.string.cycling), "", "", "", ""))
+        workoutTypeList.add(RunningWorkout("", getString(R.string.run), "", "", "", ""))
         workoutTypeAdapter.submitList(workoutTypeList)
     }
 

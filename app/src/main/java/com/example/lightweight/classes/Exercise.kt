@@ -9,6 +9,4 @@ data class Exercise(
     var sets: MutableList<Sets> = arrayListOf()
 
 
-
-
 }

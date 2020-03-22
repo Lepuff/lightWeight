@@ -19,18 +19,19 @@ import kotlinx.android.synthetic.main.layout_exercises_list_item.view.*
 class ExerciseAdapter(private val parentRecyclerView: RecyclerView) :
     RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder>() {
 
-    private var isEditable : Boolean = true
+    private var isEditable: Boolean = true
     private var exercises: MutableList<Exercise> = ArrayList()
 
     fun submitList(workOutList: MutableList<Exercise>) {
         exercises = workOutList
     }
-    fun isEditable(){
+
+    fun isEditable() {
         isEditable = true
         notifyDataSetChanged()
     }
 
-    fun isNotEditable(){
+    fun isNotEditable() {
         isEditable = false
         notifyDataSetChanged()
     }
@@ -41,7 +42,8 @@ class ExerciseAdapter(private val parentRecyclerView: RecyclerView) :
         exercises.add(newExercise)
         notifyItemInserted(exercises.size)
     }
-    fun addExercise(exercise :Exercise){
+
+    fun addExercise(exercise: Exercise) {
         exercises.add(exercise)
         notifyItemInserted(exercises.size)
     }
@@ -90,24 +92,24 @@ class ExerciseAdapter(private val parentRecyclerView: RecyclerView) :
             }
 
 
-        private val newSetButton: Button = itemView.findViewById<Button>(R.id.new_set_button).apply {
-            setOnClickListener {
-                val setsAdapter = childRecyclerView.adapter as SetsAdapter
-                setsAdapter.addSet()
+        private val newSetButton: Button =
+            itemView.findViewById<Button>(R.id.new_set_button).apply {
+                setOnClickListener {
+                    val setsAdapter = childRecyclerView.adapter as SetsAdapter
+                    setsAdapter.addSet()
+                }
             }
-        }
 
         fun setEditable(editable: Boolean) {
 
-            if (editable){
+            if (editable) {
                 newSetButton.visibility = View.VISIBLE
                 deleteExerciseButton.visibility = View.VISIBLE
-            }else{
+            } else {
                 newSetButton.visibility = View.GONE
                 deleteExerciseButton.visibility = View.GONE
             }
         }
-
 
 
         fun bind(exercise: Exercise) {

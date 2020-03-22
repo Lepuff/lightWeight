@@ -55,7 +55,7 @@ class FeedFragment : Fragment() {
             root.findViewById<FloatingActionButton>(R.id.feed_floating_action_button)
 
         floatingActionButton.setOnClickListener {
-            NewWorkoutDialog().show(childFragmentManager, "test")//todo fix.
+            NewWorkoutDialog().show(childFragmentManager, "new_workout_dialog_fragment")
 
         }
         return root
@@ -68,7 +68,6 @@ class FeedFragment : Fragment() {
         workOutAdapter.submitList(viewModel.workoutList.value!!)
 
     }
-
 
 
     private fun initRecyclerView() {
@@ -88,7 +87,7 @@ class FeedFragment : Fragment() {
     }
 
     private fun checkDatabaseForUpdates() {
-        val snapShotListener = workoutsRef.addSnapshotListener { snapshots, e ->
+        workoutsRef.addSnapshotListener { snapshots, e ->
             if (e != null) {
                 Log.w(TAG, "Listen failed.", e)
                 return@addSnapshotListener
@@ -107,11 +106,11 @@ class FeedFragment : Fragment() {
                 }
 
             }
-            addWorkoutToFeed()
+            addWorkoutsToFeed()
         }
     }
 
-    private fun addWorkoutToFeed() {
+    private fun addWorkoutsToFeed() {
 
         workoutsRef.orderBy(Database.WORKOUT_DATE, Query.Direction.DESCENDING).get()
             .addOnSuccessListener { workouts ->

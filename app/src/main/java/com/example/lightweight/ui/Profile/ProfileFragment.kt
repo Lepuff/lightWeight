@@ -43,7 +43,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.dialog_change_password.*
 import kotlinx.android.synthetic.main.dialog_change_password.view.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -426,7 +425,7 @@ class ProfileFragment : Fragment() {
                         val user = User()
                         user.email = friend[Database.EMAIL].toString()
                         user.id = friend.id
-                        friendAdapter.addItem(user)
+                        friendAdapter.addUser(user)
                     }
                 }
             }

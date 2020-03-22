@@ -33,6 +33,7 @@
                 android:hint="@string/distance"
                 android:inputType="numberDecimal"
                 android:textColor="@color/text_content" />
+            <requestFocus/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

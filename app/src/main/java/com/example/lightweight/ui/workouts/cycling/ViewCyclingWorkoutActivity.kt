@@ -243,7 +243,6 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
             .document(Database.getUserId()!!).collection(Database.WORKOUTS)
             .document(intent.getStringExtra("id")!!)//todo fix constants
 
-
         currentRunWorkoutRef.update(
             Database.DISTANCE,
             findViewById<TextInputEditText>(R.id.cycling_distance_editText).text.toString()

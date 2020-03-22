@@ -46,8 +46,6 @@ class RegisterActivity : AppCompatActivity() {
         textInputPasswordLayout = findViewById(R.id.passwordRegister_layout)
         progressBar = findViewById(R.id.progressBarRegister)
 
-        textInputFirstName.requestFocus()
-
         textInputPassword.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 

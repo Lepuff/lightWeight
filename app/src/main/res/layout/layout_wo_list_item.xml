@@ -6,8 +6,8 @@
     app:cardBackgroundColor="@color/background_item"
     app:cardCornerRadius="15dp"
     app:cardElevation="5dp"
-    app:cardUseCompatPadding="true"
-    app:cardPreventCornerOverlap="false">
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -33,16 +33,16 @@
 
             android:paddingTop="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/workout_icon"
+            app:layout_constraintEnd_toStartOf="@id/workout_icon_imageView"
             app:layout_constraintStart_toEndOf="@id/workout_image"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/workout_title"
-                android:paddingVertical="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Title of the workout"
+                android:paddingVertical="5dp"
+                android:text="@string/title_of_the_workout"
                 android:textSize="16sp" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -53,6 +53,7 @@
                 android:textSize="13sp"
 
                 />
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/workout_user_name"
                 android:layout_width="match_parent"
@@ -66,7 +67,7 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/workout_icon"
+            android:id="@+id/workout_icon_imageView"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/ic_directions_bike_yellow_24dp"

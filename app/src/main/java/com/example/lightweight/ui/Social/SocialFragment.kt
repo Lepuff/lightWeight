@@ -65,7 +65,7 @@ class SocialFragment : Fragment() {
 
 
     private fun initRecyclerView() {
-        social_recycler_view.apply {
+        social_recyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
             val topSpacingItemDecoration =
                 TopSpacingItemDecoration(itemPadding)

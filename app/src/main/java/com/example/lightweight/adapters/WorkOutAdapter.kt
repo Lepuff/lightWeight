@@ -63,7 +63,7 @@ class WorkOutAdapter : RecyclerView.Adapter<WorkOutAdapter.WorkOutViewHolder>() 
 
         private val userName: MaterialTextView = itemView.workout_user_name
         private val userImage: CircleImageView = itemView.workout_image
-        private val workoutIcon: AppCompatImageView = itemView.workout_icon
+        private val workoutIcon: AppCompatImageView = itemView.workout_icon_imageView
         private val workoutTitle: MaterialTextView = itemView.workout_title
         private val workoutDate: MaterialTextView = itemView.workout_date
 

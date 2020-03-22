@@ -100,4 +100,5 @@
     <string name="cycling">Cykling</string>
     <string name="gym">Gym</string>
     <string name="run">Springa</string>
+    <string name="title_of_the_workout">Titel av passet</string>
 </resources>

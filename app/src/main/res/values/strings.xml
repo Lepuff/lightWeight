@@ -115,6 +115,7 @@
     <string name="cycling">Cycling</string>
     <string name="gym">Gym</string>
     <string name="run">Running</string>
+    <string name="title_of_the_workout">Title of the workout</string>
 
 
 </resources>

@@ -6,7 +6,7 @@
     android:background="@color/background">
 
     <TextView
-        android:id="@+id/text_notifications"
+        android:id="@+id/analyctics_notifications_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

@@ -10,7 +10,7 @@
     tools:context=".ui.login.LoginActivity">
 
     <TextView
-        android:id="@+id/login_WelcomeMessage_textView"
+        android:id="@+id/login_welcome_message_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -26,41 +26,34 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/login_email_TextLayout"
+            android:id="@+id/login_email_textLayout"
+            style="@style/TextInputLayoutOutlined"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.15"
-
-
-            style="@style/TextInputLayoutOutlined"
-            >
+            app:layout_constraintVertical_bias="0.15">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/login_emailLogin_editText"
+                android:id="@+id/login_email_login_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
-                android:textColorHint="@color/text_item"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/text_item"
-                style="@style/MyTextInputEditText"/>
+                android:textColorHint="@color/text_item" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/login_password_textLayout"
+            style="@style/TextInputLayoutOutlined"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorEnabled="true"
-
-           
             app:endIconMode="password_toggle"
-
-            app:layout_constraintTop_toBottomOf="@+id/login_email_TextLayout"
-            style="@style/TextInputLayoutOutlined">
+            app:errorEnabled="true"
+            app:layout_constraintTop_toBottomOf="@+id/login_email_textLayout">
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -69,18 +62,17 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
                 android:inputType="textPassword"
-                android:textColor="@color/text_item"
-                />
+                android:textColor="@color/text_item" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
 
-            android:id="@+id/login_userLogin_button"
+            android:id="@+id/login_user_login_button"
+            style="@style/ButtonOutlined"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginTop="36dp"
-            style="@style/ButtonOutlined"
             android:text="@string/log_in"
             android:textColor="@color/text_button"
             android:textSize="14sp"
@@ -89,7 +81,7 @@
             app:layout_constraintTop_toBottomOf="@+id/login_password_textLayout" />
 
         <TextView
-            android:id="@+id/login_noAccount_textView"
+            android:id="@+id/login_no_account_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/don_t_have_an_account"
@@ -97,14 +89,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_userLogin_button"
+            app:layout_constraintTop_toBottomOf="@+id/login_user_login_button"
             app:layout_constraintVertical_bias="0.15">
 
         </TextView>
 
         <Button
+            android:id="@+id/login_sign_up_button"
             style="@style/ButtonOutlined"
-            android:id="@+id/login_signUp_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
@@ -112,8 +104,7 @@
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_noAccount_textView"
-            >
+            app:layout_constraintTop_toBottomOf="@+id/login_no_account_textView">
 
         </Button>
 
@@ -125,7 +116,7 @@
             app:layout_constraintBottom_toTopOf="@id/login_facebook_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/login_signUp_button">
+            app:layout_constraintTop_toBottomOf="@id/login_sign_up_button">
 
         </TextView>
 
@@ -140,7 +131,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/login_signUp_button"
+            app:layout_constraintTop_toBottomOf="@id/login_sign_up_button"
             app:layout_constraintVertical_bias="0" />
 
         <ProgressBar

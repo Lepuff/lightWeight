@@ -44,12 +44,14 @@ class LoginActivity : AppCompatActivity() {
         AppEventsLogger.activateApp(application)
 
         callbackManager = CallbackManager.Factory.create()
-        val facebookLoginButton: LoginButton = findViewById(R.id.login_facebook_button)
-        val userSignUp = findViewById<Button>(R.id.login_signUp_button)
-        val userLoginButton = findViewById<Button>(R.id.login_userLogin_button)
+
+        val facebookLoginButton: LoginButton = findViewById(R.id.login_fb_button)
+        val userSignUp = findViewById<Button>(R.id.login_sign_up_button)
+        val userLoginButton = findViewById<Button>(R.id.login_user_login_button)
+
         progressBar = findViewById(R.id.login_progressBar)
         textInputPasswordLayout = findViewById(R.id.login_password_textLayout)
-        textInputEmail = findViewById(R.id.login_emailLogin_editText)
+        textInputEmail = findViewById(R.id.login_email_login_editText)
         textInputPassword = findViewById(R.id.login_password_editText)
 
         auth = FirebaseAuth.getInstance()

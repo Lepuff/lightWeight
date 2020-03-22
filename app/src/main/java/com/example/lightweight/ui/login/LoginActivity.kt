@@ -45,10 +45,10 @@ class LoginActivity : AppCompatActivity() {
         val firstTime = prefs!!.firstTimeLogin*/
 
         callbackManager = CallbackManager.Factory.create()
-        val fbLoginButton: LoginButton = findViewById(R.id.fbLogin_button)
-        val userSignUp = findViewById<Button>(R.id.signUp_button)
-        val userLogin = findViewById<Button>(R.id.loginButton_button)
-        progressBar = findViewById(R.id.progressBarLogin)
+        val fbLoginButton: LoginButton = findViewById(R.id.login_fb_button)
+        val userSignUp = findViewById<Button>(R.id.login_signUp_button)
+        val userLogin = findViewById<Button>(R.id.login_button)
+        progressBar = findViewById(R.id.login_progressBar)
 
         auth = FirebaseAuth.getInstance()
 
@@ -91,8 +91,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun passwordSignIn() {
-        textInputEmail = findViewById(R.id.emailLogin_editText)
-        textInputPassword = findViewById(R.id.passwordLogin_editText)
+        textInputEmail = findViewById(R.id.login_emailLogin_editText)
+        textInputPassword = findViewById(R.id.login_password_editText)
 
 
         email = textInputEmail.text.toString().trim().toLowerCase(Locale.ROOT)
@@ -137,8 +137,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun fbSignIn() {
-        fbLogin_button.setPermissions(listOf("email", "public_profile", "user_friends"))
-        fbLogin_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+        login_fb_button.setPermissions(listOf("email", "public_profile", "user_friends"))
+        login_fb_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult) {
                 handleFacebookAccessToken(result.accessToken)
             }

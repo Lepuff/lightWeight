@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:padding="10dp"
+    android:padding="5dp"
     tools:context=".ui.workouts.cycling.NewCyclingWorkoutActivity">
 
     <LinearLayout

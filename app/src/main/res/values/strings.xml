@@ -102,7 +102,6 @@
     <string name="password_successfully_changed">Password successfully changed</string>
     <string name="invalid_password">Invalid password</string>
     <string name="title">Title</string>
-    <string name="delete_forever">Delete forever</string>
     <string name="new_cycling_workout">New Cycling Workout</string>
     <string name="new_running_workout">New Running Workout</string>
     <string name="new_gym_workout">New Gym Workout</string>
@@ -116,7 +115,7 @@
     <string name="log_out_message">Do you want to log out?</string>
     <string name="cycling">Cycling</string>
     <string name="gym">Gym</string>
-    <string name="run">Run</string>
+    <string name="run">Running</string>
 
 
 </resources>

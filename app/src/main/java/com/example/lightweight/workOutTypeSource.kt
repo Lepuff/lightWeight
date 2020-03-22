@@ -15,7 +15,7 @@ class WorkOutTypeSource {
             val list = ArrayList<Workout>()
             list.add(
                 GymWorkout(
-                    "", "Gym", "","", "","") //todo string res
+                    "","", "","", "","") //todo string res
             )
             list.add(
                 RunningWorkout("", "Run", "","", "","")

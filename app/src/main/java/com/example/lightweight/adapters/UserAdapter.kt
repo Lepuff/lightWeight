@@ -58,7 +58,7 @@ class UserAdapter(private val recyclerView: RecyclerView, private val db : Fireb
         private var adapter = recyclerView.adapter as UserAdapter
         var name: TextView = itemView.friend_item_text
 
-        val addFriendButton  = itemView.findViewById<Button>(R.id.friend_add_button).apply {
+        val addFriendButton: Button = itemView.findViewById<Button>(R.id.friend_add_button).apply {
             this.setOnClickListener {
                 val userInfo = hashMapOf(
                     Database.EMAIL to selectedUser?.email,
@@ -69,13 +69,10 @@ class UserAdapter(private val recyclerView: RecyclerView, private val db : Fireb
                 adapter.removeitem(position)
             }
         }
-        val removeFriendButton = itemView.findViewById<Button>(R.id.friend_remove_button).apply {
+        val removeFriendButton: Button = itemView.findViewById<Button>(R.id.friend_remove_button).apply {
             setOnClickListener {
-
                 db.collection(Database.USERS).document(Database.getUserId()!!).collection(Database.FRIENDS).document(
                     selectedUser?.id!!).delete()
-                val position = adapterPosition
-                adapter.removeitem(position)
             }
         }
 

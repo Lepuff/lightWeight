@@ -1,12 +1,18 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.MaterialComponents">
+        <item name="toolbarStyle">@style/ActionBarStyle</item>
         <item name="android:dialogTheme">@style/DialogStyle</item>
         <item name="colorPrimary">@color/background_item</item>
         <item name="colorPrimaryDark">@color/background_item</item>
         <item name="colorAccent">@color/text_content</item>
         <item name="android:textColorPrimary">@color/text_content</item>
         <item name="android:textColor">@color/text_content</item>
+
+    </style>
+
+    <style name="ActionBarStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="subtitleTextColor">@color/text_content</item>
         <item name="titleTextColor">@color/text_content</item>
     </style>
 

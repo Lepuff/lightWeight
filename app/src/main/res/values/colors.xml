@@ -9,7 +9,6 @@
     <color name="text_content">#ffc107</color>
     <color name="text_button">#ffc107</color>
     <color name="text_item">#ffc107</color>
-    <color name="text_header">#ffffff</color>
     <color name="navBar_background">#1e1d1b</color>
     <color name="navBar_icon_tint_clicked">#ffc107</color>
     <color name="navBar_icon_tint_not_clicked">#FFD54F</color>

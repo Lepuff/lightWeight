@@ -122,7 +122,7 @@ class FeedFragment : Fragment() {
                         val type = workout[Database.TYPE_OF_WORKOUT].toString()
                         val date = workout[Database.WORKOUT_DATE].toString()
                         val title = workout[Database.WORKOUT_TITLE].toString()
-                        val name = Database.getUserName()
+                        val name = Database.getUserFullName()
                         val profilePicture = Database.getUserPicture().toString()
                         when (type) {
                             Database.GYM_WORKOUT ->

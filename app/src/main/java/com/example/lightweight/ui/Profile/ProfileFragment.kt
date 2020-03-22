@@ -62,7 +62,7 @@ class ProfileFragment : Fragment() {
 
         val logoutButton = root.findViewById<Button>(R.id.profile_logout_button)
         logoutButton.setOnClickListener {
-            logOut()
+            logOutDialog()
         }
         val profilePicture = root.findViewById<CircleImageView>(R.id.profile_image)
         updateGlidePicture(Database.getUserPicture(), profilePicture)
@@ -71,7 +71,6 @@ class ProfileFragment : Fragment() {
             root.findViewById<ImageButton>(R.id.profile_camera_button)
         cameraButton.setOnClickListener {
                 checkStoragePermission()
-            //pickPhotoFromGallery()
         }
 
         val addFriendsButton = root.findViewById<Button>(R.id.profile_add_friends_button)
@@ -222,6 +221,20 @@ class ProfileFragment : Fragment() {
             Database.getUserLastName()
         view.findViewById<TextView>(R.id.fragment_profile_email_editText).text =
             Database.getUserEmail()
+    }
+
+    private fun logOutDialog(){
+
+        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext(), R.style.DialogStyle)
+        builder.setTitle(R.string.delete_workout_message)
+        builder.setPositiveButton(R.string.yes) { dialog, _ ->
+            logOut()
+            dialog.cancel()
+        }
+        builder.setNegativeButton(R.string.no) { dialog, _ ->
+            dialog.cancel()
+        }
+        builder.show()
     }
 
     private fun logOut() {

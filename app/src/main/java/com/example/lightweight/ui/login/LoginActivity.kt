@@ -160,12 +160,13 @@ class LoginActivity : AppCompatActivity() {
 
         progressBar.visibility = View.VISIBLE
         auth.signInWithCredential(credential)
-            .addOnSuccessListener { result ->
+            .addOnSuccessListener {
                 Database.updateUserDataFromFacebook(accessToken)
                 Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
-
-                startActivity(Intent(this, NavigationActivity::class.java))
                 progressBar.visibility = View.INVISIBLE
+                val intent = Intent(this,NavigationActivity::class.java)
+                startActivity(intent)
+
             }
 
             .addOnFailureListener { e ->

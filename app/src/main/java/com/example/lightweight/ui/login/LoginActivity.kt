@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
 
         callbackManager = CallbackManager.Factory.create()
 
-        val facebookLoginButton: LoginButton = findViewById(R.id.login_fb_button)
+        val facebookLoginButton: LoginButton = findViewById(R.id.login_facebook_button)
         val userSignUp = findViewById<Button>(R.id.login_sign_up_button)
         val userLoginButton = findViewById<Button>(R.id.login_user_login_button)
 

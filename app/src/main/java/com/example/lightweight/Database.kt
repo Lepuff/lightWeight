@@ -100,8 +100,8 @@ object Database {
         ) { `object`, response ->
             user.id = `object`.getString(ID)
             user.email = `object`.getString(EMAIL)
-            user.firstName = `object`.getString(FIRST_NAME)
-            user.lastName = `object`.getString(LAST_NAME)
+            user.firstName = `object`.getString("first_name")
+            user.lastName = `object`.getString("last_name")
             user.isFacebookUser = true
             user.profilePicture =
                 Profile.getCurrentProfile().getProfilePictureUri(PICTURE_SIZE, PICTURE_SIZE)

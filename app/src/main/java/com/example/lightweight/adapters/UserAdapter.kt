@@ -66,7 +66,7 @@ class UserAdapter(
         private var selectedUser: User? = null
         private var adapter = recyclerView.adapter as UserAdapter
 
-        var name: TextView = itemView.friend_item_textView
+        var userName: TextView = itemView.friend_item_textView
 
 
         val addFriendButton: Button = itemView.findViewById<Button>(R.id.friend_add_button).apply {

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -60,7 +61,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         val saveWorkoutButton = findViewById<Button>(R.id.gym_save_workout_button)
         saveWorkoutButton.visibility = View.VISIBLE
         saveWorkoutButton.setOnClickListener {
-
+            Keyboard().closeKeyboard(this)
             saveGymDialog()
 
         }
@@ -117,14 +118,12 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         val dialog = dialogBuilder.show()
 
         saveButton.setOnClickListener {
-            saveGymWorkout(dialogView)
-            dialog.cancel()
-            Keyboard().closeKeyboard(this)
-            finish()
+            saveGymWorkout(dialogView, dialog)
+            //Keyboard().closeKeyboard(this)
         }
     }
 
-    private fun saveGymWorkout(dialogView: View) {
+    private fun saveGymWorkout(dialogView: View, dialog: AlertDialog) {
 
         val workoutDate =
             dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText)
@@ -132,15 +131,20 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
         val currentGymWorkoutRef = db.collection(Database.USERS)
             .document(Database.getUserId()!!).collection(Database.WORKOUTS).document()
-
-        val workoutInfo = hashMapOf(
-            Database.EXERCISES to viewModel.exerciseLiveData.value,
-            Database.TIMESTAMP to FieldValue.serverTimestamp(),
-            Database.TYPE_OF_WORKOUT to "gymWorkout",
-            Database.WORKOUT_TITLE to workoutTitle.text.toString(),
-            Database.WORKOUT_DATE to workoutDate.toString()
-        )
-        currentGymWorkoutRef.set(workoutInfo)
+        if (TextUtils.isEmpty(workoutTitle.text.toString())) {
+            workoutTitle.error = getString(R.string.field_cant_be_empty)
+        } else {
+            val workoutInfo = hashMapOf(
+                Database.EXERCISES to viewModel.exerciseLiveData.value,
+                Database.TIMESTAMP to FieldValue.serverTimestamp(),
+                Database.TYPE_OF_WORKOUT to "gymWorkout",
+                Database.WORKOUT_TITLE to workoutTitle.text.toString(),
+                Database.WORKOUT_DATE to workoutDate.toString()
+            )
+            currentGymWorkoutRef.set(workoutInfo)
+            dialog.cancel()
+            finish()
+        }
     }
 
 }

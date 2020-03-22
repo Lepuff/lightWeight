@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputType
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -21,17 +23,20 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()
     private lateinit var workoutTitle: TextInputEditText
+    private lateinit var workoutDistance: TextInputEditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cycling_workout)
+
+        workoutDistance = findViewById(R.id.cycling_distance_editText)
 
         val saveButton: Button = findViewById(R.id.cycling_save_button)
         saveButton.visibility = View.VISIBLE
         saveButton.setOnClickListener {
             saveCyclingDialog()
         }
-        findViewById<TextInputEditText>(R.id.cycling_distance_editText).requestFocus()
+
 
     }
 
@@ -55,20 +60,14 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
         val dialog = dialogBuilder.show()
 
         dialogSaveButton.setOnClickListener {
-            saveCyclingWorkout(dialogView)
-            dialog.cancel()
+            saveCyclingWorkout(dialogView, dialog)
             Keyboard().closeKeyboard(this)
-            finish()
         }
 
     }
 
 
-    private fun saveCyclingWorkout(dialogView: View) {
-
-
-        val distance = findViewById<TextInputEditText>(R.id.cycling_distance_editText).text.toString()
-
+    private fun saveCyclingWorkout(dialogView: View, dialog: AlertDialog) {
         val averageSpeed =
             findViewById<TextInputEditText>(R.id.cycling_average_speed_editText).text.toString()
         val topSpeed =
@@ -99,24 +98,29 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
         val currentCyclingWorkoutRef = db.collection("users")
             .document(Database.getUserId()!!).collection("workouts").document()
 
-
-        val workoutInfo = hashMapOf(
-            Database.DISTANCE to distance,
-            Database.AVERAGE_SPEED to averageSpeed,
-            Database.TOP_SPEED to topSpeed,
-            Database.TOTAL_TIME to totalTime,
-            Database.AVERAGE_PULSE to averagePulse,
-            Database.MAX_PULSE to maxPulse,
-            Database.AVERAGE_FORCE to averageForce,
-            Database.MAX_FORCE to maxForce,
-            Database.AVERAGE_CADENCE to averageCadence,
-            Database.MAX_CADENCE to maxCadence,
-            Database.CALORIES to calories,
-            Database.TIMESTAMP to FieldValue.serverTimestamp(),
-            Database.TYPE_OF_WORKOUT to "cyclingWorkout",
-            Database.WORKOUT_TITLE to workoutTitle.text.toString(),
-            Database.WORKOUT_DATE to workoutDate
-        )
-        currentCyclingWorkoutRef.set(workoutInfo)
+        if (TextUtils.isEmpty(workoutTitle.text.toString())) {
+            workoutTitle.error = getString(R.string.field_cant_be_empty)
+        } else {
+            val workoutInfo = hashMapOf(
+                Database.DISTANCE to workoutDistance.text.toString(),
+                Database.AVERAGE_SPEED to averageSpeed,
+                Database.TOP_SPEED to topSpeed,
+                Database.TOTAL_TIME to totalTime,
+                Database.AVERAGE_PULSE to averagePulse,
+                Database.MAX_PULSE to maxPulse,
+                Database.AVERAGE_FORCE to averageForce,
+                Database.MAX_FORCE to maxForce,
+                Database.AVERAGE_CADENCE to averageCadence,
+                Database.MAX_CADENCE to maxCadence,
+                Database.CALORIES to calories,
+                Database.TIMESTAMP to FieldValue.serverTimestamp(),
+                Database.TYPE_OF_WORKOUT to "cyclingWorkout",
+                Database.WORKOUT_TITLE to workoutTitle.text.toString(),
+                Database.WORKOUT_DATE to workoutDate
+            )
+            currentCyclingWorkoutRef.set(workoutInfo)
+            dialog.cancel()
+            finish()
+        }
     }
 }

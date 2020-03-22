@@ -15,7 +15,8 @@
         <com.google.android.material.textfield.TextInputLayout
             style="@style/TextInputLayoutFilled"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialog_save_workout_title_editText"

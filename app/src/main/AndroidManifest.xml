@@ -39,8 +39,7 @@
         <activity
             android:label="@string/new_cycling_workout"
             android:name=".ui.workouts.cycling.NewCyclingWorkoutActivity"
-            android:launchMode="singleTop"
-            android:windowSoftInputMode="stateVisible">
+            android:launchMode="singleTop">
         </activity>
         <activity
             android:label="@string/new_running_workout"
@@ -91,8 +90,7 @@
         <activity
             android:name=".ui.NavigationActivity"
             android:label="LightWeight"
-            android:launchMode="singleTop"
-            android:windowSoftInputMode="stateVisible"/>
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

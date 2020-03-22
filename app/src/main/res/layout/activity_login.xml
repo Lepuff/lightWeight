@@ -51,8 +51,8 @@
             android:layout_height="wrap_content"
             app:errorEnabled="true"
             app:layout_constraintTop_toBottomOf="@+id/emailLayout"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/text_item"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/text_item"
             android:theme="@style/TextInputLayoutAppearance">
 
             <com.google.android.material.textfield.TextInputEditText

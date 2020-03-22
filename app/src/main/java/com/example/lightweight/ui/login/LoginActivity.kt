@@ -2,6 +2,8 @@ package com.example.lightweight.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -17,6 +19,7 @@ import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
@@ -32,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var password: String
     private lateinit var progressBar: ProgressBar
+    private lateinit var textInputPasswordLayout: TextInputLayout
     //private var prefs: Preferences? = null
 
 
@@ -49,8 +53,20 @@ class LoginActivity : AppCompatActivity() {
         val userSignUp = findViewById<Button>(R.id.signUp_button)
         val userLogin = findViewById<Button>(R.id.loginButton_button)
         progressBar = findViewById(R.id.progressBarLogin)
-
+        textInputPasswordLayout = findViewById(R.id.passwordLayout)
+        textInputEmail = findViewById(R.id.emailLogin_editText)
+        textInputPassword = findViewById(R.id.passwordLogin_editText)
         auth = FirebaseAuth.getInstance()
+
+        textInputPassword.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (textInputPasswordLayout.endIconMode != TextInputLayout.END_ICON_PASSWORD_TOGGLE)
+                    textInputPasswordLayout.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
         userSignUp.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
@@ -91,10 +107,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun passwordSignIn() {
-        textInputEmail = findViewById(R.id.emailLogin_editText)
-        textInputPassword = findViewById(R.id.passwordLogin_editText)
-
-
         email = textInputEmail.text.toString().trim().toLowerCase(Locale.ROOT)
         password = textInputPassword.text.toString().trim().toLowerCase(Locale.ROOT)
 
@@ -114,6 +126,7 @@ class LoginActivity : AppCompatActivity() {
             if (password.isEmpty()) {
                 textInputPassword.error = getString(R.string.field_cant_be_empty)
                 textInputPassword.requestFocus()
+                textInputPasswordLayout.endIconMode = TextInputLayout.END_ICON_NONE
                 return
             }
         }

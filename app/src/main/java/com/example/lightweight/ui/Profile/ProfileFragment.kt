@@ -253,23 +253,35 @@ class ProfileFragment : Fragment() {
     }
 
 
-    private fun setTextChangedListeners(dialogView: View){
+    private fun setTextChangedListeners(dialogView: View) {
         //TODO
-        dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText).addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (dialogView.dialog_old_password_layout.endIconMode != TextInputLayout.END_ICON_PASSWORD_TOGGLE)
-                    dialogView.dialog_old_password_layout.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
-            }
-            override fun afterTextChanged(s: Editable?) {}
-        })
+        dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText)
+            .addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (dialogView.dialog_old_password_layout.endIconMode != TextInputLayout.END_ICON_PASSWORD_TOGGLE)
+                        dialogView.dialog_old_password_layout.endIconMode =
+                            TextInputLayout.END_ICON_PASSWORD_TOGGLE
+                }
+
+                override fun afterTextChanged(s: Editable?) {}
+            })
 
         dialogView.dialog_new_password_editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (dialogView.dialog_new_password_layout.endIconMode != TextInputLayout.END_ICON_PASSWORD_TOGGLE)
-                    dialogView.dialog_new_password_layout.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+                    dialogView.dialog_new_password_layout.endIconMode =
+                        TextInputLayout.END_ICON_PASSWORD_TOGGLE
             }
+
             override fun afterTextChanged(s: Editable?) {}
         })
 
@@ -277,10 +289,13 @@ class ProfileFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (dialogView.dialog_confirm_password_layout.endIconMode != TextInputLayout.END_ICON_PASSWORD_TOGGLE)
-                    dialogView.dialog_confirm_password_layout.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+                    dialogView.dialog_confirm_password_layout.endIconMode =
+                        TextInputLayout.END_ICON_PASSWORD_TOGGLE
             }
+
             override fun afterTextChanged(s: Editable?) {}
         })
+    }
 
     private fun logOutDialog(){
 

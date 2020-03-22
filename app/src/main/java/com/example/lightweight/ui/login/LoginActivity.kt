@@ -49,13 +49,13 @@ class LoginActivity : AppCompatActivity() {
         val firstTime = prefs!!.firstTimeLogin*/
 
         callbackManager = CallbackManager.Factory.create()
-        val fbLoginButton: LoginButton = findViewById(R.id.fbLogin_button)
-        val userSignUp = findViewById<Button>(R.id.signUp_button)
-        val userLogin = findViewById<Button>(R.id.loginButton_button)
-        progressBar = findViewById(R.id.progressBarLogin)
-        textInputPasswordLayout = findViewById(R.id.passwordLayout)
-        textInputEmail = findViewById(R.id.emailLogin_editText)
-        textInputPassword = findViewById(R.id.passwordLogin_editText)
+        val fbLoginButton: LoginButton = findViewById(R.id.login_fb_button)
+        val userSignUp = findViewById<Button>(R.id.login_signUp_button)
+        val userLoginButton = findViewById<Button>(R.id.login_userLogin_button)
+        progressBar = findViewById(R.id.login_progressBar)
+        textInputPasswordLayout = findViewById(R.id.login_password_textLayout)
+        textInputEmail = findViewById(R.id.login_emailLogin_editText)
+        textInputPassword = findViewById(R.id.login_password_editText)
 
         auth = FirebaseAuth.getInstance()
 
@@ -73,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
 
-        userLogin.setOnClickListener {
+        userLoginButton.setOnClickListener {
             passwordSignIn()
         }
 

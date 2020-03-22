@@ -42,6 +42,7 @@ class FeedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("AAA","view created")
         viewModel =
             ViewModelProviders.of(this).get(WorkoutFeedViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_feed, container, false)
@@ -65,7 +66,8 @@ class FeedFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initRecyclerView()
-        workOutAdapter.submitList(viewModel.workoutList.value!!)
+        Log.d("AAA","activity created")
+
 
     }
 
@@ -84,7 +86,30 @@ class FeedFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        checkDatabaseForUpdates()
+        Log.d("AAA","onStart")
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("AAA","on resume")
+        workOutAdapter.clearList()
+        addWorkoutToFeed()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("AAA","on pause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("AAA","on stop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("AAA","on destroy")
     }
 
     private fun checkDatabaseForUpdates() {

@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.lightweight.Database
 import com.example.lightweight.R
 import com.example.lightweight.adapters.WorkOutAdapter
@@ -44,6 +46,15 @@ class SocialFragment : Fragment() {
                 workOutAdapter.notifyDataSetChanged()
             })
 
+       val swipeRefreshLayout = root.findViewById<SwipeRefreshLayout>(R.id.social_swipeRefreshLayout)
+        swipeRefreshLayout.setOnRefreshListener {
+            addWorkoutToFeed()
+            swipeRefreshLayout.isRefreshing = false
+        }
+
+
+
+
         return root
     }
 
@@ -68,47 +79,9 @@ class SocialFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        checkDatabaseForUpdates()
+        addWorkoutToFeed()
     }
 
-    private  fun checkDatabaseForUpdates(){
-        db.collection(Database.USERS).document(Database.getUserId()!!).collection(Database.FRIENDS)
-            .get().addOnSuccessListener {friends->
-                if (friends!=null)
-                    for (friend in friends) {
-                        db.collection(Database.USERS).document(friend[Database.ID].toString()).collection(Database.WORKOUTS)
-                            .addSnapshotListener { snapshots, e ->
-                                if (e != null) {
-                                    Log.w(
-                                        "Social Fragment : snap shot listener :",
-                                        "Listen failed.",
-                                        e
-                                    )
-                                    return@addSnapshotListener
-                                } else {
-                                    for (dc in snapshots!!.documentChanges) {
-                                        when (dc.type) {
-                                            DocumentChange.Type.ADDED -> Log.d(
-                                                TAG,
-                                                "New workout: ${dc.document.data}"
-                                            )
-                                            DocumentChange.Type.MODIFIED -> Log.d(
-                                                TAG,
-                                                "Modified workout: ${dc.document.data}"
-                                            )
-                                            DocumentChange.Type.REMOVED -> Log.d(
-                                                TAG,
-                                                "Removed workout: ${dc.document.data}"
-                                            )
-                                        }
-                                    }
-                                }
-                                workOutAdapter.clearList()
-                                addWorkoutToFeed()
-                            }
-                    }
-            }
-    }
 
     private fun addWorkoutToFeed() {
         workOutAdapter.clearList()

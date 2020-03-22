@@ -3,6 +3,7 @@ package com.example.lightweight.ui.feed
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
@@ -11,7 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lightweight.R
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.adapters.WorkOutTypeAdapter
-import com.example.lightweight.WorkOutTypeSource
+
+import com.example.lightweight.classes.CyclingWorkout
+import com.example.lightweight.classes.GymWorkout
+import com.example.lightweight.classes.RunningWorkout
+import com.example.lightweight.classes.Workout
 
 
 class NewWorkoutDialog : DialogFragment() {
@@ -33,9 +38,11 @@ class NewWorkoutDialog : DialogFragment() {
 
 
     private fun addWorkoutTypeDataSet() {
-        val data =
-            WorkOutTypeSource.createNWDataSet()
-        workoutTypeAdapter.submitList(data)
+        val workoutTypeList : MutableList<Workout> = ArrayList()
+        workoutTypeList.add(GymWorkout("",getString(R.string.gym),"","","",""))
+        workoutTypeList.add(CyclingWorkout("",getString(R.string.cycling),"","","",""))
+        workoutTypeList.add(RunningWorkout("",getString(R.string.run),"","","",""))
+        workoutTypeAdapter.submitList(workoutTypeList)
     }
 
     @SuppressLint("InflateParams")

@@ -114,6 +114,9 @@
     <string name="rpm">Rpm</string>
     <string name="k_cal">Kcal</string>
     <string name="log_out_message">Do you want to log out?</string>
+    <string name="cycling">Cycling</string>
+    <string name="gym">Gym</string>
+    <string name="run">Run</string>
 
 
 </resources>

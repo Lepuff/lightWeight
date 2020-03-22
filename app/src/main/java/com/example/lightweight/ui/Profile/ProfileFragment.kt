@@ -7,10 +7,12 @@ import android.net.Uri
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.app.AlertDialog
+import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -38,6 +40,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.dialog_change_password.*
@@ -137,18 +140,8 @@ class ProfileFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initRecyclerView()
+        checkUpdates()
     }
-
-    override fun onResume() {
-        super.onResume()
-        getFriendsFromDb()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        friendAdapter.clearList()
-    }
-
     @SuppressLint("InflateParams")
     private fun changePasswordDialog() {
         val dialogView =
@@ -395,7 +388,36 @@ class ProfileFragment : Fragment() {
     }
 
 
+    private fun checkUpdates(){
+        db.collection(Database.USERS).document(Database.getUserId()!!).collection(Database.FRIENDS).addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Log.w(ContentValues.TAG, "Listen failed.", e)
+                return@addSnapshotListener
+            }
+            for (dc in snapshot!!.documentChanges) {
+                when (dc.type) {
+                    DocumentChange.Type.ADDED -> Log.d(ContentValues.TAG, "New Friend: ${dc.document.data}")
+                    DocumentChange.Type.MODIFIED -> Log.d(
+                        ContentValues.TAG,
+                        "Modified Friend: ${dc.document.data}"
+                    )
+                    DocumentChange.Type.REMOVED -> Log.d(
+                        ContentValues.TAG,
+                        "Removed Friend: ${dc.document.data}"
+                    )
+                }
+            }
+            getFriendsFromDb()
+        }
+
+
+
+
+
+    }
+
     private fun getFriendsFromDb() {
+        friendAdapter.clearList()
         db.collection(Database.USERS).document(Database.getUserId()!!).collection(Database.FRIENDS)
             .get().addOnSuccessListener { friends ->
 

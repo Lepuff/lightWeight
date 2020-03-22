@@ -123,11 +123,13 @@ class ProfileFragment : Fragment() {
     }
 
     private fun checkStoragePermission(){
+        //If permission is not already granted
         if (ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED){
-            //Permission is not granted
+            //Request permission to read storage
             requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), PICK_PHOTO_REQUEST)
         } else{
+            //if permission is already granted
             pickPhotoFromGallery()
         }
     }
@@ -149,7 +151,6 @@ class ProfileFragment : Fragment() {
 
     @SuppressLint("InflateParams")
     private fun changePasswordDialog() {
-        //TODO
         val dialogView =
             LayoutInflater.from(this.context).inflate(R.layout.dialog_change_password, null)
         val builder = AlertDialog.Builder(this.context)
@@ -254,7 +255,6 @@ class ProfileFragment : Fragment() {
 
 
     private fun setTextChangedListeners(dialogView: View) {
-        //TODO
         dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText)
             .addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(

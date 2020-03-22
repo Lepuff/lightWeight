@@ -85,4 +85,12 @@
     <string name="delete_workout_message">Vill du verkligen ta bort?</string>
     <string name="choose_a_new_exercise">Välj ny övning</string>
     <string name="edit_workout">Redigera träningspass</string>
+    <string name="Km">Km</string>
+    <string name="h_m_s">t:m:s</string>
+    <string name="Km_h">Km/h</string>
+    <string name="bpm">Bpm</string>
+    <string name="watts">W</string>
+    <string name="rpm">Rpm</string>
+    <string name="k_cal">Kcal</string>
+    <string name="log_out_message">Vill du logga ut?</string>
 </resources>

@@ -129,6 +129,11 @@ class LoginActivity : AppCompatActivity() {
                 textInputPassword.requestFocus()
                 textInputPasswordLayout.endIconMode = TextInputLayout.END_ICON_NONE
                 return
+            } else{
+                textInputPassword.error = getString(R.string.password_too_short)
+                textInputPassword.requestFocus()
+                textInputPasswordLayout.endIconMode = TextInputLayout.END_ICON_NONE
+                return
             }
         }
         progressBar.visibility = View.VISIBLE

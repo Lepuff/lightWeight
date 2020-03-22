@@ -36,6 +36,8 @@
         <item name="hintTextColor">@color/text_content</item>
         <item name="boxStrokeColor">@color/input_text_border_box</item>
         <item name="suffixTextColor">@color/text_content</item>
+        <item name="endIconTint">@color/details</item>
+        <item name="startIconTint">@color/details</item>
     </style>
 
     <style name="TextInputLayoutFilled" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
@@ -48,6 +50,8 @@
         <item name="hintTextColor">@color/text_content</item>
         <item name="boxStrokeColor">@color/input_text_border_box</item>
         <item name="suffixTextColor">@color/text_content</item>
+        <item name="endIconTint">@color/details</item>
+        <item name="startIconTint">@color/details</item>
     </style>
 
 

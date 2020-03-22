@@ -67,7 +67,7 @@
             style="@style/TextInputLayoutOutlined"
             app:errorEnabled="true"
             app:endIconMode="password_toggle"
-            app:endIconTint="@color/text_item">
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordRegister_editText"

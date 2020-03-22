@@ -63,7 +63,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
-        exercise_recycle_view.apply {
+        exercises_recycle_view.apply {
             layoutManager = LinearLayoutManager(this.context)
             val topSpacingItemDecoration =
                 TopSpacingItemDecoration(20)

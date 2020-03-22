@@ -22,17 +22,16 @@
         android:id="@+id/profile_camera_button"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        app:layout_constraintEnd_toEndOf="@id/profile_image"
-        app:layout_constraintBottom_toBottomOf="@id/profile_image"
-        android:src="@drawable/ic_photo_camera_yellow_24dp"
         android:background="@color/background_button"
-        />
+        android:src="@drawable/ic_photo_camera_yellow_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/profile_image"
+        app:layout_constraintEnd_toEndOf="@id/profile_image" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/profile_first_name_textLayout"
+        style="@style/TextInputLayoutOutlined"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/TextInputLayoutOutlined"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/profile_image"
         app:layout_constraintTop_toTopOf="parent">
@@ -50,9 +49,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/profile_last_name_textLayout"
+        style="@style/TextInputLayoutOutlined"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/TextInputLayoutOutlined"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/profile_image"
         app:layout_constraintTop_toBottomOf="@id/profile_first_name_textLayout">
@@ -69,9 +68,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/profile_email_textLayout"
+        style="@style/TextInputLayoutOutlined"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/TextInputLayoutOutlined"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profile_last_name_textLayout">
@@ -98,41 +97,39 @@
 
 
         <Button
-            android:textSize="12sp"
             android:id="@+id/profile_edit_profile_button"
+            style="@style/ButtonTextOnly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:enabled="true"
             android:text="@string/edit_profile"
-            style="@style/ButtonTextOnly"
-            />
+            android:textSize="12sp" />
 
         <Button
-            android:textSize="12sp"
             android:id="@+id/profile_save_profile_button"
+            style="@style/ButtonTextOnly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/save_profile"
-            style="@style/ButtonTextOnly"/>
+            android:textSize="12sp" />
 
         <Button
-            android:textSize="12sp"
             android:id="@+id/profile_change_password_button"
+            style="@style/ButtonTextOnly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/change_password"
-            style="@style/ButtonTextOnly"
-            />
+            android:textSize="12sp" />
 
 
         <Button
-            android:textSize="12sp"
             android:id="@+id/profile_add_friends_button"
+            style="@style/ButtonTextOnly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/background_button"
             android:text="@string/add_friends"
-            style="@style/ButtonTextOnly"/>
+            android:textSize="12sp" />
     </LinearLayout>
 
 
@@ -153,9 +150,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_profile_friends" />
+
     <Button
-        style="@style/ButtonTextOnly"
         android:id="@+id/profile_logout_button"
+        style="@style/ButtonTextOnly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/log_out"

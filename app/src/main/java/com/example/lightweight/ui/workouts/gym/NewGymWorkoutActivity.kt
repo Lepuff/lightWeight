@@ -52,6 +52,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.gym_delete_workout_button).visibility =View.GONE
         findViewById<Button>(R.id.gym_edit_workout_button).visibility =View.GONE
+
         val addExerciseButton = findViewById<Button>(R.id.gym_add_exercise_button)
         addExerciseButton.visibility = View.VISIBLE
         addExerciseButton.setOnClickListener {
@@ -61,9 +62,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         val saveWorkoutButton = findViewById<Button>(R.id.gym_save_workout_button)
         saveWorkoutButton.visibility = View.VISIBLE
         saveWorkoutButton.setOnClickListener {
-            Keyboard().closeKeyboard(this)
             saveGymDialog()
-
         }
     }
 
@@ -119,7 +118,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
         saveButton.setOnClickListener {
             saveGymWorkout(dialogView, dialog)
-            //Keyboard().closeKeyboard(this)
+            Keyboard().closeKeyboard(this)
         }
     }
 

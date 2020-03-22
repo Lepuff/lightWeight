@@ -1,4 +1,4 @@
-package com.example.lightweight.viewModels
+package com.example.lightweight.ViewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,7 +7,7 @@ import com.example.lightweight.classes.Exercise
 
 class GymViewModel : ViewModel() {
 
-    var exercisesList = MutableLiveData<MutableList<Exercise>>().apply {
+    var exerciseLiveData = MutableLiveData<MutableList<Exercise>>().apply {
         value = ArrayList()
     }
     var title = MutableLiveData<String>().apply {

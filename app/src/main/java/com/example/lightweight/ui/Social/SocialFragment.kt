@@ -16,7 +16,7 @@ import com.example.lightweight.R
 import com.example.lightweight.adapters.WorkOutAdapter
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.classes.*
-import com.example.lightweight.viewModels.WorkoutFeedViewModel
+import com.example.lightweight.ViewModels.WorkoutFeedViewModel
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_social.*

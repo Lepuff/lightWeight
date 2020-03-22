@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.lightweight.Database
 import com.example.lightweight.R
-import com.example.lightweight.viewModels.RunViewModel
+import com.example.lightweight.ViewModels.RunViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -83,6 +83,7 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         findViewById<TextInputEditText>(R.id.running_average_pulse_editText).isEnabled = isEditable
         findViewById<TextInputEditText>(R.id.running_max_pulse_editText).isEnabled = isEditable
         findViewById<TextInputEditText>(R.id.running_calories_editText).isEnabled = isEditable
+
         findViewById<TextInputEditText>(R.id.running_distance_editText).requestFocus()
 
         if (isEditable) {
@@ -165,8 +166,8 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
     }
 
     private fun getRunningInfoFromDb() {
-        val currentRunWorkoutRef = db.collection(Database.USERS)
-            .document(intent.getStringExtra("userId")!!).collection(Database.WORKOUTS)
+        val currentRunWorkoutRef = db.collection("users")
+            .document(intent.getStringExtra("userId")!!).collection("workouts")
             .document(intent.getStringExtra("id")!!) // todo constants
         currentRunWorkoutRef.get().addOnSuccessListener { document ->
             if (document != null) {
@@ -194,7 +195,7 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
 
         viewModel.isLoadedFromDb.observe(this, Observer {
             if (viewModel.isLoadedFromDb.value == false) {
-                getRunningInfoFromDb()
+                getRunningInfoFromDb()//todo fix constants
                 viewModel.isLoadedFromDb.value == true
             }
         })

@@ -66,6 +66,11 @@
 
 
     <style name="DialogStyle">
+        <item name="buttonStyle">@style/ButtonTextOnly</item>
+        <item name="buttonBarPositiveButtonStyle">@style/ButtonTextOnly</item>
+        <item name="buttonBarNegativeButtonStyle">@style/ButtonTextOnly</item>
+        <item name="android:buttonBarNeutralButtonStyle">@style/ButtonTextOnly</item>
+        <item name="android:buttonBarButtonStyle">@style/ButtonTextOnly</item>
         <item name="textColorAlertDialogListItem">@color/text_item</item>
         <item name="android:background">@color/background_item</item>
         <item name="android:windowBackground">@color/transparent</item>

@@ -113,6 +113,7 @@
     <string name="watts">W</string>
     <string name="rpm">Rpm</string>
     <string name="k_cal">Kcal</string>
+    <string name="log_out_message">Do you want to log out?</string>
 
 
 </resources>

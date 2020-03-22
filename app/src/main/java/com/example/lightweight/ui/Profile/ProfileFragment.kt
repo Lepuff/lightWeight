@@ -226,7 +226,7 @@ class ProfileFragment : Fragment() {
     private fun logOutDialog(){
 
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext(), R.style.DialogStyle)
-        builder.setTitle(R.string.delete_workout_message)
+        builder.setTitle(R.string.log_out_message)
         builder.setPositiveButton(R.string.yes) { dialog, _ ->
             logOut()
             dialog.cancel()

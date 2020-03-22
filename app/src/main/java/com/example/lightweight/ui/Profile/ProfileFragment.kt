@@ -43,6 +43,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.dialog_change_password.*
 import kotlinx.android.synthetic.main.dialog_change_password.view.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -81,7 +82,7 @@ class ProfileFragment : Fragment() {
         val cameraButton =
             root.findViewById<ImageButton>(R.id.profile_camera_button)
         cameraButton.setOnClickListener {
-            checkStoragePermission()
+                checkStoragePermission()
         }
 
         val addFriendsButton = root.findViewById<Button>(R.id.profile_add_friends_button)
@@ -116,51 +117,31 @@ class ProfileFragment : Fragment() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PICK_PHOTO_REQUEST) {
+        if (requestCode == PICK_PHOTO_REQUEST){
             if (permissions[0].equals(android.Manifest.permission.READ_EXTERNAL_STORAGE) && grantResults[0]
-                == PackageManager.PERMISSION_GRANTED
-            ) {
+            == PackageManager.PERMISSION_GRANTED){
                 pickPhotoFromGallery()
             }
+        }
+    }
+
+    private fun checkStoragePermission(){
+        //If permission is not already granted
+        if (ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED){
+            //Request permission to read storage
+            requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), PICK_PHOTO_REQUEST)
+        } else{
+            //if permission is already granted
+            pickPhotoFromGallery()
         }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initRecyclerView()
-        checkForUpdates()
+        checkUpdates()
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (resultCode == Activity.RESULT_OK && requestCode == PICK_PHOTO_REQUEST &&
-            data != null && data.data != null
-        ) {
-            Database.setUserPicture(data.data!!)
-            updateGlidePicture(data.data!!, profile_image)
-        }
-    }
-
-    private fun checkStoragePermission() {
-        //If permission is not already granted
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                android.Manifest.permission.READ_EXTERNAL_STORAGE
-            )
-            != PackageManager.PERMISSION_GRANTED
-        ) {
-            //Request permission to read storage
-            requestPermissions(
-                arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
-                PICK_PHOTO_REQUEST
-            )
-        } else {
-            //if permission is already granted
-            pickPhotoFromGallery()
-        }
-    }
-
     @SuppressLint("InflateParams")
     private fun changePasswordDialog() {
         val dialogView =
@@ -245,6 +226,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
+
     private fun saveProfileInfo(view: View) {
         val firstName =
             view.findViewById<TextInputEditText>(R.id.fragment_profile_first_name_editText).text
@@ -263,6 +245,7 @@ class ProfileFragment : Fragment() {
         view.findViewById<TextView>(R.id.fragment_profile_email_editText).text =
             Database.getUserEmail()
     }
+
 
     private fun setTextChangedListeners(dialogView: View) {
         dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText)
@@ -307,10 +290,9 @@ class ProfileFragment : Fragment() {
         })
     }
 
-    private fun logOutDialog() {
+    private fun logOutDialog(){
 
-        val builder =
-            androidx.appcompat.app.AlertDialog.Builder(requireContext(), R.style.DialogStyle)
+        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext(), R.style.DialogStyle)
         builder.setTitle(R.string.log_out_message)
         builder.setPositiveButton(R.string.yes) { dialog, _ ->
             logOut()
@@ -359,6 +341,17 @@ class ProfileFragment : Fragment() {
         startActivityForResult(intent, PICK_PHOTO_REQUEST)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK && requestCode == PICK_PHOTO_REQUEST &&
+            data != null && data.data != null
+        ) {
+            Database.setUserPicture(data.data!!)
+            updateGlidePicture(data.data!!, profile_image)
+        }
+    }
+
     private fun handleEditStates() {
         if (Database.isFacebookUser()) {
             requireView().findViewById<Button>(R.id.profile_change_password_button).visibility =
@@ -367,13 +360,11 @@ class ProfileFragment : Fragment() {
                 View.GONE
             requireView().findViewById<Button>(R.id.profile_save_profile_button).visibility =
                 View.GONE
-            requireView().findViewById<ImageButton>(R.id.profile_camera_button).visibility =
-                View.GONE
+            requireView().findViewById<ImageButton>(R.id.profile_camera_button).visibility = View.GONE
         } else {
 
 
-            requireView().findViewById<ImageButton>(R.id.profile_camera_button).visibility =
-                View.VISIBLE
+            requireView().findViewById<ImageButton>(R.id.profile_camera_button).visibility = View.VISIBLE
             requireView().findViewById<Button>(R.id.profile_change_password_button).visibility =
                 View.VISIBLE
             if (viewModel.isInEditState.value!!) {
@@ -396,31 +387,33 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun checkForUpdates() {
-        db.collection(Database.USERS).document(Database.getUserId()!!).collection(Database.FRIENDS)
-            .addSnapshotListener { snapshot, e ->
-                if (e != null) {
-                    Log.w(ContentValues.TAG, "Listen failed.", e)
-                    return@addSnapshotListener
-                }
-                for (dc in snapshot!!.documentChanges) {
-                    when (dc.type) {
-                        DocumentChange.Type.ADDED -> Log.d(
-                            ContentValues.TAG,
-                            "New Friend: ${dc.document.data}"
-                        )
-                        DocumentChange.Type.MODIFIED -> Log.d(
-                            ContentValues.TAG,
-                            "Modified Friend: ${dc.document.data}"
-                        )
-                        DocumentChange.Type.REMOVED -> Log.d(
-                            ContentValues.TAG,
-                            "Removed Friend: ${dc.document.data}"
-                        )
-                    }
-                }
-                getFriendsFromDb()
+
+    private fun checkUpdates(){
+        db.collection(Database.USERS).document(Database.getUserId()!!).collection(Database.FRIENDS).addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Log.w(ContentValues.TAG, "Listen failed.", e)
+                return@addSnapshotListener
             }
+            for (dc in snapshot!!.documentChanges) {
+                when (dc.type) {
+                    DocumentChange.Type.ADDED -> Log.d(ContentValues.TAG, "New Friend: ${dc.document.data}")
+                    DocumentChange.Type.MODIFIED -> Log.d(
+                        ContentValues.TAG,
+                        "Modified Friend: ${dc.document.data}"
+                    )
+                    DocumentChange.Type.REMOVED -> Log.d(
+                        ContentValues.TAG,
+                        "Removed Friend: ${dc.document.data}"
+                    )
+                }
+            }
+            getFriendsFromDb()
+        }
+
+
+
+
+
     }
 
     private fun getFriendsFromDb() {

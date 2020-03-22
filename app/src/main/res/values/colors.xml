@@ -11,8 +11,8 @@
     <color name="text_item">#ffc107</color>
     <color name="text_header">#ffffff</color>
     <color name="navBar_background">#1e1d1b</color>
-    <color name="navbar_icon_tint_clicked">#ffc107</color>
-    <color name="navbar_icon_tint_not_clicked">#FFD54F</color>
+    <color name="navBar_icon_tint_clicked">#ffc107</color>
+    <color name="navBar_icon_tint_not_clicked">#FFD54F</color>
     <color name="navbar_text_color_clicked">#ffc107</color>
     <color name="navbar_text_color_not_clicked">#FFD54F</color>
     <color name="navBar_ripple_color">#ffc107</color>
@@ -21,8 +21,10 @@
     <color name="divider">#2e2e1f</color>
     <color name="text_divider">#ffc107</color>
     <color name="details">#ffc107</color>
+    <color name="details_unfocused">#80FFD54F</color>
     <color name="transparent">#00000000</color>
 
 
-
 </resources>
+
+

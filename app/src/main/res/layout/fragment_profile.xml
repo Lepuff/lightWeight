@@ -32,7 +32,7 @@
         android:id="@+id/profile_first_name_textLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:theme="@style/TextInputLayoutAppearance"
+        style="@style/TextInputLayoutOutlined"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/profile_image"
         app:layout_constraintTop_toTopOf="parent">
@@ -41,6 +41,7 @@
             android:id="@+id/fragment_profile_first_name_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:hint="@string/first_name"
             android:inputType="text"
             android:textColor="@color/text_content" />
@@ -51,7 +52,7 @@
         android:id="@+id/profile_last_name_textLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:theme="@style/TextInputLayoutAppearance"
+        style="@style/TextInputLayoutOutlined"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/profile_image"
         app:layout_constraintTop_toBottomOf="@id/profile_first_name_textLayout">
@@ -70,7 +71,7 @@
         android:id="@+id/profile_email_textLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:theme="@style/TextInputLayoutAppearance"
+        style="@style/TextInputLayoutOutlined"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profile_last_name_textLayout">
@@ -97,39 +98,28 @@
 
 
         <Button
+
             android:id="@+id/profile_edit_profile_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="7dp"
-            android:background="@color/background_button"
             android:enabled="true"
             android:text="@string/edit_profile"
-            android:textColor="@color/text_button"
-            android:textSize="12sp"
-            style="?android:attr/buttonBarButtonStyle"
+            style="@style/ButtonOutlined"
             />
 
         <Button
             android:id="@+id/profile_save_profile_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="7dp"
-            android:background="@color/background_button"
             android:text="@string/save_profile"
-            android:textColor="@color/text_button"
-            android:textSize="12sp"
-            style="?android:attr/buttonBarButtonStyle"/>
+            style="@style/ButtonOutlined"/>
 
         <Button
             android:id="@+id/profile_change_password_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="7dp"
-            android:background="@color/background_button"
             android:text="@string/change_password"
-            android:textColor="@color/text_button"
-            android:textSize="12sp"
-            style="?android:attr/buttonBarButtonStyle"
+            style="@style/ButtonOutlined"
             />
 
 
@@ -137,12 +127,9 @@
             android:id="@+id/profile_add_friends_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="7dp"
             android:background="@color/background_button"
             android:text="@string/add_friends"
-            android:textColor="@color/text_button"
-            android:textSize="12sp"
-            style="?android:attr/buttonBarButtonStyle"/>
+            style="@style/ButtonOutlined"/>
     </LinearLayout>
 
 
@@ -151,7 +138,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/friends"
-        android:textColor="@color/text_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profile_buttons_linearLayout" />
@@ -165,12 +151,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_profile_friends" />
     <Button
+        style="@style/ButtonOutlined"
         android:id="@+id/profile_logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/background_button"
         android:text="@string/log_out"
-        android:textColor="@color/text_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

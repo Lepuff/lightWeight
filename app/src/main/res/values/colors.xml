@@ -18,7 +18,7 @@
     <color name="navBar_ripple_color">#ffc107</color>
     <color name="floating_action_button_color">#ffc107</color>
     <color name="text_item_unfocused">#80FFD54F</color>
-    <color name="divider">#2e2e1f</color>
+    <color name="divider">#00000000</color>
     <color name="text_divider">#ffc107</color>
     <color name="details">#ffc107</color>
     <color name="details_unfocused">#80FFD54F</color>

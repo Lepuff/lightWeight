@@ -28,6 +28,7 @@
         <item name="android:paddingEnd">16dp</item>
         <item name="hintTextColor">@color/text_content</item>
         <item name="boxStrokeColor">@color/input_text_border_box</item>
+        <item name="suffixTextColor">@color/text_content</item>
     </style>
 
     <style name="MyTextInputEditText" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
@@ -36,6 +37,7 @@
 
     <style name="ButtonOutlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="strokeColor">@color/details</item>
+        <item name="android:textColor">@color/text_button</item>
     </style>
 
 

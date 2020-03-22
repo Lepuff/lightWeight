@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lightweight.Database
 import com.example.lightweight.R
-import com.example.lightweight.ViewModels.GymViewModel
+import com.example.lightweight.viewModels.GymViewModel
 import com.example.lightweight.adapters.ExerciseAdapter
 import com.example.lightweight.classes.Exercise
 import com.example.lightweight.classes.Sets
@@ -25,6 +25,8 @@ import kotlinx.android.synthetic.main.activity_gym_workout.*
 
 class ViewGymWorkoutActivity : AppCompatActivity() {
 
+
+    private val itemPaddingTop = 30
     private lateinit var exerciseAdapter: ExerciseAdapter
     private lateinit var viewModel: GymViewModel
     private val db = FirebaseFirestore.getInstance()
@@ -92,7 +94,7 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
 
 
     private fun setObservers() {
-        viewModel.exerciseLiveData.observe(this,
+        viewModel.exercisesList.observe(this,
             Observer {
                 exerciseAdapter.notifyDataSetChanged()
             })
@@ -169,11 +171,11 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
         gym_exercises_recycle_view.apply {
             layoutManager = LinearLayoutManager(this.context)
             val topSpacingItemDecoration =
-                TopSpacingItemDecoration(30)
+                TopSpacingItemDecoration(itemPaddingTop)
             addItemDecoration(topSpacingItemDecoration)
             exerciseAdapter = ExerciseAdapter(this)
             adapter = exerciseAdapter
-            exerciseAdapter.submitList(viewModel.exerciseLiveData.value!!)
+            exerciseAdapter.submitList(viewModel.exercisesList.value!!)
         }
     }
 
@@ -181,9 +183,7 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this, R.style.DialogStyle)
         builder.setTitle(getString(R.string.choose_a_new_exercise))
         val listOfExercisesRef = db.collection(Database.TYPE_OF_EXERCISE).get()
-
         listOfExercisesRef.addOnSuccessListener { typeOfExercises ->
-            //TODO cycle through "names" of the typeOfWorkout
             val typeOfExerciseList: MutableList<String> = ArrayList()
             for (typeOfExercise in typeOfExercises) {
                 typeOfExerciseList.add(typeOfExercise[Database.NAME].toString())
@@ -235,7 +235,7 @@ class ViewGymWorkoutActivity : AppCompatActivity() {
             Database.WORKOUT_DATE,
             dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText).text.toString()
         )
-        currentGymWorkoutRef.update(Database.EXERCISES, viewModel.exerciseLiveData.value)
+        currentGymWorkoutRef.update(Database.EXERCISES, viewModel.exercisesList.value)
 
     }
 }

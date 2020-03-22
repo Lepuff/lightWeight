@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lightweight.Database
 import com.example.lightweight.R
-import com.example.lightweight.ViewModels.GymViewModel
+import com.example.lightweight.viewModels.GymViewModel
 
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.adapters.ExerciseAdapter
@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.activity_gym_workout.*
 import java.time.LocalDate
 
 class NewGymWorkoutActivity : AppCompatActivity() {
-
+    val itemPaddingTop = 20
     private lateinit var exerciseAdapter: ExerciseAdapter
     private lateinit var viewModel: GymViewModel
     private val db = FirebaseFirestore.getInstance()
@@ -37,41 +37,45 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(
             GymViewModel::class.java
         )
-        viewModel.exerciseLiveData.observe(
+        viewModel.exercisesList.observe(
             this, Observer {
                 exerciseAdapter.notifyDataSetChanged()
             }
         )
         initRecyclerView()
-        exerciseAdapter.submitList(viewModel.exerciseLiveData.value!!)
+        exerciseAdapter.submitList(viewModel.exercisesList.value!!)
 
-        findViewById<Button>(R.id.gym_delete_workout_button).visibility =View.GONE
-        findViewById<Button>(R.id.gym_edit_workout_button).visibility =View.GONE
+        setInEditState()
+
         val addExerciseButton = findViewById<Button>(R.id.gym_add_exercise_button)
-        addExerciseButton.visibility = View.VISIBLE
         addExerciseButton.setOnClickListener {
             showNewExerciseDialog()
         }
 
         val saveWorkoutButton = findViewById<Button>(R.id.gym_save_workout_button)
-        saveWorkoutButton.visibility = View.VISIBLE
         saveWorkoutButton.setOnClickListener {
-
             saveGymDialog()
-
         }
+    }
+
+
+    private fun setInEditState() {
+        findViewById<Button>(R.id.gym_add_exercise_button).visibility = View.VISIBLE
+        findViewById<Button>(R.id.gym_save_workout_button).visibility = View.VISIBLE
+        findViewById<Button>(R.id.gym_delete_workout_button).visibility = View.GONE
+        findViewById<Button>(R.id.gym_edit_workout_button).visibility = View.GONE
+        exerciseAdapter.isEditable()
     }
 
     private fun initRecyclerView() {
         gym_exercises_recycle_view.apply {
             layoutManager = LinearLayoutManager(this.context)
             val topSpacingItemDecoration =
-                TopSpacingItemDecoration(20)
+                TopSpacingItemDecoration(itemPaddingTop)
             addItemDecoration(topSpacingItemDecoration)
             exerciseAdapter =
                 ExerciseAdapter(this)
             adapter = exerciseAdapter
-
         }
     }
 
@@ -82,7 +86,6 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         val listOfExercisesRef = db.collection(Database.TYPE_OF_EXERCISE).get()
 
         listOfExercisesRef.addOnSuccessListener { typeOfExercises ->
-            //TODO cycle through "names" of the typeOfWorkout
             val typeOfExerciseList: MutableList<String> = ArrayList()
             for (typeOfExercise in typeOfExercises) {
                 typeOfExerciseList.add(typeOfExercise[Database.NAME].toString())
@@ -92,7 +95,6 @@ class NewGymWorkoutActivity : AppCompatActivity() {
 
             }
             val dialog = builder.create()
-
             dialog.show()
         }
     }
@@ -131,7 +133,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
             .document(Database.getUserId()!!).collection(Database.WORKOUTS).document()
 
         val workoutInfo = hashMapOf(
-            Database.EXERCISES to viewModel.exerciseLiveData.value,
+            Database.EXERCISES to viewModel.exercisesList.value,
             Database.TIMESTAMP to FieldValue.serverTimestamp(),
             Database.TYPE_OF_WORKOUT to "gymWorkout",
             Database.WORKOUT_TITLE to workoutTitle.toString(),

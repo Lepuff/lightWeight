@@ -22,10 +22,10 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_running_workout)
 
-
+        findViewById<TextInputEditText>(R.id.running_distance_editText).requestFocus()
 
         val saveButton = findViewById<Button>(R.id.running_save_button)
-            saveButton.visibility = View.VISIBLE
+        saveButton.visibility = View.VISIBLE
         saveButton.setOnClickListener {
             saveRunningDialog()
         }
@@ -52,24 +52,27 @@ class NewRunningWorkoutActivity : AppCompatActivity() {
     }
 
     private fun saveRunningWorkout(dialogView: View) {
-
-        val date = dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText).text.toString()
-        val title = dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_title_editText).text.toString()
-        val currentRunningWorkoutRef = db.collection("users")
-            .document(Database.getUserId()!!).collection("workouts").document()
+        val date =
+            dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText)
+                .text.toString()
+        val title =
+            dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_title_editText)
+                .text.toString()
+        val currentRunningWorkoutRef = db.collection(Database.USERS)
+            .document(Database.getUserId()!!).collection(Database.WORKOUTS).document()
 
         val workoutInfo = hashMapOf(
-            "distance" to findViewById<TextInputEditText>(R.id.running_distance_editText).text.toString(),
-            "totalTime" to findViewById<TextInputEditText>(R.id.running_total_time_editText).text.toString(),
-            "averageSpeed" to findViewById<TextInputEditText>(R.id.running_average_speed_editText).text.toString(),
-            "topSpeed" to findViewById<TextInputEditText>(R.id.running_top_speed_editText).text.toString(),
-            "averagePulse" to findViewById<TextInputEditText>(R.id.running_average_pulse_editText).text.toString(),
-            "maxPulse" to findViewById<TextInputEditText>(R.id.running_max_pulse_editText).text.toString(),
-            "calories" to findViewById<TextInputEditText>(R.id.running_calories_editText).text.toString(),
-            "timestamp" to FieldValue.serverTimestamp(),
-            "typeOfWorkout" to "runningWorkout",
-            "workoutTitle" to title,
-            "workoutDate" to date
+            Database.DISTANCE to findViewById<TextInputEditText>(R.id.running_distance_editText).text.toString(),
+            Database.TOTAL_TIME to findViewById<TextInputEditText>(R.id.running_total_time_editText).text.toString(),
+            Database.AVERAGE_SPEED to findViewById<TextInputEditText>(R.id.running_average_speed_editText).text.toString(),
+            Database.TOP_SPEED to findViewById<TextInputEditText>(R.id.running_top_speed_editText).text.toString(),
+            Database.AVERAGE_PULSE to findViewById<TextInputEditText>(R.id.running_average_pulse_editText).text.toString(),
+            Database.MAX_PULSE to findViewById<TextInputEditText>(R.id.running_max_pulse_editText).text.toString(),
+            Database.CALORIES to findViewById<TextInputEditText>(R.id.running_calories_editText).text.toString(),
+            Database.TIMESTAMP to FieldValue.serverTimestamp(),
+            Database.TYPE_OF_WORKOUT to "runningWorkout",
+            Database.WORKOUT_TITLE to title,
+            Database.WORKOUT_DATE to date
         )
         currentRunningWorkoutRef.set(workoutInfo)
     }

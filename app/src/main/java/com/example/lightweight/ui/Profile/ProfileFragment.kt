@@ -24,7 +24,7 @@ import com.example.lightweight.Database
 import com.example.lightweight.R
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lightweight.Validation
-import com.example.lightweight.ViewModels.ProfileViewModel
+import com.example.lightweight.viewModels.ProfileViewModel
 import com.example.lightweight.adapters.UserAdapter
 import com.example.lightweight.classes.User
 import com.example.lightweight.ui.TopSpacingItemDecoration

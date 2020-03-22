@@ -118,7 +118,7 @@ class ProfileFragment : Fragment() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == PICK_PHOTO_REQUEST){
-            if (permissions[0].equals(android.Manifest.permission.READ_EXTERNAL_STORAGE) && grantResults[0]
+            if (permissions[0] == android.Manifest.permission.READ_EXTERNAL_STORAGE && grantResults[0]
             == PackageManager.PERMISSION_GRANTED){
                 pickPhotoFromGallery()
             }

@@ -156,7 +156,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/calories"
-                android:inputType="numberDecimal"
+                android:inputType="number"
                 android:textColor="@color/text_content" />
         </com.google.android.material.textfield.TextInputLayout>
 

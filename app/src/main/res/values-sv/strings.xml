@@ -86,7 +86,7 @@
     <string name="choose_a_new_exercise">Välj ny övning</string>
     <string name="edit_workout">Redigera pass</string>
     <string name="Km">Km</string>
-    <string name="h_m_s">t:m:s</string>
+    <string name="h_m_s">Minuter</string>
     <string name="Km_h">Km/h</string>
     <string name="bpm">Bpm</string>
     <string name="watts">W</string>

@@ -105,7 +105,7 @@
     <string name="new_running_workout">New Running Workout</string>
     <string name="new_gym_workout">New Gym Workout</string>
     <string name="Km">Km</string>
-    <string name="h_m_s">h:m:s</string>
+    <string name="h_m_s">Minutes</string>
     <string name="Km_h">Km/h</string>
     <string name="bpm">Bpm</string>
     <string name="watts">W</string>

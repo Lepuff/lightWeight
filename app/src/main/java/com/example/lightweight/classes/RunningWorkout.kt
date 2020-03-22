@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import com.example.lightweight.R
 import com.example.lightweight.ui.workouts.running.NewRunningWorkoutActivity
-import com.example.lightweight.ui.workouts.running.ViewRunWorkoutActivity
+import com.example.lightweight.ui.workouts.running.ViewRunningWorkoutActivity
 
 class RunningWorkout(
     override var id: String,
@@ -18,7 +18,7 @@ class RunningWorkout(
 
 
     override fun viewWorkout(context: Context) {
-        val intent = Intent(context, ViewRunWorkoutActivity::class.java)
+        val intent = Intent(context, ViewRunningWorkoutActivity::class.java)
         intent.putExtra("id", id)
         intent.putExtra("userId", userId)
         context.startActivity(intent)

@@ -42,10 +42,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 class ProfileFragment : Fragment() {
 
     private val itemPaddingTop = 5
-
     private val PICK_PHOTO_REQUEST = 1
-
-
     private lateinit var viewModel: ProfileViewModel
     private lateinit var friendAdapter: UserAdapter
     private var db = FirebaseFirestore.getInstance()

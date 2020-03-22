@@ -3,7 +3,7 @@ package com.example.lightweight.ViewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class RunViewModel : ViewModel() {
+class RunningViewModel : ViewModel() {
 
 
     var title  = MutableLiveData<String>().apply {

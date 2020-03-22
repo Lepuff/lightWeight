@@ -29,7 +29,7 @@
             android:launchMode="singleTop">
         </activity>
         <activity
-            android:name=".ui.workouts.running.ViewRunWorkoutActivity"
+            android:name=".ui.workouts.running.ViewRunningWorkoutActivity"
             android:launchMode="singleTop">
         </activity>
         <activity

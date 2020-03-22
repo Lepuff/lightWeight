@@ -102,8 +102,8 @@
         <Button
             style="@style/ButtonOutlined"
             android:id="@+id/login_signUp_button"
-            android:layout_width="111dp"
-            android:layout_height="33dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:text="@string/sign_up_here"
             android:textSize="12sp"

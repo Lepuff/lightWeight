@@ -72,7 +72,7 @@ class FeedFragment : Fragment() {
 
 
     private fun initRecyclerView() {
-        feed_recycler_view.apply {
+        feed_recyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
             val topSpacingItemDecoration =
                 TopSpacingItemDecoration(itemPadding)

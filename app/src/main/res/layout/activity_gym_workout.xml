@@ -9,7 +9,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/gym_exercises_recycle_view"
+        android:id="@+id/gym_exercises_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/gym_button_constraintLayout"
@@ -26,47 +26,48 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            style="@style/ButtonTextOnly"
             android:id="@+id/gym_add_exercise_button"
+            style="@style/ButtonTextOnly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:drawableStart="@drawable/ic_add_yellow_24dp"
             android:drawableTint="@color/details"
             android:text="@string/add_exercise"
             android:visibility="gone"
-            android:layout_margin="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            style="@style/ButtonTextOnly"
             android:id="@+id/gym_save_workout_button"
+            style="@style/ButtonTextOnly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:text="@string/save_workout"
             android:visibility="gone"
-            android:layout_margin="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
-            style="@style/ButtonTextOnly"
             android:id="@+id/gym_edit_workout_button"
+            style="@style/ButtonTextOnly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:text="@string/edit_workout"
             android:visibility="visible"
-            android:layout_margin="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
         <Button
-            style="@style/ButtonTextOnly"
             android:id="@+id/gym_delete_workout_button"
+            style="@style/ButtonTextOnly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:text="@string/delete_workout"
             android:visibility="visible"
-            android:layout_margin="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

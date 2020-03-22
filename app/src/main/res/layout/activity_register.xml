@@ -7,36 +7,39 @@
     android:background="@color/background"
     android:orientation="vertical"
     tools:context=".ui.register.RegisterActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
+
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputLayoutOutlined"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextInputLayoutOutlined"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/firstNameRegister_editText"
+                android:id="@+id/register_first_name_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/first_name"
                 android:inputType="textCapWords"
                 android:textColor="@color/text_item" />
-            <requestFocus/>
+
+            <requestFocus />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputLayoutOutlined"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextInputLayoutOutlined"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/lastNameRegister_editText"
+                android:id="@+id/register_last_ame_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/last_name"
@@ -46,13 +49,13 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputLayoutOutlined"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextInputLayoutOutlined"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/emailRegister_editText"
+                android:id="@+id/register_email_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
@@ -62,16 +65,15 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passwordRegister_layout"
+            android:id="@+id/register_password_layout"
+            style="@style/TextInputLayoutOutlined"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextInputLayoutOutlined"
-            app:errorEnabled="true"
             app:endIconMode="password_toggle"
-            >
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/passwordRegister_editText"
+                android:id="@+id/register_password_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
@@ -81,18 +83,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            android:id="@+id/register_register_button"
             style="@style/ButtonOutlined"
-            android:id="@+id/registerButton_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="48dp"
             android:background="@color/background_button"
-            android:text="@string/register"
-            />
+            android:text="@string/register" />
 
         <ProgressBar
-            android:id="@+id/progressBarRegister"
+            android:id="@+id/register_progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

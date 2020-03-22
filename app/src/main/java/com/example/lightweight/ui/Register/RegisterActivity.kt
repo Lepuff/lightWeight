@@ -12,7 +12,6 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
 import com.example.lightweight.Database
 import com.example.lightweight.R
 import com.example.lightweight.Validation
@@ -38,13 +37,13 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        val signUpButton = findViewById<Button>(R.id.registerButton_button)
-        textInputEmail = findViewById(R.id.emailRegister_editText)
-        textInputPassword = findViewById(R.id.passwordRegister_editText)
-        textInputFirstName = findViewById(R.id.firstNameRegister_editText)
-        textInputLastName = findViewById(R.id.lastNameRegister_editText)
-        textInputPasswordLayout = findViewById(R.id.passwordRegister_layout)
-        progressBar = findViewById(R.id.progressBarRegister)
+        val signUpButton = findViewById<Button>(R.id.register_register_button)
+        textInputEmail = findViewById(R.id.register_email_editText)
+        textInputPassword = findViewById(R.id.register_password_editText)
+        textInputFirstName = findViewById(R.id.register_first_name_editText)
+        textInputLastName = findViewById(R.id.register_last_ame_editText)
+        textInputPasswordLayout = findViewById(R.id.register_password_layout)
+        progressBar = findViewById(R.id.register_progressBar)
 
         textInputPassword.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}

@@ -8,13 +8,15 @@
     app:cardElevation="5dp"
     app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="true">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp">
+
         <LinearLayout
 
-            android:id="@+id/exercise_linear_layout"
+            android:id="@+id/exercise_linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -60,15 +62,15 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/sets_recycle_view"
+            android:id="@+id/sets_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/new_set_button"
-            app:layout_constraintTop_toBottomOf="@id/exercise_linear_layout" />
+            app:layout_constraintTop_toBottomOf="@id/exercise_linearLayout" />
 
         <Button
-            style="@style/ButtonTextOnly"
             android:id="@+id/new_set_button"
+            style="@style/ButtonTextOnly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_add_yellow_24dp"
@@ -76,6 +78,7 @@
             android:text="@string/add_set"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
         <ImageButton
             android:id="@+id/delete_exercise_button"
             android:layout_width="40dp"

@@ -42,7 +42,7 @@ class WorkOutTypeAdapter(private val dialog: Dialog) : RecyclerView.Adapter<Work
            itemView.setOnClickListener(this)
         }
 
-        val icon: AppCompatImageView = itemView.new_workout_icon
+        val icon: AppCompatImageView = itemView.new_workout_icon_imageView
         val title: MaterialTextView = itemView.new_workout_textView
 
         fun bind(workOutType: Workout) {

@@ -43,7 +43,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.dialog_change_password.*
 import kotlinx.android.synthetic.main.dialog_change_password.view.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -76,7 +75,7 @@ class ProfileFragment : Fragment() {
         logoutButton.setOnClickListener {
             logOutDialog()
         }
-        val profilePicture = root.findViewById<CircleImageView>(R.id.profile_image)
+        val profilePicture = root.findViewById<CircleImageView>(R.id.profile_profile_image)
         updateGlidePicture(Database.getUserPicture(), profilePicture)
 
         val cameraButton =
@@ -151,9 +150,9 @@ class ProfileFragment : Fragment() {
         val dialog = builder.show()
 
 
-        textInputOldLayout = dialogView.findViewById(R.id.dialog_old_password_layout)
-        textInputNewLayout = dialogView.findViewById(R.id.dialog_new_password_layout)
-        textInputConfirmLayout = dialogView.findViewById(R.id.dialog_confirm_password_layout)
+        textInputOldLayout = dialogView.findViewById(R.id.dialog_old_password_textLayout)
+        textInputNewLayout = dialogView.findViewById(R.id.dialog_new_password_textLayout)
+        textInputConfirmLayout = dialogView.findViewById(R.id.dialog_confirm_password_textLayout)
         //adds textChangedListeners to all password fields
         setTextChangedListeners(dialogView)
 
@@ -229,20 +228,20 @@ class ProfileFragment : Fragment() {
 
     private fun saveProfileInfo(view: View) {
         val firstName =
-            view.findViewById<TextInputEditText>(R.id.fragment_profile_first_name_editText).text
+            view.findViewById<TextInputEditText>(R.id.profile_first_name_editText).text
         val lastName =
-            view.findViewById<TextInputEditText>(R.id.fragment_profile_last_name_editText).text
-        val email = view.findViewById<TextInputEditText>(R.id.fragment_profile_email_editText).text
+            view.findViewById<TextInputEditText>(R.id.profile_last_name_editText).text
+        val email = view.findViewById<TextInputEditText>(R.id.profile_email_editText).text
 
         Database.updateUser(firstName.toString(), lastName.toString(), email.toString())
     }
 
     private fun loadUserInfo(view: View) {
-        view.findViewById<TextView>(R.id.fragment_profile_first_name_editText).text =
+        view.findViewById<TextView>(R.id.profile_first_name_editText).text =
             Database.getUserFirstName()
-        view.findViewById<TextView>(R.id.fragment_profile_last_name_editText).text =
+        view.findViewById<TextView>(R.id.profile_last_name_editText).text =
             Database.getUserLastName()
-        view.findViewById<TextView>(R.id.fragment_profile_email_editText).text =
+        view.findViewById<TextView>(R.id.profile_email_editText).text =
             Database.getUserEmail()
     }
 
@@ -259,8 +258,8 @@ class ProfileFragment : Fragment() {
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if (dialogView.dialog_old_password_layout.endIconMode != TextInputLayout.END_ICON_PASSWORD_TOGGLE)
-                        dialogView.dialog_old_password_layout.endIconMode =
+                    if (dialogView.dialog_old_password_textLayout.endIconMode != TextInputLayout.END_ICON_PASSWORD_TOGGLE)
+                        dialogView.dialog_old_password_textLayout.endIconMode =
                             TextInputLayout.END_ICON_PASSWORD_TOGGLE
                 }
 
@@ -270,8 +269,8 @@ class ProfileFragment : Fragment() {
         dialogView.dialog_new_password_editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (dialogView.dialog_new_password_layout.endIconMode != TextInputLayout.END_ICON_PASSWORD_TOGGLE)
-                    dialogView.dialog_new_password_layout.endIconMode =
+                if (dialogView.dialog_new_password_textLayout.endIconMode != TextInputLayout.END_ICON_PASSWORD_TOGGLE)
+                    dialogView.dialog_new_password_textLayout.endIconMode =
                         TextInputLayout.END_ICON_PASSWORD_TOGGLE
             }
 
@@ -281,8 +280,8 @@ class ProfileFragment : Fragment() {
         dialogView.dialog_confirm_password_editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (dialogView.dialog_confirm_password_layout.endIconMode != TextInputLayout.END_ICON_PASSWORD_TOGGLE)
-                    dialogView.dialog_confirm_password_layout.endIconMode =
+                if (dialogView.dialog_confirm_password_textLayout.endIconMode != TextInputLayout.END_ICON_PASSWORD_TOGGLE)
+                    dialogView.dialog_confirm_password_textLayout.endIconMode =
                         TextInputLayout.END_ICON_PASSWORD_TOGGLE
             }
 
@@ -348,7 +347,7 @@ class ProfileFragment : Fragment() {
             data != null && data.data != null
         ) {
             Database.setUserPicture(data.data!!)
-            updateGlidePicture(data.data!!, profile_image)
+            updateGlidePicture(data.data!!, profile_profile_image)
         }
     }
 
@@ -368,17 +367,17 @@ class ProfileFragment : Fragment() {
             requireView().findViewById<Button>(R.id.profile_change_password_button).visibility =
                 View.VISIBLE
             if (viewModel.isInEditState.value!!) {
-                fragment_profile_first_name_editText.isEnabled = true
-                fragment_profile_last_name_editText.isEnabled = true
-                fragment_profile_email_editText.isEnabled = true
+                profile_first_name_editText.isEnabled = true
+                profile_last_name_editText.isEnabled = true
+                profile_email_editText.isEnabled = true
                 requireView().findViewById<Button>(R.id.profile_edit_profile_button).visibility =
                     View.GONE
                 requireView().findViewById<Button>(R.id.profile_save_profile_button).visibility =
                     View.VISIBLE
             } else {
-                fragment_profile_first_name_editText.isEnabled = false
-                fragment_profile_last_name_editText.isEnabled = false
-                fragment_profile_email_editText.isEnabled = false
+                profile_first_name_editText.isEnabled = false
+                profile_last_name_editText.isEnabled = false
+                profile_email_editText.isEnabled = false
                 requireView().findViewById<Button>(R.id.profile_edit_profile_button).visibility =
                     View.VISIBLE
                 requireView().findViewById<Button>(R.id.profile_save_profile_button).visibility =

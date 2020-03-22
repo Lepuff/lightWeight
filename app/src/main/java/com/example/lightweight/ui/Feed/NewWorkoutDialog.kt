@@ -3,7 +3,6 @@ package com.example.lightweight.ui.feed
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
@@ -56,7 +55,7 @@ class NewWorkoutDialog : DialogFragment() {
             .setView(dialogView)
             .create()
         dialog.setCanceledOnTouchOutside(true)
-        val recyclerView = dialogView.findViewById<RecyclerView>(R.id.dialog_recycle_view)
+        val recyclerView = dialogView.findViewById<RecyclerView>(R.id.dialog_recyclerView)
         initNewWorkoutRecycleView(recyclerView!!, dialog)
         addWorkoutTypeDataSet()
         return dialog

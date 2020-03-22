@@ -1,13 +1,11 @@
 package com.example.lightweight.ui.workouts.gym
 
 import android.annotation.SuppressLint
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
@@ -67,7 +65,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
-        gym_exercises_recycle_view.apply {
+        gym_exercises_recyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
             val topSpacingItemDecoration =
                 TopSpacingItemDecoration(20)

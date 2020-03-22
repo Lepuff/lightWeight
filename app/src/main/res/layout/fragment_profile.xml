@@ -8,7 +8,7 @@
     tools:context=".ui.profile.ProfileFragment">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
+        android:id="@+id/profile_profile_image"
         android:layout_width="115dp"
         android:layout_height="115dp"
         android:padding="10dp"
@@ -24,8 +24,8 @@
         android:layout_height="30dp"
         android:background="@color/background_button"
         android:src="@drawable/ic_photo_camera_yellow_24dp"
-        app:layout_constraintBottom_toBottomOf="@id/profile_image"
-        app:layout_constraintEnd_toEndOf="@id/profile_image" />
+        app:layout_constraintBottom_toBottomOf="@id/profile_profile_image"
+        app:layout_constraintEnd_toEndOf="@id/profile_profile_image" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/profile_first_name_textLayout"
@@ -33,11 +33,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/profile_image"
+        app:layout_constraintStart_toEndOf="@id/profile_profile_image"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/fragment_profile_first_name_editText"
+            android:id="@+id/profile_first_name_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
@@ -53,11 +53,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/profile_image"
+        app:layout_constraintStart_toEndOf="@id/profile_profile_image"
         app:layout_constraintTop_toBottomOf="@id/profile_first_name_textLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/fragment_profile_last_name_editText"
+            android:id="@+id/profile_last_name_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
@@ -76,7 +76,7 @@
         app:layout_constraintTop_toBottomOf="@id/profile_last_name_textLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/fragment_profile_email_editText"
+            android:id="@+id/profile_email_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="false"
@@ -134,7 +134,7 @@
 
 
     <TextView
-        android:id="@+id/text_profile_friends"
+        android:id="@+id/profile_friends_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/friends"
@@ -149,7 +149,7 @@
         app:layout_constraintBottom_toTopOf="@id/profile_logout_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_profile_friends" />
+        app:layout_constraintTop_toBottomOf="@id/profile_friends_textView" />
 
     <Button
         android:id="@+id/profile_logout_button"

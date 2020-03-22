@@ -6,7 +6,7 @@
     android:background="@color/background_item">
 
     <LinearLayout
-        android:id="@+id/save_workout_linear_layout"
+        android:id="@+id/save_workout_linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -25,7 +25,6 @@
                 android:hint="@string/title"
                 android:inputType="textCapSentences"
                 android:textColor="@color/text_item" />
-
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -58,7 +57,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/save_workout_linear_layout" />
+        app:layout_constraintTop_toBottomOf="@id/save_workout_linearLayout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

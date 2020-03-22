@@ -72,7 +72,7 @@ class ExerciseAdapter(private val parentRecyclerView: RecyclerView) :
 
     ) : RecyclerView.ViewHolder(itemView) {
         private var selectedExercise: Exercise? = null
-        val childRecyclerView: RecyclerView = itemView.findViewById(R.id.sets_recycle_view)
+        val childRecyclerView: RecyclerView = itemView.findViewById(R.id.sets_recyclerView)
         private val exerciseName: TextView = itemView.exercise_name_textView
 
 

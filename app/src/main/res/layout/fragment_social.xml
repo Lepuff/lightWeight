@@ -10,8 +10,9 @@
         android:id="@+id/social_swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/social_recycler_view"
+            android:id="@+id/social_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"

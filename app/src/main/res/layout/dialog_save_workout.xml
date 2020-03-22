@@ -24,6 +24,9 @@
                 android:hint="@string/title"
                 android:inputType="textCapSentences"
                 android:textColor="@color/text_item" />
+
+
+
         </com.google.android.material.textfield.TextInputLayout>
 
 

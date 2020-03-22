@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.profile.AddFriendsActivity"
-            android:label="Add friends"
+            android:label="@string/add_friends"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -39,7 +39,8 @@
         <activity
             android:label="@string/new_cycling_workout"
             android:name=".ui.workouts.cycling.NewCyclingWorkoutActivity"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateVisible">
         </activity>
         <activity
             android:label="@string/new_running_workout"
@@ -75,6 +76,7 @@
         </activity>
         <activity
             android:name=".ui.register.RegisterActivity"
+            android:windowSoftInputMode="stateVisible"
             android:exported="true" /> <!-- todo Check this erroro? -->
         <activity
             android:name=".ui.login.LoginActivity"
@@ -89,7 +91,8 @@
         <activity
             android:name=".ui.NavigationActivity"
             android:label="LightWeight"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateVisible"/>
     </application>
 
 </manifest>

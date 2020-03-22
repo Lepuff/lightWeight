@@ -1,10 +1,12 @@
 package com.example.lightweight.ui.workouts.gym
 
 import android.annotation.SuppressLint
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
@@ -16,6 +18,7 @@ import com.example.lightweight.ViewModels.GymViewModel
 
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.adapters.ExerciseAdapter
+import com.example.lightweight.ui.workouts.Keyboard
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -29,6 +32,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
     private lateinit var exerciseAdapter: ExerciseAdapter
     private lateinit var viewModel: GymViewModel
     private val db = FirebaseFirestore.getInstance()
+    private lateinit var workoutTitle: TextInputEditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,7 +79,6 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         }
     }
 
-
     private fun showNewExerciseDialog() {
         val builder = AlertDialog.Builder(this, R.style.DialogStyle)
         builder.setTitle(getString(R.string.choose_a_new_exercise))
@@ -105,6 +108,10 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         val currentDate = LocalDate.now().toString()
         dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText)
             .setText(currentDate)
+        workoutTitle = dialogView.findViewById(R.id.dialog_save_workout_title_editText)
+        workoutTitle.requestFocus()
+        Keyboard().showKeyboard(this)
+
         val dialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)
         val dialog = dialogBuilder.show()
@@ -112,16 +119,12 @@ class NewGymWorkoutActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
             saveGymWorkout(dialogView)
             dialog.cancel()
+            Keyboard().closeKeyboard(this)
             finish()
         }
     }
 
     private fun saveGymWorkout(dialogView: View) {
-
-
-        val workoutTitle =
-            dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_title_editText)
-                .text
 
         val workoutDate =
             dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText)
@@ -134,7 +137,7 @@ class NewGymWorkoutActivity : AppCompatActivity() {
             Database.EXERCISES to viewModel.exerciseLiveData.value,
             Database.TIMESTAMP to FieldValue.serverTimestamp(),
             Database.TYPE_OF_WORKOUT to "gymWorkout",
-            Database.WORKOUT_TITLE to workoutTitle.toString(),
+            Database.WORKOUT_TITLE to workoutTitle.text.toString(),
             Database.WORKOUT_DATE to workoutDate.toString()
         )
         currentGymWorkoutRef.set(workoutInfo)

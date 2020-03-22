@@ -209,6 +209,7 @@ class ViewRunningWorkoutActivity : AppCompatActivity() {
                     setEditable(false)
                 }
             } else {
+                setEditable(false)
                 findViewById<Button>(R.id.running_edit_button).visibility = View.GONE
                 findViewById<Button>(R.id.running_save_button).visibility = View.GONE
             }

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/background_item"
-    app:cardCornerRadius="2dp"
-    app:cardElevation="5dp"
     app:cardUseCompatPadding="true"
-
     app:cardPreventCornerOverlap="false">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,32 +30,36 @@
                 android:id="@+id/sets_number_textView"/>
 
             <EditText
+
+                android:textColorHint="@color/details"
+                android:backgroundTint="@color/details"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_content"
-                android:autofillHints="@string/weight"
+                android:outlineAmbientShadowColor="@color/details"
                 android:inputType="number"
                 android:gravity="center"
                 android:id="@+id/sets_weight_editText"
-                android:hint="@string/weight"/>
+                tools:ignore="Autofill,LabelFor"
+                 />
 
             <EditText
+                android:backgroundTint="@color/details"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_content"
-                android:autofillHints="@string/reps"
                 android:inputType="number"
                 android:gravity="center"
                 android:id="@+id/sets_reps_editText"
-                android:hint="@string/reps"
-                />
+                tools:ignore="Autofill,LabelFor" />
 
-            <Button
+            <ImageButton
                 android:layout_width="50dp"
                 android:id="@+id/delete_set_button"
                 android:layout_height="wrap_content"
                 android:background="@color/background_button"
-                android:drawableStart="@drawable/ic_delete_forever_yellow_24dp" />
+                android:drawableStart="@drawable/ic_delete_forever_yellow_24dp"
+                android:contentDescription="@string/delete_forever" />
         </LinearLayout>
 
 

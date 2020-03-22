@@ -12,12 +12,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.lightweight.Database
 import com.example.lightweight.R
-import com.example.lightweight.ViewModels.RunViewModel
+import com.example.lightweight.ViewModels.RunningViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
 
-class ViewRunWorkoutActivity : AppCompatActivity() {
-    private lateinit var viewModel: RunViewModel
+class ViewRunningWorkoutActivity : AppCompatActivity() {
+    private lateinit var viewModel: RunningViewModel
     private val db = FirebaseFirestore.getInstance()
 
 
@@ -25,7 +25,7 @@ class ViewRunWorkoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_running_workout)
 
-        viewModel = ViewModelProviders.of(this).get(RunViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(RunningViewModel::class.java)
         setObservers()
 
         val editButton = findViewById<Button>(R.id.running_edit_button)

@@ -101,6 +101,19 @@
     <string name="passwords_dont_match">Passwords don\'t match</string>
     <string name="password_successfully_changed">Password successfully changed</string>
     <string name="invalid_password">Invalid password</string>
+    <string name="title">Title</string>
+    <string name="delete_forever">Delete forever</string>
+    <string name="new_cycling_workout">New Cycling Workout</string>
+    <string name="new_running_workout">New Running Workout</string>
+    <string name="new_gym_workout">New Gym Workout</string>
+    <string name="Km">Km</string>
+    <string name="h_m_s">h:m:s</string>
+    <string name="Km_h">Km/h</string>
+    <string name="bpm">Bpm</string>
+    <string name="watts">W</string>
+    <string name="rpm">Rpm</string>
+    <string name="k_cal">Kcal</string>
+    <string name="log_out_message">Do you want to log out?</string>
 
 
 </resources>

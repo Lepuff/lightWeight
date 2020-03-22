@@ -68,9 +68,7 @@ class SocialFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        workOutAdapter.clearList()
-        addWorkoutToFeed()
-        //checkDatabaseForUpdates()
+        checkDatabaseForUpdates()
     }
 
     private  fun checkDatabaseForUpdates(){
@@ -105,6 +103,7 @@ class SocialFragment : Fragment() {
                                         }
                                     }
                                 }
+                                workOutAdapter.clearList()
                                 addWorkoutToFeed()
                             }
                     }

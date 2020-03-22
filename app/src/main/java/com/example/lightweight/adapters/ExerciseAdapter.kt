@@ -37,7 +37,7 @@ class ExerciseAdapter(private val parentRecyclerView: RecyclerView) :
 
     fun addExercise(name: String) {
         val newExercise = Exercise(name)
-        newExercise.sets.add(Sets("", ""))
+        newExercise.sets.add(Sets(0, 0))
         exercises.add(newExercise)
         notifyItemInserted(exercises.size)
     }

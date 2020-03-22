@@ -56,6 +56,7 @@ class LoginActivity : AppCompatActivity() {
         textInputPasswordLayout = findViewById(R.id.passwordLayout)
         textInputEmail = findViewById(R.id.emailLogin_editText)
         textInputPassword = findViewById(R.id.passwordLogin_editText)
+
         auth = FirebaseAuth.getInstance()
 
         textInputPassword.addTextChangedListener(object : TextWatcher {
@@ -150,8 +151,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun fbSignIn() {
-        fbLogin_button.setPermissions(listOf("email", "public_profile", "user_friends"))
-        fbLogin_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+        login_fb_button.setPermissions(listOf("email", "public_profile", "user_friends"))
+        login_fb_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult) {
                 handleFacebookAccessToken(result.accessToken)
             }
@@ -173,12 +174,13 @@ class LoginActivity : AppCompatActivity() {
 
         progressBar.visibility = View.VISIBLE
         auth.signInWithCredential(credential)
-            .addOnSuccessListener { result ->
+            .addOnSuccessListener {
                 Database.updateUserDataFromFacebook(accessToken)
                 Toast.makeText(this, "Log in successful", Toast.LENGTH_SHORT).show()
-
-                startActivity(Intent(this, NavigationActivity::class.java))
                 progressBar.visibility = View.INVISIBLE
+                val intent = Intent(this,NavigationActivity::class.java)
+                startActivity(intent)
+
             }
 
             .addOnFailureListener { e ->

@@ -48,10 +48,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 class ProfileFragment : Fragment() {
 
     private val itemPaddingTop = 5
-
     private val PICK_PHOTO_REQUEST = 1
-
-
     private lateinit var viewModel: ProfileViewModel
     private lateinit var friendAdapter: UserAdapter
     private var db = FirebaseFirestore.getInstance()
@@ -74,7 +71,7 @@ class ProfileFragment : Fragment() {
 
         val logoutButton = root.findViewById<Button>(R.id.profile_logout_button)
         logoutButton.setOnClickListener {
-            logOut()
+            logOutDialog()
         }
         val profilePicture = root.findViewById<CircleImageView>(R.id.profile_image)
         updateGlidePicture(Database.getUserPicture(), profilePicture)
@@ -83,7 +80,6 @@ class ProfileFragment : Fragment() {
             root.findViewById<ImageButton>(R.id.profile_camera_button)
         cameraButton.setOnClickListener {
                 checkStoragePermission()
-            //pickPhotoFromGallery()
         }
 
         val addFriendsButton = root.findViewById<Button>(R.id.profile_add_friends_button)
@@ -256,6 +252,7 @@ class ProfileFragment : Fragment() {
             Database.getUserEmail()
     }
 
+
     private fun setTextChangedListeners(dialogView: View){
         //TODO
         dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText).addTextChangedListener(object : TextWatcher {
@@ -284,6 +281,20 @@ class ProfileFragment : Fragment() {
             }
             override fun afterTextChanged(s: Editable?) {}
         })
+
+    private fun logOutDialog(){
+
+        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext(), R.style.DialogStyle)
+        builder.setTitle(R.string.log_out_message)
+        builder.setPositiveButton(R.string.yes) { dialog, _ ->
+            logOut()
+            dialog.cancel()
+        }
+        builder.setNegativeButton(R.string.no) { dialog, _ ->
+            dialog.cancel()
+        }
+        builder.show()
+
     }
 
     private fun logOut() {

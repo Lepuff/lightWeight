@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lightweight.R
@@ -32,8 +33,8 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
 
 
     fun addSet() {
-        var weight = ""
-        var rep = ""
+        var weight: Int? = 0
+        var rep : Int? = 0
 
         if (sets.isNotEmpty()) {
             rep = sets[sets.size - 1].reps
@@ -90,8 +91,13 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     val position = adapterPosition
+                    val weight = s.toString()
+                    if (weight.isEmpty()){
+                        adapter.sets[position].weight = 0
 
-                    adapter.sets[position].weight = s.toString()
+                    }else {
+                        adapter.sets[position].weight = s.toString().toInt()
+                    }
                 }
 
 
@@ -116,13 +122,18 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     val position = adapterPosition
-                    adapter.sets[position].reps = s.toString()
+                    val reps = s.toString()
+                    if (reps.isEmpty()){
+                        adapter.sets[position].reps = 0
 
+                    }else {
+                        adapter.sets[position].reps = s.toString().toInt()
+                    }
                 }
             }
             )
         }
-        val button: Button = itemView.findViewById<Button>(R.id.delete_set_button).apply {
+        val button: ImageButton = itemView.findViewById<ImageButton>(R.id.delete_set_button).apply {
             setOnClickListener {
                 adapter.deleteSet(recyclerView.getChildLayoutPosition(itemView) + 1)
             }
@@ -144,8 +155,12 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
             this.selectedSet = set
             setNumber.text = (position + 1).toString()// +1 for correct set numbers
 
-            setWeight.setText(set.weight)
-            setsReps.setText(set.reps)
+            if (set.weight == 0)setWeight.setText("")
+            else setWeight.setText(set.weight.toString())
+
+            if (set.reps == 0) setsReps.setText("")
+            else setsReps.setText(set.reps.toString())
+
 
         }
     }

@@ -22,17 +22,16 @@
         android:id="@+id/profile_camera_button"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        app:layout_constraintEnd_toEndOf="@id/profile_image"
-        app:layout_constraintBottom_toBottomOf="@id/profile_image"
-        android:src="@drawable/ic_photo_camera_yellow_24dp"
         android:background="@color/background_button"
-        />
+        android:src="@drawable/ic_photo_camera_yellow_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/profile_image"
+        app:layout_constraintEnd_toEndOf="@id/profile_image" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/profile_first_name_textLayout"
+        style="@style/TextInputLayoutOutlined"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:theme="@style/TextInputLayoutAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/profile_image"
         app:layout_constraintTop_toTopOf="parent">
@@ -41,6 +40,7 @@
             android:id="@+id/fragment_profile_first_name_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:hint="@string/first_name"
             android:inputType="text"
             android:textColor="@color/text_content" />
@@ -49,9 +49,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/profile_last_name_textLayout"
+        style="@style/TextInputLayoutOutlined"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:theme="@style/TextInputLayoutAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/profile_image"
         app:layout_constraintTop_toBottomOf="@id/profile_first_name_textLayout">
@@ -68,9 +68,9 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/profile_email_textLayout"
+        style="@style/TextInputLayoutOutlined"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:theme="@style/TextInputLayoutAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profile_last_name_textLayout">
@@ -98,51 +98,38 @@
 
         <Button
             android:id="@+id/profile_edit_profile_button"
+            style="@style/ButtonTextOnly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="7dp"
-            android:background="@color/background_button"
             android:enabled="true"
             android:text="@string/edit_profile"
-            android:textColor="@color/text_button"
-            android:textSize="12sp"
-            style="?android:attr/buttonBarButtonStyle"
-            />
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/profile_save_profile_button"
+            style="@style/ButtonTextOnly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="7dp"
-            android:background="@color/background_button"
             android:text="@string/save_profile"
-            android:textColor="@color/text_button"
-            android:textSize="12sp"
-            style="?android:attr/buttonBarButtonStyle"/>
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/profile_change_password_button"
+            style="@style/ButtonTextOnly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="7dp"
-            android:background="@color/background_button"
             android:text="@string/change_password"
-            android:textColor="@color/text_button"
-            android:textSize="12sp"
-            style="?android:attr/buttonBarButtonStyle"
-            />
+            android:textSize="12sp" />
 
 
         <Button
             android:id="@+id/profile_add_friends_button"
+            style="@style/ButtonTextOnly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="7dp"
             android:background="@color/background_button"
             android:text="@string/add_friends"
-            android:textColor="@color/text_button"
-            android:textSize="12sp"
-            style="?android:attr/buttonBarButtonStyle"/>
+            android:textSize="12sp" />
     </LinearLayout>
 
 
@@ -151,7 +138,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/friends"
-        android:textColor="@color/text_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profile_buttons_linearLayout" />
@@ -164,13 +150,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_profile_friends" />
+
     <Button
         android:id="@+id/profile_logout_button"
+        style="@style/ButtonTextOnly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/background_button"
         android:text="@string/log_out"
-        android:textColor="@color/text_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

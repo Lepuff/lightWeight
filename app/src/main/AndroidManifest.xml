@@ -27,44 +27,30 @@
         <activity
             android:name=".ui.workouts.cycling.ViewCyclingWorkoutActivity"
             android:launchMode="singleTop">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.NavigationActivity" />
         </activity>
         <activity
             android:name=".ui.workouts.running.ViewRunWorkoutActivity"
             android:launchMode="singleTop">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.NavigationActivity" />
         </activity>
         <activity
             android:name=".ui.workouts.gym.ViewGymWorkoutActivity"
             android:launchMode="singleTop">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.NavigationActivity" />
         </activity>
         <activity
+            android:label="@string/new_cycling_workout"
             android:name=".ui.workouts.cycling.NewCyclingWorkoutActivity"
             android:launchMode="singleTop">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.NavigationActivity" />
         </activity>
         <activity
+            android:label="@string/new_running_workout"
             android:name=".ui.workouts.running.NewRunningWorkoutActivity"
             android:launchMode="singleTop">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.NavigationActivity" />
+
         </activity>
         <activity
+            android:label="@string/new_gym_workout"
             android:name=".ui.workouts.gym.NewGymWorkoutActivity"
             android:launchMode="singleTop">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.NavigationActivity" />
         </activity>
 
         <meta-data

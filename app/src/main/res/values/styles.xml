@@ -1,37 +1,67 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.MaterialComponents">
+        <item name="toolbarStyle">@style/ActionBarStyle</item>
         <item name="android:dialogTheme">@style/DialogStyle</item>
-        <item name="colorPrimary">@color/background_item</item>
-        <item name="colorPrimaryDark">@color/background_item</item>
+        <item name="colorPrimary">@color/details</item>
+        <item name="colorPrimaryDark">@color/transparent</item>
         <item name="colorAccent">@color/text_content</item>
         <item name="android:textColorPrimary">@color/text_content</item>
         <item name="android:textColor">@color/text_content</item>
-        <item name="titleTextColor">@color/text_content</item>    </style>
+        <item name="colorSurface">@color/transparent</item>
+
+    </style>
+
+    <style name="ActionBarStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="subtitleTextColor">@color/text_content</item>
+        <item name="titleTextColor">@color/text_content</item>
+    </style>
 
 
-    <style name="ErrorText" parent="TextAppearance.AppCompat">
+    <style name="ErrorText" parent="TextAppearance.AppCompat"> <!--todo see if needed-->
         <item name="android:textColor">@color/text_item</item>
         <item name="android:textSize">16sp</item>
     </style>
 
     <style name="HintText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/text_item</item>
+        <item name="android:textColor">@color/text_item</item><!--todo see if needed-->
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="TextInputLayoutAppearance" parent="Widget.Design.TextInputLayout">
-        <item name="hintTextAppearance">@style/HintText</item>
-        <item name="errorTextAppearance">@style/ErrorText</item>
-        <item name="android:textColor">@color/text_item</item>
-        <item name="android:textColorHint">@color/text_item_unfocused</item>
-        <item name="colorControlNormal">@color/text_item_unfocused</item>
-        <item name="colorControlActivated">@color/text_item</item>
-        <item name="colorControlHighlight">@color/text_item</item>
-        <item name="drawableTint">@color/text_content</item>
-        <item name="boxBackgroundMode">outline</item>
-        <item name="boxBackgroundColor">@color/text_content</item>
 
+    <style name="TextInputLayoutOutlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColorHint">@color/text_content</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="hintTextColor">@color/text_content</item>
+        <item name="boxStrokeColor">@color/input_text_border_box</item>
+        <item name="suffixTextColor">@color/text_content</item>
+    </style>
+
+    <style name="TextInputLayoutFilled" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+<item name="passwordToggleTint">@color/details</item>
+        <item name="backgroundTint">@color/transparent</item>
+        <item name="boxBackgroundColor">@color/transparent</item>
+        <item name="android:textColorHint">@color/text_content</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="hintTextColor">@color/text_content</item>
+        <item name="boxStrokeColor">@color/input_text_border_box</item>
+        <item name="suffixTextColor">@color/text_content</item>
+    </style>
+
+
+    <style name="MyTextInputEditText" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
+        <item name="android:textColor">@color/text_content</item>
+    </style>
+
+    <style name="ButtonOutlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/details</item>
+        <item name="android:textColor">@color/text_button</item>
+    </style>
+    <style name="ButtonTextOnly" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="strokeColor">@color/details</item>
+        <item name="android:textColor">@color/text_button</item>
     </style>
 
 
@@ -46,22 +76,24 @@
         <item name="android:drawableStart">@drawable/ic_add_yellow_24dp</item>
         <item name="iconTint">@color/text_content</item>
         <item name="android:windowIsFloating">true</item>
-        
         <item name="android:windowTitleStyle">@style/setWindowTitleStyle</item>
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="itemTextColor">@color/text_content</item>
-
-        <!--TODO check style attri-->
     </style>
-
 
     <style name="setWindowTitleStyle">
         <item name="android:drawableStart">@color/transparent</item>
         <item name="android:textColor">@color/text_content</item>
         <item name="android:background">@color/background_item</item>
         <item name="android:textSize">20sp</item>
-    </style>-->
+    </style>
+    <style name="EditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/details_unfocused</item>
+        <item name="colorControlActivated">@color/details</item>
+        <item name="colorControlHighlight">@color/details</item>
+    </style>
+
 </resources>

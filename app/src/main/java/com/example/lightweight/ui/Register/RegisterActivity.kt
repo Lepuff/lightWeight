@@ -53,6 +53,7 @@ class RegisterActivity : AppCompatActivity() {
                 if (textInputPasswordLayout.endIconMode != TextInputLayout.END_ICON_PASSWORD_TOGGLE)
                     textInputPasswordLayout.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
             }
+
             override fun afterTextChanged(s: Editable?) {}
         })
 
@@ -71,22 +72,18 @@ class RegisterActivity : AppCompatActivity() {
         val firstName = textInputFirstName.text.toString()
         val lastName = textInputLastName.text.toString()
 
-
-        //check if firstName is empty
         if (firstName.isEmpty()) {
             textInputFirstName.error = getString(R.string.field_cant_be_empty)
             textInputFirstName.requestFocus()
             return
         }
 
-        //check if lastName is empty
         if (lastName.isEmpty()) {
             textInputLastName.error = getString(R.string.field_cant_be_empty)
             textInputLastName.requestFocus()
             return
         }
 
-        //check if email is empty or invalid
         if (!Validation.isValidEmail(email)) {
             if (email.isEmpty()) {
                 textInputEmail.error = getString(R.string.field_cant_be_empty)
@@ -99,7 +96,6 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        //check if password is empty or too short
         if (!Validation.isValidPassword(password)) {
             if (password.isEmpty()) {
                 textInputPassword.error = getString(R.string.field_cant_be_empty)
@@ -126,7 +122,6 @@ class RegisterActivity : AppCompatActivity() {
                     )
                     Toast.makeText(this, getString(R.string.sign_up_successful), Toast.LENGTH_SHORT)
                         .show()
-
                     //update database with user data
                     Database.userInfoToDb()
 
@@ -137,12 +132,11 @@ class RegisterActivity : AppCompatActivity() {
                     Log.d("TAG", "createUserWithEmail:failure", task.exception)
                     Toast.makeText(
                         baseContext,
-                        getString(R.string.authentication_failed), //TODO set message to $exception
+                        getString(R.string.authentication_failed),
                         Toast.LENGTH_SHORT
                     ).show()
                     progressBar.visibility = View.INVISIBLE
                 }
-
             }
     }
 }

@@ -125,7 +125,7 @@ class FeedFragment : Fragment() {
                         val name = Database.getUserName()
                         val profilePicture = Database.getUserPicture().toString()
                         when (type) {
-                            "gymWorkout" ->
+                            Database.GYM_WORKOUT ->
                                 workOutAdapter.addWorkout(
                                     GymWorkout(
                                         id,
@@ -136,7 +136,7 @@ class FeedFragment : Fragment() {
                                         Database.getUserId().toString()
                                     )
                                 )
-                            "runningWorkout" ->
+                            Database.RUNNING_WORKOUT ->
                                 workOutAdapter.addWorkout(
                                     RunningWorkout(
                                         id,
@@ -147,7 +147,7 @@ class FeedFragment : Fragment() {
                                         Database.getUserId().toString()
                                     )
                                 )
-                            "cyclingWorkout" ->
+                            Database.CYCLING_WORKOUT ->
                                 workOutAdapter.addWorkout(
                                     CyclingWorkout(
                                         id,

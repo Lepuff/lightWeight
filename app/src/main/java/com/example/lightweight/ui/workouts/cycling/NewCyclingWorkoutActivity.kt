@@ -1,19 +1,16 @@
 package com.example.lightweight.ui.workouts.cycling
 
 import android.annotation.SuppressLint
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.InputType
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import com.example.lightweight.Database
 import com.example.lightweight.R
-import com.example.lightweight.ui.workouts.Keyboard
+import com.example.lightweight.classes.Keyboard
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -36,7 +33,6 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
             saveCyclingDialog()
         }
-
 
     }
 
@@ -63,7 +59,6 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
             saveCyclingWorkout(dialogView, dialog)
             Keyboard().closeKeyboard(this)
         }
-
     }
 
 
@@ -94,9 +89,8 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
             dialogView.findViewById<TextInputEditText>(R.id.dialog_save_workout_date_editText)
                 .text.toString()
 
-
-        val currentCyclingWorkoutRef = db.collection("users")
-            .document(Database.getUserId()!!).collection("workouts").document()
+        val currentCyclingWorkoutRef = db.collection(Database.USERS)
+            .document(Database.getUserId()!!).collection(Database.WORKOUTS).document()
 
         if (TextUtils.isEmpty(workoutTitle.text.toString())) {
             workoutTitle.error = getString(R.string.field_cant_be_empty)
@@ -114,7 +108,7 @@ class NewCyclingWorkoutActivity : AppCompatActivity() {
                 Database.MAX_CADENCE to maxCadence,
                 Database.CALORIES to calories,
                 Database.TIMESTAMP to FieldValue.serverTimestamp(),
-                Database.TYPE_OF_WORKOUT to "cyclingWorkout",
+                Database.TYPE_OF_WORKOUT to Database.CYCLING_WORKOUT,
                 Database.WORKOUT_TITLE to workoutTitle.text.toString(),
                 Database.WORKOUT_DATE to workoutDate
             )

@@ -84,7 +84,6 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
     }
 
     private fun deleteCyclingWorkout() {
-
         db.collection(Database.USERS).document(intent.getStringExtra("userId")!!)
             .collection(Database.WORKOUTS).document(intent.getStringExtra("id")!!).delete()
             .addOnSuccessListener {
@@ -129,7 +128,6 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
             findViewById<Button>(R.id.cycling_delete_button).visibility = View.VISIBLE
         }
     }
-
 
     private fun setObservers() {
 
@@ -241,7 +239,7 @@ class ViewCyclingWorkoutActivity : AppCompatActivity() {
     private fun updateCyclingWorkout(dialogView: View) {
         val currentRunWorkoutRef = db.collection(Database.USERS)
             .document(Database.getUserId()!!).collection(Database.WORKOUTS)
-            .document(intent.getStringExtra("id")!!)//todo fix constants
+            .document(intent.getStringExtra("id")!!)
 
         currentRunWorkoutRef.update(
             Database.DISTANCE,

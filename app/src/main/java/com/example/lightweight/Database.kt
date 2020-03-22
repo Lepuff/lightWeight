@@ -21,6 +21,9 @@ object Database {
 
 
     const val SP_INFO = "SP_INFO" //shared preferences info
+    const val RUNNING_WORKOUT = "runningWorkout"
+    const val GYM_WORKOUT = "gymWorkout"
+    const val CYCLING_WORKOUT = "cyclingWorkout"
     const val WORKOUTS = "workouts"
     const val USERS = "users"
     const val FRIENDS = "friends"

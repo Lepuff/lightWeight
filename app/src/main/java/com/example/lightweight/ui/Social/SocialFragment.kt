@@ -1,8 +1,6 @@
 package com.example.lightweight.ui.Social
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.lightweight.Database
 import com.example.lightweight.R
@@ -19,7 +16,6 @@ import com.example.lightweight.adapters.WorkOutAdapter
 import com.example.lightweight.ui.TopSpacingItemDecoration
 import com.example.lightweight.classes.*
 import com.example.lightweight.ViewModels.WorkoutFeedViewModel
-import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_social.*
 
@@ -46,15 +42,12 @@ class SocialFragment : Fragment() {
                 workOutAdapter.notifyDataSetChanged()
             })
 
-       val swipeRefreshLayout = root.findViewById<SwipeRefreshLayout>(R.id.social_swipeRefreshLayout)
+        val swipeRefreshLayout =
+            root.findViewById<SwipeRefreshLayout>(R.id.social_swipeRefreshLayout)
         swipeRefreshLayout.setOnRefreshListener {
-            addWorkoutToFeed()
+            addWorkoutsToFeed()
             swipeRefreshLayout.isRefreshing = false
         }
-
-
-
-
         return root
     }
 
@@ -62,6 +55,12 @@ class SocialFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         initRecyclerView()
         workOutAdapter.submitList(viewModel.workoutList.value!!)
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        addWorkoutsToFeed()
     }
 
 
@@ -77,13 +76,7 @@ class SocialFragment : Fragment() {
     }
 
 
-    override fun onStart() {
-        super.onStart()
-        addWorkoutToFeed()
-    }
-
-
-    private fun addWorkoutToFeed() {
+    private fun addWorkoutsToFeed() {
         workOutAdapter.clearList()
         db.collection(Database.USERS).document(Database.getUserId()!!).collection(Database.FRIENDS)
             .get()

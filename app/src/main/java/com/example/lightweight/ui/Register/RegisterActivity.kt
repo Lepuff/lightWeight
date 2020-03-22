@@ -4,17 +4,21 @@ package com.example.lightweight.ui.register
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import com.example.lightweight.Database
 import com.example.lightweight.R
 import com.example.lightweight.Validation
 import com.example.lightweight.ui.NavigationActivity
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import java.util.*
 
@@ -27,6 +31,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var textInputLastName: TextInputEditText
     private lateinit var progressBar: ProgressBar
     private lateinit var auth: FirebaseAuth
+    private lateinit var textInputPasswordLayout: TextInputLayout
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,9 +39,24 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
 
         val signUpButton = findViewById<Button>(R.id.registerButton_button)
-
-
+        textInputEmail = findViewById(R.id.emailRegister_editText)
+        textInputPassword = findViewById(R.id.passwordRegister_editText)
+        textInputFirstName = findViewById(R.id.firstNameRegister_editText)
+        textInputLastName = findViewById(R.id.lastNameRegister_editText)
+        textInputPasswordLayout = findViewById(R.id.passwordRegister_layout)
         progressBar = findViewById(R.id.progressBarRegister)
+
+        textInputFirstName.requestFocus()
+
+        textInputPassword.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (textInputPasswordLayout.endIconMode != TextInputLayout.END_ICON_PASSWORD_TOGGLE)
+                    textInputPasswordLayout.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
 
         signUpButton.setOnClickListener {
@@ -46,12 +66,8 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
-    private fun signUpUser() {
-        textInputEmail = findViewById(R.id.emailRegister_editText)
-        textInputPassword = findViewById(R.id.passwordRegister_editText)
-        textInputFirstName = findViewById(R.id.firstNameRegister_editText)
-        textInputLastName = findViewById(R.id.lastNameRegister_editText)
 
+    private fun signUpUser() {
         val email = textInputEmail.text.toString().trim().toLowerCase(Locale.ROOT)
         val password = textInputPassword.text.toString().trim()
         val firstName = textInputFirstName.text.toString()
@@ -59,7 +75,7 @@ class RegisterActivity : AppCompatActivity() {
 
 
         //check if firstName is empty
-        if (firstName.isEmpty()){
+        if (firstName.isEmpty()) {
             textInputFirstName.error = getString(R.string.field_cant_be_empty)
             textInputFirstName.requestFocus()
             return
@@ -90,10 +106,12 @@ class RegisterActivity : AppCompatActivity() {
             if (password.isEmpty()) {
                 textInputPassword.error = getString(R.string.field_cant_be_empty)
                 textInputPassword.requestFocus()
+                textInputPasswordLayout.endIconMode = TextInputLayout.END_ICON_NONE
                 return
             } else {
                 textInputPassword.error = getString(R.string.password_too_short)
                 textInputPassword.requestFocus()
+                textInputPasswordLayout.endIconMode = TextInputLayout.END_ICON_NONE
                 return
             }
         }
@@ -104,8 +122,10 @@ class RegisterActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val id = auth.currentUser!!.uid
 
-                    Database.setUser(id = id, isFacebookUser = false, email = email,
-                        firstName = firstName, lastName = lastName, picture = null)
+                    Database.setUser(
+                        id = id, isFacebookUser = false, email = email,
+                        firstName = firstName, lastName = lastName, picture = null
+                    )
                     Toast.makeText(this, getString(R.string.sign_up_successful), Toast.LENGTH_SHORT)
                         .show()
 
@@ -118,7 +138,8 @@ class RegisterActivity : AppCompatActivity() {
                 } else {
                     Log.d("TAG", "createUserWithEmail:failure", task.exception)
                     Toast.makeText(
-                        baseContext, getString(R.string.authentication_failed), //TODO set message to $exception
+                        baseContext,
+                        getString(R.string.authentication_failed), //TODO set message to $exception
                         Toast.LENGTH_SHORT
                     ).show()
                     progressBar.visibility = View.INVISIBLE

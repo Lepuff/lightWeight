@@ -55,10 +55,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
+
+           
+            app:endIconMode="password_toggle"
+
             app:layout_constraintTop_toBottomOf="@+id/login_email_TextLayout"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/text_item"
             style="@style/TextInputLayoutOutlined">
+
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/login_password_editText"

@@ -8,6 +8,9 @@ import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.app.AlertDialog
 import android.content.pm.PackageManager
+import android.text.Editable
+import android.text.TextUtils
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -32,10 +35,13 @@ import com.example.lightweight.ui.login.LoginActivity
 import com.facebook.AccessToken
 import com.facebook.login.LoginManager
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.dialog_change_password.*
+import kotlinx.android.synthetic.main.dialog_change_password.view.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 
@@ -46,6 +52,9 @@ class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
     private lateinit var friendAdapter: UserAdapter
     private var db = FirebaseFirestore.getInstance()
+    private lateinit var textInputOldLayout: TextInputLayout
+    private lateinit var textInputNewLayout: TextInputLayout
+    private lateinit var textInputConfirmLayout: TextInputLayout
 
 
     override fun onCreateView(
@@ -140,11 +149,19 @@ class ProfileFragment : Fragment() {
 
     @SuppressLint("InflateParams")
     private fun changePasswordDialog() {
+        //TODO
         val dialogView =
             LayoutInflater.from(this.context).inflate(R.layout.dialog_change_password, null)
         val builder = AlertDialog.Builder(this.context)
         builder.setView(dialogView)
         val dialog = builder.show()
+
+
+        textInputOldLayout = dialogView.findViewById(R.id.dialog_old_password_layout)
+        textInputNewLayout = dialogView.findViewById(R.id.dialog_new_password_layout)
+        textInputConfirmLayout = dialogView.findViewById(R.id.dialog_confirm_password_layout)
+        //adds textChangedListeners to all password fields
+        setTextChangedListeners(dialogView)
 
         dialogView.findViewById<Button>(R.id.dialog_save_password_button).setOnClickListener {
             saveNewPassword(dialogView, dialog)
@@ -162,44 +179,56 @@ class ProfileFragment : Fragment() {
             dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText).text
 
         //Re-authenticate user by having to type in correct password
-        val credential =
-            EmailAuthProvider.getCredential(currentUser.email!!, oldPassword.toString())
-        currentUser.reauthenticate(credential).addOnCompleteListener { auth ->
-            if (auth.isSuccessful) {
-                if (newPassword.isNullOrEmpty() || !Validation.isValidPassword(newPassword)) {
-                    dialogView.findViewById<TextInputEditText>(R.id.dialog_new_password_editText)
-                        .error = getString(R.string.password_too_short)
-                    dialogView.findViewById<TextInputEditText>(R.id.dialog_new_password_editText)
-                        .requestFocus()
-                } else if (confirmPassword.isNullOrEmpty() || !Validation.isValidPassword(
-                        confirmPassword
-                    )
-                ) {
-                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
-                        .error = getString(R.string.password_too_short)
-                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
-                        .requestFocus()
-                } else if (newPassword.toString() != confirmPassword.toString()) {
-                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
-                        .error = getString(R.string.passwords_dont_match)
-                    dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
-                        .requestFocus()
-                } else {
-                    currentUser.updatePassword(confirmPassword.toString())
-                    Toast.makeText(
-                        this.context,
-                        getString(R.string.password_successfully_changed),
-                        Toast.LENGTH_LONG
-                    ).show()
-                    dialog.cancel()
-                }
+        if (!TextUtils.isEmpty(oldPassword)) {
+            val credential =
+                EmailAuthProvider.getCredential(currentUser.email!!, oldPassword.toString())
+            currentUser.reauthenticate(credential).addOnCompleteListener { auth ->
+                if (auth.isSuccessful) {
+                    if (TextUtils.isEmpty(newPassword) || !Validation.isValidPassword(newPassword)) {
+                        dialogView.findViewById<TextInputEditText>(R.id.dialog_new_password_editText)
+                            .error = getString(R.string.password_too_short)
+                        dialogView.findViewById<TextInputEditText>(R.id.dialog_new_password_editText)
+                            .requestFocus()
+                        textInputNewLayout.endIconMode = TextInputLayout.END_ICON_NONE
+                    } else if (TextUtils.isEmpty(confirmPassword) || !Validation.isValidPassword(
+                            confirmPassword
+                        )
+                    ) {
+                        dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
+                            .error = getString(R.string.password_too_short)
+                        dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
+                            .requestFocus()
+                        textInputConfirmLayout.endIconMode = TextInputLayout.END_ICON_NONE
+                    } else if (newPassword.toString() != confirmPassword.toString()) {
+                        dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
+                            .error = getString(R.string.passwords_dont_match)
+                        dialogView.findViewById<TextInputEditText>(R.id.dialog_confirm_password_editText)
+                            .requestFocus()
+                        textInputConfirmLayout.endIconMode = TextInputLayout.END_ICON_NONE
+                    } else {
+                        currentUser.updatePassword(confirmPassword.toString())
+                        Toast.makeText(
+                            this.context,
+                            getString(R.string.password_successfully_changed),
+                            Toast.LENGTH_LONG
+                        ).show()
+                        dialog.cancel()
+                    }
 
-            } else {
-                dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText)
-                    .error = getString(R.string.invalid_password)
-                dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText)
-                    .requestFocus()
+                } else {
+                    dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText)
+                        .error = getString(R.string.invalid_password)
+                    dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText)
+                        .requestFocus()
+                    textInputOldLayout.endIconMode = TextInputLayout.END_ICON_NONE
+                }
             }
+        } else {
+            dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText)
+                .error = getString(R.string.invalid_password)
+            dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText)
+                .requestFocus()
+            textInputOldLayout.endIconMode = TextInputLayout.END_ICON_NONE
         }
     }
 
@@ -223,6 +252,36 @@ class ProfileFragment : Fragment() {
             Database.getUserEmail()
     }
 
+
+    private fun setTextChangedListeners(dialogView: View){
+        //TODO
+        dialogView.findViewById<TextInputEditText>(R.id.dialog_old_password_editText).addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (dialogView.dialog_old_password_layout.endIconMode != TextInputLayout.END_ICON_PASSWORD_TOGGLE)
+                    dialogView.dialog_old_password_layout.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        dialogView.dialog_new_password_editText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (dialogView.dialog_new_password_layout.endIconMode != TextInputLayout.END_ICON_PASSWORD_TOGGLE)
+                    dialogView.dialog_new_password_layout.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        dialogView.dialog_confirm_password_editText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (dialogView.dialog_confirm_password_layout.endIconMode != TextInputLayout.END_ICON_PASSWORD_TOGGLE)
+                    dialogView.dialog_confirm_password_layout.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
     private fun logOutDialog(){
 
         val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext(), R.style.DialogStyle)
@@ -235,6 +294,7 @@ class ProfileFragment : Fragment() {
             dialog.cancel()
         }
         builder.show()
+
     }
 
     private fun logOut() {

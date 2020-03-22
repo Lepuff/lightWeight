@@ -61,12 +61,13 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordRegister_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/TextInputLayoutOutlined"
             app:errorEnabled="true"
-            app:passwordToggleTint="@color/text_item"
-            app:passwordToggleEnabled="true">
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/text_item">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordRegister_editText"

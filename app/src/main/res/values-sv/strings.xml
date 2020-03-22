@@ -84,7 +84,7 @@
     <string name="edit_profile">Redigera profil</string>
     <string name="delete_workout_message">Vill du verkligen ta bort?</string>
     <string name="choose_a_new_exercise">Välj ny övning</string>
-    <string name="edit_workout">Redigera träningspass</string>
+    <string name="edit_workout">Redigera pass</string>
     <string name="Km">Km</string>
     <string name="h_m_s">t:m:s</string>
     <string name="Km_h">Km/h</string>
@@ -93,4 +93,11 @@
     <string name="rpm">Rpm</string>
     <string name="k_cal">Kcal</string>
     <string name="log_out_message">Vill du logga ut?</string>
+    <string name="title">Titel</string>
+    <string name="new_cycling_workout">Nytt Cyklings Pass</string>
+    <string name="new_running_workout">Nytt Löpnings Pass</string>
+    <string name="new_gym_workout">Nytt Gym Pass</string>
+    <string name="cycling">Cykling</string>
+    <string name="gym">Gym</string>
+    <string name="run">Springa</string>
 </resources>

@@ -101,6 +101,7 @@
     <string name="passwords_dont_match">Passwords don\'t match</string>
     <string name="password_successfully_changed">Password successfully changed</string>
     <string name="invalid_password">Invalid password</string>
+    <string name="title">Title</string>
 
 
 </resources>

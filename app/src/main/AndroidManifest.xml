@@ -19,10 +19,7 @@
             android:name=".ui.profile.AddFriendsActivity"
             android:label="Add friends"
             android:launchMode="singleTop">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.NavigationActivity" />
-
+            
         </activity>
         <activity
             android:name=".ui.workouts.cycling.ViewCyclingWorkoutActivity"
@@ -75,7 +72,7 @@
         </activity>
         <activity
             android:name=".ui.register.RegisterActivity"
-            android:exported="true" /> <!-- todo Check this erroro? -->
+            android:exported="true" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true">

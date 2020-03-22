@@ -132,7 +132,7 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
             }
             )
         }
-        private val deleteSetbutton: ImageButton = itemView.findViewById<ImageButton>(R.id.delete_set_button).apply {
+        private val deleteSetButton: ImageButton = itemView.findViewById<ImageButton>(R.id.delete_set_button).apply {
             setOnClickListener {
                 adapter.deleteSet(recyclerView.getChildLayoutPosition(itemView) + 1)
             }
@@ -141,9 +141,9 @@ class SetsAdapter(private val childRecyclerView: RecyclerView) :
         fun setEditable(editable: Boolean) {
 
             if (editable) {
-                deleteSetbutton.visibility = View.VISIBLE
+                deleteSetButton.visibility = View.VISIBLE
             } else {
-                deleteSetbutton.visibility = View.GONE
+                deleteSetButton.visibility = View.GONE
             }
             setWeight.isEnabled = editable
             setsReps.isEnabled = editable

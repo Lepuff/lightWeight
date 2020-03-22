@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lightweight.Database
 import com.example.lightweight.R
-import com.example.lightweight.ViewModels.GymViewModel
+import com.example.lightweight.viewModels.GymViewModel
 import com.example.lightweight.adapters.ExerciseAdapter
 import com.example.lightweight.classes.Exercise
 import com.example.lightweight.classes.Sets

@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.lightweight.Database
 import com.example.lightweight.R
-import com.example.lightweight.ViewModels.RunningViewModel
+import com.example.lightweight.viewModels.RunningViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -196,7 +196,7 @@ class ViewRunningWorkoutActivity : AppCompatActivity() {
         viewModel.isLoadedFromDb.observe(this, Observer {
             if (viewModel.isLoadedFromDb.value == false) {
                 getRunningInfoFromDb()
-                viewModel.isLoadedFromDb.value == true
+                viewModel.isLoadedFromDb.value = true
             }
         })
 

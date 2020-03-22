@@ -3,8 +3,7 @@ package com.example.lightweight.classes
 import android.net.Uri
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import java.io.InputStream
-import java.net.URI
+
 
 data class User(
 

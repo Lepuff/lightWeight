@@ -101,4 +101,5 @@
     <string name="gym">Gym</string>
     <string name="run">Springa</string>
     <string name="title_of_the_workout">Titel av passet</string>
+    <string name="delete_exercise_button">Ta bort övning knapp</string>
 </resources>
